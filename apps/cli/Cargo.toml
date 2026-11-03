@@ -1,0 +1,25 @@
+[package]
+name = "social-mail"
+description = "Decentralised, email-based social app with a CLI and a TUI"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "social-mail"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+chrono.workspace = true
+clap.workspace = true
+crossterm.workspace = true
+ratatui.workspace = true
+serde_json.workspace = true
+social-mail-crypto = { path = "../../crates/crypto" }
+social-mail-engine = { path = "../../crates/engine" }
+social-mail-storage = { path = "../../crates/storage" }
+unicode-bidi.workspace = true
+unicode-width.workspace = true

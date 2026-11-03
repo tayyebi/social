@@ -11,4 +11,6 @@ pub use engine::{
     InitOptions, QueueItem, SyncReport, ACCEPTED_LABEL,
 };
 pub use error::EngineError;
+pub use social_mail_protocol::Audience;
+pub use social_mail_storage::{DeliveryState, FollowState, Tab, Trust};
 pub use transport::SpoolTransport;

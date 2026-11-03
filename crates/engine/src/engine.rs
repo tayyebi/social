@@ -1159,6 +1159,38 @@ impl Engine {
         Ok(out)
     }
 
+    // ----------------------------------------------------------------- lists
+
+    /// Lists the user has added, stored as a JSON array in settings.
+    pub fn lists(&self) -> Result<Vec<String>, EngineError> {
+        match self.db.setting("lists")? {
+            None => Ok(Vec::new()),
+            Some(text) => Ok(serde_json::from_str(&text)?),
+        }
+    }
+
+    pub fn add_list(&mut self, address: &str) -> Result<(), EngineError> {
+        let address = address.trim();
+        if address.is_empty() || !address.contains('@') {
+            return Err(EngineError::Invalid(
+                "a list needs an address like name@example.org".into(),
+            ));
+        }
+        let mut lists = self.lists()?;
+        if !lists.iter().any(|existing| existing == address) {
+            lists.push(address.to_string());
+        }
+        self.db.set_setting("lists", &serde_json::to_string(&lists)?)?;
+        Ok(())
+    }
+
+    pub fn remove_list(&mut self, address: &str) -> Result<(), EngineError> {
+        let mut lists = self.lists()?;
+        lists.retain(|existing| existing != address.trim());
+        self.db.set_setting("lists", &serde_json::to_string(&lists)?)?;
+        Ok(())
+    }
+
     // -------------------------------------------------------------- settings
 
     pub fn set_locale(&mut self, locale: &str) -> Result<(), EngineError> {
