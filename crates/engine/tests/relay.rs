@@ -24,10 +24,8 @@ impl Sandbox {
             .unwrap()
             .as_nanos();
         let unique = SEQUENCE.fetch_add(1, Ordering::Relaxed);
-        let root = std::env::temp_dir().join(format!(
-            "sm-relay-{}-{nanos}-{unique}",
-            std::process::id()
-        ));
+        let root =
+            std::env::temp_dir().join(format!("sm-relay-{}-{nanos}-{unique}", std::process::id()));
         fs::create_dir_all(&root).unwrap();
         Sandbox { root }
     }
