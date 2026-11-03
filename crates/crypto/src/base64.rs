@@ -42,14 +42,21 @@ pub fn decode(text: &str) -> Result<Vec<u8>, CryptoError> {
         let block = &bytes[index..index + 4];
         let mut values = [0u32; 4];
         let mut padding = 0usize;
+        let mut padding_seen = false;
         for (slot, byte) in block.iter().enumerate() {
             if *byte == b'=' {
                 if slot < 2 {
                     return Err(CryptoError::Base64("misplaced padding".into()));
                 }
+                padding_seen = true;
                 padding += 1;
                 values[slot] = 0;
             } else {
+                if padding_seen {
+                    return Err(CryptoError::Base64(
+                        "data after padding character".into(),
+                    ));
+                }
                 values[slot] = decode_char(*byte)? as u32;
             }
         }
