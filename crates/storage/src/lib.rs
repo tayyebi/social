@@ -254,6 +254,22 @@ impl Database {
             .optional()?)
     }
 
+    /// Contact whose delivery address equals `address`.
+    ///
+    /// Used to find a public list's operator when a post is addressed to the
+    /// list instead of to a fingerprint.
+    pub fn contact_by_address(&self, address: &str) -> Result<Option<Contact>, StorageError> {
+        Ok(self
+            .conn
+            .query_row(
+                "SELECT fingerprint, display_name, address, ed25519, x25519, trust, muted, added_at, updated_at
+                 FROM contacts WHERE address = ?1 COLLATE NOCASE LIMIT 1",
+                params![address],
+                Self::contact_from_row,
+            )
+            .optional()?)
+    }
+
     pub fn contacts(&self) -> Result<Vec<Contact>, StorageError> {
         let mut statement = self.conn.prepare(
             "SELECT fingerprint, display_name, address, ed25519, x25519, trust, muted, added_at, updated_at
@@ -903,6 +919,29 @@ impl Database {
             Self::EVENT_COLUMNS
         ))?;
         let rows = statement.query_map(params![author, limit as i64], Self::event_from_row)?;
+        let mut out = Vec::new();
+        for row in rows {
+            out.push(row?);
+        }
+        Ok(out)
+    }
+
+    /// Accepted root posts written by other people, oldest first.
+    ///
+    /// The reflector uses this to find list traffic that has not been
+    /// redistributed yet; the engine narrows the result to the configured list.
+    pub fn posts_for_relay(
+        &self,
+        exclude_author: &str,
+        limit: usize,
+    ) -> Result<Vec<EventRow>, StorageError> {
+        let mut statement = self.conn.prepare(&format!(
+            "SELECT {} FROM events
+             WHERE kind = 'post' AND status = 'accepted' AND author <> ?1
+             ORDER BY received_at ASC LIMIT ?2",
+            Self::EVENT_COLUMNS
+        ))?;
+        let rows = statement.query_map(params![exclude_author, limit as i64], Self::event_from_row)?;
         let mut out = Vec::new();
         for row in rows {
             out.push(row?);

@@ -82,6 +82,18 @@ pub struct QueueItem {
     pub deliveries: Vec<DeliveryRow>,
 }
 
+/// What one relay pass did for a list post.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct RedistributeReport {
+    pub event_id: String,
+    /// Members the event was queued for in this pass.
+    pub recipients: usize,
+    pub sent: usize,
+    pub failed: usize,
+    /// Approved members that were skipped (unverified key, duplicate, author).
+    pub skipped: usize,
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct SyncReport {
     pub received: usize,
@@ -431,6 +443,28 @@ impl Engine {
         Ok(out)
     }
 
+    /// Remember a contact card verbatim so it can travel with relayed messages.
+    fn remember_card(&self, card: &ContactCard) -> Result<(), EngineError> {
+        self.db.set_setting(
+            &format!("card:{}", card.fingerprint),
+            &card.to_pretty_json()?,
+        )?;
+        Ok(())
+    }
+
+    /// The last card seen for a fingerprint, if any.
+    pub fn card_for(&self, fingerprint: &str) -> Result<Option<ContactCard>, EngineError> {
+        let Some(text) = self.db.setting(&format!("card:{fingerprint}"))? else {
+            return Ok(None);
+        };
+        Ok(ContactCard::from_json(&text).ok())
+    }
+
+    /// Everyone who follows this mailbox: the members of a reflector list.
+    pub fn members(&self) -> Result<Vec<FollowRow>, EngineError> {
+        Ok(self.db.followers_of(&self.fingerprint())?)
+    }
+
     pub fn my_follows(&self) -> Result<Vec<FollowRow>, EngineError> {
         Ok(self.db.follows_of(&self.fingerprint())?)
     }
@@ -460,7 +494,7 @@ impl Engine {
         self.insert_signed(&signed, "accepted", None, None)?;
         self.db
             .upsert_follow(&self.fingerprint(), &target, FollowState::Pending, false)?;
-        self.queue_delivery(&signed, &contact)?;
+        self.queue_delivery(&signed, &contact, false)?;
         self.flush_deliveries()?;
         Ok(signed.event_id)
     }
@@ -495,7 +529,7 @@ impl Engine {
             FollowState::Following,
             verify,
         )?;
-        self.queue_delivery(&signed, &contact)?;
+        self.queue_delivery(&signed, &contact, false)?;
         self.flush_deliveries()?;
         Ok(signed.event_id)
     }
@@ -528,7 +562,7 @@ impl Engine {
             );
             let signed = SignedEvent::sign(envelope, &self.identity)?;
             self.insert_signed(&signed, "accepted", None, None)?;
-            self.queue_delivery(&signed, &contact)?;
+            self.queue_delivery(&signed, &contact, false)?;
             self.flush_deliveries()?;
         }
         Ok(())
@@ -550,7 +584,7 @@ impl Engine {
             );
             let signed = SignedEvent::sign(envelope, &self.identity)?;
             self.insert_signed(&signed, "accepted", None, None)?;
-            self.queue_delivery(&signed, &contact)?;
+            self.queue_delivery(&signed, &contact, false)?;
             self.flush_deliveries()?;
         }
         Ok(())
@@ -585,8 +619,200 @@ impl Engine {
             list.as_deref(),
         )?;
         self.deliver_to_followers(&signed)?;
+        if let Some(address) = list.as_deref() {
+            self.deliver_to_list_operator(&signed, address)?;
+        }
         self.flush_deliveries()?;
         Ok(signed.event_id)
+    }
+
+    /// Public list posts are additionally sent to the list's operator, who
+    /// relays them to subscribers. Without a known operator the post stays
+    /// local; nothing is encrypted for a list address.
+    fn deliver_to_list_operator(
+        &mut self,
+        signed: &SignedEvent,
+        address: &str,
+    ) -> Result<(), EngineError> {
+        let Some(contact) = self.db.contact_by_address(address)? else {
+            return Ok(());
+        };
+        if contact.fingerprint == self.fingerprint() {
+            return Ok(());
+        }
+        // List posts are signed, never encrypted (PLAN.md §11): the operator and
+        // every subscriber can read them, and the card travels so the operator
+        // can verify the author.
+        let carrier = Carrier::plain(signed.clone()).with_card(self.contact_card()?);
+        let body = carrier.to_json()?;
+        let transport = self.transport()?;
+        let now = now_rfc3339();
+        match transport.send(&contact.fingerprint, &body) {
+            Ok(_) => self.db.upsert_delivery(&DeliveryRow {
+                post_event_id: signed.event_id.clone(),
+                recipient: contact.fingerprint.clone(),
+                state: DeliveryState::Accepted,
+                reason: Some("list operator".to_string()),
+                attempts: 1,
+                next_attempt_at: None,
+                updated_at: now,
+            })?,
+            Err(error) => self.db.upsert_delivery(&DeliveryRow {
+                post_event_id: signed.event_id.clone(),
+                recipient: contact.fingerprint.clone(),
+                state: DeliveryState::Failed,
+                reason: Some(error.to_string()),
+                attempts: 1,
+                next_attempt_at: None,
+                updated_at: now,
+            })?,
+        }
+        Ok(())
+    }
+
+    // ------------------------------------------------------------------ relay
+
+    /// Verified list posts from other authors that this mailbox has not relayed.
+    pub fn relay_candidates(
+        &self,
+        list: &str,
+        limit: usize,
+    ) -> Result<Vec<EventRow>, EngineError> {
+        let me = self.fingerprint();
+        let mut out = Vec::new();
+        for row in self.db.posts_for_relay(&me, limit)? {
+            let payload: PostPayload = match serde_json::from_str(&row.payload) {
+                Ok(payload) => payload,
+                Err(_) => continue,
+            };
+            if payload.audience != Audience::PublicList {
+                continue;
+            }
+            match payload.list.as_deref() {
+                Some(address) if address.eq_ignore_ascii_case(list) => {}
+                _ => continue,
+            }
+            if !self.db.deliveries_for(&row.event_id)?.is_empty() {
+                continue;
+            }
+            out.push(row);
+        }
+        Ok(out)
+    }
+
+    /// Re-encrypt one verified list post for every approved member.
+    ///
+    /// The original author signature travels untouched: recipients verify the
+    /// author, not the list. Unverified members never receive anything, which
+    /// is stricter than personal two-tier trust (D9/D26).
+    pub fn redistribute(
+        &mut self,
+        event_id: &str,
+    ) -> Result<RedistributeReport, EngineError> {
+        let row = self
+            .db
+            .event(event_id)?
+            .ok_or_else(|| EngineError::NotFound(event_id.to_string()))?;
+        if row.status != "accepted" {
+            return Err(EngineError::Invalid(format!(
+                "event {event_id} was not accepted ({})",
+                row.reason.unwrap_or_else(|| row.status.clone())
+            )));
+        }
+        let signed = signed_from_row(&row)?;
+        let author = signed.event.author.clone();
+        let me = self.fingerprint();
+        if author == me {
+            return Err(EngineError::Invalid(
+                "refusing to relay an event this mailbox wrote".into(),
+            ));
+        }
+        let membership = self.db.follow(&author, &me)?;
+        let approved = membership
+            .as_ref()
+            .map(|row| row.state == FollowState::Following)
+            .unwrap_or(false);
+        if !approved {
+            return Err(EngineError::Invalid(format!(
+                "author {author} is not an approved member"
+            )));
+        }
+        let author_contact = self
+            .db
+            .contact(&author)?
+            .ok_or_else(|| EngineError::NotFound(format!("contact {author}")))?;
+        if author_contact.trust.is_blocked() {
+            return Err(EngineError::Invalid(format!("author {author} is blocked")));
+        }
+
+        let mut report = RedistributeReport {
+            event_id: event_id.to_string(),
+            ..RedistributeReport::default()
+        };
+        let already: Vec<String> = self
+            .db
+            .deliveries_for(event_id)?
+            .into_iter()
+            .map(|row| row.recipient)
+            .collect();
+        let transport = self.transport()?;
+        let relay_card = self.card_for(&author)?;
+
+        for row in self.members()? {
+            if row.state != FollowState::Following {
+                continue;
+            }
+            if row.follower == author || already.contains(&row.follower) {
+                report.skipped += 1;
+                continue;
+            }
+            let Some(contact) = self.db.contact(&row.follower)? else {
+                report.skipped += 1;
+                continue;
+            };
+            if !contact.trust.is_verified() || contact.trust.is_blocked() {
+                // Deliberately stricter than personal trust: a list has one
+                // operator and a fan-out blast radius (D26).
+                report.skipped += 1;
+                continue;
+            }
+            let public = PublicIdentity::from_b64(&contact.ed25519, &contact.x25519)?;
+            let mut carrier = Carrier::for_recipient(&signed, &public)?;
+            if let Some(card) = relay_card.clone() {
+                carrier = carrier.with_card(card);
+            }
+            let body = carrier.to_json()?;
+            let now = now_rfc3339();
+            match transport.send(&contact.fingerprint, &body) {
+                Ok(_) => {
+                    self.db.upsert_delivery(&DeliveryRow {
+                        post_event_id: event_id.to_string(),
+                        recipient: contact.fingerprint.clone(),
+                        state: DeliveryState::Accepted,
+                        reason: None,
+                        attempts: 1,
+                        next_attempt_at: None,
+                        updated_at: now,
+                    })?;
+                    report.recipients += 1;
+                    report.sent += 1;
+                }
+                Err(error) => {
+                    let next = chrono::Utc::now() + chrono::Duration::minutes(2);
+                    self.db.upsert_delivery(&DeliveryRow {
+                        post_event_id: event_id.to_string(),
+                        recipient: contact.fingerprint.clone(),
+                        state: DeliveryState::Retrying,
+                        reason: Some(error.to_string()),
+                        attempts: 1,
+                        next_attempt_at: Some(next.to_rfc3339()),
+                        updated_at: now,
+                    })?;
+                    report.failed += 1;
+                }
+            }
+        }
+        Ok(report)
     }
 
     pub fn reply(&mut self, parent_event_id: &str, text: &str) -> Result<String, EngineError> {
@@ -616,7 +842,7 @@ impl Engine {
             .set_parent_author(&signed.event_id, &parent.author)?;
         if parent.author != self.fingerprint() {
             if let Some(contact) = self.db.contact(&parent.author)? {
-                self.queue_delivery(&signed, &contact)?;
+                self.queue_delivery(&signed, &contact, true)?;
             }
         }
         self.flush_deliveries()?;
@@ -636,18 +862,25 @@ impl Engine {
             if contact.trust.is_blocked() {
                 continue;
             }
-            self.queue_delivery(signed, &contact)?;
+            self.queue_delivery(signed, &contact, true)?;
         }
         Ok(())
     }
 
+    /// Queue one copy of `signed` for `contact`.
+    ///
+    /// Handshake and control messages (`require_verified = false`) go to any
+    /// contact: a follow request has to reach someone we have not verified yet,
+    /// otherwise onboarding is impossible. Private posts require verification,
+    /// and unverified recipients are recorded as `Withheld` — visible, not lost.
     fn queue_delivery(
         &mut self,
         signed: &SignedEvent,
         contact: &Contact,
+        require_verified: bool,
     ) -> Result<(), EngineError> {
         let verified = contact.trust.is_verified();
-        let state = if verified {
+        let state = if verified || !require_verified {
             DeliveryState::Queued
         } else {
             DeliveryState::Withheld
@@ -698,17 +931,6 @@ impl Engine {
                 failed += 1;
                 continue;
             };
-            if !contact.trust.is_verified() {
-                self.db.set_delivery_state(
-                    &row.post_event_id,
-                    &row.recipient,
-                    DeliveryState::Withheld,
-                    Some("unverified"),
-                    None,
-                    false,
-                )?;
-                continue;
-            }
             let signed = signed_from_row(&event_row)?;
             let public = PublicIdentity::from_b64(&contact.ed25519, &contact.x25519)?;
             let carrier = Carrier::for_recipient(&signed, &public)?;
@@ -808,15 +1030,36 @@ impl Engine {
     pub fn ingest(&mut self, body: &str) -> Result<IngestOutcome, EngineError> {
         let carrier = Carrier::from_json(body)?;
         let author = carrier.author.clone();
-        let Some(contact) = self.db.contact(&author)? else {
-            self.record_problem(
-                &carrier.event_id,
-                Some(&author),
-                None,
-                "unknown author",
-                "No contact key for this author. Import their contact card first (verification is a separate, deliberate step).",
-            )?;
-            return Ok(IngestOutcome::Quarantined("unknown author".into()));
+        let contact = match self.db.contact(&author)? {
+            Some(contact) => contact,
+            None => {
+                // A carrier may carry its author's self-signed card. That proves
+                // key possession, not identity: the contact is imported as
+                // unverified and the post is shown as unverified (D9). Without
+                // such a card the message is quarantined, never displayed.
+                let card = carrier.card.clone().filter(|card| {
+                    card.fingerprint.eq_ignore_ascii_case(&author) && card.verify().is_ok()
+                });
+                match card {
+                    Some(card) => {
+                        self.import_card_struct(&card)?;
+                        self.remember_card(&card)?;
+                        self.db.contact(&author)?.ok_or_else(|| {
+                            EngineError::Invalid("card import produced no contact".into())
+                        })?
+                    }
+                    None => {
+                        self.record_problem(
+                            &carrier.event_id,
+                            Some(&author),
+                            None,
+                            "unknown author",
+                            "No contact key for this author and no card in the message.",
+                        )?;
+                        return Ok(IngestOutcome::Quarantined("unknown author".into()));
+                    }
+                }
+            }
         };
         if contact.trust.is_blocked() {
             return Ok(IngestOutcome::Dropped);
@@ -835,6 +1078,11 @@ impl Engine {
                 return Ok(IngestOutcome::Quarantined("signature invalid".into()));
             }
         };
+        if let Some(card) = carrier.card.clone() {
+            if card.fingerprint.eq_ignore_ascii_case(&author) && card.verify().is_ok() {
+                self.remember_card(&card)?;
+            }
+        }
         if self.db.event(&signed.event_id)?.is_some() {
             return Ok(IngestOutcome::Duplicate);
         }
