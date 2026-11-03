@@ -131,7 +131,7 @@ pub const fn protocol_version() -> u32 {
 mod tests {
     use super::*;
 
-    fn card() -> (Identity, ContactCard) {
+    fn make_card() -> (Identity, ContactCard) {
         let identity = Identity::from_secrets([11u8; 32], [12u8; 32]);
         let card = ContactCard::create(
             &identity,
@@ -145,7 +145,7 @@ mod tests {
 
     #[test]
     fn verifies_and_carries_identity() {
-        let (identity, card) = card();
+        let (identity, card) = make_card();
         let public = card.verify().unwrap();
         assert_eq!(public, identity.public());
         assert_eq!(card.fingerprint, identity.fingerprint());
@@ -153,33 +153,33 @@ mod tests {
 
     #[test]
     fn rejects_tampering() {
-        let (_, mut card) = card();
+        let (_, mut card) = make_card();
         card.display_name = "Mallory".to_string();
         assert!(matches!(card.verify(), Err(ProtocolError::BadSignature)));
 
-        let (_, mut card) = card();
+        let (_, mut card) = make_card();
         card.address = "mallory@example.org".to_string();
         assert!(card.verify().is_err());
 
-        let (_, mut card) = card();
+        let (_, mut card) = make_card();
         card.fingerprint = "0".repeat(40);
         assert!(card.verify().is_err());
     }
 
     #[test]
     fn rejects_wrong_kind_and_version() {
-        let (_, mut card) = card();
+        let (_, mut card) = make_card();
         card.kind = "something-else".into();
         assert!(card.verify().is_err());
 
-        let (_, mut card) = card();
+        let (_, mut card) = make_card();
         card.version = 99;
         assert!(card.verify().is_err());
     }
 
     #[test]
     fn round_trips_through_json() {
-        let (_, card) = card();
+        let (_, card) = make_card();
         let text = card.to_pretty_json().unwrap();
         let parsed = ContactCard::from_json(&text).unwrap();
         assert_eq!(parsed, card);
