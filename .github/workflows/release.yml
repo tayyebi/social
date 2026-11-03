@@ -5,8 +5,8 @@ name: release
 #   social-mail-v0.1.0-x86_64-unknown-linux-gnu.tar.gz  (+ .sha256)
 #   social-mail-v0.1.0-x86_64-pc-windows-msvc.zip       (+ .sha256)
 #   SHA256SUMS.txt
-# `workflow_dispatch` builds and tests the same binaries without publishing a
-# release, which is how a release candidate is checked.
+# This is the only workflow in the repository: branch CI was a temporary gate for
+# this phase and was removed once it was green on Linux and Windows.
 
 on:
   push:

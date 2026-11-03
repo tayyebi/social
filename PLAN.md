@@ -1213,3 +1213,53 @@ constrain every implementation task:
     tests**, not documentation. A journey without a test is unfinished work, and
     the release report must show which journeys pass. The acceptance demo must
     pass both interactively and as a scripted CLI transcript.
+
+---
+
+## 25. Implementation status (2026-11-04)
+
+This section records where the code stands against the requirements above. It is
+not a requirement; `docs/IMPLEMENTATION-STATUS.md` is the maintained version of
+this table. Requirements above stay unchanged until a decision record says
+otherwise.
+
+### Shipped in this phase (release `v0.1.0`, Windows + Linux)
+
+| Requirement | Where |
+|---|---|
+| §2 deliverables 1–4, 7, 9, 10, 11, 13 | workspace, CLI/TUI binary, engine, SQLite, RTL tests, README, `docs/`, `release.yml` |
+| §7 identity and contact model | `crates/crypto`, `crates/protocol/src/card.rs`, `crates/engine` |
+| §8 protocol envelope, canonical ids, invalid events | `crates/protocol`, golden vectors in `crates/protocol/tests/fixtures.rs` |
+| §9 signing and encryption | Ed25519 + X25519 + ChaCha20-Poly1305; see `docs/decisions/0002-crypto-backend.md` |
+| §10 direct subscription workflow | follow request → approval → encrypted posts, with `withheld` for unverified followers |
+| §11 mailing lists (both modes) | public-list delivery to the operator; `social-mail-reflector` for private relay, strict verification, per-member states |
+| §14 local storage | schema v1, sticky positions, dedupe, orphan re-link, problems, deliveries, settings |
+| §15 CLI | full command surface with `--json`, nonzero exits, actionable errors |
+| §16–17 TUI and RTL | four tabs, three densities, conversation view, composer, bidi pipeline with Persian fixtures |
+| §18 security requirements | quarantine, block, mismatch rejection, encrypted backups, `docs/security.md` |
+| §19 tests | unit + integration + relay end-to-end + bidi; `cargo test --workspace` green on ubuntu-latest and windows-latest |
+| §21 Actions | `release.yml` on `v*` tags → two archives + SHA-256 + SHA256SUMS.txt; branch CI was temporary and is now removed |
+| §22 `TODO.md` | present, covering deferred work |
+| §24 non-negotiables 1–17 | implemented except those that depend on mail transport (see below) |
+
+### Still open
+
+| Requirement | Blocker |
+|---|---|
+| §12 IMAP folder behaviour | needs IMAP |
+| §13 synchronization and sending | spool transport ships instead; IMAP/SMTP is the next milestone |
+| MIME encoding (§9) | carriers are JSON on disk; MIME lands with the mail transport |
+| §16 "Syncing… n of m" and offline banners | depend on a real sync loop |
+| §19 acceptance demonstration J0–J18 as transcripts | journeys that require a mailbox cannot be scripted yet; the spool equivalents pass |
+| OpenPGP interoperability (§1) | replaced for v0.1 by decision 0002 |
+
+### Crate layout that shipped
+
+```text
+crates/crypto    keys, signatures, encryption, backups
+crates/protocol  envelopes, canonical JSON, carriers, contact cards
+crates/storage   SQLite schema and queries
+crates/engine    application logic, transport boundary, relay
+apps/cli         social-mail (CLI + TUI)
+apps/social-mail-reflector
+```

@@ -82,6 +82,14 @@ right now.
 | Persian glyph shaping | Terminals that do not shape Arabic script still show disconnected letters; documented in `TODO.md`. |
 | Attachments, reactions, edits, search, multi-device | Out of v0.1 scope. |
 
+## Continuous integration
+
+Branch CI was a development gate for this phase: it ran `cargo fmt`, `check`,
+`test` and `clippy` on Linux and Windows and committed a readable report to the
+branch. It passed on both platforms (sha `e4bf421`) and was then removed, so the
+only workflow left is `release.yml`. Releases run the full test suite before they
+package anything.
+
 ## How to verify this claim
 
 ```bash
