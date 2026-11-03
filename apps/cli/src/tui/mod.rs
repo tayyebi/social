@@ -223,7 +223,7 @@ impl App {
                     reply_to: None,
                 });
             }
-            KeyCode::Char('R') => self.reply_to_selected(),
+            KeyCode::Char('R') if self.screen != Screen::Queue => self.reply_to_selected(),
             KeyCode::Char('g') => self.pending_g = true,
             KeyCode::Char('1') => self.switch_tab(Tab::Following),
             KeyCode::Char('2') => self.switch_tab(Tab::Lists),
@@ -1164,7 +1164,7 @@ fn truncate(value: &str, width: usize) -> String {
     text::truncate(value, width)
 }
 
-pub fn run(mut engine: Engine) -> Result<()> {
+pub fn run(engine: Engine) -> Result<()> {
     enable_raw_mode()?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen)?;

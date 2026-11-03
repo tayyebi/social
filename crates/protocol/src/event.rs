@@ -382,14 +382,7 @@ impl SignedEvent {
     }
 
     pub fn carrier(self) -> Carrier {
-        Carrier {
-            kind: CARRIER_KIND.to_string(),
-            version: CARRIER_VERSION,
-            event_id: self.event_id,
-            signature: self.signature,
-            event: self.event,
-            card: None,
-        }
+        Carrier::plain(self)
     }
 }
 

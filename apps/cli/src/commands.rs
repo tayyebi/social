@@ -6,8 +6,8 @@ use std::path::{Path, PathBuf};
 use anyhow::{bail, Context, Result};
 use serde_json::json;
 use social_mail_engine::{
-    Audience, Config, ConversationItem, DeliveryState, Engine, FeedItem, ImportOutcome,
-    InitOptions, Tab, Trust,
+    Audience, ConversationItem, DeliveryState, Engine, FeedItem, ImportOutcome, InitOptions,
+    Tab, Trust,
 };
 
 use crate::text;
