@@ -1180,14 +1180,16 @@ impl Engine {
         if !lists.iter().any(|existing| existing == address) {
             lists.push(address.to_string());
         }
-        self.db.set_setting("lists", &serde_json::to_string(&lists)?)?;
+        self.db
+            .set_setting("lists", &serde_json::to_string(&lists)?)?;
         Ok(())
     }
 
     pub fn remove_list(&mut self, address: &str) -> Result<(), EngineError> {
         let mut lists = self.lists()?;
         lists.retain(|existing| existing != address.trim());
-        self.db.set_setting("lists", &serde_json::to_string(&lists)?)?;
+        self.db
+            .set_setting("lists", &serde_json::to_string(&lists)?)?;
         Ok(())
     }
 
