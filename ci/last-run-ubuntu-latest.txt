@@ -1,0 +1,95 @@
+# ci report (ubuntu-latest)
+sha: bd5ccb26c2833f266a75771e7198d659ad1cf417
+
+## toolchain
+rustc 1.99.1 (58cf8f9c3 2026-10-13)
+cargo 1.99.1 (5f94df478 2026-08-27)
+
+## fmt
+Diff in /home/runner/work/social/social/crates/crypto/src/base64.rs:31:
+ pub fn decode(text: &str) -> Result<Vec<u8>, CryptoError> {
+     let cleaned: String = text.chars().filter(|c| !c.is_whitespace()).collect();
+     if cleaned.len() % 4 != 0 {
+-        return Err(CryptoError::Base64("length is not a multiple of four".into()));
++        return Err(CryptoError::Base64(
++            "length is not a multiple of four".into(),
++        ));
+     }
+     let bytes = cleaned.as_bytes();
+     let mut out = Vec::with_capacity(cleaned.len() / 4 * 3);
+Diff in /home/runner/work/social/social/crates/crypto/src/identity.rs:86:
+         }
+         let mut ephemeral = [0u8; 32];
+         ephemeral.copy_from_slice(&blob[6..38]);
+-        let nonce_bytes: [u8; 12] = blob[38..50]
+-            .try_into()
+-            .map_err(|_| CryptoError::Decrypt)?;
++        let nonce_bytes: [u8; 12] = blob[38..50].try_into().map_err(|_| CryptoError::Decrypt)?;
+         let recipient = X25519PublicKey::from(&self.encryption);
+-        let shared = self.encryption.diffie_hellman(&X25519PublicKey::from(ephemeral));
++        let shared = self
++            .encryption
++            .diffie_hellman(&X25519PublicKey::from(ephemeral));
+         let key = derive_key(shared.as_bytes(), &ephemeral, recipient.as_bytes());
+         let cipher = ChaCha20Poly1305::new_from_slice(&key)
+             .map_err(|_| CryptoError::Key("bad cipher key length".into()))?;
+Diff in /home/runner/work/social/social/crates/protocol/src/card.rs:115:
+     }
+ 
+     pub fn from_json(text: &str) -> Result<Self, ProtocolError> {
+-        let card: ContactCard = serde_json::from_str(text).map_err(|error| {
+-            ProtocolError::Card(format!("could not read card: {error}"))
+-        })?;
++        let card: ContactCard = serde_json::from_str(text)
++            .map_err(|error| ProtocolError::Card(format!("could not read card: {error}")))?;
+         card.verify()?;
+         Ok(card)
+     }
+Diff in /home/runner/work/social/social/crates/protocol/src/event.rs:171:
+     if let Some(lang) = lang {
+         if lang.is_empty()
+             || lang.len() > 35
+-            || !lang
+-                .chars()
+-                .all(|c| c.is_ascii_alphanumeric() || c == '-')
++            || !lang.chars().all(|c| c.is_ascii_alphanumeric() || c == '-')
+         {
+             return Err(ProtocolError::InvalidPayload(format!(
+                 "invalid language tag {lang:?}"
+Diff in /home/runner/work/social/social/crates/protocol/src/json.rs:93:
+     #[test]
+     fn sorts_keys_recursively() {
+         let value = json!({"b": 1, "a": {"z": true, "y": null}});
+-        assert_eq!(canonical_json(&value).unwrap(), r#"{"a":{"y":null,"z":true},"b":1}"#);
++        assert_eq!(
++            canonical_json(&value).unwrap(),
++            r#"{"a":{"y":null,"z":true},"b":1}"#
++        );
+     }
+ 
+     #[test]
+Diff in /home/runner/work/social/social/crates/protocol/src/lib.rs:9:
+ pub use card::{CardKeys, ContactCard, CARD_KIND, CARD_VERSION};
+ pub use error::ProtocolError;
+ pub use event::{
+-    now_rfc3339, parse_timestamp, random_nonce, sha256_hex, Audience, Carrier, Envelope,
+-    EventKind, FollowAcceptPayload, FollowRemovePayload, FollowRequestPayload, PostPayload,
+-    ProfilePayload, ReplyPayload, RouteUpdatePayload, SignedEvent, CARRIER_KIND,
++    now_rfc3339, parse_timestamp, random_nonce, sha256_hex, Audience, Carrier, Envelope, EventKind,
++    FollowAcceptPayload, FollowRemovePayload, FollowRequestPayload, PostPayload, ProfilePayload,
++    ReplyPayload, RouteUpdatePayload, SignedEvent, CARRIER_KIND,
+ };
+ pub use json::canonical_json;
+ 
+Diff in /home/runner/work/social/social/crates/protocol/tests/fixtures.rs:141:
+ 
+     let mut envelope = post_envelope();
+     envelope.nonce = "短".into();
+-    assert!(matches!(envelope.validate(), Err(ProtocolError::InvalidNonce)));
++    assert!(matches!(
++        envelope.validate(),
++        Err(ProtocolError::InvalidNonce)
++    ));
+ 
+     let mut envelope = post_envelope();
+     envelope.created_at = "not a timestamp".into();
