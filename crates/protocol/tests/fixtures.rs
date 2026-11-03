@@ -248,7 +248,7 @@ fn carrier_round_trips_with_card() {
 
     // A carrier claiming someone else's event with Alice's card is rejected.
     let mut mismatched = parsed.clone();
-    mismatched.event.author = "0".repeat(40);
+    mismatched.event.as_mut().unwrap().author = "0".repeat(40);
     assert!(mismatched.verify_with(&identity.public(), None).is_err());
 }
 

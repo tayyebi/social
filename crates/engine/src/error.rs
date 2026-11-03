@@ -10,6 +10,8 @@ pub enum EngineError {
     Crypto(#[from] social_mail_crypto::CryptoError),
     #[error("io error: {0}")]
     Io(#[from] std::io::Error),
+    #[error("json error: {0}")]
+    Json(#[from] serde_json::Error),
     #[error("configuration error: {0}")]
     Config(String),
     #[error("this profile is not initialised: {0}")]
