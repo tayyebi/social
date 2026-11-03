@@ -171,9 +171,7 @@ pub fn validate_lang(lang: &Option<String>) -> Result<(), ProtocolError> {
     if let Some(lang) = lang {
         if lang.is_empty()
             || lang.len() > 35
-            || !lang
-                .chars()
-                .all(|c| c.is_ascii_alphanumeric() || c == '-')
+            || !lang.chars().all(|c| c.is_ascii_alphanumeric() || c == '-')
         {
             return Err(ProtocolError::InvalidPayload(format!(
                 "invalid language tag {lang:?}"

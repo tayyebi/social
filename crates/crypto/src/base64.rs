@@ -31,7 +31,9 @@ pub fn encode(data: &[u8]) -> String {
 pub fn decode(text: &str) -> Result<Vec<u8>, CryptoError> {
     let cleaned: String = text.chars().filter(|c| !c.is_whitespace()).collect();
     if cleaned.len() % 4 != 0 {
-        return Err(CryptoError::Base64("length is not a multiple of four".into()));
+        return Err(CryptoError::Base64(
+            "length is not a multiple of four".into(),
+        ));
     }
     let bytes = cleaned.as_bytes();
     let mut out = Vec::with_capacity(cleaned.len() / 4 * 3);

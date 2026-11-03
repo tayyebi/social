@@ -9,9 +9,9 @@ pub mod json;
 pub use card::{CardKeys, ContactCard, CARD_KIND, CARD_VERSION};
 pub use error::ProtocolError;
 pub use event::{
-    now_rfc3339, parse_timestamp, random_nonce, sha256_hex, Audience, Carrier, Envelope,
-    EventKind, FollowAcceptPayload, FollowRemovePayload, FollowRequestPayload, PostPayload,
-    ProfilePayload, ReplyPayload, RouteUpdatePayload, SignedEvent, CARRIER_KIND,
+    now_rfc3339, parse_timestamp, random_nonce, sha256_hex, Audience, Carrier, Envelope, EventKind,
+    FollowAcceptPayload, FollowRemovePayload, FollowRequestPayload, PostPayload, ProfilePayload,
+    ReplyPayload, RouteUpdatePayload, SignedEvent, CARRIER_KIND,
 };
 pub use json::canonical_json;
 

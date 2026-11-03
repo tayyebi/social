@@ -141,7 +141,10 @@ fn rejects_invalid_envelopes() {
 
     let mut envelope = post_envelope();
     envelope.nonce = "短".into();
-    assert!(matches!(envelope.validate(), Err(ProtocolError::InvalidNonce)));
+    assert!(matches!(
+        envelope.validate(),
+        Err(ProtocolError::InvalidNonce)
+    ));
 
     let mut envelope = post_envelope();
     envelope.created_at = "not a timestamp".into();

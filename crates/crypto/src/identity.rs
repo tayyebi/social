@@ -86,11 +86,11 @@ impl Identity {
         }
         let mut ephemeral = [0u8; 32];
         ephemeral.copy_from_slice(&blob[6..38]);
-        let nonce_bytes: [u8; 12] = blob[38..50]
-            .try_into()
-            .map_err(|_| CryptoError::Decrypt)?;
+        let nonce_bytes: [u8; 12] = blob[38..50].try_into().map_err(|_| CryptoError::Decrypt)?;
         let recipient = X25519PublicKey::from(&self.encryption);
-        let shared = self.encryption.diffie_hellman(&X25519PublicKey::from(ephemeral));
+        let shared = self
+            .encryption
+            .diffie_hellman(&X25519PublicKey::from(ephemeral));
         let key = derive_key(shared.as_bytes(), &ephemeral, recipient.as_bytes());
         let cipher = ChaCha20Poly1305::new_from_slice(&key)
             .map_err(|_| CryptoError::Key("bad cipher key length".into()))?;

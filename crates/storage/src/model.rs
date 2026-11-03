@@ -92,7 +92,9 @@ impl FromStr for FollowState {
             "following" => Ok(FollowState::Following),
             "declined" => Ok(FollowState::Declined),
             "removed" => Ok(FollowState::Removed),
-            other => Err(StorageError::Data(format!("unknown follow state {other:?}"))),
+            other => Err(StorageError::Data(format!(
+                "unknown follow state {other:?}"
+            ))),
         }
     }
 }

@@ -115,9 +115,8 @@ impl ContactCard {
     }
 
     pub fn from_json(text: &str) -> Result<Self, ProtocolError> {
-        let card: ContactCard = serde_json::from_str(text).map_err(|error| {
-            ProtocolError::Card(format!("could not read card: {error}"))
-        })?;
+        let card: ContactCard = serde_json::from_str(text)
+            .map_err(|error| ProtocolError::Card(format!("could not read card: {error}")))?;
         card.verify()?;
         Ok(card)
     }

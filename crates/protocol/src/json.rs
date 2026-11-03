@@ -93,7 +93,10 @@ mod tests {
     #[test]
     fn sorts_keys_recursively() {
         let value = json!({"b": 1, "a": {"z": true, "y": null}});
-        assert_eq!(canonical_json(&value).unwrap(), r#"{"a":{"y":null,"z":true},"b":1}"#);
+        assert_eq!(
+            canonical_json(&value).unwrap(),
+            r#"{"a":{"y":null,"z":true},"b":1}"#
+        );
     }
 
     #[test]

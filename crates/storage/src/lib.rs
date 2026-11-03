@@ -420,7 +420,10 @@ impl Database {
         Ok(self
             .conn
             .query_row(
-                &format!("SELECT {} FROM events WHERE event_id = ?1", Self::EVENT_COLUMNS),
+                &format!(
+                    "SELECT {} FROM events WHERE event_id = ?1",
+                    Self::EVENT_COLUMNS
+                ),
                 params![event_id],
                 Self::event_from_row,
             )
@@ -586,22 +589,19 @@ impl Database {
             Self::tab_clause(tab)
         );
         let mut statement = self.conn.prepare(&sql)?;
-        let rows = statement.query_map(
-            params![me, before_position, limit as i64],
-            |row| {
-                let seen: i64 = row.get(7)?;
-                Ok(TimelineRow {
-                    event_id: row.get(0)?,
-                    position: row.get(1)?,
-                    author: row.get(2)?,
-                    kind: row.get(3)?,
-                    audience: row.get(4)?,
-                    list_id: row.get(5)?,
-                    parent: row.get(6)?,
-                    seen: seen != 0,
-                })
-            },
-        )?;
+        let rows = statement.query_map(params![me, before_position, limit as i64], |row| {
+            let seen: i64 = row.get(7)?;
+            Ok(TimelineRow {
+                event_id: row.get(0)?,
+                position: row.get(1)?,
+                author: row.get(2)?,
+                kind: row.get(3)?,
+                audience: row.get(4)?,
+                list_id: row.get(5)?,
+                parent: row.get(6)?,
+                seen: seen != 0,
+            })
+        })?;
         let mut out = Vec::new();
         for row in rows {
             out.push(row?);
@@ -620,9 +620,7 @@ impl Database {
                {}",
             Self::tab_clause(tab)
         );
-        Ok(self
-            .conn
-            .query_row(&sql, params![me], |row| row.get(0))?)
+        Ok(self.conn.query_row(&sql, params![me], |row| row.get(0))?)
     }
 
     pub fn max_position(&self) -> Result<i64, StorageError> {
@@ -814,8 +812,10 @@ impl Database {
     }
 
     pub fn clear_problem(&self, event_id: &str) -> Result<(), StorageError> {
-        self.conn
-            .execute("DELETE FROM problems WHERE event_id = ?1", params![event_id])?;
+        self.conn.execute(
+            "DELETE FROM problems WHERE event_id = ?1",
+            params![event_id],
+        )?;
         Ok(())
     }
 
@@ -962,7 +962,9 @@ mod tests {
     #[test]
     fn contacts_round_trip_and_update_local_state() {
         let database = db();
-        database.upsert_contact(&contact("A", Trust::Unverified)).unwrap();
+        database
+            .upsert_contact(&contact("A", Trust::Unverified))
+            .unwrap();
         assert_eq!(database.contacts().unwrap().len(), 1);
         // Upsert keeps local trust; only attributes refresh.
         let mut updated = contact("A", Trust::Blocked);
@@ -997,8 +999,12 @@ mod tests {
     #[test]
     fn positions_are_monotonic_and_never_reused() {
         let mut database = db();
-        database.insert_event(&event("e1", "A", "post", None)).unwrap();
-        database.insert_event(&event("e2", "A", "post", None)).unwrap();
+        database
+            .insert_event(&event("e1", "A", "post", None))
+            .unwrap();
+        database
+            .insert_event(&event("e2", "A", "post", None))
+            .unwrap();
         let first = database
             .append_root("e1", "A", "post", "followers", None)
             .unwrap();
@@ -1040,9 +1046,15 @@ mod tests {
             .append_root("listed", "LISTER", "post", "public-list", Some("rust"))
             .unwrap();
 
-        database.upsert_contact(&contact("ALICE", Trust::Verified)).unwrap();
-        database.upsert_contact(&contact("BOB", Trust::Unverified)).unwrap();
-        database.upsert_contact(&contact("MUTED", Trust::Unverified)).unwrap();
+        database
+            .upsert_contact(&contact("ALICE", Trust::Verified))
+            .unwrap();
+        database
+            .upsert_contact(&contact("BOB", Trust::Unverified))
+            .unwrap();
+        database
+            .upsert_contact(&contact("MUTED", Trust::Unverified))
+            .unwrap();
         database.set_muted("MUTED", true).unwrap();
         database
             .upsert_follow(me, "ALICE", FollowState::Following, true)
@@ -1056,7 +1068,11 @@ mod tests {
 
         let following = database.timeline(Tab::Following, me, 50, None).unwrap();
         let ids: Vec<&str> = following.iter().map(|row| row.event_id.as_str()).collect();
-        assert_eq!(ids, vec!["p2", "p1"], "newest first, muted and own excluded");
+        assert_eq!(
+            ids,
+            vec!["p2", "p1"],
+            "newest first, muted and own excluded"
+        );
 
         let lists = database.timeline(Tab::Lists, me, 50, None).unwrap();
         assert_eq!(lists.len(), 1);
@@ -1074,12 +1090,16 @@ mod tests {
         let mut database = db();
         let me = "ME";
         for (id, author) in [("p1", "A"), ("p2", "A"), ("p3", "A")] {
-            database.insert_event(&event(id, author, "post", None)).unwrap();
+            database
+                .insert_event(&event(id, author, "post", None))
+                .unwrap();
             database
                 .append_root(id, author, "post", "followers", None)
                 .unwrap();
         }
-        database.upsert_contact(&contact("A", Trust::Unverified)).unwrap();
+        database
+            .upsert_contact(&contact("A", Trust::Unverified))
+            .unwrap();
         database
             .upsert_follow(me, "A", FollowState::Following, false)
             .unwrap();
@@ -1100,7 +1120,9 @@ mod tests {
     #[test]
     fn conversations_include_nested_replies_only_when_stored() {
         let database = db();
-        database.insert_event(&event("root", "A", "post", None)).unwrap();
+        database
+            .insert_event(&event("root", "A", "post", None))
+            .unwrap();
         database
             .insert_event(&event("r1", "B", "reply", Some("root")))
             .unwrap();
@@ -1124,7 +1146,9 @@ mod tests {
     #[test]
     fn replies_to_me_use_the_resolved_parent_author() {
         let database = db();
-        database.insert_event(&event("root", "ME", "post", None)).unwrap();
+        database
+            .insert_event(&event("root", "ME", "post", None))
+            .unwrap();
         database
             .insert_event(&event("r1", "ALICE", "reply", Some("root")))
             .unwrap();
@@ -1189,7 +1213,10 @@ mod tests {
         database.set_setting("ui.locale", "fa").unwrap();
         assert_eq!(database.setting_or("ui.locale", "en").unwrap(), "fa");
         database.set_sync_state("imap.uid", "42").unwrap();
-        assert_eq!(database.sync_state("imap.uid").unwrap().as_deref(), Some("42"));
+        assert_eq!(
+            database.sync_state("imap.uid").unwrap().as_deref(),
+            Some("42")
+        );
     }
 
     #[test]
@@ -1225,11 +1252,15 @@ mod tests {
     #[test]
     fn counts_summarise_state() {
         let mut database = db();
-        database.insert_event(&event("p1", "A", "post", None)).unwrap();
+        database
+            .insert_event(&event("p1", "A", "post", None))
+            .unwrap();
         database
             .append_root("p1", "A", "post", "followers", None)
             .unwrap();
-        database.upsert_contact(&contact("A", Trust::Verified)).unwrap();
+        database
+            .upsert_contact(&contact("A", Trust::Verified))
+            .unwrap();
         database
             .upsert_follow("ME", "A", FollowState::Following, true)
             .unwrap();
