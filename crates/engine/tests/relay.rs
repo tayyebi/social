@@ -7,6 +7,7 @@
 
 use std::fs;
 use std::path::PathBuf;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 use social_mail_engine::{Audience, Config, Engine, FollowState, InitOptions, Tab, Trust};
@@ -17,11 +18,16 @@ struct Sandbox {
 
 impl Sandbox {
     fn new() -> Self {
+        static SEQUENCE: AtomicU64 = AtomicU64::new(0);
         let nanos = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_nanos();
-        let root = std::env::temp_dir().join(format!("sm-relay-{}-{nanos}", std::process::id()));
+        let unique = SEQUENCE.fetch_add(1, Ordering::Relaxed);
+        let root = std::env::temp_dir().join(format!(
+            "sm-relay-{}-{nanos}-{unique}",
+            std::process::id()
+        ));
         fs::create_dir_all(&root).unwrap();
         Sandbox { root }
     }
@@ -137,8 +143,10 @@ fn relay_preserves_the_author_and_skips_unverified_members() {
         .unwrap()
         .is_empty());
 
-    // A removed member receives nothing further.
+    // A removed member receives nothing further. The removal notice itself is
+    // delivered, so drain it before checking the relay.
     list.remove_follower(&bob.fingerprint()).unwrap();
+    bob.sync().unwrap();
     let second = alice
         .post(
             "second post",

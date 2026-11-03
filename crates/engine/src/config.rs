@@ -309,12 +309,19 @@ fn parse_int(value: &str) -> Option<i64> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::sync::atomic::{AtomicU64, Ordering};
+
+    /// Test directories must be unique even when the clock has coarse
+    /// resolution (Windows) and tests run in parallel.
+    static SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
     fn temp_config(text: &str) -> PathBuf {
+        let unique = SEQUENCE.fetch_add(1, Ordering::Relaxed);
         let dir = std::env::temp_dir().join(format!(
-            "sm-config-{}-{}",
+            "sm-config-{}-{}-{}",
             std::process::id(),
-            chrono::Utc::now().timestamp_nanos_opt().unwrap_or_default()
+            chrono::Utc::now().timestamp_nanos_opt().unwrap_or_default(),
+            unique
         ));
         std::fs::create_dir_all(&dir).unwrap();
         let path = dir.join("social-mail.toml");
