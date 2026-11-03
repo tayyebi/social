@@ -1,0 +1,12 @@
+name: probe
+on:
+  push:
+    branches: [arena/beca6cfd-social]
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustc --version && cargo --version
+      - run: curl -sS -o /dev/null -w "crates-index %{http_code}\n" https://index.crates.io/config.json
