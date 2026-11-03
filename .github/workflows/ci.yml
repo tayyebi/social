@@ -1,0 +1,95 @@
+name: ci
+
+# Development gate. Runs on branch pushes and commits its own report back to the
+# branch so results are readable without the Actions log UI. Once v0.1 stabilises
+# this workflow is switched to manual dispatch only; see release.yml for shipping.
+
+on:
+  push:
+    branches: [arena/beca6cfd-social]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ci-${{ github.ref }}-${{ matrix.os }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    name: gate (${{ matrix.os }})
+    if: "!contains(github.event.head_commit.message, '[ci-report]')"
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Run checks and capture report
+        shell: bash
+        run: |
+          mkdir -p ci
+          report="ci/last-run-${{ matrix.os }}.txt"
+          {
+            echo "# ci report (${{ matrix.os }})"
+            echo "sha: ${GITHUB_SHA}"
+            echo
+            echo "## toolchain"
+            rustc --version
+            cargo --version
+            echo
+            echo "## fmt"
+            cargo fmt --all -- --check 2>&1
+            echo "fmt_exit=$?"
+            echo
+            echo "## check"
+            cargo check --workspace --all-targets 2>&1
+            echo "check_exit=$?"
+            echo
+            echo "## test"
+            cargo test --workspace 2>&1
+            echo "test_exit=$?"
+            echo
+            echo "## clippy"
+            cargo clippy --workspace --all-targets 2>&1
+            echo "clippy_exit=$?"
+          } > "$report"
+          echo "report written to $report"
+          grep -E '^(fmt|check|test|clippy)_exit=' "$report" || true
+
+      - name: Publish report to branch
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@users.noreply.github.com"
+          for attempt in 1 2 3 4; do
+            git add -f ci/
+            git commit -m "ci: report for ${GITHUB_SHA:0:7} [ci-report]" || true
+            git pull --rebase --autostash origin arena/beca6cfd-social || true
+            if git push origin HEAD:arena/beca6cfd-social; then
+              echo "report pushed"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "could not push report"
+          exit 0
+
+      - name: Gate on failures
+        shell: bash
+        run: |
+          f="ci/last-run-${{ matrix.os }}.txt"
+          if grep -qE '^(fmt|check|test|clippy)_exit=[1-9]' "$f"; then
+            echo "::error::ci gate failed"
+            grep -E '^(fmt|check|test|clippy)_exit=' "$f"
+            exit 1
+          fi
+          echo "ci gate passed"

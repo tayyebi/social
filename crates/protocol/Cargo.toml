@@ -1,0 +1,17 @@
+[package]
+name = "social-mail-protocol"
+description = "Event envelope, canonical JSON and verification for social-mail"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+chrono.workspace = true
+rand.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+social-mail-crypto = { path = "../crypto" }
+thiserror.workspace = true

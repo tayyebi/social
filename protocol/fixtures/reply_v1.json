@@ -1,0 +1,13 @@
+{
+  "protocol": "social-mail",
+  "version": 1,
+  "type": "reply",
+  "author": "3F2A91C48D770B5E6C1D44A09E3877B25A6F0C21",
+  "nonce": "0123456789abcdef0123456789abcdef",
+  "created_at": "2026-11-03T10:02:11Z",
+  "payload": {
+    "parent": "b15e0d0d5c9f4c0aa1d0b6c1b0e6f3a1c7d94b1f3d0a8e5c2b6f4a7d9e1c3b5a",
+    "text": "این پیام از social-mail است.",
+    "audience": "followers"
+  }
+}
