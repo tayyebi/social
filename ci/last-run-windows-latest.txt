@@ -1,0 +1,95 @@
+# ci report (windows-latest)
+sha: bd5ccb26c2833f266a75771e7198d659ad1cf417
+
+## toolchain
+rustc 1.99.1 (58cf8f9c3 2026-10-13)
+cargo 1.99.1 (5f94df478 2026-08-27)
+
+## fmt
+Diff in \\?\D:\a\social\social\crates\crypto\src\base64.rs:31:
+ pub fn decode(text: &str) -> Result<Vec<u8>, CryptoError> {
+     let cleaned: String = text.chars().filter(|c| !c.is_whitespace()).collect();
+     if cleaned.len() % 4 != 0 {
+[31m-        return Err(CryptoError::Base64("length is not a multiple of four".into()));
+[0m[32m+        return Err(CryptoError::Base64(
+[0m[32m+            "length is not a multiple of four".into(),
+[0m[32m+        ));
+[0m     }
+     let bytes = cleaned.as_bytes();
+     let mut out = Vec::with_capacity(cleaned.len() / 4 * 3);
+Diff in \\?\D:\a\social\social\crates\crypto\src\identity.rs:86:
+         }
+         let mut ephemeral = [0u8; 32];
+         ephemeral.copy_from_slice(&blob[6..38]);
+[31m-        let nonce_bytes: [u8; 12] = blob[38..50]
+[0m[31m-            .try_into()
+[0m[31m-            .map_err(|_| CryptoError::Decrypt)?;
+[0m[32m+        let nonce_bytes: [u8; 12] = blob[38..50].try_into().map_err(|_| CryptoError::Decrypt)?;
+[0m         let recipient = X25519PublicKey::from(&self.encryption);
+[31m-        let shared = self.encryption.diffie_hellman(&X25519PublicKey::from(ephemeral));
+[0m[32m+        let shared = self
+[0m[32m+            .encryption
+[0m[32m+            .diffie_hellman(&X25519PublicKey::from(ephemeral));
+[0m         let key = derive_key(shared.as_bytes(), &ephemeral, recipient.as_bytes());
+         let cipher = ChaCha20Poly1305::new_from_slice(&key)
+             .map_err(|_| CryptoError::Key("bad cipher key length".into()))?;
+Diff in \\?\D:\a\social\social\crates\protocol\src\card.rs:115:
+     }
+ 
+     pub fn from_json(text: &str) -> Result<Self, ProtocolError> {
+[31m-        let card: ContactCard = serde_json::from_str(text).map_err(|error| {
+[0m[31m-            ProtocolError::Card(format!("could not read card: {error}"))
+[0m[31m-        })?;
+[0m[32m+        let card: ContactCard = serde_json::from_str(text)
+[0m[32m+            .map_err(|error| ProtocolError::Card(format!("could not read card: {error}")))?;
+[0m         card.verify()?;
+         Ok(card)
+     }
+Diff in \\?\D:\a\social\social\crates\protocol\src\event.rs:171:
+     if let Some(lang) = lang {
+         if lang.is_empty()
+             || lang.len() > 35
+[31m-            || !lang
+[0m[31m-                .chars()
+[0m[31m-                .all(|c| c.is_ascii_alphanumeric() || c == '-')
+[0m[32m+            || !lang.chars().all(|c| c.is_ascii_alphanumeric() || c == '-')
+[0m         {
+             return Err(ProtocolError::InvalidPayload(format!(
+                 "invalid language tag {lang:?}"
+Diff in \\?\D:\a\social\social\crates\protocol\src\json.rs:93:
+     #[test]
+     fn sorts_keys_recursively() {
+         let value = json!({"b": 1, "a": {"z": true, "y": null}});
+[31m-        assert_eq!(canonical_json(&value).unwrap(), r#"{"a":{"y":null,"z":true},"b":1}"#);
+[0m[32m+        assert_eq!(
+[0m[32m+            canonical_json(&value).unwrap(),
+[0m[32m+            r#"{"a":{"y":null,"z":true},"b":1}"#
+[0m[32m+        );
+[0m     }
+ 
+     #[test]
+Diff in \\?\D:\a\social\social\crates\protocol\src\lib.rs:9:
+ pub use card::{CardKeys, ContactCard, CARD_KIND, CARD_VERSION};
+ pub use error::ProtocolError;
+ pub use event::{
+[31m-    now_rfc3339, parse_timestamp, random_nonce, sha256_hex, Audience, Carrier, Envelope,
+[0m[31m-    EventKind, FollowAcceptPayload, FollowRemovePayload, FollowRequestPayload, PostPayload,
+[0m[31m-    ProfilePayload, ReplyPayload, RouteUpdatePayload, SignedEvent, CARRIER_KIND,
+[0m[32m+    now_rfc3339, parse_timestamp, random_nonce, sha256_hex, Audience, Carrier, Envelope, EventKind,
+[0m[32m+    FollowAcceptPayload, FollowRemovePayload, FollowRequestPayload, PostPayload, ProfilePayload,
+[0m[32m+    ReplyPayload, RouteUpdatePayload, SignedEvent, CARRIER_KIND,
+[0m };
+ pub use json::canonical_json;
+ 
+Diff in \\?\D:\a\social\social\crates\protocol\tests\fixtures.rs:141:
+ 
+     let mut envelope = post_envelope();
+     envelope.nonce = "短".into();
+[31m-    assert!(matches!(envelope.validate(), Err(ProtocolError::InvalidNonce)));
+[0m[32m+    assert!(matches!(
+[0m[32m+        envelope.validate(),
+[0m[32m+        Err(ProtocolError::InvalidNonce)
+[0m[32m+    ));
+[0m 
+     let mut envelope = post_envelope();
+     envelope.created_at = "not a timestamp".into();
