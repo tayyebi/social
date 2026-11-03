@@ -393,21 +393,60 @@ impl SignedEvent {
     }
 }
 
-/// The transport object: a signed event plus, optionally, the author's card.
+/// The transport object: a signed event, either in the clear or encrypted for a
+/// single recipient, optionally carrying the author's contact card.
+///
+/// Encrypted carriers keep `author`, `event_id` and `signature` as routing
+/// metadata only. Recipients MUST re-derive all three from the decrypted event;
+/// [`Carrier::resolve`] does that and rejects mismatches.
 #[derive(Serialize, Deserialize, Clone, Debug)]
 pub struct Carrier {
     pub kind: String,
     pub version: u32,
+    pub author: String,
     pub event_id: String,
     pub signature: String,
-    pub event: Envelope,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub event: Option<Envelope>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub encrypted: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub card: Option<ContactCard>,
 }
 
 impl Carrier {
-    pub fn from_signed(signed: SignedEvent) -> Self {
-        signed.carrier()
+    pub fn plain(signed: SignedEvent) -> Self {
+        Carrier {
+            kind: CARRIER_KIND.to_string(),
+            version: CARRIER_VERSION,
+            author: signed.event.author.clone(),
+            event_id: signed.event_id,
+            signature: signed.signature,
+            event: Some(signed.event),
+            encrypted: None,
+            card: None,
+        }
+    }
+
+    /// One independently encrypted copy for one recipient (PLAN.md §10).
+    pub fn for_recipient(
+        signed: &SignedEvent,
+        recipient: &PublicIdentity,
+    ) -> Result<Self, ProtocolError> {
+        let plaintext = serde_json::to_vec(signed)?;
+        let blob = recipient
+            .encrypt_to(&plaintext)
+            .map_err(|error| ProtocolError::Crypto(error.to_string()))?;
+        Ok(Carrier {
+            kind: CARRIER_KIND.to_string(),
+            version: CARRIER_VERSION,
+            author: signed.event.author.clone(),
+            event_id: signed.event_id.clone(),
+            signature: signed.signature.clone(),
+            event: None,
+            encrypted: Some(social_mail_crypto::base64::encode(&blob)),
+            card: None,
+        })
     }
 
     pub fn with_card(mut self, card: ContactCard) -> Self {
@@ -415,23 +454,51 @@ impl Carrier {
         self
     }
 
-    pub fn signed(&self) -> SignedEvent {
-        SignedEvent {
-            event: self.event.clone(),
-            event_id: self.event_id.clone(),
-            signature: self.signature.clone(),
-        }
+    pub fn is_encrypted(&self) -> bool {
+        self.encrypted.is_some()
     }
 
-    pub fn verify_with(&self, author: &PublicIdentity) -> Result<(), ProtocolError> {
-        self.signed().verify(author)?;
+    /// Recover the signed event, decrypting when needed.
+    pub fn resolve(&self, identity: Option<&Identity>) -> Result<SignedEvent, ProtocolError> {
+        if let Some(event) = &self.event {
+            return Ok(SignedEvent {
+                event: event.clone(),
+                event_id: self.event_id.clone(),
+                signature: self.signature.clone(),
+            });
+        }
+        let encrypted = self.encrypted.as_ref().ok_or_else(|| {
+            ProtocolError::InvalidPayload("carrier carries neither event nor ciphertext".into())
+        })?;
+        let identity = identity.ok_or_else(|| {
+            ProtocolError::Crypto("an encrypted carrier needs the recipient key".into())
+        })?;
+        let blob = social_mail_crypto::base64::decode(encrypted)
+            .map_err(|error| ProtocolError::Crypto(error.to_string()))?;
+        let plaintext = identity
+            .decrypt(&blob)
+            .map_err(|error| ProtocolError::Crypto(error.to_string()))?;
+        let signed: SignedEvent = serde_json::from_slice(&plaintext)?;
+        if signed.event_id != self.event_id || signed.event.author != self.author {
+            return Err(ProtocolError::EventIdMismatch);
+        }
+        Ok(signed)
+    }
+
+    pub fn verify_with(
+        &self,
+        author: &PublicIdentity,
+        identity: Option<&Identity>,
+    ) -> Result<SignedEvent, ProtocolError> {
+        let signed = self.resolve(identity)?;
+        signed.verify(author)?;
         if let Some(card) = &self.card {
             let public = card.verify()?;
-            if public.fingerprint() != self.event.author {
+            if public.fingerprint() != signed.event.author {
                 return Err(ProtocolError::WrongAuthor);
             }
         }
-        Ok(())
+        Ok(signed)
     }
 
     /// The verified embedded card, if this carrier advertises one.
@@ -440,7 +507,7 @@ impl Carrier {
             None => Ok(None),
             Some(card) => {
                 card.verify()?;
-                if card.fingerprint != self.event.author {
+                if card.fingerprint != self.author {
                     return Err(ProtocolError::WrongAuthor);
                 }
                 Ok(Some(card.clone()))
@@ -469,6 +536,11 @@ impl Carrier {
         }
         if carrier.version != CARRIER_VERSION {
             return Err(ProtocolError::UnsupportedVersion(carrier.version));
+        }
+        if carrier.event.is_some() == carrier.encrypted.is_some() {
+            return Err(ProtocolError::InvalidPayload(
+                "a carrier must carry exactly one of event or ciphertext".into(),
+            ));
         }
         Ok(carrier)
     }

@@ -1,0 +1,17 @@
+[package]
+name = "social-mail-engine"
+description = "Application engine shared by the CLI and the TUI"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+chrono.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+social-mail-crypto = { path = "../crypto" }
+social-mail-protocol = { path = "../protocol" }
+social-mail-storage = { path = "../storage" }
+thiserror.workspace = true

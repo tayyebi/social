@@ -238,18 +238,18 @@ fn carrier_round_trips_with_card() {
     let mut envelope = post_envelope();
     envelope.author = identity.fingerprint();
     let signed = SignedEvent::sign(envelope, &identity).unwrap();
-    let carrier = Carrier::from_signed(signed.clone()).with_card(card.clone());
+    let carrier = Carrier::plain(signed.clone()).with_card(card.clone());
 
     let text = carrier.to_pretty_json().unwrap();
     let parsed = Carrier::from_json(&text).unwrap();
-    parsed.verify_with(&identity.public()).unwrap();
+    parsed.verify_with(&identity.public(), None).unwrap();
     assert_eq!(parsed.embedded_card().unwrap().unwrap(), card);
     assert_eq!(parsed.event_id, signed.event_id);
 
     // A carrier claiming someone else's event with Alice's card is rejected.
     let mut mismatched = parsed.clone();
     mismatched.event.author = "0".repeat(40);
-    assert!(mismatched.verify_with(&identity.public()).is_err());
+    assert!(mismatched.verify_with(&identity.public(), None).is_err());
 }
 
 #[test]

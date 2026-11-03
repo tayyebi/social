@@ -28,6 +28,8 @@ pub enum ProtocolError {
     WrongAuthor,
     #[error("signature verification failed")]
     BadSignature,
+    #[error("crypto error: {0}")]
+    Crypto(String),
     #[error("contact card error: {0}")]
     Card(String),
     #[error("limit exceeded: {0}")]

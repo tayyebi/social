@@ -879,6 +879,47 @@ impl Database {
             .optional()?)
     }
 
+    /// Resolve replies whose parent just arrived.
+    pub fn resolve_orphans(&self, parent: &str, parent_author: &str) -> Result<usize, StorageError> {
+        let changed = self.conn.execute(
+            "UPDATE events SET parent_author = ?2 WHERE parent = ?1",
+            params![parent, parent_author],
+        )?;
+        Ok(changed)
+    }
+
+    /// Events authored by one fingerprint, for bundle export.
+    pub fn events_by_author(
+        &self,
+        author: &str,
+        limit: usize,
+    ) -> Result<Vec<EventRow>, StorageError> {
+        let mut statement = self.conn.prepare(&format!(
+            "SELECT {} FROM events WHERE author = ?1 ORDER BY received_at ASC LIMIT ?2",
+            Self::EVENT_COLUMNS
+        ))?;
+        let rows = statement.query_map(params![author, limit as i64], Self::event_from_row)?;
+        let mut out = Vec::new();
+        for row in rows {
+            out.push(row?);
+        }
+        Ok(out)
+    }
+
+    /// Every delivery row, newest first, for the queue screen.
+    pub fn all_deliveries(&self, limit: usize) -> Result<Vec<DeliveryRow>, StorageError> {
+        let mut statement = self.conn.prepare(
+            "SELECT post_event_id, recipient, state, reason, attempts, next_attempt_at, updated_at
+             FROM deliveries ORDER BY updated_at DESC LIMIT ?1",
+        )?;
+        let rows = statement.query_map(params![limit as i64], Self::delivery_from_row)?;
+        let mut out = Vec::new();
+        for row in rows {
+            out.push(row?);
+        }
+        Ok(out)
+    }
+
     // -------------------------------------------------------------- diagnostics
 
     pub fn counts(&self, me: &str) -> Result<Counts, StorageError> {
