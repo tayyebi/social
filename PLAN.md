@@ -21,6 +21,8 @@ Email providers still provide transport and storage. “Decentralized” means t
 
 This phase is a working reference implementation, not a production-ready anonymity system.
 
+This document specifies the machine. `docs/user-journey.md` specifies the human side of the same binary — personas, first-run setup, trust ceremonies, screen flows, copy, failure states, and closed product decisions (D1–D28). It is part of the v0.1 baseline: where it disagrees about *what the software must do*, this document wins; where it disagrees about *how the product feels and in what order the user is asked for things*, it wins. See section 24.
+
 ---
 
 ## 2. Deliverables
@@ -124,6 +126,7 @@ Use this structure unless a concrete implementation constraint requires a small 
     ├── architecture.md
     ├── protocol.md
     ├── security.md
+    ├── user-journey.md
     └── decisions/
 ```
 
@@ -669,6 +672,14 @@ social-mail settings show
 social-mail settings set-mail-folder <true|false>
 ```
 
+Additional commands required by the user-journey baseline (`docs/user-journey.md`):
+
+```text
+social-mail init [--email <ADDR>] [--name <NAME>] [--locale <en|fa>] [--offline] [--no-auto-sync]
+social-mail identity contact-card [--out <FILE>]
+social-mail lists request-membership <LIST_ADDRESS>
+```
+
 `--tui` and `tui` may both launch the same interface, but only one needs to be the documented primary form.
 
 All machine-oriented commands should support `--json` where practical.
@@ -1131,7 +1142,7 @@ The implementing agent must:
 5. Never generate or commit real credentials, private keys, or personal email fixtures.
 6. Keep all protocol state transitions deterministic and covered by fixtures.
 7. Run formatting, linting, and tests before reporting completion.
-8. Update `README.md`, `docs/protocol.md`, and `TODO.md` whenever behavior changes.
+8. Update `README.md`, `docs/protocol.md`, `docs/user-journey.md`, and `TODO.md` whenever behavior changes.
 9. Mark unfinished functionality explicitly rather than leaving silently broken commands.
 10. Finish with a report containing:
     - Implemented features.
@@ -1146,3 +1157,38 @@ The first implementation target remains:
 > Two Rust profiles exchanging a verified, encrypted signed post through real or locally emulated email, with a persistent local timeline.
 
 Everything else should build on that working foundation.
+
+---
+
+## 24. User Experience Baseline
+
+The full plan lives in `docs/user-journey.md`. The non-negotiable parts that
+constrain every implementation task:
+
+1. **The TUI is the product**; the CLI is the automation surface. `social-mail init`
+   is the single entry point and is resumable and fully flag-drivable.
+2. **First launch is always the wizard.** No implicit profile creation.
+3. **Identity before mailbox.** A local (file-based) mode must let a user complete
+   onboarding, pairing, posting, and replying with no mail credentials.
+4. **Verification is a two-step ceremony** with the full grouped fingerprint on
+   screen; short fingerprints are scan aids only; a follow request can only be
+   approved from a verified contact.
+5. **Private is the default audience**, and every timeline item and queue row
+   states its audience and trust status as words, not icons or colors.
+6. **Delivery language never exceeds SMTP truth**: queued, sending, accepted by
+   your mail server, retrying, failed, cancelled. Never "delivered", never
+   "read".
+7. **Key changes are never silent.** Mismatched or invalid signatures are
+   quarantined into a visible `Problems` list and never enter the timeline.
+8. **Every error names an action.** No dead-end screens and no unusable app when
+   the network or mailbox is broken.
+9. **Block and mute are local and silent**; no block or mute action sends mail.
+10. **Nothing is lost to a crash**: drafts survive `Esc`, outgoing state survives
+    kill, and restarting never duplicates a timeline entry.
+11. **Persian is a first-class locale**: UI language is chosen at first run with a
+    live preview, identifiers stay Latin and LTR inside RTL text, and RTL
+    correctness is proven by snapshot tests, not asserted.
+12. **Journeys J0–J12 in section 22 of `docs/user-journey.md` are acceptance
+    tests**, not documentation. A journey without a test is unfinished work, and
+    the release report must show which journeys pass.
+
