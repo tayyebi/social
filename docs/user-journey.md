@@ -28,6 +28,16 @@ earlier framing in this file. They are the assumptions behind every journey belo
 | Timeline | **Feed of cards** | Header (time · author · fingerprint · trust · audience), body, footer; grouped by day; no split pane. |
 | Visual style | **Color-coded status** | Trust and delivery states get color and always keep their word; `NO_COLOR` loses nothing. |
 
+Second pass, same day, on the timeline specifically (§24):
+
+| Choice | Selected | Consequence |
+|---|---|---|
+| Ordering | **Sticky** | Positions are assigned once and never re-sorted; late arrivals are labelled, not relocated (D32). |
+| Threading | **Roots only** | Replies live in conversations; a Replies screen and a status-bar counter keep "someone answered you" visible (D33). |
+| Sources | **Tabs with counts** | `Following` is the default view; list traffic never merges into it (D34). |
+| Density | **Per source** | Compact for lists, cozy for people, `Z` to override, width-guarded (D35). |
+| Chrome | **Borders when they fit** | Bordered cards at ≥60 columns, dim rule otherwise; focus never uses a status color (D36). |
+
 ---
 
 ## 1. Product promise, in user language
@@ -140,7 +150,7 @@ from an accident. Reversal requires editing this table.
 | **D15** | **Never block the interface on the network.** Sync and sends run in the engine's worker; the TUI shows state transitions (`Syncing…`, `Retrying in 2m`) and stays navigable. Modals only appear for actions the user just took. | Terminal apps that freeze look crashed. |
 | **D16** | **Delivery language is literal and never exceeds SMTP truth**: `Queued` → `Sending` → `Accepted by your mail server` → `Retrying in 2m (attempt 3)` → `Failed — needs action`. "Delivered" is banned; "Read" is banned. A private copy withheld by policy reads **`Not sent — unverified`** — never queued, never failed. | PLAN.md §13. The withheld state is a policy outcome decided before the queue, so presenting it as a queue state would mislead twice: it is not coming, and nothing is broken. |
 | **D17** | **Public/private/list audience is visible on every timeline item and every queue row**, as a compact tag (`private`, `public`, `list:name`). | The user must never wonder whether something went out encrypted. |
-| **D18** | **Threads open on demand.** Timeline is flat and chronological (local receipt order); `Enter` opens a thread view with replies, capped at 3 indentation levels. Orphaned replies appear under a `Pending (parent not received)` heading in both the timeline and the thread. | PLAN.md §8's ordering rules and orphan handling need a concrete presentation. |
+| **D18** | **The feed is roots-only; replies live in conversations.** `Enter` opens a thread with replies ordered by author time and capped at 3 indentation levels; orphans appear under `Pending (parent not received)`. Replies to you never enter the feed — they surface as a status-bar count and a **Replies** screen (`g r`). | PLAN.md §8's ordering and orphan rules need one concrete home. Roots-only keeps a chatty thread from taking over the screen; the Replies screen pays back the one thing it costs. |
 | **D19** | **Read/unread is local and never synced.** A `New` divider marks items received since the timeline was last opened in this session; `u` toggles unread. No read receipts exist anywhere in the protocol. | Prevents an implied receipt channel and matches the "no server" model. |
 | **D20** | **Blocking is local and silent.** v0.1 has no protocol `block` event: blocked events are dropped at ingest, blocked contacts disappear from the timeline, and no message is sent to the blocked party. **Mute** keeps delivery and subscription but hides items from the timeline. Both are reversible from Contacts. | A block event would be a notification. Silent local control is also what protects the user in the harassment case. |
 | **D21** | **Key change is never silent.** If mail arrives signed by a key that claims a known contact's address but a different fingerprint, it is quarantined, the contact is flagged `key mismatch`, and no timeline item is created. The user resolves it from the Requests/Diagnostics screen. | PLAN.md §7 forbids silent replacement; the UI needs a place for the case to land. |
@@ -151,9 +161,15 @@ from an accident. Reversal requires editing this table.
 | **D26** | **Reflector administration is CLI-only in v0.1.** No reflector TUI. | PLAN.md §11 lists CLI commands; a second TUI doubles the RTL/snapshot test surface for a small-operator audience already using a terminal. |
 | **D27** | **No OS notifications, no sounds, no badges outside the app.** The status bar and the `Requests` badge are the notification system. | Cross-platform terminal notification support is unreliable; false promises are worse than quiet. |
 | **D28** | **The first public post is the only place we interrupt the user uninvited**, and that interruption is educational, not blocking. | One earned interruption; everything else stays out of the way. |
-| **D29** | **The timeline is a feed of cards, not an inbox of rows.** Each item is a bordered block: a header line (local time · author · short fingerprint · trust · audience), the body (up to a configurable line budget, with `…` + `Enter` for the rest), and a footer line (`2 replies`, delivery summary for own posts). Cards are grouped by day with a thin `Today` / `Yesterday` / date divider. | Chosen over an inbox list: posts are multi-paragraph and often mixed-direction, and a header/body/footer block is the only layout that keeps author, trust, and audience attached to the text they describe without a second column. Chosen over a split pane: split panes waste horizontal space at 80 columns, which is the size we must look good at. |
+| **D29** | **The timeline is a feed of post cards, with compact rows as the volume density.** Each item is a header line (time · author · short fingerprint · trust · audience), a body (line budget, `… +N lines`, `Enter` for the rest), and a footer (`2 replies · 1 new`, delivery summary for your own posts). Day dividers, source tabs, and three densities; full rules in §24. | Chosen over an inbox list: posts are multi-paragraph and often mixed-direction, and a header/body/footer block is the only layout that keeps author, trust, and audience attached to the text they describe without a second column. Chosen over a split pane: split panes waste horizontal space at 80 columns, which is the size we must look good at. |
 | **D30** | **Color carries status, words carry meaning.** Trust and delivery states get color (verified green, unverified/retrying amber, mismatch/failed red, private blue-cyan, public yellow, list magenta), and every one of them also renders as a word. `NO_COLOR`, `TERM=dumb`, and a `settings.color = never` option remove color entirely with no loss of information; `settings.color = always` is available for high-contrast terminals. | Chosen over monochrome: scanning a feed for "is this verified / did it send" is the app's most repeated task, and color makes it a glance instead of a read. The word must stay, because ssh sessions, screenshots, and color-blind users all exist. |
 | **D31** | **One trust vocabulary, two renderings.** The engine returns trust (`verified`, `unverified`, `mismatch`, `invalid`) and delivery (`queued`, `sending`, `accepted`, `retrying`, `failed`, `cancelled`, `withheld`); the TUI maps these to color + word, the CLI maps them to words and `--json` enums. Neither surface invents a state, and a test asserts the mapping is total. | Two surfaces means two chances to describe the same fact differently — the fastest way to lose a user's trust is for the TUI to say "Sending" while the CLI says "queued". |
+
+| **D32** | **The feed is sticky, newest-first, and append-only.** Each item gets an immutable monotonic position at commit; within a batch items sort by `author_time` clamped to `[commit−30d, commit]`; nothing is ever re-sorted, and read state never changes position. Late arrivals are labelled `late`, not relocated. | A feed that shifts while you read it is the worst timeline bug there is: you lose your place and stop trusting the order. The cost is that a genuinely old post delivered today appears at the top — marked, not hidden. Needs a small PLAN.md §8 amendment, since display order is now commit order rather than receipt order. |
+| **D33** | **Replies are excluded from the feed by design**, with two quiet compensations: a per-root `· n new` footer and a status-bar `N new replies` counter leading to a **Replies** screen (`g r`, CLI `timeline --replies`). | Chosen over a hybrid feed: threads stay calm and the feed stays about posts. The counter exists so "someone answered you" is never invisible — roots-only without it would be silent, not quiet. |
+| **D34** | **Source tabs with per-filter cursors** (`Following`, `Lists`, `You`, `All`, digits `1`–`4`), defaulting to the last used tab, never merging list traffic into Following. | A 200-post/day list and a three-friend circle cannot share one column. Tabs make the trusted circle the default view and `All` the deliberate exception. |
+| **D35** | **Density is per source**: compact for `Lists` and `All`, cozy for `Following` and `You`, `Z` to override, remembered per tab; everything is compact below 60 columns and `full` is offered at ≥120. | Volume and intimacy want different layouts; forcing one layout either wastes the reading view or makes triage unbearable. |
+| **D36** | **Chrome is hybrid**: bordered cards when ≥60 columns and not compact; otherwise a dim left rule. Focus is a brighter rule, never a status color; Persian body text is right-aligned inside the left-ruled chrome. | Borders are worth their rows when there is room, and worth dropping when there is not. Focus must not impersonate trust. |
 
 ---
 
@@ -510,48 +526,52 @@ immediate kill -9 and resumes on restart.
 
 ## 12. J7 — Reading, threading, replying
 
-**Timeline cards** (feed layout, D29; must fit 80×24 — roughly three cards):
+**Timeline** — full feed rules in §24; this is what J7 exercises. Source tabs
+sit above the feed, and the feed carries **root posts only** (D33):
 
 ```text
+ 1 Following (12)   2 Lists (47)   3 You   4 All         / filter   r sync
 ─────────────────── Today ────────────────────
 ┌ 12:04 · Bob · b7c3 · verified · private ─────────────────────┐
 │ سلام، این یک آزمایش است.                                    │
 │ Hello world                                                  │
 │                                                              │
-│ 2 replies                                                    │
+│ 2 replies · 1 new                                            │
 └──────────────────────────────────────────────────────────────┘
-┌ 11:47 · Carol · 4a19 · verified · list:rust-users ───────────┐
-│ Does anybody still have that mail-sync bug from last week?   │
-│ I couldn't reproduce it on 0.1.0.                            │
-│                                                              │
-│ 5 replies · unread                                           │
-└──────────────────────────────────────────────────────────────┘
+```
+
+`Lists` renders compact by default; the same items become two-line rows:
+
+```text
+ 11:47  Carol   verified    list:rust-users   Does anybody still have that…
+ 11:12  Dave    unverified  private           Anyone else seeing duplicate…
 ```
 
 Color (D30) applies to the header's status words, never to the body text:
 `verified` green, `unverified` amber, `mismatch`/`invalid` red, `private`
-blue-cyan, `public` yellow, `list:…` magenta. Without color the words, the
-`private`/`public` tag, and the position of the tag are unchanged, so the card is
-identically informative.
+blue-cyan, `public` yellow, `list:…` magenta. Without color the words and their
+positions are unchanged, so the item is identically informative.
 
 Card rules:
 
-- **Header line:** local receipt time · author · short fingerprint · trust word ·
-  audience tag. Header is the only thing that is ever truncated (and it
-  truncates from the right, keeping author and trust).
-- **Body:** authored text, up to `settings.feed.body_lines` (default `6`) with a
-  `… +4 lines` marker; `Enter` opens the full item. Persian and mixed-direction
-  bodies render through the same text pipeline as everywhere else.
-- **Footer:** reply count, `unread` marker, and for your own posts the delivery
-  summary from §11. No footer if there is nothing to say.
-- Day dividers (`Today`, `Yesterday`, `2026-11-01`) keep local chronology legible
-  without timestamps competing with the body.
-- Author display name falls back to address, then short fingerprint. The short
-  fingerprint is a *scan* aid only; `Enter` → contact card shows the full one.
-- Trust and delivery never render as bare icons; the word is always present
+- **Header:** author time · author · short fingerprint · trust · audience (plus
+  source in `All`). The header is the only part that truncates, and it truncates
+  from the right — author, trust, and audience survive at 40 columns.
+- **Body:** authored text, clipped at the density's line budget with an explicit
+  `… +N lines`; `Enter` opens the conversation. Persian and mixed-direction
+  bodies go through the same text pipeline as everywhere else.
+- **Footer:** reply count with `· n new`, `unread`, and for your own posts the
+  delivery summary from §11. Absent when there is nothing to say.
+- Trust and delivery are always **word plus color**, never color or icon alone
   (D30, PLAN.md §16).
-- Own posts are visually distinguishable (a dim left rule) but not differently
-  colored, so "mine" never competes with "trusted".
+- Own posts carry a dim left marker: provenance, not status.
+- Day dividers follow author dates in display order; positions never change
+  (§24.1), so a late arrival can introduce a `Yesterday` divider above `Today`.
+
+**Replies never appear in the feed** (D33). A direct reply to you is reachable
+from the status-bar counter (`2 new replies` → Replies screen, `g r`) and from the
+root card's footer. Quieter than a hybrid feed, at the cost of one screen — a
+deliberate trade, not an omission.
 
 **Invalid events never look like normal events.** A quarantined item renders in a
 separate `Problems` section with one sentence of cause and an action:
@@ -757,25 +777,27 @@ the date it was written.
 ### Screens and navigation
 
 ```text
-                       ┌────────────┐
-                       │  Timeline  │◄── home
-                       └─┬───┬───┬──┘
-        ┌────────────────┘   │   └───────────────┐
-        ▼                    ▼                   ▼
-   ┌─────────┐         ┌───────────┐       ┌───────────┐
-   │ Thread  │         │ Composer  │       │  Problem  │
-   └────┬────┘         └───────────┘       │  details  │
-        ▼                                 └───────────┘
-   ┌───────────┐   ┌──────────┐   ┌────────┐   ┌─────────┐   ┌──────────┐
-   │ Contacts  │   │ Requests │   │ Lists  │   │  Queue  │   │ Settings │
-   └────┬──────┘   └────┬─────┘   └───┬────┘   └────┬────┘   └────┬─────┘
-        ▼               ▼             ▼             ▼             ▼
-   Verify dialog   Verify+approve  List detail   Delivery row   Folder,
-   Import card     Decline/Block   Post/leave    Retry/cancel   locale, sync
+                        ┌──────────────────┐
+                        │     Timeline     │◄── home (tabs 1–4)
+                        └─┬────┬────┬──────┘
+        ┌─────────────────┘    │    └──────────────┐
+        ▼                      ▼                   ▼
+   ┌────────────┐        ┌───────────┐      ┌───────────┐
+   │ Conversation│       │ Composer  │      │  Problems │
+   │ (thread)    │       │           │      │  details  │
+   └──────┬──────┘       └───────────┘      └───────────┘
+          ▼
+   ┌───────────┐  ┌──────────┐  ┌────────┐  ┌─────────┐  ┌──────────┐  ┌───────────┐
+   │ Contacts  │  │ Requests │  │ Lists  │  │  Queue  │  │  Replies  │  │ Settings  │
+   └────┬──────┘  └────┬─────┘  └───┬────┘  └────┬────┘  └────┬──────┘  └─────┬─────┘
+        ▼              ▼            ▼            ▼            ▼               ▼
+   Verify dialog   Verify+approve  List detail  Delivery     Reply to you    Folder,
+   Import card     Approve/decline Post/leave   Retry/cancel Open thread     locale, color,
+   Contact card    Decline/Block                Withheld                     density, sync
 ```
 
 - Single status bar at the bottom, always visible: `identity · sync freshness ·
-  N queued · N requests · mode/locale`.
+  N queued · N requests · N new replies · mode/locale`.
 - Banners occupy one line above the status bar; they never steal focus.
 - Modals are only for actions the user initiated; the queue/sync run in the
   background (D15).
@@ -787,12 +809,18 @@ the date it was written.
 
 ### Feed layout
 
-The Timeline is a vertical list of cards (D29), each `header / body / footer`,
-separated by day dividers, never by per-card blank lines (borders do that job).
-Card width equals the frame width minus one column of breathing room; text is
-wrapped by the terminal-text pipeline, not by character count. Long bodies are
-clipped at `settings.feed.body_lines` (default `6`) with an explicit `… +N lines`
-marker, never silently.
+The Timeline is a vertical list of cards, newest first, with an immutable order
+(D32) and per-source density (§24.4). This section only fixes the chrome; the
+ordering, tabs, density, and threading rules live in §24.
+
+- Card width is the frame width minus one column of breathing room; wrapping is
+  done by the terminal-text pipeline, never by character count.
+- Bordered cards at ≥60 columns in cozy/full density; a dim left rule and a
+  two-space indent below 60 columns or in compact density (§24.5).
+- The focused card is marked with a brighter rule, not a status color — focus
+  must never be mistaken for trust.
+- Long bodies are clipped at the density budget with an explicit `… +N lines`
+  marker, never silently.
 
 ### Color palette (D30)
 
@@ -821,6 +849,13 @@ monochrome snapshot test runs the full matrix to prove no information is lost.
 | `Esc` | cancel modal | · | back | back | back | back | save draft & close |
 | `j` / `k`, `↓` / `↑` | move | move | move | move | move | move | · |
 | `g` then `t/c/f/l/q/s` | jump to screen | · | · | · | · | · | · |
+| `g` then `r` | Replies screen | · | · | · | · | · | · |
+| `1`–`4` | feed tabs (Following/Lists/You/All) | · | · | · | · | · | · |
+| `[` / `]` | cycle feed tabs | · | · | · | · | · | · |
+| `Z` | cycle density (compact/cozy/full) | · | · | · | · | · | · |
+| `N` | jump to new frontier | · | · | · | · | · | · |
+| `gg` / `G` | · | newest / oldest | top / bottom | · | · | · | · |
+| `Ctrl+D` / `Ctrl+U` | half page | half page | half page | half page | half page | half page | · |
 | `r` | sync now | · | · | · | · | · | · |
 | `n` | new post | new post | · | · | · | · | · |
 | `a` | · | · | · | approve unverified | follow | · | audience |
@@ -859,6 +894,11 @@ scripted equivalent of the keypress — not a reduced version.
 | Post (private/list) | `n`, `a`, `Ctrl+S` | `post --text … --private` / `--public-list <ID>` |
 | Reply | `R` | `reply <EVENT_ID> --text …` |
 | Read timeline | scroll / `Enter` | `timeline [--limit N] [--json] [--thread <ID>]` |
+| Feed tab | `1`–`4`, `[` / `]` | `timeline --tab <following\|lists\|you\|all>` |
+| Feed density | `Z` | `timeline --density <compact\|cozy\|full>` |
+| Jump to new | `N` | `timeline --new` |
+| Replies to you | `g r` (Replies screen) | `timeline --replies [--json]` |
+| Mark seen / unread | scroll past frontier, `u` | `timeline --mark-seen`, `timeline --mark-unread <EVENT_ID>` |
 | Sync | `r`, auto | `sync`, `sync --status` |
 | Delivery state / retry / cancel | Queue `R` / `c` | `queue status`, `queue retry <ID>`, `queue cancel <ID>` |
 | Verify-a-recipient prompt | `v` on a withheld row | `queue show <POST_ID>` lists withheld recipients |
@@ -964,6 +1004,9 @@ Every journey has an owner, a test, and a demonstrable artifact. Journeys marked
 | J11 | Block/mute | integration: drop before insert, unblock no replay | test output |
 | J12 | Restart | integration: 5 recovery cases | test output |
 | J13 | Key loss | manual checklist + doc assertion | docs link |
+| J16 | Feed stability | `tests/integration/journey_feed_order.rs`: 3 batches incl. an out-of-order item — positions immutable, batch order, `late` chip, divider, cursor restart | test output |
+| J17 | Feed presentation | snapshot matrix: 4 tabs × 3 densities × 3 widths × 2 locales × color on/off | golden files |
+| J18 | Replies path | integration: reply-to-you creates no feed item, increments counter, opens correct conversation | test output |
 | J14 | Surface parity | `tests/parity.rs`: every row of the §19 parity table exists in `--help` and in the keymap registry, and both surfaces return the same state words (D31) | parity report |
 | J15 | Color independence | snapshot matrix with and without color at 40/80/120 columns, both locales | diffed snapshots |
 
@@ -979,27 +1022,191 @@ one alone is an incomplete gate under D1.
    `identity contact-card`, `contacts import <FILE>` already exists,
    `lists request-membership`, and `init` with a full flag set
    (`--email --name --locale --offline --no-auto-sync --config`).
-2. **New TUI screens/details** implied by §19: `Problems`/quarantine list,
-   `Pending replies`, delivery detail view, withheld-recipient row, `LOCAL MODE`
-   marker, key-mismatch resolution.
+2. **New TUI screens/details** implied by §19/§24: feed source tabs, three
+   densities, attention strip, new-frontier band, **Replies** screen,
+   `Problems`/quarantine list, `Pending replies`, delivery detail view,
+   withheld-recipient row, `LOCAL MODE` marker, key-mismatch resolution.
 3. **New settings**: `ui.locale`, `ui.color` (`auto|always|never`),
    `sync.auto_interval_minutes` (default `5`, `0` = manual),
+   `feed.density.<tab>` (per-tab override, `auto` by default),
    `feed.body_lines` (default `6`), `compose.max_bytes`, and the existing
    `mail.move_protocol_messages`.
-4. **New engine outputs**: per-recipient delivery summary for a post (including
+4. **New storage** (PLAN.md §14): `timeline_entries.position` (`i64`, unique per
+   profile, immutable after commit) and `feed_cursors(tab, last_position)`.
+   Positions are assigned in the same transaction as the sync checkpoint, so a
+   crash can neither reorder nor half-commit a batch. Migration must backfill
+   existing rows in author-time order. `feed_cursors` is local-only and never
+   synced.
+5. **New engine outputs**: per-recipient delivery summary for a post (including
    `withheld` reason), so both surfaces render from one struct (D31) — this is a
    small addition to PLAN.md §14's `outgoing_deliveries` semantics: a withheld
    recipient gets a row with reason `unverified` and never an SMTP attempt.
-5. **New tests**: journey integration tests (J0–J13), parity test (J14), color
+6. **New tests**: journey integration tests (J0–J13, J16–J18), parity test (J14), color
    independence snapshots (J15), string-table coverage (every UI key has both
    locales), TUI snapshot matrix at 40/80/120 columns.
-6. **New docs**: this file; `docs/protocol.md` gains nothing (no protocol
+7. **New docs**: this file; `docs/protocol.md` gains nothing (no protocol
    change); README gains a "Five-minute two-person demo" section that follows
    J0→J7 verbatim, in both its interactive and scripted forms.
 
 ---
 
-## 24. Deliberately not in v0.1 UX
+## 24. Timeline design (feed)
+
+The feed has one job: answer *"what's new, and can I trust it?"* in one screen.
+Three failure modes are designed against explicitly — **flooding** (a busy list
+buries your three friends), **scattering** (a sync batch inserts items in the
+middle and the screen rearranges under the cursor), and **theatre** (algorithms,
+engagement bait, a fake "you're all caught up"). Every rule below is normative.
+
+### 24.1 Ordering: sticky, newest first, never re-sorted
+
+The feed is ordered newest-first and **an item's position is assigned once and
+never changes**. No middle inserts, no re-sorting, no jumping.
+
+- Position is a per-profile monotonic sequence (`timeline_entries.position`,
+  `i64`) assigned at **commit** — when a sync batch is stored, or when a restored
+  batch is applied — inside the same transaction as the sync checkpoint.
+- **Within a commit batch**, items are ordered by `sort_time`, so a batch holding
+  a week of mail reads chronologically instead of in IMAP order.
+- `sort_time = clamp(author_time, commit_time − 30 days, commit_time)`. A claim
+  in the future can never outrank a genuinely newer post; an unparsable or
+  missing time sorts last within its batch and renders `time unknown`.
+- A card whose `author_time` is more than 24 h older than the newest committed
+  item gets a `late` chip: `late · posted 3h ago`. Under roots-only arrival this
+  is rare; when it happens we say so instead of rewriting history.
+- **Read/unread never changes position.** `u` toggles state, not order.
+- **Threads do not use feed order.** A conversation is always author-time
+  ascending. Feed order and conversation order are different orders on purpose.
+- Restart cannot reorder (positions come from the sequence); duplicate delivery
+  cannot create a second position (unique `event_id`); a restored profile is
+  applied as one batch and therefore reads chronologically.
+
+Accepted cost, stated plainly: an ancient root post delivered today sits at the
+top of the feed with a `late` chip. That is better than a feed that shifts while
+you are reading it.
+
+### 24.2 The new frontier
+
+The seen/unseen boundary is a **position**, not a timestamp:
+`feed_cursors(filter, last_position)` — local, per profile, per filter, never
+synced.
+
+- **On open:** if the active filter has unseen items, land on the frontier band
+  (`── 12 new ──`, dim, one row) rather than at the very top; if not, restore the
+  last viewport; if there is no history, the top.
+- `N` jumps to the frontier; scrolling past it marks the filter seen and moves
+  the cursor; `Esc` in a filter leaves it untouched.
+- The band is content, not a notification: it never steals focus and never
+  auto-scrolls.
+
+### 24.3 Source tabs
+
+```text
+ 1 Following (12)   2 Lists (47)   3 You   4 All         / filter   r sync
+```
+
+| Tab | Contains | Default density |
+|---|---|---|
+| `1 Following` | root posts by contacts you follow (verified and unverified) | cozy |
+| `2 Lists` | root posts from added lists | compact |
+| `3 You` | your own posts and replies, with delivery summaries | cozy |
+| `4 All` | union, header gains a source tag | compact |
+
+- Counts are unseen items, dim; the bar is one row and always visible.
+- `1`–`4` select; `[` / `]` cycle; the last used tab is remembered per profile.
+- **List traffic is never merged into Following.** This is the anti-flooding rule;
+  `All` is the explicit opt-in.
+- Each tab has its own empty state and its own `/` filter scope.
+
+### 24.4 Density, per source
+
+Three densities: **compact** (2-line rows), **cozy** (bordered card, 6 body
+lines), **full** (bordered card, 12 body lines, full fingerprint + source).
+
+- Defaults come from the tab (table above); `Z` cycles and the choice is
+  remembered **per tab, per profile**.
+- Width guard: below 60 columns everything is compact; at ≥120 columns `full` is
+  offered (not forced).
+- Density changes presentation only — order, cursors, and read state are
+  untouched, so switching never loses your place.
+
+### 24.5 Chrome
+
+- ≥60 columns and not compact → single-line bordered card; no double borders, no
+  shadows, no filled panels.
+- Compact or <60 columns → no border: a dim left rule `▏` and a two-space indent.
+- Header truncation order: drop the short fingerprint → collapse the audience tag
+  to `priv` / `pub` / `list` → shorten the time. Author and trust are never
+  dropped.
+- Focus is a brighter rule or a caret, never a status color: focus ≠ trust.
+- Persian text is right-aligned **inside** a left-ruled card; the chrome does not
+  mirror, because mirrored chrome in a mixed-direction feed is unreadable.
+  Paragraph-level bidi handles the text; identifiers stay Latin and LTR.
+  (Locale-mirrored chrome is recorded in `TODO.md` as an experiment.)
+
+### 24.6 Threading: roots only
+
+- The feed contains root posts. Replies, and replies-to-replies, appear only in
+  the conversation view (`Enter`).
+- Root card footer: `3 replies · 1 new` (`new` = received since you last opened
+  that conversation; local only).
+- **A reply to you never appears in the feed.** It is surfaced two other ways,
+  both quiet:
+  - status-bar counter `2 new replies` → **Replies** screen (`g r`), which lists
+    replies addressed to you with author, time, trust, and the parent's first
+    line; `Enter` opens the conversation;
+  - the root card footer's `· n new`.
+- Orphaned replies are listed in the conversation under
+  `Pending (parent not received)`, counted in the status bar while any exist, and
+  disappear from that count when resolved (`Enter` on one explains the case).
+- Replies are counted as unread only in their conversation, never in the feed.
+  This is the honest consequence of roots-only: the feed stays quiet, so the app
+  owes you a visible, one-keystroke path to "someone answered you".
+
+### 24.7 Filtering, attention, and arriving batches
+
+- `/` filters the loaded items in the active tab by author, list, or text
+  substring. It **replaces** the list (not highlight-in-place) and shows
+  `filter: "uidvalidity" · 3 results`; `Esc` clears. No server search, no search
+  across unloaded mail.
+- **Attention strip:** if any of your own posts has a failed or stuck delivery, a
+  one-row strip sits above the feed: `⚠ 1 post needs attention · Enter to review`.
+  It never auto-opens and disappears when resolved.
+- **Batch arrival:** a sync that brings 12 items commits one batch and shows one
+  dim line at the frontier (`── 12 new ──`). The feed does not animate, flash, or
+  scroll; nothing already on screen moves.
+- The day header of the section currently at the top edge stays pinned while its
+  cards are visible (cozy/full only; compact drops it to save a row).
+
+### 24.8 Navigation and viewport
+
+- `j` / `k` move card by card (card granularity at every width and density);
+  `Ctrl+D` / `Ctrl+U` move half a screen; `gg` / `G` jump to newest / oldest.
+- Tab switches restore that tab's scroll offset for the session.
+- On exit, one position per tab is saved, so the next launch restores where you
+  were (subject to §24.2's frontier rule).
+
+### 24.9 Performance budget
+
+The ordering model is chosen partly because it is cheap to render: the list is
+append-only, so the viewport is a slice with stable indices.
+
+- Layout cache keyed by `(event_id, width, locale, density, tab)`; shaping and
+  bidi analysis run once per key.
+- Targets: first paint of a 200-item feed < 150 ms; one scroll step < 16 ms;
+  re-layout on resize < 100 ms at 80 columns; 5,000 stored events must not slow
+  navigation.
+- Only visible cards (plus one screen of prefetch) are shaped.
+
+### 24.10 Tests
+
+| ID | Test | Asserts |
+|---|---|---|
+| J16 | Feed stability | three batches including an out-of-order older item: committed positions never change, batch-internal author order, `late` chip, divider behaviour, cursor survives restart, no re-sort after any sync |
+| J17 | Feed presentation | snapshot matrix: 4 tabs × 3 densities × 3 widths (40/80/120) × 2 locales × color on/off, plus focus marker and truncation order |
+| J18 | Replies path (roots-only) | a reply to you creates no feed item, increments `new replies`, appears in Replies, opens the conversation at the right reply, and clears the count |
+
+## 25. Deliberately not in v0.1 UX
 
 Onboarding tours · suggested contacts · follow-back prompts · OS notifications ·
 themes · global search · rich text/Markdown · reactions · read receipts · visual

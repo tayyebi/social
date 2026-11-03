@@ -339,7 +339,7 @@ If a reply arrives before its parent:
 - Display it as an orphaned reply or pending item.
 - Resolve it automatically when the parent arrives.
 
-`created_at` is an author claim. Sort primarily by local receipt/index information with author time displayed separately; do not let an arbitrary timestamp reorder local storage destructively.
+`created_at` is an author claim. Give every stored event an **immutable, monotonically increasing local feed position**, assigned at commit time inside the same transaction as the sync checkpoint. Within one commit batch, order by the claimed time clamped to `[commit_time - 30 days, commit_time]`; after commit, never re-sort and never move an event. Display author time separately and label arrivals that are far older than the newest committed item. Read state never changes position. Do not let an arbitrary timestamp reorder local storage destructively, and do not let a background sync rearrange the screen a user is reading (see `docs/user-journey.md` D32).
 
 ### Invalid events
 
@@ -626,6 +626,7 @@ received
 Requirements:
 
 - Event IDs have uniqueness constraints.
+- Every timeline entry stores an immutable feed position (monotonic per profile), and per-filter seen cursors are stored separately from entries.
 - Transport messages and application events are separate concepts.
 - Duplicate deliveries do not duplicate timeline entries.
 - Raw payloads and verification status remain available for diagnostics.
@@ -1196,10 +1197,19 @@ constrain every implementation task:
 11. **Block and mute are local and silent**; no block or mute action sends mail.
 12. **Nothing is lost to a crash**: drafts survive `Esc`, outgoing state survives
     kill, and restarting never duplicates a timeline entry.
-13. **Persian is a first-class locale**: UI language is chosen at first run with
+13. **The feed is sticky and append-only.** Items get their position once, at
+    commit; nothing is re-sorted, and syncing never rearranges what is on screen.
+    Late arrivals are labelled `late`, not relocated.
+14. **The feed is roots-only**, with replies in conversations and a visible
+    `N new replies` counter plus a Replies screen so "someone answered you" is
+    never invisible. List traffic is never merged into the Following tab.
+15. **Density is per source and chrome is hybrid**: compact rows for lists, cards
+    for people, borders only when the terminal has room (≥60 columns, not
+    compact), and focus is never rendered as a status color.
+16. **Persian is a first-class locale**: UI language is chosen at first run with
     a live preview, identifiers stay Latin and LTR inside RTL text, and RTL
     correctness is proven by snapshot tests, not asserted.
-14. **Journeys J0–J15 in section 22 of `docs/user-journey.md` are acceptance
+17. **Journeys J0–J18 in section 22 of `docs/user-journey.md` are acceptance
     tests**, not documentation. A journey without a test is unfinished work, and
     the release report must show which journeys pass. The acceptance demo must
     pass both interactively and as a scripted CLI transcript.
