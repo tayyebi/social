@@ -1,5 +1,5 @@
 # ci report (windows-latest)
-sha: 880796d6249c56c125788daddbdcc4b559ca674a
+sha: 877223ce9a1eb9b6ce47c72c82056c0f5d6c6963
 
 ## toolchain
 rustc 1.99.1 (58cf8f9c3 2026-10-13)
@@ -11,136 +11,136 @@ fmt_exit=0
 ## check
 [1m[92m    Updating[0m crates.io index
 [1m[92m Downloading[0m crates ...
-[1m[92m  Downloaded[0m subtle v2.6.1
-[1m[92m  Downloaded[0m strum v0.26.3
-[1m[92m  Downloaded[0m strum_macros v0.26.4
-[1m[92m  Downloaded[0m unicode-truncate v1.1.0
-[1m[92m  Downloaded[0m utf8parse v0.2.2
-[1m[92m  Downloaded[0m version_check v0.9.5
-[1m[92m  Downloaded[0m universal-hash v0.5.1
-[1m[92m  Downloaded[0m windows-link v0.2.1
-[1m[92m  Downloaded[0m thiserror v1.0.69
-[1m[92m  Downloaded[0m zeroize v1.9.1
-[1m[92m  Downloaded[0m zmij v1.0.23
-[1m[92m  Downloaded[0m chacha20 v0.9.1
-[1m[92m  Downloaded[0m thiserror-impl v1.0.69
-[1m[92m  Downloaded[0m unicode-ident v1.0.27
-[1m[92m  Downloaded[0m zeroize_derive v1.5.0
-[1m[92m  Downloaded[0m unicode-bidi v0.3.18
-[1m[92m  Downloaded[0m x25519-dalek v2.0.1
-[1m[92m  Downloaded[0m typenum v1.20.1
-[1m[92m  Downloaded[0m unicode-segmentation v1.13.3
-[1m[92m  Downloaded[0m block-buffer v0.10.4
-[1m[92m  Downloaded[0m clap_lex v1.1.1
-[1m[92m  Downloaded[0m darling_macro v0.24.1
-[1m[92m  Downloaded[0m anstyle v1.0.14
-[1m[92m  Downloaded[0m vcpkg v0.2.15
-[1m[92m  Downloaded[0m cipher v0.4.4
-[1m[92m  Downloaded[0m syn v3.0.9
-[1m[92m  Downloaded[0m unicode-width v0.1.14
-[1m[92m  Downloaded[0m digest v0.10.7
-[1m[92m  Downloaded[0m unicode-width v0.2.0
-[1m[92m  Downloaded[0m syn v2.0.119
-[1m[92m  Downloaded[0m zerocopy v0.8.63
-[1m[92m  Downloaded[0m bitflags v2.13.2
-[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
-[1m[92m  Downloaded[0m der v0.7.10
-[1m[92m  Downloaded[0m allocator-api2 v0.2.21
-[1m[92m  Downloaded[0m anstream v1.0.0
 [1m[92m  Downloaded[0m castaway v0.2.4
-[1m[92m  Downloaded[0m ahash v0.8.12
-[1m[92m  Downloaded[0m base64ct v1.8.3
-[1m[92m  Downloaded[0m compact_str v0.8.2
-[1m[92m  Downloaded[0m darling_core v0.24.1
-[1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
-[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
-[1m[92m  Downloaded[0m colorchoice v1.0.5
-[1m[92m  Downloaded[0m cassowary v0.3.0
-[1m[92m  Downloaded[0m hmac v0.12.1
-[1m[92m  Downloaded[0m cc v1.11.0
-[1m[92m  Downloaded[0m darling v0.24.1
-[1m[92m  Downloaded[0m winapi v0.3.9
-[1m[92m  Downloaded[0m anyhow v1.0.104
-[1m[92m  Downloaded[0m anstyle-wincon v3.0.11
-[1m[92m  Downloaded[0m cfg-if v1.0.5
-[1m[92m  Downloaded[0m clap v4.6.7
-[1m[92m  Downloaded[0m crypto-common v0.1.7
-[1m[92m  Downloaded[0m equivalent v1.0.3
 [1m[92m  Downloaded[0m aead v0.5.2
-[1m[92m  Downloaded[0m ed25519 v2.2.3
-[1m[92m  Downloaded[0m cpufeatures v0.2.17
-[1m[92m  Downloaded[0m scopeguard v1.2.0
-[1m[92m  Downloaded[0m anstyle-query v1.1.5
-[1m[92m  Downloaded[0m itoa v1.0.18
-[1m[92m  Downloaded[0m once_cell_polyfill v1.70.2
-[1m[92m  Downloaded[0m pkg-config v0.3.34
-[1m[92m  Downloaded[0m strsim v0.11.1
-[1m[92m  Downloaded[0m windows-sys v0.61.2
-[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
-[1m[92m  Downloaded[0m is_terminal_polyfill v1.70.2
-[1m[92m  Downloaded[0m crossterm_winapi v0.9.1
-[1m[92m  Downloaded[0m ident_case v1.0.1
-[1m[92m  Downloaded[0m parking_lot_core v0.9.12
-[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
-[1m[92m  Downloaded[0m rand_chacha v0.3.1
-[1m[92m  Downloaded[0m lru v0.12.5
-[1m[92m  Downloaded[0m paste v1.0.15
-[1m[92m  Downloaded[0m pkcs8 v0.10.2
-[1m[92m  Downloaded[0m fallible-iterator v0.3.0
-[1m[92m  Downloaded[0m indoc v2.0.8
-[1m[92m  Downloaded[0m heck v0.5.0
-[1m[92m  Downloaded[0m poly1305 v0.8.0
-[1m[92m  Downloaded[0m hashlink v0.9.1
-[1m[92m  Downloaded[0m quote v1.0.47
-[1m[92m  Downloaded[0m smallvec v1.16.4
-[1m[92m  Downloaded[0m either v1.19.0
-[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
-[1m[92m  Downloaded[0m generic-array v0.14.7
-[1m[92m  Downloaded[0m getrandom v0.2.17
-[1m[92m  Downloaded[0m shlex v2.0.1
-[1m[92m  Downloaded[0m spki v0.7.3
-[1m[92m  Downloaded[0m inout v0.1.4
-[1m[92m  Downloaded[0m pbkdf2 v0.12.2
-[1m[92m  Downloaded[0m proc-macro2 v1.0.107
-[1m[92m  Downloaded[0m rustversion v1.0.23
-[1m[92m  Downloaded[0m static_assertions v1.1.0
-[1m[92m  Downloaded[0m instability v0.3.14
-[1m[92m  Downloaded[0m num-traits v0.2.19
-[1m[92m  Downloaded[0m semver v1.0.28
-[1m[92m  Downloaded[0m serde_core v1.0.229
-[1m[92m  Downloaded[0m const-oid v0.9.6
-[1m[92m  Downloaded[0m once_cell v1.21.4
-[1m[92m  Downloaded[0m opaque-debug v0.3.1
-[1m[92m  Downloaded[0m signature v2.2.0
-[1m[92m  Downloaded[0m anstyle-parse v1.0.0
 [1m[92m  Downloaded[0m autocfg v1.5.1
-[1m[92m  Downloaded[0m parking_lot v0.12.5
-[1m[92m  Downloaded[0m sha2 v0.10.9
-[1m[92m  Downloaded[0m foldhash v0.1.5
-[1m[92m  Downloaded[0m lock_api v0.4.14
-[1m[92m  Downloaded[0m rand_core v0.6.4
+[1m[92m  Downloaded[0m cc v1.11.0
+[1m[92m  Downloaded[0m block-buffer v0.10.4
+[1m[92m  Downloaded[0m utf8parse v0.2.2
+[1m[92m  Downloaded[0m anstyle-query v1.1.5
+[1m[92m  Downloaded[0m base64ct v1.8.3
+[1m[92m  Downloaded[0m thiserror-impl v1.0.69
+[1m[92m  Downloaded[0m cpufeatures v0.2.17
+[1m[92m  Downloaded[0m strum v0.26.3
+[1m[92m  Downloaded[0m is_terminal_polyfill v1.70.2
+[1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
+[1m[92m  Downloaded[0m equivalent v1.0.3
+[1m[92m  Downloaded[0m cfg-if v1.0.5
+[1m[92m  Downloaded[0m universal-hash v0.5.1
+[1m[92m  Downloaded[0m crypto-common v0.1.7
+[1m[92m  Downloaded[0m heck v0.5.0
+[1m[92m  Downloaded[0m lru v0.12.5
+[1m[92m  Downloaded[0m rand_chacha v0.3.1
+[1m[92m  Downloaded[0m strsim v0.11.1
+[1m[92m  Downloaded[0m generic-array v0.14.7
+[1m[92m  Downloaded[0m once_cell_polyfill v1.70.2
+[1m[92m  Downloaded[0m colorchoice v1.0.5
+[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
+[1m[92m  Downloaded[0m cassowary v0.3.0
+[1m[92m  Downloaded[0m hashlink v0.9.1
+[1m[92m  Downloaded[0m inout v0.1.4
+[1m[92m  Downloaded[0m scopeguard v1.2.0
+[1m[92m  Downloaded[0m darling_macro v0.24.1
+[1m[92m  Downloaded[0m itoa v1.0.18
+[1m[92m  Downloaded[0m unicode-truncate v1.1.0
+[1m[92m  Downloaded[0m anstyle-wincon v3.0.11
+[1m[92m  Downloaded[0m ident_case v1.0.1
+[1m[92m  Downloaded[0m signature v2.2.0
 [1m[92m  Downloaded[0m rustc_version v0.4.1
-[1m[92m  Downloaded[0m serde_derive v1.0.229
+[1m[92m  Downloaded[0m crossterm_winapi v0.9.1
+[1m[92m  Downloaded[0m clap_lex v1.1.1
+[1m[92m  Downloaded[0m opaque-debug v0.3.1
+[1m[92m  Downloaded[0m anstyle-parse v1.0.0
+[1m[92m  Downloaded[0m either v1.19.0
+[1m[92m  Downloaded[0m poly1305 v0.8.0
+[1m[92m  Downloaded[0m cipher v0.4.4
+[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
+[1m[92m  Downloaded[0m digest v0.10.7
+[1m[92m  Downloaded[0m rand_core v0.6.4
+[1m[92m  Downloaded[0m getrandom v0.2.17
+[1m[92m  Downloaded[0m lock_api v0.4.14
+[1m[92m  Downloaded[0m anyhow v1.0.104
+[1m[92m  Downloaded[0m instability v0.3.14
+[1m[92m  Downloaded[0m ed25519 v2.2.3
+[1m[92m  Downloaded[0m sha2 v0.10.9
+[1m[92m  Downloaded[0m spki v0.7.3
+[1m[92m  Downloaded[0m chacha20 v0.9.1
+[1m[92m  Downloaded[0m zeroize_derive v1.5.0
+[1m[92m  Downloaded[0m windows-link v0.2.1
+[1m[92m  Downloaded[0m subtle v2.6.1
+[1m[92m  Downloaded[0m version_check v0.9.5
+[1m[92m  Downloaded[0m anstream v1.0.0
+[1m[92m  Downloaded[0m quote v1.0.47
+[1m[92m  Downloaded[0m paste v1.0.15
+[1m[92m  Downloaded[0m pbkdf2 v0.12.2
+[1m[92m  Downloaded[0m pkcs8 v0.10.2
+[1m[92m  Downloaded[0m rustversion v1.0.23
+[1m[92m  Downloaded[0m indoc v2.0.8
+[1m[92m  Downloaded[0m thiserror v1.0.69
+[1m[92m  Downloaded[0m strum_macros v0.26.4
+[1m[92m  Downloaded[0m anstyle v1.0.14
+[1m[92m  Downloaded[0m pkg-config v0.3.34
+[1m[92m  Downloaded[0m fallible-iterator v0.3.0
+[1m[92m  Downloaded[0m smallvec v1.16.4
+[1m[92m  Downloaded[0m static_assertions v1.1.0
 [1m[92m  Downloaded[0m clap_derive v4.6.7
+[1m[92m  Downloaded[0m foldhash v0.1.5
+[1m[92m  Downloaded[0m const-oid v0.9.6
+[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
+[1m[92m  Downloaded[0m zmij v1.0.23
+[1m[92m  Downloaded[0m once_cell v1.21.4
+[1m[92m  Downloaded[0m parking_lot_core v0.9.12
+[1m[92m  Downloaded[0m semver v1.0.28
+[1m[92m  Downloaded[0m ahash v0.8.12
+[1m[92m  Downloaded[0m hmac v0.12.1
+[1m[92m  Downloaded[0m shlex v2.0.1
 [1m[92m  Downloaded[0m ryu v1.0.23
-[1m[92m  Downloaded[0m hashbrown v0.15.5
-[1m[92m  Downloaded[0m crossterm v0.28.1
-[1m[92m  Downloaded[0m memchr v2.8.3
+[1m[92m  Downloaded[0m num-traits v0.2.19
+[1m[92m  Downloaded[0m serde_core v1.0.229
+[1m[92m  Downloaded[0m darling v0.24.1
+[1m[92m  Downloaded[0m serde_derive v1.0.229
+[1m[92m  Downloaded[0m parking_lot v0.12.5
+[1m[92m  Downloaded[0m proc-macro2 v1.0.107
+[1m[92m  Downloaded[0m bitflags v2.13.2
+[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
+[1m[92m  Downloaded[0m clap v4.6.7
+[1m[92m  Downloaded[0m darling_core v0.24.1
+[1m[92m  Downloaded[0m der v0.7.10
 [1m[92m  Downloaded[0m rand v0.8.8
-[1m[92m  Downloaded[0m serde v1.0.229
-[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
+[1m[92m  Downloaded[0m allocator-api2 v0.2.21
+[1m[92m  Downloaded[0m compact_str v0.8.2
+[1m[92m  Downloaded[0m memchr v2.8.3
 [1m[92m  Downloaded[0m itertools v0.13.0
+[1m[92m  Downloaded[0m serde v1.0.229
+[1m[92m  Downloaded[0m zeroize v1.9.1
+[1m[92m  Downloaded[0m unicode-ident v1.0.27
+[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
+[1m[92m  Downloaded[0m crossterm v0.28.1
+[1m[92m  Downloaded[0m hashbrown v0.15.5
+[1m[92m  Downloaded[0m rusqlite v0.32.1
 [1m[92m  Downloaded[0m serde_json v1.0.154
 [1m[92m  Downloaded[0m clap_builder v4.6.7
 [1m[92m  Downloaded[0m hashbrown v0.14.5
-[1m[92m  Downloaded[0m rusqlite v0.32.1
 [1m[92m  Downloaded[0m chrono v0.4.45
+[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
+[1m[92m  Downloaded[0m unicode-bidi v0.3.18
 [1m[92m  Downloaded[0m ratatui v0.29.0
+[1m[92m  Downloaded[0m x25519-dalek v2.0.1
+[1m[92m  Downloaded[0m typenum v1.20.1
+[1m[92m  Downloaded[0m unicode-segmentation v1.13.3
 [1m[92m  Downloaded[0m libsqlite3-sys v0.30.1
-[1m[92m   Compiling[0m proc-macro2 v1.0.107
+[1m[92m  Downloaded[0m vcpkg v0.2.15
+[1m[92m  Downloaded[0m syn v3.0.9
+[1m[92m  Downloaded[0m unicode-width v0.2.0
+[1m[92m  Downloaded[0m unicode-width v0.1.14
+[1m[92m  Downloaded[0m zerocopy v0.8.63
+[1m[92m  Downloaded[0m syn v2.0.119
+[1m[92m  Downloaded[0m winapi v0.3.9
+[1m[92m  Downloaded[0m windows-sys v0.61.2
 [1m[92m    Checking[0m cfg-if v1.0.5
-[1m[92m   Compiling[0m unicode-ident v1.0.27
+[1m[92m   Compiling[0m proc-macro2 v1.0.107
 [1m[92m   Compiling[0m quote v1.0.47
+[1m[92m   Compiling[0m unicode-ident v1.0.27
 [1m[92m   Compiling[0m version_check v0.9.5
 [1m[92m    Checking[0m getrandom v0.2.17
 [1m[92m   Compiling[0m generic-array v0.14.7
@@ -150,17 +150,17 @@ fmt_exit=0
 [1m[92m   Compiling[0m zerocopy v0.8.63
 [1m[92m    Checking[0m subtle v2.6.1
 [1m[92m    Checking[0m cpufeatures v0.2.17
-[1m[92m   Compiling[0m serde_core v1.0.229
 [1m[92m   Compiling[0m semver v1.0.28
 [1m[92m    Checking[0m crypto-common v0.1.7
 [1m[92m    Checking[0m block-buffer v0.10.4
-[1m[92m    Checking[0m digest v0.10.7
 [1m[92m   Compiling[0m autocfg v1.5.1
+[1m[92m    Checking[0m digest v0.10.7
+[1m[92m   Compiling[0m serde_core v1.0.229
 [1m[92m   Compiling[0m rustc_version v0.4.1
 [1m[92m   Compiling[0m num-traits v0.2.19
+[1m[92m   Compiling[0m curve25519-dalek v4.1.3
 [1m[92m   Compiling[0m syn v2.0.119
 [1m[92m   Compiling[0m syn v3.0.9
-[1m[92m   Compiling[0m curve25519-dalek v4.1.3
 [1m[92m   Compiling[0m thiserror v1.0.69
 [1m[92m   Compiling[0m serde v1.0.229
 [1m[92m    Checking[0m inout v0.1.4
@@ -170,126 +170,118 @@ fmt_exit=0
 [1m[92m    Checking[0m chrono v0.4.45
 [1m[92m    Checking[0m universal-hash v0.5.1
 [1m[92m   Compiling[0m ahash v0.8.12
+[1m[92m    Checking[0m signature v2.2.0
+[1m[92m    Checking[0m opaque-debug v0.3.1
+[1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m   Compiling[0m find-msvc-tools v0.1.15
 [1m[92m   Compiling[0m shlex v2.0.1
-[1m[92m    Checking[0m signature v2.2.0
-[1m[92m   Compiling[0m serde_json v1.0.154
-[1m[92m    Checking[0m opaque-debug v0.3.1
 [1m[92m    Checking[0m smallvec v1.16.4
-[1m[92m    Checking[0m poly1305 v0.8.0
-[1m[92m    Checking[0m ed25519 v2.2.3
 [1m[92m   Compiling[0m cc v1.11.0
-[1m[92m    Checking[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m serde_derive v1.0.229
+[1m[92m    Checking[0m poly1305 v0.8.0
 [1m[92m   Compiling[0m zeroize_derive v1.5.0
+[1m[92m   Compiling[0m curve25519-dalek-derive v0.1.1
 [1m[92m   Compiling[0m thiserror-impl v1.0.69
 [1m[92m    Checking[0m zeroize v1.9.1
-[1m[92m   Compiling[0m curve25519-dalek-derive v0.1.1
 [1m[92m    Checking[0m cipher v0.4.4
-[1m[92m    Checking[0m sha2 v0.10.9
 [1m[92m    Checking[0m chacha20 v0.9.1
+[1m[92m    Checking[0m ed25519 v2.2.3
+[1m[92m    Checking[0m rand_chacha v0.3.1
+[1m[92m    Checking[0m sha2 v0.10.9
 [1m[92m    Checking[0m hmac v0.12.1
 [1m[92m    Checking[0m aead v0.5.2
+[1m[92m   Compiling[0m pkg-config v0.3.34
 [1m[92m    Checking[0m once_cell v1.21.4
 [1m[92m    Checking[0m memchr v2.8.3
 [1m[92m   Compiling[0m vcpkg v0.2.15
-[1m[92m   Compiling[0m pkg-config v0.3.34
+[1m[92m    Checking[0m chacha20poly1305 v0.10.1
+[1m[92m    Checking[0m pbkdf2 v0.12.2
 [1m[92m    Checking[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m    Checking[0m x25519-dalek v2.0.1
-[1m[92m    Checking[0m chacha20poly1305 v0.10.1
-[1m[92m    Checking[0m pbkdf2 v0.12.2
 [1m[92m    Checking[0m rand v0.8.8
 [1m[92m    Checking[0m bitflags v2.13.2
 [1m[92m    Checking[0m hashbrown v0.14.5
 [1m[92m    Checking[0m fallible-iterator v0.3.0
-[1m[92m    Checking[0m hashlink v0.9.1
 [1m[92m    Checking[0m social-mail-crypto v0.1.0 (D:\a\social\social\crates\crypto)
 [1m[92m    Checking[0m fallible-streaming-iterator v0.1.9
 [1m[92m    Checking[0m windows-sys v0.61.2
-[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m   Compiling[0m rustversion v1.0.23
+[1m[92m    Checking[0m hashlink v0.9.1
+[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m    Checking[0m social-mail-protocol v0.1.0 (D:\a\social\social\crates\protocol)
-[1m[92m    Checking[0m anstyle v1.0.14
 [1m[92m    Checking[0m utf8parse v0.2.2
+[1m[92m    Checking[0m anstyle v1.0.14
 [1m[92m    Checking[0m once_cell_polyfill v1.70.2
-[1m[92m    Checking[0m anstyle-parse v1.0.0
-[1m[92m   Compiling[0m parking_lot_core v0.9.12
 [1m[92m    Checking[0m anstyle-query v1.1.5
 [1m[92m    Checking[0m anstyle-wincon v3.0.11
-[1m[92m   Compiling[0m winapi v0.3.9
-[1m[92m   Compiling[0m strsim v0.11.1
+[1m[92m    Checking[0m anstyle-parse v1.0.0
 [1m[92m    Checking[0m is_terminal_polyfill v1.70.2
 [1m[92m   Compiling[0m ident_case v1.0.1
 [1m[92m    Checking[0m colorchoice v1.0.5
+[1m[92m   Compiling[0m strsim v0.11.1
+[1m[92m   Compiling[0m winapi v0.3.9
+[1m[92m   Compiling[0m parking_lot_core v0.9.12
 [1m[92m   Compiling[0m darling_core v0.24.1
 [1m[92m    Checking[0m anstream v1.0.0
-[1m[92m    Checking[0m clap_lex v1.1.1
 [1m[92m    Checking[0m scopeguard v1.2.0
 [1m[92m   Compiling[0m anyhow v1.0.104
+[1m[92m    Checking[0m clap_lex v1.1.1
 [1m[92m    Checking[0m clap_builder v4.6.7
 [1m[92m    Checking[0m lock_api v0.4.14
 [1m[92m   Compiling[0m clap_derive v4.6.7
-[1m[92m    Checking[0m equivalent v1.0.3
-[1m[92m    Checking[0m allocator-api2 v0.2.21
 [1m[92m    Checking[0m foldhash v0.1.5
+[1m[92m    Checking[0m equivalent v1.0.3
 [1m[92m   Compiling[0m paste v1.0.15
-[1m[92m    Checking[0m rusqlite v0.32.1
-[1m[92m    Checking[0m either v1.19.0
 [1m[92m   Compiling[0m darling_macro v0.24.1
+[1m[92m    Checking[0m either v1.19.0
+[1m[92m    Checking[0m allocator-api2 v0.2.21
+[1m[92m   Compiling[0m darling v0.24.1
 [1m[92m    Checking[0m itertools v0.13.0
 [1m[92m    Checking[0m clap v4.6.7
-[1m[92m    Checking[0m hashbrown v0.15.5
-[1m[92m   Compiling[0m darling v0.24.1
 [1m[92m    Checking[0m crossterm_winapi v0.9.1
+[1m[92m    Checking[0m hashbrown v0.15.5
 [1m[92m    Checking[0m parking_lot v0.12.5
-[1m[92m    Checking[0m social-mail-storage v0.1.0 (D:\a\social\social\crates\storage)
 [1m[92m   Compiling[0m strum_macros v0.26.4
-[1m[92m    Checking[0m social-mail-engine v0.1.0 (D:\a\social\social\crates\engine)
 [1m[92m    Checking[0m castaway v0.2.4
-[1m[92m    Checking[0m ryu v1.0.23
-[1m[92m    Checking[0m unicode-segmentation v1.13.3
-[1m[92m    Checking[0m unicode-width v0.1.14
 [1m[92m   Compiling[0m indoc v2.0.8
 [1m[92m    Checking[0m static_assertions v1.1.0
-[1m[92m    Checking[0m unicode-truncate v1.1.0
+[1m[92m    Checking[0m unicode-segmentation v1.13.3
+[1m[92m    Checking[0m ryu v1.0.23
+[1m[92m    Checking[0m unicode-width v0.1.14
 [1m[92m    Checking[0m compact_str v0.8.2
+[1m[92m    Checking[0m unicode-truncate v1.1.0
+[1m[92m   Compiling[0m instability v0.3.14
+[1m[92m    Checking[0m rusqlite v0.32.1
 [1m[92m    Checking[0m lru v0.12.5
 [1m[92m    Checking[0m crossterm v0.28.1
-[1m[92m   Compiling[0m instability v0.3.14
-[1m[92m    Checking[0m unicode-width v0.2.0
-[1m[92m    Checking[0m cassowary v0.3.0
-[1m[92m    Checking[0m unicode-bidi v0.3.18
-[1m[92m    Checking[0m social-mail-reflector v0.1.0 (D:\a\social\social\apps\social-mail-reflector)
 [1m[92m    Checking[0m strum v0.26.3
+[1m[92m    Checking[0m social-mail-storage v0.1.0 (D:\a\social\social\crates\storage)
+[1m[92m    Checking[0m cassowary v0.3.0
+[1m[92m    Checking[0m unicode-width v0.2.0
+[1m[92m    Checking[0m unicode-bidi v0.3.18
+[1m[92m    Checking[0m social-mail-engine v0.1.0 (D:\a\social\social\crates\engine)
 [1m[92m    Checking[0m ratatui v0.29.0
+[1m[92m    Checking[0m social-mail-reflector v0.1.0 (D:\a\social\social\apps\social-mail-reflector)
 [1m[92m    Checking[0m social-mail v0.1.0 (D:\a\social\social\apps\cli)
-[1m[91merror[E0004][0m[1m[97m: non-exhaustive patterns: `unicode_bidi::Direction::Mixed` not covered[0m
-   [1m[96m--> [0mapps\cli\src\text.rs:77:23
-    [1m[96m|[0m
-[1m[96m 77[0m [1m[96m|[0m     let level = match base_direction(line) {
-    [1m[96m|[0m                       [1m[91m^^^^^^^^^^^^^^^^^^^^[0m [1m[91mpattern `unicode_bidi::Direction::Mixed` not covered[0m
-    [1m[96m|[0m
-[1m[92mnote[0m: `unicode_bidi::Direction` defined here
-   [1m[96m--> [0mC:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-bidi-0.3.18\src\lib.rs:165:1
-    [1m[96m|[0m
-[1m[96m165[0m [1m[96m|[0m pub enum Direction {
-    [1m[96m|[0m [1m[92m^^^^^^^^^^^^^^^^^^[0m
-[1m[96m...[0m
-[1m[96m168[0m [1m[96m|[0m     Mixed,
-    [1m[96m|[0m     [1m[96m-----[0m [1m[96mnot covered[0m
-    [1m[96m= [0m[1m[97mnote[0m: the matched value is of type `unicode_bidi::Direction`
-[1m[96mhelp[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown
-    [1m[96m|[0m
-[1m[96m 79[0m [92m~ [0m        Direction::Ltr => None[92m,[0m
-[1m[96m 80[0m [92m~         unicode_bidi::Direction::Mixed => todo!()[0m,
-    [1m[96m|[0m
+[1m[93mwarning[0m[1m[97m: function `delivery_label` is never used[0m
+    [1m[96m--> [0mapps\cli\src\commands.rs:1092:8
+     [1m[96m|[0m
+[1m[96m1092[0m [1m[96m|[0m pub fn delivery_label(state: DeliveryState) -> &'static str {
+     [1m[96m|[0m        [1m[93m^^^^^^^^^^^^^^[0m
+     [1m[96m|[0m
+     [1m[96m= [0m[1m[97mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1m[97mFor more information about this error, try `rustc --explain E0004`.[0m
-[1m[91merror[0m: could not compile `social-mail` (bin "social-mail") due to 1 previous error
-[1m[93mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[0m: could not compile `social-mail` (bin "social-mail" test) due to 1 previous error
-check_exit=101
+[1m[93mwarning[0m[1m[97m: function `width` is never used[0m
+   [1m[96m--> [0mapps\cli\src\text.rs:100:8
+    [1m[96m|[0m
+[1m[96m100[0m [1m[96m|[0m pub fn width(text: &str) -> usize {
+    [1m[96m|[0m        [1m[93m^^^^^[0m
+
+[1m[93mwarning[0m: `social-mail` (bin "social-mail") generated 2 warnings (1 duplicate)
+[1m[93mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 36.49s
+check_exit=0
 
 ## test
 [1m[92m   Compiling[0m cfg-if v1.0.5
@@ -322,51 +314,51 @@ check_exit=101
 [1m[92m   Compiling[0m chacha20 v0.9.1
 [1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m   Compiling[0m sha2 v0.10.9
-[1m[92m   Compiling[0m hmac v0.12.1
 [1m[92m   Compiling[0m ppv-lite86 v0.2.21
+[1m[92m   Compiling[0m hmac v0.12.1
 [1m[92m   Compiling[0m aead v0.5.2
-[1m[92m   Compiling[0m smallvec v1.16.4
-[1m[92m   Compiling[0m memchr v2.8.3
-[1m[92m   Compiling[0m chacha20poly1305 v0.10.1
-[1m[92m   Compiling[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m rand_chacha v0.3.1
+[1m[92m   Compiling[0m memchr v2.8.3
+[1m[92m   Compiling[0m smallvec v1.16.4
+[1m[92m   Compiling[0m chacha20poly1305 v0.10.1
 [1m[92m   Compiling[0m pbkdf2 v0.12.2
-[1m[92m   Compiling[0m x25519-dalek v2.0.1
 [1m[92m   Compiling[0m rand v0.8.8
+[1m[92m   Compiling[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m serde_json v1.0.154
+[1m[92m   Compiling[0m x25519-dalek v2.0.1
 [1m[92m   Compiling[0m once_cell v1.21.4
 [1m[92m   Compiling[0m ahash v0.8.12
 [1m[92m   Compiling[0m bitflags v2.13.2
 [1m[92m   Compiling[0m hashbrown v0.14.5
 [1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m   Compiling[0m fallible-iterator v0.3.0
-[1m[92m   Compiling[0m social-mail-crypto v0.1.0 (D:\a\social\social\crates\crypto)
 [1m[92m   Compiling[0m fallible-streaming-iterator v0.1.9
-[1m[92m   Compiling[0m hashlink v0.9.1
+[1m[92m   Compiling[0m social-mail-crypto v0.1.0 (D:\a\social\social\crates\crypto)
 [1m[92m   Compiling[0m strsim v0.11.1
+[1m[92m   Compiling[0m hashlink v0.9.1
 [1m[92m   Compiling[0m rusqlite v0.32.1
 [1m[92m   Compiling[0m social-mail-protocol v0.1.0 (D:\a\social\social\crates\protocol)
 [1m[92m   Compiling[0m windows-sys v0.61.2
-[1m[92m   Compiling[0m utf8parse v0.2.2
 [1m[92m   Compiling[0m anstyle v1.0.14
+[1m[92m   Compiling[0m utf8parse v0.2.2
 [1m[92m   Compiling[0m once_cell_polyfill v1.70.2
 [1m[92m   Compiling[0m darling_core v0.24.1
 [1m[92m   Compiling[0m social-mail-storage v0.1.0 (D:\a\social\social\crates\storage)
 [1m[92m   Compiling[0m anstyle-wincon v3.0.11
 [1m[92m   Compiling[0m anstyle-query v1.1.5
 [1m[92m   Compiling[0m anstyle-parse v1.0.0
-[1m[92m   Compiling[0m scopeguard v1.2.0
 [1m[92m   Compiling[0m is_terminal_polyfill v1.70.2
+[1m[92m   Compiling[0m scopeguard v1.2.0
 [1m[92m   Compiling[0m colorchoice v1.0.5
-[1m[92m   Compiling[0m lock_api v0.4.14
-[1m[92m   Compiling[0m anstream v1.0.0
 [1m[92m   Compiling[0m winapi v0.3.9
+[1m[92m   Compiling[0m anstream v1.0.0
+[1m[92m   Compiling[0m lock_api v0.4.14
 [1m[92m   Compiling[0m social-mail-engine v0.1.0 (D:\a\social\social\crates\engine)
 [1m[92m   Compiling[0m parking_lot_core v0.9.12
-[1m[92m   Compiling[0m equivalent v1.0.3
-[1m[92m   Compiling[0m allocator-api2 v0.2.21
-[1m[92m   Compiling[0m clap_lex v1.1.1
 [1m[92m   Compiling[0m foldhash v0.1.5
+[1m[92m   Compiling[0m clap_lex v1.1.1
+[1m[92m   Compiling[0m allocator-api2 v0.2.21
+[1m[92m   Compiling[0m equivalent v1.0.3
 [1m[92m   Compiling[0m either v1.19.0
 [1m[92m   Compiling[0m itertools v0.13.0
 [1m[92m   Compiling[0m hashbrown v0.15.5
@@ -376,47 +368,61 @@ check_exit=101
 [1m[92m   Compiling[0m parking_lot v0.12.5
 [1m[92m   Compiling[0m darling v0.24.1
 [1m[92m   Compiling[0m castaway v0.2.4
-[1m[92m   Compiling[0m static_assertions v1.1.0
 [1m[92m   Compiling[0m unicode-width v0.1.14
 [1m[92m   Compiling[0m ryu v1.0.23
 [1m[92m   Compiling[0m unicode-segmentation v1.13.3
+[1m[92m   Compiling[0m static_assertions v1.1.0
 [1m[92m   Compiling[0m instability v0.3.14
 [1m[92m   Compiling[0m compact_str v0.8.2
 [1m[92m   Compiling[0m unicode-truncate v1.1.0
-[1m[92m   Compiling[0m strum v0.26.3
 [1m[92m   Compiling[0m crossterm v0.28.1
-[1m[92m   Compiling[0m anyhow v1.0.104
+[1m[92m   Compiling[0m strum v0.26.3
 [1m[92m   Compiling[0m lru v0.12.5
-[1m[92m   Compiling[0m cassowary v0.3.0
-[1m[92m   Compiling[0m clap v4.6.7
+[1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m   Compiling[0m unicode-width v0.2.0
-[1m[92m   Compiling[0m ratatui v0.29.0
+[1m[92m   Compiling[0m cassowary v0.3.0
 [1m[92m   Compiling[0m unicode-bidi v0.3.18
+[1m[92m   Compiling[0m clap v4.6.7
+[1m[92m   Compiling[0m ratatui v0.29.0
 [1m[92m   Compiling[0m social-mail-reflector v0.1.0 (D:\a\social\social\apps\social-mail-reflector)
 [1m[92m   Compiling[0m social-mail v0.1.0 (D:\a\social\social\apps\cli)
-[1m[91merror[E0004][0m[1m[97m: non-exhaustive patterns: `unicode_bidi::Direction::Mixed` not covered[0m
-   [1m[96m--> [0mapps\cli\src\text.rs:77:23
-    [1m[96m|[0m
-[1m[96m 77[0m [1m[96m|[0m     let level = match base_direction(line) {
-    [1m[96m|[0m                       [1m[91m^^^^^^^^^^^^^^^^^^^^[0m [1m[91mpattern `unicode_bidi::Direction::Mixed` not covered[0m
-    [1m[96m|[0m
-[1m[92mnote[0m: `unicode_bidi::Direction` defined here
-   [1m[96m--> [0mC:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-bidi-0.3.18\src\lib.rs:165:1
-    [1m[96m|[0m
-[1m[96m165[0m [1m[96m|[0m pub enum Direction {
-    [1m[96m|[0m [1m[92m^^^^^^^^^^^^^^^^^^[0m
-[1m[96m...[0m
-[1m[96m168[0m [1m[96m|[0m     Mixed,
-    [1m[96m|[0m     [1m[96m-----[0m [1m[96mnot covered[0m
-    [1m[96m= [0m[1m[97mnote[0m: the matched value is of type `unicode_bidi::Direction`
-[1m[96mhelp[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown
-    [1m[96m|[0m
-[1m[96m 79[0m [92m~ [0m        Direction::Ltr => None[92m,[0m
-[1m[96m 80[0m [92m~         unicode_bidi::Direction::Mixed => todo!()[0m,
-    [1m[96m|[0m
+[1m[93mwarning[0m[1m[97m: function `delivery_label` is never used[0m
+    [1m[96m--> [0mapps\cli\src\commands.rs:1092:8
+     [1m[96m|[0m
+[1m[96m1092[0m [1m[96m|[0m pub fn delivery_label(state: DeliveryState) -> &'static str {
+     [1m[96m|[0m        [1m[93m^^^^^^^^^^^^^^[0m
+     [1m[96m|[0m
+     [1m[96m= [0m[1m[97mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1m[97mFor more information about this error, try `rustc --explain E0004`.[0m
-[1m[91merror[0m: could not compile `social-mail` (bin "social-mail" test) due to 1 previous error
+[1m[93mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning
+[1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 14.99s
+[1m[92m     Running[0m unittests src\main.rs (target\debug\deps\social_mail-ca71001e7202c6fb.exe)
+
+running 6 tests
+test text::tests::identifiers_stay_latin_and_readable ... ok
+test text::tests::empty_and_control_input_is_safe ... ok
+test text::tests::persian_fixtures_survive_layout ... ok
+test text::tests::very_long_unbroken_text_is_broken ... ok
+test text::tests::mixed_direction_lines_stay_within_width ... ok
+test text::tests::truncation_respects_width_and_utf8 ... FAILED
+
+failures:
+
+---- text::tests::truncation_respects_width_and_utf8 stdout ----
+
+thread 'text::tests::truncation_respects_width_and_utf8' (10112) panicked at apps\cli\src\text.rs:202:9:
+assertion `left == right` failed
+  left: 3
+ right: 4
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    text::tests::truncation_respects_width_and_utf8
+
+test result: FAILED. 5 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[1m[91merror[0m: test failed, to rerun pass `-p social-mail --bin social-mail`
 test_exit=101
 
 ## clippy
@@ -424,31 +430,75 @@ test_exit=101
 [1m[92m    Checking[0m social-mail-storage v0.1.0 (D:\a\social\social\crates\storage)
 [1m[92m    Checking[0m social-mail-protocol v0.1.0 (D:\a\social\social\crates\protocol)
 [1m[92m    Checking[0m social-mail-engine v0.1.0 (D:\a\social\social\crates\engine)
-[1m[92m    Checking[0m social-mail-reflector v0.1.0 (D:\a\social\social\apps\social-mail-reflector)
 [1m[92m    Checking[0m social-mail v0.1.0 (D:\a\social\social\apps\cli)
-[1m[91merror[E0004][0m[1m[97m: non-exhaustive patterns: `unicode_bidi::Direction::Mixed` not covered[0m
-   [1m[96m--> [0mapps\cli\src\text.rs:77:23
+[1m[92m    Checking[0m social-mail-reflector v0.1.0 (D:\a\social\social\apps\social-mail-reflector)
+[1m[93mwarning[0m[1m[97m: function `delivery_label` is never used[0m
+    [1m[96m--> [0mapps\cli\src\commands.rs:1092:8
+     [1m[96m|[0m
+[1m[96m1092[0m [1m[96m|[0m pub fn delivery_label(state: DeliveryState) -> &'static str {
+     [1m[96m|[0m        [1m[93m^^^^^^^^^^^^^^[0m
+     [1m[96m|[0m
+     [1m[96m= [0m[1m[97mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+[1m[93mwarning[0m[1m[97m: function `width` is never used[0m
+   [1m[96m--> [0mapps\cli\src\text.rs:100:8
     [1m[96m|[0m
-[1m[96m 77[0m [1m[96m|[0m     let level = match base_direction(line) {
-    [1m[96m|[0m                       [1m[91m^^^^^^^^^^^^^^^^^^^^[0m [1m[91mpattern `unicode_bidi::Direction::Mixed` not covered[0m
+[1m[96m100[0m [1m[96m|[0m pub fn width(text: &str) -> usize {
+    [1m[96m|[0m        [1m[93m^^^^^[0m
+
+[1m[93mwarning[0m[1m[97m: enclosing `Ok` and `?` operator are unneeded[0m
+   [1m[96m--> [0mapps\cli\src\commands.rs:125:16
     [1m[96m|[0m
-[1m[92mnote[0m: `unicode_bidi::Direction` defined here
-   [1m[96m--> [0mC:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\unicode-bidi-0.3.18\src\lib.rs:165:1
+[1m[96m125[0m [1m[96m|[0m         return Ok(std::fs::read_to_string(file).context("reading the text file")?);
+    [1m[96m|[0m                [1m[93m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
     [1m[96m|[0m
-[1m[96m165[0m [1m[96m|[0m pub enum Direction {
-    [1m[96m|[0m [1m[92m^^^^^^^^^^^^^^^^^^[0m
-[1m[96m...[0m
-[1m[96m168[0m [1m[96m|[0m     Mixed,
-    [1m[96m|[0m     [1m[96m-----[0m [1m[96mnot covered[0m
-    [1m[96m= [0m[1m[97mnote[0m: the matched value is of type `unicode_bidi::Direction`
-[1m[96mhelp[0m: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown
+    [1m[96m= [0m[1m[97mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#needless_question_mark
+    [1m[96m= [0m[1m[97mnote[0m: `#[warn(clippy::needless_question_mark)]` on by default
+[1m[96mhelp[0m: remove the enclosing `Ok` and `?` operator
     [1m[96m|[0m
-[1m[96m 79[0m [92m~ [0m        Direction::Ltr => None[92m,[0m
-[1m[96m 80[0m [92m~         unicode_bidi::Direction::Mixed => todo!()[0m,
+[1m[96m125[0m [91m- [0m        return [91mOk([0mstd::fs::read_to_string(file).context("reading the text file")[91m?)[0m;
+[1m[96m125[0m [92m+ [0m        return std::fs::read_to_string(file).context("reading the text file");
     [1m[96m|[0m
 
-[1m[97mFor more information about this error, try `rustc --explain E0004`.[0m
-[1m[91merror[0m: could not compile `social-mail` (bin "social-mail") due to 1 previous error
-[1m[93mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[0m: could not compile `social-mail` (bin "social-mail" test) due to 1 previous error
-clippy_exit=101
+[1m[93mwarning[0m[1m[97m: this `if` has identical blocks[0m
+   [1m[96m--> [0mapps\cli\src\commands.rs:174:28
+    [1m[96m|[0m
+[1m[96m174[0m [1m[96m|[0m               if json_output {
+    [1m[96m|[0m [1m[93m ____________________________^[0m
+[1m[96m175[0m [1m[96m|[0m [1m[93m|[0m                 print_identity(engine)?;
+[1m[96m176[0m [1m[96m|[0m [1m[93m|[0m             } else {
+    [1m[96m|[0m [1m[93m|_____________^[0m
+    [1m[96m|[0m
+[1m[92mnote[0m: same as this
+   [1m[96m--> [0mapps\cli\src\commands.rs:176:20
+    [1m[96m|[0m
+[1m[96m176[0m [1m[96m|[0m               } else {
+    [1m[96m|[0m [1m[92m ____________________^[0m
+[1m[96m177[0m [1m[96m|[0m [1m[92m|[0m                 print_identity(engine)?;
+[1m[96m178[0m [1m[96m|[0m [1m[92m|[0m             }
+    [1m[96m|[0m [1m[92m|_____________^[0m
+    [1m[96m= [0m[1m[97mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#if_same_then_else
+    [1m[96m= [0m[1m[97mnote[0m: `#[warn(clippy::if_same_then_else)]` on by default
+
+[1m[93mwarning[0m[1m[97m: this `if` can be collapsed into the outer `match`[0m
+   [1m[96m--> [0mapps\cli\src\commands.rs:383:21
+    [1m[96m|[0m
+[1m[96m383[0m [1m[96m|[0m [1m[93m/[0m [1m[96m...[0m   if !json_output {
+[1m[96m384[0m [1m[96m|[0m [1m[93m|[0m [1m[96m...[0m       println!("{} isn't verified. Their posts will be marked unverified until you check their fingerprint.", contact.display[1m[96m...[0m
+[1m[96m385[0m [1m[96m|[0m [1m[93m|[0m [1m[96m...[0m   }
+    [1m[96m|[0m [1m[93m|_______^[0m
+    [1m[96m|[0m
+    [1m[96m= [0m[1m[97mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_match
+    [1m[96m= [0m[1m[97mnote[0m: `#[warn(clippy::collapsible_match)]` on by default
+[1m[96mhelp[0m: collapse nested if block
+    [1m[96m|[0m
+[1m[96m382[0m [92m~ [0m                Some(contact) if contact.trust == Trust::Unverified
+[1m[96m383[0m [92m~ [0m                    [92m&&[0m !json_output [92m=> [0m{
+[1m[96m384[0m [1m[96m|[0m                         println!("{} isn't verified. Their posts will be marked unverified until you check their fingerprint.", contact.display_name);
+[1m[96m385[0m [92m~ [0m                    }
+    [1m[96m|[0m
+
+[1m[93mwarning[0m: `social-mail` (bin "social-mail") generated 5 warnings (2 duplicates) (run `cargo clippy --fix --bin "social-mail" -p social-mail -- ` to apply 1 suggestion)
+[1m[93mwarning[0m: `social-mail` (bin "social-mail" test) generated 4 warnings (2 duplicates) (run `cargo clippy --fix --bin "social-mail" -p social-mail --tests -- ` to apply 1 suggestion)
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 2.45s
+clippy_exit=0
