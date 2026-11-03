@@ -371,6 +371,13 @@ impl Engine {
         if needle.is_empty() {
             return Err(EngineError::Invalid("empty fingerprint".into()));
         }
+        // People quote addresses more often than fingerprints, so both work.
+        if needle.contains('@') {
+            if let Some(contact) = self.db.contact_by_address(needle)? {
+                return Ok(contact.fingerprint);
+            }
+            return Err(EngineError::NotFound(needle.to_string()));
+        }
         let upper = needle.to_uppercase();
         if upper.len() == 40 && upper.chars().all(|c| c.is_ascii_hexdigit()) {
             return Ok(upper);

@@ -43,11 +43,20 @@ pub enum Command {
         name: Option<String>,
         #[arg(long)]
         address: Option<String>,
+        /// Alias for --address
+        #[arg(long)]
+        email: Option<String>,
         #[arg(long)]
         locale: Option<String>,
         /// Shared spool directory used by the file transport
         #[arg(long)]
         spool: Option<PathBuf>,
+        /// Local-only profile: no mail account, spool transport, manual sync
+        #[arg(long)]
+        offline: bool,
+        /// Do not sync automatically
+        #[arg(long)]
+        no_auto_sync: bool,
         /// Reinitialise even when a profile already exists
         #[arg(long)]
         force: bool,
@@ -80,6 +89,9 @@ pub enum Command {
         /// Publish to a public mailing list instead of followers
         #[arg(long)]
         public_list: Option<String>,
+        /// Publish to followers (the default; stated for scripts)
+        #[arg(long)]
+        private: bool,
     },
     /// Reply to an event
     Reply {
@@ -209,6 +221,8 @@ pub enum QueueCmd {
 #[derive(Subcommand, Debug)]
 pub enum ListsCmd {
     Add { address: String },
+    /// Ask a private list's operator to admit you
+    RequestMembership { address: String },
     Remove { address: String },
     List,
 }
@@ -266,18 +280,27 @@ fn run(cli: Cli) -> Result<()> {
         Some(Command::Init {
             name,
             address,
+            email,
             locale,
             spool,
+            offline,
+            no_auto_sync,
             force,
         }) => {
             let mut config = Config::load(&config_path)?;
             if let Some(spool) = spool {
                 config.spool_dir = spool;
-                config.save(&config_path)?;
             }
+            if offline || no_auto_sync {
+                config.auto_sync_minutes = 0;
+            }
+            if offline {
+                config.transport = "spool".to_string();
+            }
+            config.save(&config_path)?;
             let options = InitOptions {
                 display_name: name.unwrap_or_default(),
-                address: address.unwrap_or_default(),
+                address: address.or(email).unwrap_or_default(),
                 locale: locale.unwrap_or_default(),
             };
             let engine = commands::init(&config_path, options, force, json)?;

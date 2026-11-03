@@ -145,7 +145,16 @@ pub fn run(engine: &mut Engine, command: Command, json_output: bool) -> Result<(
             file,
             stdin,
             public_list,
-        } => post(engine, text, file, stdin, public_list, json_output),
+            private,
+        } => post(
+            engine,
+            text,
+            file,
+            stdin,
+            public_list,
+            private,
+            json_output,
+        ),
         Command::Reply {
             event_id,
             text,
@@ -491,9 +500,13 @@ fn post(
     file: Option<PathBuf>,
     stdin: bool,
     public_list: Option<String>,
+    private: bool,
     json_output: bool,
 ) -> Result<()> {
     let body = read_body(text_option, file, stdin)?;
+    if private && public_list.is_some() {
+        bail!("--private and --public-list are mutually exclusive");
+    }
     let (audience, list) = match public_list {
         Some(list) => (Audience::PublicList, Some(list)),
         None => (Audience::Followers, None),
@@ -681,6 +694,20 @@ fn lists(engine: &mut Engine, cmd: ListsCmd, json_output: bool) -> Result<()> {
         ListsCmd::Add { address } => {
             engine.add_list(&address)?;
             println!("Added list {address}. Public list posts to it are signed, not encrypted.");
+            Ok(())
+        }
+        ListsCmd::RequestMembership { address } => {
+            if !address.contains('@') {
+                bail!("request-membership takes the list's mail address");
+            }
+            let event_id = engine.follow(&address)?;
+            if json_output {
+                print_json(json!({"event_id": event_id, "state": "pending"}));
+            } else {
+                println!(
+                    "Asked {address} to admit you (event {event_id}). The operator decides; you may hear nothing."
+                );
+            }
             Ok(())
         }
         ListsCmd::Remove { address } => {
