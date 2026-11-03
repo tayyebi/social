@@ -177,16 +177,24 @@ pub enum ContactsCmd {
 
 #[derive(Subcommand, Debug)]
 pub enum FollowCmd {
-    Request { target: String },
+    Request {
+        target: String,
+    },
     Approve {
         fingerprint: String,
         /// Approve without verifying the fingerprint (withheld from private posts)
         #[arg(long)]
         force: bool,
     },
-    Decline { fingerprint: String },
-    Remove { fingerprint: String },
-    Unfollow { fingerprint: String },
+    Decline {
+        fingerprint: String,
+    },
+    Remove {
+        fingerprint: String,
+    },
+    Unfollow {
+        fingerprint: String,
+    },
     List,
     Requests,
 }
@@ -212,9 +220,16 @@ pub enum SettingsCmd {
         /// true or false
         value: String,
     },
-    SetLocale { value: String },
-    SetColor { value: String },
-    SetDensity { tab: String, value: String },
+    SetLocale {
+        value: String,
+    },
+    SetColor {
+        value: String,
+    },
+    SetDensity {
+        tab: String,
+        value: String,
+    },
 }
 
 #[derive(Subcommand, Debug)]

@@ -6,8 +6,8 @@ use std::path::{Path, PathBuf};
 use anyhow::{bail, Context, Result};
 use serde_json::json;
 use social_mail_engine::{
-    Audience, ConversationItem, DeliveryState, Engine, FeedItem, ImportOutcome, InitOptions,
-    Tab, Trust,
+    Audience, ConversationItem, DeliveryState, Engine, FeedItem, ImportOutcome, InitOptions, Tab,
+    Trust,
 };
 
 use crate::text;
@@ -180,20 +180,30 @@ fn identity(engine: &mut Engine, cmd: IdentityCmd, json_output: bool) -> Result<
         IdentityCmd::ExportPublic { out } => {
             let card = engine.export_card(&out)?;
             if json_output {
-                print_json(json!({"fingerprint": card.fingerprint, "path": out.display().to_string()}));
+                print_json(
+                    json!({"fingerprint": card.fingerprint, "path": out.display().to_string()}),
+                );
             } else {
                 println!("Contact card written to {}", out.display());
-                println!("Fingerprint: {}", social_mail_crypto::group_fingerprint(&card.fingerprint));
+                println!(
+                    "Fingerprint: {}",
+                    social_mail_crypto::group_fingerprint(&card.fingerprint)
+                );
             }
             Ok(())
         }
         IdentityCmd::ContactCard { out } => {
             let card = engine.export_card(&out)?;
             if json_output {
-                print_json(json!({"fingerprint": card.fingerprint, "path": out.display().to_string()}));
+                print_json(
+                    json!({"fingerprint": card.fingerprint, "path": out.display().to_string()}),
+                );
             } else {
                 println!("Contact card written to {}", out.display());
-                println!("Fingerprint: {}", social_mail_crypto::group_fingerprint(&card.fingerprint));
+                println!(
+                    "Fingerprint: {}",
+                    social_mail_crypto::group_fingerprint(&card.fingerprint)
+                );
             }
             Ok(())
         }
@@ -221,7 +231,9 @@ fn identity(engine: &mut Engine, cmd: IdentityCmd, json_output: bool) -> Result<
                 print_json(json!({"fingerprint": fingerprint}));
             } else {
                 println!("Identity restored: {fingerprint}");
-                println!("Contacts kept their local trust state; re-enter mail settings if needed.");
+                println!(
+                    "Contacts kept their local trust state; re-enter mail settings if needed."
+                );
             }
             Ok(())
         }
@@ -279,7 +291,9 @@ fn contacts(engine: &mut Engine, cmd: ContactsCmd, json_output: bool) -> Result<
                     .collect();
                 print_json(json!({"contacts": items}));
             } else if views.is_empty() {
-                println!("No contacts yet. Import someone's contact card, or ask for their fingerprint.");
+                println!(
+                    "No contacts yet. Import someone's contact card, or ask for their fingerprint."
+                );
             } else {
                 println!(
                     "{:<10} {:<20} {:<12} {:<14} {:<12}",
@@ -335,7 +349,9 @@ fn contacts(engine: &mut Engine, cmd: ContactsCmd, json_output: bool) -> Result<
         }
         ContactsCmd::Block { fingerprint } => {
             engine.block_contact(&fingerprint)?;
-            println!("Blocked. New messages from them are discarded and never shown. They are not told.");
+            println!(
+                "Blocked. New messages from them are discarded and never shown. They are not told."
+            );
             Ok(())
         }
         ContactsCmd::Unblock { fingerprint } => {
@@ -443,7 +459,9 @@ fn follow(engine: &mut Engine, cmd: FollowCmd, json_output: bool) -> Result<()> 
                     .collect();
                 print_json(json!({"requests": items}));
             } else if requests.is_empty() {
-                println!("No follow requests. People who want your private posts appear here first.");
+                println!(
+                    "No follow requests. People who want your private posts appear here first."
+                );
             } else {
                 for (row, contact) in requests {
                     let name = contact
@@ -530,7 +548,9 @@ fn timeline(
     if let Some(root) = thread {
         let items = engine.conversation(&root)?;
         if json_output {
-            print_json(json!({"root": root, "items": items.iter().map(conversation_json).collect::<Vec<_>>()}));
+            print_json(
+                json!({"root": root, "items": items.iter().map(conversation_json).collect::<Vec<_>>()}),
+            );
         } else {
             print_conversation(&items);
         }
@@ -589,7 +609,10 @@ fn sync(engine: &mut Engine, json_output: bool) -> Result<()> {
             "Sync: {} received, {} accepted, {} duplicates, {} dropped, {} quarantined",
             report.received, report.accepted, report.duplicates, report.dropped, report.quarantined
         );
-        println!("Deliveries: {} accepted, {} failed/retrying", report.sent, report.failed);
+        println!(
+            "Deliveries: {} accepted, {} failed/retrying",
+            report.sent, report.failed
+        );
     }
     Ok(())
 }
@@ -617,7 +640,9 @@ fn queue(engine: &mut Engine, cmd: QueueCmd, json_output: bool) -> Result<()> {
                     .collect();
                 print_json(json!({"queue": value}));
             } else if items.is_empty() {
-                println!("Nothing queued. Everything you've sent has been accepted by your transport.");
+                println!(
+                    "Nothing queued. Everything you've sent has been accepted by your transport."
+                );
             } else {
                 for item in items {
                     println!("{}  {}", short(&item.post_event_id), item.preview);
@@ -696,7 +721,10 @@ fn settings(engine: &mut Engine, cmd: SettingsCmd, json_output: bool) -> Result<
                 for (key, value) in engine.config.as_map() {
                     println!("{key:<32} {value}");
                 }
-                println!("{:<32} {}", "ui.density_following", engine.config.density_following);
+                println!(
+                    "{:<32} {}",
+                    "ui.density_following", engine.config.density_following
+                );
                 println!("{:<32} {}", "ui.density_lists", engine.config.density_lists);
                 println!("{:<32} {}", "ui.density_you", engine.config.density_you);
                 println!("{:<32} {}", "ui.density_all", engine.config.density_all);
@@ -738,14 +766,16 @@ fn problems(engine: &mut Engine, cmd: ProblemsCmd, json_output: bool) -> Result<
             if json_output {
                 let value: Vec<_> = rows
                     .iter()
-                    .map(|row| json!({
-                        "event_id": row.event_id,
-                        "author": row.author,
-                        "kind": row.kind,
-                        "reason": row.reason,
-                        "detail": row.detail,
-                        "created_at": row.created_at,
-                    }))
+                    .map(|row| {
+                        json!({
+                            "event_id": row.event_id,
+                            "author": row.author,
+                            "kind": row.kind,
+                            "reason": row.reason,
+                            "detail": row.detail,
+                            "created_at": row.created_at,
+                        })
+                    })
                     .collect();
                 print_json(json!({"problems": value}));
             } else if rows.is_empty() {
@@ -843,7 +873,10 @@ fn diagnostics(engine: &mut Engine, json_output: bool) -> Result<()> {
         println!("Spool       {}", engine.config.spool_dir.display());
         println!("Transport   {}", engine.config.transport);
         println!();
-        println!("Events      {} ({} roots, {} replies)", counts.events, counts.roots, counts.replies);
+        println!(
+            "Events      {} ({} roots, {} replies)",
+            counts.events, counts.roots, counts.replies
+        );
         println!(
             "Contacts    {} ({} verified)",
             counts.contacts, counts.verified_contacts
@@ -911,7 +944,10 @@ fn print_feed(tab: Tab, items: &[FeedItem]) {
             println!("    {line}");
         }
         if item.reply_count > 0 {
-            println!("    {} replies · social-mail timeline --thread {}", item.reply_count, item.event_id);
+            println!(
+                "    {} replies · social-mail timeline --thread {}",
+                item.reply_count, item.event_id
+            );
         }
     }
     if items.is_empty() {
@@ -970,7 +1006,10 @@ fn conversation_json(item: &ConversationItem) -> serde_json::Value {
 }
 
 fn print_json(value: serde_json::Value) {
-    println!("{}", serde_json::to_string_pretty(&value).unwrap_or_else(|_| "{}".into()));
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&value).unwrap_or_else(|_| "{}".into())
+    );
 }
 
 // -------------------------------------------------------------------- helpers

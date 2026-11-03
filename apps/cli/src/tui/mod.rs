@@ -245,9 +245,7 @@ impl App {
             }
             KeyCode::Char('Z') => {
                 self.density = self.density.cycle();
-                let _ = self
-                    .engine
-                    .set_density(self.tab, self.density.label());
+                let _ = self.engine.set_density(self.tab, self.density.label());
                 self.status = format!("density: {}", self.density.label());
             }
             KeyCode::Char('j') | KeyCode::Down => self.move_selection(1),
@@ -304,8 +302,8 @@ impl App {
     }
 
     fn handle_composer(&mut self, key: KeyEvent) -> Result<bool> {
-        let send = key.modifiers.contains(KeyModifiers::CONTROL)
-            && matches!(key.code, KeyCode::Char('s'));
+        let send =
+            key.modifiers.contains(KeyModifiers::CONTROL) && matches!(key.code, KeyCode::Char('s'));
         if send {
             let composer = self.composer.take().expect("composer");
             if composer.text.trim().is_empty() {
@@ -392,10 +390,8 @@ impl App {
             Screen::Timeline => {
                 if let Some(item) = self.feed.get(self.selected) {
                     self.conversation_root = item.event_id.clone();
-                    self.conversation = self
-                        .engine
-                        .conversation(&item.event_id)
-                        .unwrap_or_default();
+                    self.conversation =
+                        self.engine.conversation(&item.event_id).unwrap_or_default();
                     self.screen = Screen::Conversation;
                     self.selected = 0;
                     let _ = self.engine.mark_seen(self.tab);
@@ -404,10 +400,8 @@ impl App {
             Screen::Replies => {
                 if let Some(item) = self.replies.get(self.selected) {
                     self.conversation_root = item.event_id.clone();
-                    self.conversation = self
-                        .engine
-                        .conversation(&item.event_id)
-                        .unwrap_or_default();
+                    self.conversation =
+                        self.engine.conversation(&item.event_id).unwrap_or_default();
                     self.screen = Screen::Conversation;
                     self.selected = 0;
                 }
@@ -544,10 +538,7 @@ impl App {
                     .deliveries
                     .iter()
                     .filter(|row| {
-                        matches!(
-                            row.state,
-                            DeliveryState::Failed | DeliveryState::Retrying
-                        )
+                        matches!(row.state, DeliveryState::Failed | DeliveryState::Retrying)
                     })
                     .map(|row| row.recipient.clone())
                     .collect();
@@ -697,7 +688,9 @@ impl App {
                 "Nothing here yet. When someone you follow posts, it arrives by email and appears here.",
             ));
             lines.push(Line::from(""));
-            lines.push(Line::from("n  write a post      g c  contacts      ?  help"));
+            lines.push(Line::from(
+                "n  write a post      g c  contacts      ?  help",
+            ));
         }
         let mut current_day = String::new();
         for (index, item) in self.feed.iter().enumerate() {
@@ -823,10 +816,7 @@ impl App {
                 ),
             ]));
             for line in text::layout(&item.text, width.saturating_sub(item.depth * 2)) {
-                lines.push(Line::from(format!(
-                    "   {}{line}",
-                    "  ".repeat(item.depth)
-                )));
+                lines.push(Line::from(format!("   {}{line}", "  ".repeat(item.depth))));
             }
             lines.push(Line::from(""));
         }
@@ -845,16 +835,13 @@ impl App {
         }
         for (index, view) in self.contacts.iter().enumerate() {
             let marker = if index == self.selected { "▶" } else { " " };
-            let follows = view
-                .i_follow
-                .map(|state| state.as_str())
-                .unwrap_or("-");
-            let follows_me = view
-                .follows_me
-                .map(|state| state.as_str())
-                .unwrap_or("-");
+            let follows = view.i_follow.map(|state| state.as_str()).unwrap_or("-");
+            let follows_me = view.follows_me.map(|state| state.as_str()).unwrap_or("-");
             lines.push(Line::from(vec![
-                Span::raw(format!("{marker} {:<20} ", truncate(&view.contact.display_name, 20))),
+                Span::raw(format!(
+                    "{marker} {:<20} ",
+                    truncate(&view.contact.display_name, 20)
+                )),
                 Span::styled(
                     format!("{:<10}", view.contact.trust.as_str()),
                     self.trust_style(view.contact.trust),
@@ -867,9 +854,10 @@ impl App {
             ]));
         }
         frame.render_widget(
-            Paragraph::new(lines).block(Block::bordered().title(
-                " Contacts · v verify  b block  m mute  f follow  F remove follower ",
-            )),
+            Paragraph::new(lines).block(
+                Block::bordered()
+                    .title(" Contacts · v verify  b block  m mute  f follow  F remove follower "),
+            ),
             area,
         );
     }
@@ -939,8 +927,7 @@ impl App {
             lines.push(Line::from(""));
         }
         frame.render_widget(
-            Paragraph::new(lines)
-                .block(Block::bordered().title(" Queue · R retry  c cancel ")),
+            Paragraph::new(lines).block(Block::bordered().title(" Queue · R retry  c cancel ")),
             area,
         );
     }
@@ -1030,7 +1017,9 @@ impl App {
     fn render_problems(&self, frame: &mut Frame<'_>, area: Rect) {
         let mut lines: Vec<Line<'static>> = Vec::new();
         if self.problems.is_empty() {
-            lines.push(Line::from("No problems. Every message that arrived verified."));
+            lines.push(Line::from(
+                "No problems. Every message that arrived verified.",
+            ));
         }
         for (index, problem) in self.problems.iter().enumerate() {
             let marker = if index == self.selected { "▶" } else { " " };
@@ -1178,10 +1167,7 @@ pub fn run(engine: Engine) -> Result<()> {
     result
 }
 
-fn event_loop(
-    terminal: &mut Terminal<CrosstermBackend<io::Stdout>>,
-    app: &mut App,
-) -> Result<()> {
+fn event_loop(terminal: &mut Terminal<CrosstermBackend<io::Stdout>>, app: &mut App) -> Result<()> {
     loop {
         terminal.draw(|frame| app.render(frame))?;
         if event::poll(Duration::from_millis(500))? {

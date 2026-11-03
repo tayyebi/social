@@ -69,7 +69,7 @@ fn is_rtl_char(ch: char) -> bool {
         | 0x0780..=0x07BF    // Thaana
         | 0x08A0..=0x08FF    // Arabic extended-A
         | 0xFB1D..=0xFDFF    // Hebrew/Arabic presentation forms
-        | 0xFE70..=0xFEFF)   // Arabic presentation forms-B
+        | 0xFE70..=0xFEFF) // Arabic presentation forms-B
 }
 
 /// Reorder one logical line into terminal visual order.
