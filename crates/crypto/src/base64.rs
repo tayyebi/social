@@ -53,9 +53,7 @@ pub fn decode(text: &str) -> Result<Vec<u8>, CryptoError> {
                 values[slot] = 0;
             } else {
                 if padding_seen {
-                    return Err(CryptoError::Base64(
-                        "data after padding character".into(),
-                    ));
+                    return Err(CryptoError::Base64("data after padding character".into()));
                 }
                 values[slot] = decode_char(*byte)? as u32;
             }
