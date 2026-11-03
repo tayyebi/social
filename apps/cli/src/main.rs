@@ -220,10 +220,16 @@ pub enum QueueCmd {
 
 #[derive(Subcommand, Debug)]
 pub enum ListsCmd {
-    Add { address: String },
+    Add {
+        address: String,
+    },
     /// Ask a private list's operator to admit you
-    RequestMembership { address: String },
-    Remove { address: String },
+    RequestMembership {
+        address: String,
+    },
+    Remove {
+        address: String,
+    },
     List,
 }
 

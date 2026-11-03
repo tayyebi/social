@@ -146,15 +146,7 @@ pub fn run(engine: &mut Engine, command: Command, json_output: bool) -> Result<(
             stdin,
             public_list,
             private,
-        } => post(
-            engine,
-            text,
-            file,
-            stdin,
-            public_list,
-            private,
-            json_output,
-        ),
+        } => post(engine, text, file, stdin, public_list, private, json_output),
         Command::Reply {
             event_id,
             text,
