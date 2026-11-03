@@ -114,7 +114,10 @@ fn run(cli: Cli) -> Result<()> {
             let mut engine = open(&cli.config)?;
             engine.block_contact(&fingerprint)?;
             engine.remove_follower(&fingerprint)?;
-            println!("Blocked {}. Their posts are never relayed, and nobody is told.", fingerprint);
+            println!(
+                "Blocked {}. Their posts are never relayed, and nobody is told.",
+                fingerprint
+            );
             Ok(())
         }
         Command::ShowQueue => {
@@ -249,12 +252,14 @@ fn list_members(engine: &Engine, pending_only: bool, json: bool) -> Result<()> {
             .collect();
         let requests: Vec<_> = pending
             .iter()
-            .map(|(row, contact)| serde_json::json!({
-                "fingerprint": row.follower,
-                "name": contact.as_ref().map(|c| c.display_name.clone()),
-                "trust": contact.as_ref().map(|c| c.trust.as_str().to_string()),
-                "received": row.updated_at,
-            }))
+            .map(|(row, contact)| {
+                serde_json::json!({
+                    "fingerprint": row.follower,
+                    "name": contact.as_ref().map(|c| c.display_name.clone()),
+                    "trust": contact.as_ref().map(|c| c.trust.as_str().to_string()),
+                    "received": row.updated_at,
+                })
+            })
             .collect();
         println!(
             "{}",
@@ -310,9 +315,9 @@ fn list_members(engine: &Engine, pending_only: bool, json: bool) -> Result<()> {
 
 fn approve_member(engine: &mut Engine, fingerprint: &str, force: bool, json: bool) -> Result<()> {
     let fingerprint = engine.resolve_fingerprint(fingerprint)?;
-    let contact = engine
-        .contact(&fingerprint)?
-        .ok_or_else(|| anyhow::anyhow!("no contact {fingerprint}; they must request membership first"))?;
+    let contact = engine.contact(&fingerprint)?.ok_or_else(|| {
+        anyhow::anyhow!("no contact {fingerprint}; they must request membership first")
+    })?;
     if contact.trust != Trust::Verified && !force {
         bail!(
             "{} key is unverified. Compare {} out of band, then re-run with --force.\n\
@@ -332,7 +337,11 @@ fn approve_member(engine: &mut Engine, fingerprint: &str, force: bool, json: boo
             }))?
         );
     } else {
-        println!("Approved {} ({})", contact.display_name, group(&fingerprint));
+        println!(
+            "Approved {} ({})",
+            contact.display_name,
+            group(&fingerprint)
+        );
         println!("They receive new list posts; the accept notice is on its way.");
     }
     Ok(())
@@ -357,7 +366,10 @@ fn show_queue(engine: &Engine, json: bool) -> Result<()> {
                 })
             })
             .collect();
-        println!("{}", serde_json::to_string_pretty(&serde_json::json!({"queue": rows}))?);
+        println!(
+            "{}",
+            serde_json::to_string_pretty(&serde_json::json!({"queue": rows}))?
+        );
         return Ok(());
     }
     if items.is_empty() {
@@ -389,7 +401,11 @@ fn retry_failed(engine: &mut Engine) -> Result<()> {
             if matches!(row.state, DeliveryState::Failed | DeliveryState::Retrying) {
                 engine.retry_delivery(&item.post_event_id, &row.recipient)?;
                 retried += 1;
-                println!("Retried {} -> {}", short(&item.post_event_id), short(&row.recipient));
+                println!(
+                    "Retried {} -> {}",
+                    short(&item.post_event_id),
+                    short(&row.recipient)
+                );
             }
         }
     }

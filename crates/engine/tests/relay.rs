@@ -9,9 +9,7 @@ use std::fs;
 use std::path::PathBuf;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-use social_mail_engine::{
-    Audience, Config, Engine, FollowState, InitOptions, Tab, Trust,
-};
+use social_mail_engine::{Audience, Config, Engine, FollowState, InitOptions, Tab, Trust};
 
 struct Sandbox {
     root: PathBuf,
@@ -97,7 +95,10 @@ fn relay_preserves_the_author_and_skips_unverified_members() {
         .unwrap();
 
     let received = list.sync().unwrap();
-    assert!(received.accepted >= 1, "list did not receive the post: {received:?}");
+    assert!(
+        received.accepted >= 1,
+        "list did not receive the post: {received:?}"
+    );
     let candidates = list.relay_candidates("list@example.org", 10).unwrap();
     assert_eq!(candidates.len(), 1, "exactly one post waits for relay");
     assert_eq!(candidates[0].event_id, post_id);
@@ -116,7 +117,11 @@ fn relay_preserves_the_author_and_skips_unverified_members() {
         .find(|item| item.event_id == post_id)
         .expect("relayed post is in Bob's timeline");
     assert_eq!(item.author, alice.fingerprint());
-    assert_ne!(item.author, list.fingerprint(), "the list never signs for the author");
+    assert_ne!(
+        item.author,
+        list.fingerprint(),
+        "the list never signs for the author"
+    );
     assert_eq!(
         item.trust,
         Trust::Unverified,
@@ -125,7 +130,10 @@ fn relay_preserves_the_author_and_skips_unverified_members() {
     assert!(item.text.contains("آزمایش"));
 
     // Once relayed, the same post is not offered again.
-    assert!(list.relay_candidates("list@example.org", 10).unwrap().is_empty());
+    assert!(list
+        .relay_candidates("list@example.org", 10)
+        .unwrap()
+        .is_empty());
 
     // A removed member receives nothing further.
     list.remove_follower(&bob.fingerprint()).unwrap();
@@ -167,7 +175,11 @@ fn unverified_members_are_never_relayed_to() {
     list.approve_follower(&carol.fingerprint(), false).unwrap();
 
     let post_id = alice
-        .post("hi", Audience::PublicList, Some("list2@example.org".to_string()))
+        .post(
+            "hi",
+            Audience::PublicList,
+            Some("list2@example.org".to_string()),
+        )
         .unwrap();
     list.sync().unwrap();
     let relay = list.redistribute(&post_id).unwrap();

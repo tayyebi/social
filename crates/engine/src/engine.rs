@@ -673,11 +673,7 @@ impl Engine {
     // ------------------------------------------------------------------ relay
 
     /// Verified list posts from other authors that this mailbox has not relayed.
-    pub fn relay_candidates(
-        &self,
-        list: &str,
-        limit: usize,
-    ) -> Result<Vec<EventRow>, EngineError> {
+    pub fn relay_candidates(&self, list: &str, limit: usize) -> Result<Vec<EventRow>, EngineError> {
         let me = self.fingerprint();
         let mut out = Vec::new();
         for row in self.db.posts_for_relay(&me, limit)? {
@@ -705,10 +701,7 @@ impl Engine {
     /// The original author signature travels untouched: recipients verify the
     /// author, not the list. Unverified members never receive anything, which
     /// is stricter than personal two-tier trust (D9/D26).
-    pub fn redistribute(
-        &mut self,
-        event_id: &str,
-    ) -> Result<RedistributeReport, EngineError> {
+    pub fn redistribute(&mut self, event_id: &str) -> Result<RedistributeReport, EngineError> {
         let row = self
             .db
             .event(event_id)?

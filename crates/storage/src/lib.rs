@@ -941,7 +941,8 @@ impl Database {
              ORDER BY received_at ASC LIMIT ?2",
             Self::EVENT_COLUMNS
         ))?;
-        let rows = statement.query_map(params![exclude_author, limit as i64], Self::event_from_row)?;
+        let rows =
+            statement.query_map(params![exclude_author, limit as i64], Self::event_from_row)?;
         let mut out = Vec::new();
         for row in rows {
             out.push(row?);

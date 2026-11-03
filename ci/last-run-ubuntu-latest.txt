@@ -1,5 +1,5 @@
 # ci report (ubuntu-latest)
-sha: 5d55978c7b90cd7eddc0640e0b6aa4f0a3a0cbda
+sha: ced9325a3cd1c671d9d434f708a4e1f17521f1e7
 
 ## toolchain
 rustc 1.99.1 (58cf8f9c3 2026-10-13)
@@ -11,176 +11,276 @@ fmt_exit=0
 ## check
 [1m[92m    Updating[0m crates.io index
 [1m[92m Downloading[0m crates ...
-[1m[92m  Downloaded[0m hashbrown v0.14.5
-[1m[92m  Downloaded[0m ahash v0.8.12
+[1m[92m  Downloaded[0m anstyle-query v1.1.5
 [1m[92m  Downloaded[0m aead v0.5.2
-[1m[92m  Downloaded[0m iana-time-zone v0.1.65
-[1m[92m  Downloaded[0m base64ct v1.8.3
-[1m[92m  Downloaded[0m signature v2.2.0
-[1m[92m  Downloaded[0m universal-hash v0.5.1
-[1m[92m  Downloaded[0m subtle v2.6.1
-[1m[92m  Downloaded[0m bitflags v2.13.2
-[1m[92m  Downloaded[0m autocfg v1.5.1
-[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
-[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
-[1m[92m  Downloaded[0m zeroize v1.9.1
-[1m[92m  Downloaded[0m inout v0.1.4
-[1m[92m  Downloaded[0m serde v1.0.229
-[1m[92m  Downloaded[0m version_check v0.9.5
+[1m[92m  Downloaded[0m colorchoice v1.0.5
+[1m[92m  Downloaded[0m anstyle v1.0.14
+[1m[92m  Downloaded[0m anstyle-parse v1.0.0
 [1m[92m  Downloaded[0m cfg-if v1.0.5
-[1m[92m  Downloaded[0m itoa v1.0.18
-[1m[92m  Downloaded[0m spki v0.7.3
-[1m[92m  Downloaded[0m pkg-config v0.3.34
-[1m[92m  Downloaded[0m x25519-dalek v2.0.1
-[1m[92m  Downloaded[0m semver v1.0.28
-[1m[92m  Downloaded[0m rustc_version v0.4.1
-[1m[92m  Downloaded[0m zmij v1.0.23
-[1m[92m  Downloaded[0m pbkdf2 v0.12.2
-[1m[92m  Downloaded[0m cipher v0.4.4
-[1m[92m  Downloaded[0m der v0.7.10
-[1m[92m  Downloaded[0m rand_chacha v0.3.1
 [1m[92m  Downloaded[0m cpufeatures v0.2.17
-[1m[92m  Downloaded[0m chacha20 v0.9.1
-[1m[92m  Downloaded[0m ed25519 v2.2.3
-[1m[92m  Downloaded[0m crypto-common v0.1.7
+[1m[92m  Downloaded[0m anstream v1.0.0
+[1m[92m  Downloaded[0m anyhow v1.0.104
+[1m[92m  Downloaded[0m static_assertions v1.1.0
+[1m[92m  Downloaded[0m strum_macros v0.26.4
 [1m[92m  Downloaded[0m poly1305 v0.8.0
-[1m[92m  Downloaded[0m sha2 v0.10.9
+[1m[92m  Downloaded[0m signal-hook-mio v0.2.5
+[1m[92m  Downloaded[0m ahash v0.8.12
 [1m[92m  Downloaded[0m block-buffer v0.10.4
-[1m[92m  Downloaded[0m hmac v0.12.1
-[1m[92m  Downloaded[0m zeroize_derive v1.5.0
-[1m[92m  Downloaded[0m serde_core v1.0.229
-[1m[92m  Downloaded[0m getrandom v0.2.17
-[1m[92m  Downloaded[0m rusqlite v0.32.1
-[1m[92m  Downloaded[0m opaque-debug v0.3.1
-[1m[92m  Downloaded[0m fallible-iterator v0.3.0
-[1m[92m  Downloaded[0m shlex v2.0.1
-[1m[92m  Downloaded[0m hashlink v0.9.1
-[1m[92m  Downloaded[0m serde_derive v1.0.229
-[1m[92m  Downloaded[0m thiserror-impl v1.0.69
 [1m[92m  Downloaded[0m generic-array v0.14.7
-[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
-[1m[92m  Downloaded[0m digest v0.10.7
-[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
-[1m[92m  Downloaded[0m quote v1.0.47
-[1m[92m  Downloaded[0m rand_core v0.6.4
-[1m[92m  Downloaded[0m const-oid v0.9.6
-[1m[92m  Downloaded[0m num-traits v0.2.19
-[1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
-[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
-[1m[92m  Downloaded[0m pkcs8 v0.10.2
-[1m[92m  Downloaded[0m once_cell v1.21.4
-[1m[92m  Downloaded[0m unicode-ident v1.0.27
-[1m[92m  Downloaded[0m thiserror v1.0.69
+[1m[92m  Downloaded[0m signal-hook-registry v1.4.8
+[1m[92m  Downloaded[0m is_terminal_polyfill v1.70.2
+[1m[92m  Downloaded[0m itoa v1.0.18
+[1m[92m  Downloaded[0m signature v2.2.0
+[1m[92m  Downloaded[0m strsim v0.11.1
+[1m[92m  Downloaded[0m foldhash v0.1.5
+[1m[92m  Downloaded[0m lock_api v0.4.14
+[1m[92m  Downloaded[0m strum v0.26.3
 [1m[92m  Downloaded[0m smallvec v1.16.4
+[1m[92m  Downloaded[0m allocator-api2 v0.2.21
+[1m[92m  Downloaded[0m heck v0.5.0
+[1m[92m  Downloaded[0m equivalent v1.0.3
+[1m[92m  Downloaded[0m instability v0.3.14
+[1m[92m  Downloaded[0m rustc_version v0.4.1
+[1m[92m  Downloaded[0m spki v0.7.3
+[1m[92m  Downloaded[0m subtle v2.6.1
+[1m[92m  Downloaded[0m scopeguard v1.2.0
+[1m[92m  Downloaded[0m crypto-common v0.1.7
+[1m[92m  Downloaded[0m opaque-debug v0.3.1
+[1m[92m  Downloaded[0m autocfg v1.5.1
+[1m[92m  Downloaded[0m darling_macro v0.24.1
+[1m[92m  Downloaded[0m errno v0.3.14
+[1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
+[1m[92m  Downloaded[0m lru v0.12.5
+[1m[92m  Downloaded[0m cassowary v0.3.0
+[1m[92m  Downloaded[0m ident_case v1.0.1
+[1m[92m  Downloaded[0m universal-hash v0.5.1
+[1m[92m  Downloaded[0m zeroize_derive v1.5.0
+[1m[92m  Downloaded[0m ryu v1.0.23
+[1m[92m  Downloaded[0m rand_chacha v0.3.1
+[1m[92m  Downloaded[0m cipher v0.4.4
+[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
+[1m[92m  Downloaded[0m rand_core v0.6.4
+[1m[92m  Downloaded[0m chacha20 v0.9.1
+[1m[92m  Downloaded[0m pkcs8 v0.10.2
+[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
+[1m[92m  Downloaded[0m fallible-iterator v0.3.0
+[1m[92m  Downloaded[0m rustversion v1.0.23
 [1m[92m  Downloaded[0m proc-macro2 v1.0.107
-[1m[92m  Downloaded[0m serde_json v1.0.154
-[1m[92m  Downloaded[0m typenum v1.20.1
-[1m[92m  Downloaded[0m rand v0.8.8
+[1m[92m  Downloaded[0m quote v1.0.47
+[1m[92m  Downloaded[0m either v1.19.0
+[1m[92m  Downloaded[0m clap_lex v1.1.1
+[1m[92m  Downloaded[0m indoc v2.0.8
+[1m[92m  Downloaded[0m semver v1.0.28
+[1m[92m  Downloaded[0m version_check v0.9.5
+[1m[92m  Downloaded[0m castaway v0.2.4
+[1m[92m  Downloaded[0m paste v1.0.15
+[1m[92m  Downloaded[0m shlex v2.0.1
+[1m[92m  Downloaded[0m parking_lot v0.12.5
+[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
+[1m[92m  Downloaded[0m inout v0.1.4
+[1m[92m  Downloaded[0m pbkdf2 v0.12.2
+[1m[92m  Downloaded[0m digest v0.10.7
+[1m[92m  Downloaded[0m iana-time-zone v0.1.65
+[1m[92m  Downloaded[0m parking_lot_core v0.9.12
+[1m[92m  Downloaded[0m ed25519 v2.2.3
+[1m[92m  Downloaded[0m const-oid v0.9.6
+[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
+[1m[92m  Downloaded[0m darling v0.24.1
+[1m[92m  Downloaded[0m pkg-config v0.3.34
+[1m[92m  Downloaded[0m getrandom v0.2.17
+[1m[92m  Downloaded[0m serde v1.0.229
+[1m[92m  Downloaded[0m sha2 v0.10.9
+[1m[92m  Downloaded[0m serde_derive v1.0.229
+[1m[92m  Downloaded[0m signal-hook v0.3.18
+[1m[92m  Downloaded[0m hmac v0.12.1
+[1m[92m  Downloaded[0m clap_derive v4.6.7
+[1m[92m  Downloaded[0m hashlink v0.9.1
+[1m[92m  Downloaded[0m log v0.4.35
+[1m[92m  Downloaded[0m base64ct v1.8.3
+[1m[92m  Downloaded[0m darling_core v0.24.1
+[1m[92m  Downloaded[0m bitflags v2.13.2
+[1m[92m  Downloaded[0m serde_core v1.0.229
+[1m[92m  Downloaded[0m num-traits v0.2.19
+[1m[92m  Downloaded[0m clap v4.6.7
+[1m[92m  Downloaded[0m compact_str v0.8.2
+[1m[92m  Downloaded[0m der v0.7.10
+[1m[92m  Downloaded[0m utf8parse v0.2.2
+[1m[92m  Downloaded[0m unicode-truncate v1.1.0
+[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
 [1m[92m  Downloaded[0m memchr v2.8.3
+[1m[92m  Downloaded[0m mio v1.2.4
+[1m[92m  Downloaded[0m once_cell v1.21.4
+[1m[92m  Downloaded[0m zmij v1.0.23
+[1m[92m  Downloaded[0m zeroize v1.9.1
 [1m[92m  Downloaded[0m cc v1.11.0
-[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
-[1m[92m  Downloaded[0m vcpkg v0.2.15
+[1m[92m  Downloaded[0m hashbrown v0.14.5
+[1m[92m  Downloaded[0m rand v0.8.8
+[1m[92m  Downloaded[0m hashbrown v0.15.5
+[1m[92m  Downloaded[0m crossterm v0.28.1
+[1m[92m  Downloaded[0m rusqlite v0.32.1
+[1m[92m  Downloaded[0m thiserror v1.0.69
+[1m[92m  Downloaded[0m thiserror-impl v1.0.69
+[1m[92m  Downloaded[0m itertools v0.13.0
+[1m[92m  Downloaded[0m clap_builder v4.6.7
+[1m[92m  Downloaded[0m serde_json v1.0.154
 [1m[92m  Downloaded[0m chrono v0.4.45
+[1m[92m  Downloaded[0m unicode-ident v1.0.27
+[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
+[1m[92m  Downloaded[0m rustix v0.38.44
+[1m[92m  Downloaded[0m unicode-bidi v0.3.18
+[1m[92m  Downloaded[0m ratatui v0.29.0
+[1m[92m  Downloaded[0m libc v0.2.191
+[1m[92m  Downloaded[0m typenum v1.20.1
+[1m[92m  Downloaded[0m x25519-dalek v2.0.1
+[1m[92m  Downloaded[0m unicode-segmentation v1.13.3
+[1m[92m  Downloaded[0m unicode-width v0.2.0
+[1m[92m  Downloaded[0m vcpkg v0.2.15
+[1m[92m  Downloaded[0m unicode-width v0.1.14
+[1m[92m  Downloaded[0m syn v3.0.9
 [1m[92m  Downloaded[0m zerocopy v0.8.63
 [1m[92m  Downloaded[0m syn v2.0.119
-[1m[92m  Downloaded[0m syn v3.0.9
-[1m[92m  Downloaded[0m libc v0.2.191
+[1m[92m  Downloaded[0m linux-raw-sys v0.4.15
 [1m[92m  Downloaded[0m libsqlite3-sys v0.30.1
-[1m[92m   Compiling[0m version_check v0.9.5
 [1m[92m    Checking[0m cfg-if v1.0.5
 [1m[92m   Compiling[0m proc-macro2 v1.0.107
 [1m[92m   Compiling[0m libc v0.2.191
-[1m[92m   Compiling[0m unicode-ident v1.0.27
 [1m[92m   Compiling[0m quote v1.0.47
+[1m[92m   Compiling[0m unicode-ident v1.0.27
+[1m[92m   Compiling[0m version_check v0.9.5
 [1m[92m   Compiling[0m generic-array v0.14.7
 [1m[92m    Checking[0m typenum v1.20.1
 [1m[92m   Compiling[0m zerocopy v0.8.63
 [1m[92m    Checking[0m subtle v2.6.1
 [1m[92m    Checking[0m block-buffer v0.10.4
 [1m[92m    Checking[0m cpufeatures v0.2.17
-[1m[92m   Compiling[0m autocfg v1.5.1
-[1m[92m   Compiling[0m semver v1.0.28
+[1m[92m   Compiling[0m serde_core v1.0.229
 [1m[92m    Checking[0m getrandom v0.2.17
-[1m[92m    Checking[0m rand_core v0.6.4
 [1m[92m   Compiling[0m syn v2.0.119
+[1m[92m   Compiling[0m syn v3.0.9
+[1m[92m    Checking[0m rand_core v0.6.4
 [1m[92m    Checking[0m crypto-common v0.1.7
 [1m[92m    Checking[0m digest v0.10.7
-[1m[92m   Compiling[0m serde_core v1.0.229
-[1m[92m   Compiling[0m rustc_version v0.4.1
+[1m[92m   Compiling[0m semver v1.0.28
+[1m[92m   Compiling[0m autocfg v1.5.1
 [1m[92m   Compiling[0m num-traits v0.2.19
+[1m[92m   Compiling[0m rustc_version v0.4.1
 [1m[92m   Compiling[0m curve25519-dalek v4.1.3
-[1m[92m   Compiling[0m syn v3.0.9
 [1m[92m   Compiling[0m thiserror v1.0.69
 [1m[92m   Compiling[0m serde v1.0.229
 [1m[92m    Checking[0m inout v0.1.4
 [1m[92m   Compiling[0m zmij v1.0.23
-[1m[92m   Compiling[0m serde_derive v1.0.229
+[1m[92m    Checking[0m itoa v1.0.18
 [1m[92m    Checking[0m iana-time-zone v0.1.65
-[1m[92m    Checking[0m ppv-lite86 v0.2.21
 [1m[92m    Checking[0m chrono v0.4.45
-[1m[92m    Checking[0m universal-hash v0.5.1
-[1m[92m   Compiling[0m ahash v0.8.12
-[1m[92m   Compiling[0m find-msvc-tools v0.1.15
-[1m[92m    Checking[0m signature v2.2.0
-[1m[92m    Checking[0m opaque-debug v0.3.1
-[1m[92m   Compiling[0m serde_json v1.0.154
-[1m[92m   Compiling[0m shlex v2.0.1
-[1m[92m    Checking[0m poly1305 v0.8.0
-[1m[92m   Compiling[0m cc v1.11.0
+[1m[92m    Checking[0m ppv-lite86 v0.2.21
+[1m[92m   Compiling[0m serde_derive v1.0.229
 [1m[92m   Compiling[0m zeroize_derive v1.5.0
 [1m[92m   Compiling[0m curve25519-dalek-derive v0.1.1
 [1m[92m   Compiling[0m thiserror-impl v1.0.69
+[1m[92m    Checking[0m universal-hash v0.5.1
 [1m[92m    Checking[0m zeroize v1.9.1
+[1m[92m   Compiling[0m ahash v0.8.12
 [1m[92m    Checking[0m cipher v0.4.4
+[1m[92m   Compiling[0m serde_json v1.0.154
+[1m[92m   Compiling[0m shlex v2.0.1
+[1m[92m    Checking[0m signature v2.2.0
+[1m[92m   Compiling[0m find-msvc-tools v0.1.15
+[1m[92m    Checking[0m opaque-debug v0.3.1
+[1m[92m    Checking[0m smallvec v1.16.4
+[1m[92m    Checking[0m poly1305 v0.8.0
+[1m[92m   Compiling[0m cc v1.11.0
 [1m[92m    Checking[0m ed25519 v2.2.3
 [1m[92m    Checking[0m chacha20 v0.9.1
 [1m[92m    Checking[0m rand_chacha v0.3.1
 [1m[92m    Checking[0m sha2 v0.10.9
 [1m[92m    Checking[0m hmac v0.12.1
 [1m[92m    Checking[0m aead v0.5.2
-[1m[92m    Checking[0m memchr v2.8.3
-[1m[92m    Checking[0m once_cell v1.21.4
-[1m[92m   Compiling[0m vcpkg v0.2.15
-[1m[92m    Checking[0m itoa v1.0.18
+[1m[92m    Checking[0m bitflags v2.13.2
 [1m[92m   Compiling[0m pkg-config v0.3.34
-[1m[92m    Checking[0m x25519-dalek v2.0.1
-[1m[92m    Checking[0m ed25519-dalek v2.2.0
+[1m[92m    Checking[0m memchr v2.8.3
+[1m[92m   Compiling[0m vcpkg v0.2.15
+[1m[92m    Checking[0m once_cell v1.21.4
 [1m[92m    Checking[0m chacha20poly1305 v0.10.1
 [1m[92m    Checking[0m pbkdf2 v0.12.2
-[1m[92m    Checking[0m rand v0.8.8
 [1m[92m   Compiling[0m libsqlite3-sys v0.30.1
+[1m[92m    Checking[0m ed25519-dalek v2.2.0
+[1m[92m    Checking[0m rand v0.8.8
+[1m[92m    Checking[0m x25519-dalek v2.0.1
 [1m[92m    Checking[0m hashbrown v0.14.5
-[1m[92m    Checking[0m bitflags v2.13.2
-[1m[92m    Checking[0m smallvec v1.16.4
-[1m[92m    Checking[0m hashlink v0.9.1
-[1m[92m    Checking[0m social-mail-crypto v0.1.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m    Checking[0m fallible-streaming-iterator v0.1.9
 [1m[92m    Checking[0m fallible-iterator v0.3.0
+[1m[92m    Checking[0m social-mail-crypto v0.1.0 (/home/runner/work/social/social/crates/crypto)
+[1m[92m   Compiling[0m heck v0.5.0
+[1m[92m   Compiling[0m rustversion v1.0.23
+[1m[92m    Checking[0m hashlink v0.9.1
 [1m[92m    Checking[0m social-mail-protocol v0.1.0 (/home/runner/work/social/social/crates/protocol)
-[1m[91merror[E0308][0m[1m: mismatched types[0m
-   [1m[94m--> [0mcrates/protocol/src/event.rs:390:20
+[1m[92m    Checking[0m utf8parse v0.2.2
+[1m[92m    Checking[0m anstyle-parse v1.0.0
+[1m[92m    Checking[0m errno v0.3.14
+[1m[92m    Checking[0m is_terminal_polyfill v1.70.2
+[1m[92m    Checking[0m anstyle-query v1.1.5
+[1m[92m   Compiling[0m signal-hook v0.3.18
+[1m[92m    Checking[0m anstyle v1.0.14
+[1m[92m    Checking[0m colorchoice v1.0.5
+[1m[92m   Compiling[0m strsim v0.11.1
+[1m[92m   Compiling[0m ident_case v1.0.1
+[1m[92m   Compiling[0m parking_lot_core v0.9.12
+[1m[92m    Checking[0m anstream v1.0.0
+[1m[92m   Compiling[0m darling_core v0.24.1
+[1m[92m    Checking[0m signal-hook-registry v1.4.8
+[1m[92m   Compiling[0m anyhow v1.0.104
+[1m[92m    Checking[0m scopeguard v1.2.0
+[1m[92m    Checking[0m clap_lex v1.1.1
+[1m[92m    Checking[0m log v0.4.35
+[1m[92m   Compiling[0m rustix v0.38.44
+[1m[92m    Checking[0m mio v1.2.4
+[1m[92m    Checking[0m clap_builder v4.6.7
+[1m[92m    Checking[0m lock_api v0.4.14
+[1m[92m   Compiling[0m clap_derive v4.6.7
+[1m[92m   Compiling[0m paste v1.0.15
+[1m[92m    Checking[0m allocator-api2 v0.2.21
+[1m[92m    Checking[0m linux-raw-sys v0.4.15
+[1m[92m    Checking[0m foldhash v0.1.5
+[1m[92m    Checking[0m equivalent v1.0.3
+[1m[92m    Checking[0m either v1.19.0
+[1m[92m    Checking[0m hashbrown v0.15.5
+[1m[92m   Compiling[0m darling_macro v0.24.1
+[1m[92m    Checking[0m itertools v0.13.0
+[1m[92m   Compiling[0m darling v0.24.1
+[1m[92m    Checking[0m clap v4.6.7
+[1m[92m    Checking[0m parking_lot v0.12.5
+[1m[92m    Checking[0m signal-hook-mio v0.2.5
+[1m[92m    Checking[0m castaway v0.2.4
+[1m[92m   Compiling[0m strum_macros v0.26.4
+[1m[92m    Checking[0m ryu v1.0.23
+[1m[92m   Compiling[0m indoc v2.0.8
+[1m[92m    Checking[0m unicode-width v0.1.14
+[1m[92m    Checking[0m static_assertions v1.1.0
+[1m[92m    Checking[0m unicode-segmentation v1.13.3
+[1m[92m    Checking[0m compact_str v0.8.2
+[1m[92m    Checking[0m unicode-truncate v1.1.0
+[1m[92m   Compiling[0m instability v0.3.14
+[1m[92m    Checking[0m crossterm v0.28.1
+[1m[92m    Checking[0m lru v0.12.5
+[1m[92m    Checking[0m cassowary v0.3.0
+[1m[92m    Checking[0m unicode-width v0.2.0
+[1m[92m    Checking[0m unicode-bidi v0.3.18
+[1m[92m    Checking[0m strum v0.26.3
+[1m[92m    Checking[0m ratatui v0.29.0
+[1m[91merror[E0609][0m[1m: no field `author` on type `Option<Envelope>`[0m
+   [1m[94m--> [0mcrates/protocol/tests/fixtures.rs:251:22
     [1m[94m|[0m
-[1m[94m390[0m [1m[94m|[0m             event: self.event,
-    [1m[94m|[0m                    [1m[91m^^^^^^^^^^[0m [1m[91mexpected `Option<Envelope>`, found `Envelope`[0m
+[1m[94m251[0m [1m[94m|[0m     mismatched.event.author = "0".repeat(40);
+    [1m[94m|[0m                      [1m[91m^^^^^^[0m [1m[91munknown field[0m
     [1m[94m|[0m
-    [1m[94m= [0m[1mnote[0m: expected enum `[1m[35mstd::option::Option[0m[1m[35m<[0mEnvelope[1m[35m>[0m`
-             found struct `Envelope`
-[1m[96mhelp[0m: try wrapping the expression in `Some`
+[1m[96mhelp[0m: one of the expressions' fields has a field of the same name
     [1m[94m|[0m
-[1m[94m390[0m [1m[94m| [0m            event: [92mSome([0mself.event[92m)[0m,
-    [1m[94m|[0m                    [92m+++++[0m          [92m+[0m
+[1m[94m251[0m [1m[94m| [0m    mismatched.event.[92munwrap().[0mauthor = "0".repeat(40);
+    [1m[94m|[0m                      [92m+++++++++[0m
 
-[1m[91merror[E0063][0m[1m: missing fields `author` and `encrypted` in initializer of `Carrier`[0m
-   [1m[94m--> [0mcrates/protocol/src/event.rs:385:9
-    [1m[94m|[0m
-[1m[94m385[0m [1m[94m|[0m         Carrier {
-    [1m[94m|[0m         [1m[91m^^^^^^^[0m [1m[91mmissing `author` and `encrypted`[0m
-
-[1mSome errors have detailed explanations: E0063, E0308.[0m
-[1mFor more information about an error, try `rustc --explain E0063`.[0m
-[1m[91merror[0m: could not compile `social-mail-protocol` (lib) due to 2 previous errors
+[1mFor more information about this error, try `rustc --explain E0609`.[0m
+[1m[91merror[0m: could not compile `social-mail-protocol` (test "fixtures") due to 1 previous error
 [1m[33mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[0m: could not compile `social-mail-protocol` (lib test) due to 2 previous errors
 check_exit=101
 
 ## test
@@ -202,8 +302,9 @@ check_exit=101
 [1m[92m   Compiling[0m iana-time-zone v0.1.65
 [1m[92m   Compiling[0m thiserror v1.0.69
 [1m[92m   Compiling[0m inout v0.1.4
-[1m[92m   Compiling[0m curve25519-dalek v4.1.3
 [1m[92m   Compiling[0m chrono v0.4.45
+[1m[92m   Compiling[0m itoa v1.0.18
+[1m[92m   Compiling[0m curve25519-dalek v4.1.3
 [1m[92m   Compiling[0m serde v1.0.229
 [1m[92m   Compiling[0m cipher v0.4.4
 [1m[92m   Compiling[0m universal-hash v0.5.1
@@ -212,67 +313,474 @@ check_exit=101
 [1m[92m   Compiling[0m ed25519 v2.2.3
 [1m[92m   Compiling[0m poly1305 v0.8.0
 [1m[92m   Compiling[0m chacha20 v0.9.1
-[1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m   Compiling[0m ppv-lite86 v0.2.21
+[1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m   Compiling[0m sha2 v0.10.9
+[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m hmac v0.12.1
 [1m[92m   Compiling[0m aead v0.5.2
-[1m[92m   Compiling[0m itoa v1.0.18
+[1m[92m   Compiling[0m smallvec v1.16.4
 [1m[92m   Compiling[0m memchr v2.8.3
-[1m[92m   Compiling[0m rand_chacha v0.3.1
-[1m[92m   Compiling[0m ed25519-dalek v2.2.0
+[1m[92m   Compiling[0m rand v0.8.8
 [1m[92m   Compiling[0m chacha20poly1305 v0.10.1
 [1m[92m   Compiling[0m pbkdf2 v0.12.2
-[1m[92m   Compiling[0m rand v0.8.8
+[1m[92m   Compiling[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m x25519-dalek v2.0.1
+[1m[92m   Compiling[0m bitflags v2.13.2
 [1m[92m   Compiling[0m once_cell v1.21.4
 [1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m   Compiling[0m ahash v0.8.12
 [1m[92m   Compiling[0m hashbrown v0.14.5
 [1m[92m   Compiling[0m libsqlite3-sys v0.30.1
-[1m[92m   Compiling[0m bitflags v2.13.2
 [1m[92m   Compiling[0m fallible-streaming-iterator v0.1.9
 [1m[92m   Compiling[0m fallible-iterator v0.3.0
-[1m[92m   Compiling[0m smallvec v1.16.4
+[1m[92m   Compiling[0m strsim v0.11.1
+[1m[92m   Compiling[0m errno v0.3.14
 [1m[92m   Compiling[0m hashlink v0.9.1
+[1m[92m   Compiling[0m utf8parse v0.2.2
+[1m[92m   Compiling[0m darling_core v0.24.1
+[1m[92m   Compiling[0m anstyle-parse v1.0.0
 [1m[92m   Compiling[0m social-mail-crypto v0.1.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m rusqlite v0.32.1
 [1m[92m   Compiling[0m social-mail-protocol v0.1.0 (/home/runner/work/social/social/crates/protocol)
-[1m[91merror[E0308][0m[1m: mismatched types[0m
-   [1m[94m--> [0mcrates/protocol/src/event.rs:390:20
+[1m[92m   Compiling[0m signal-hook-registry v1.4.8
+[1m[92m   Compiling[0m social-mail-storage v0.1.0 (/home/runner/work/social/social/crates/storage)
+[1m[92m   Compiling[0m log v0.4.35
+[1m[92m   Compiling[0m scopeguard v1.2.0
+[1m[92m   Compiling[0m is_terminal_polyfill v1.70.2
+[1m[92m   Compiling[0m anstyle v1.0.14
+[1m[92m   Compiling[0m colorchoice v1.0.5
+[1m[92m   Compiling[0m anstyle-query v1.1.5
+[1m[92m   Compiling[0m lock_api v0.4.14
+[1m[92m   Compiling[0m anstream v1.0.0
+[1m[92m   Compiling[0m mio v1.2.4
+[1m[92m   Compiling[0m social-mail-engine v0.1.0 (/home/runner/work/social/social/crates/engine)
+[1m[92m   Compiling[0m signal-hook v0.3.18
+[1m[92m   Compiling[0m parking_lot_core v0.9.12
+[1m[92m   Compiling[0m equivalent v1.0.3
+[1m[92m   Compiling[0m linux-raw-sys v0.4.15
+[1m[92m   Compiling[0m either v1.19.0
+[1m[92m   Compiling[0m clap_lex v1.1.1
+[1m[92m   Compiling[0m allocator-api2 v0.2.21
+[1m[92m   Compiling[0m darling_macro v0.24.1
+[1m[92m   Compiling[0m foldhash v0.1.5
+[1m[92m   Compiling[0m hashbrown v0.15.5
+[1m[92m   Compiling[0m clap_builder v4.6.7
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:491:43
     [1m[94m|[0m
-[1m[94m390[0m [1m[94m|[0m             event: self.event,
-    [1m[94m|[0m                    [1m[91m^^^^^^^^^^[0m [1m[91mexpected `Option<Envelope>`, found `Envelope`[0m
+[1m[94m491[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
     [1m[94m|[0m
-    [1m[94m= [0m[1mnote[0m: expected enum `[1m[35mstd::option::Option[0m[1m[35m<[0mEnvelope[1m[35m>[0m`
-             found struct `Envelope`
-[1m[96mhelp[0m: try wrapping the expression in `Some`
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
     [1m[94m|[0m
-[1m[94m390[0m [1m[94m| [0m            event: [92mSome([0mself.event[92m)[0m,
-    [1m[94m|[0m                    [92m+++++[0m          [92m+[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-[1m[91merror[E0063][0m[1m: missing fields `author` and `encrypted` in initializer of `Carrier`[0m
-   [1m[94m--> [0mcrates/protocol/src/event.rs:385:9
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:522:43
     [1m[94m|[0m
-[1m[94m385[0m [1m[94m|[0m         Carrier {
-    [1m[94m|[0m         [1m[91m^^^^^^^[0m [1m[91mmissing `author` and `encrypted`[0m
+[1m[94m522[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-[1mSome errors have detailed explanations: E0063, E0308.[0m
-[1mFor more information about an error, try `rustc --explain E0063`.[0m
-[1m[91merror[0m: could not compile `social-mail-protocol` (lib) due to 2 previous errors
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:561:69
+    [1m[94m|[0m
+[1m[94m561[0m [1m[94m|[0m                 serde_json::to_value(FollowRemovePayload::default())?,
+    [1m[94m|[0m                 [1m[94m----------------------------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+    [1m[94m|[0m                 [1m[94m|[0m
+    [1m[94m|[0m                 [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:583:69
+    [1m[94m|[0m
+[1m[94m583[0m [1m[94m|[0m                 serde_json::to_value(FollowRemovePayload::default())?,
+    [1m[94m|[0m                 [1m[94m----------------------------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+    [1m[94m|[0m                 [1m[94m|[0m
+    [1m[94m|[0m                 [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:610:43
+    [1m[94m|[0m
+[1m[94m610[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:830:43
+    [1m[94m|[0m
+[1m[94m830[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1163:43
+     [1m[94m|[0m
+[1m[94m1163[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+     [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m             [1m[94m|[0m
+     [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1390:67
+     [1m[94m|[0m
+[1m[94m1390[0m [1m[94m|[0m         let value: serde_json::Value = serde_json::from_str(&text)?;
+     [1m[94m|[0m                                        [1m[94m---------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                                        [1m[94m|[0m
+     [1m[94m|[0m                                        [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1397:54
+     [1m[94m|[0m
+[1m[94m1397[0m [1m[94m|[0m             let body = serde_json::to_string(carrier)?;
+     [1m[94m|[0m                        [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                        [1m[94m|[0m
+     [1m[94m|[0m                        [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1409:57
+     [1m[94m|[0m
+[1m[94m1409[0m [1m[94m|[0m             Some(text) => Ok(serde_json::from_str(&text)?),
+     [1m[94m|[0m                              [1m[94m---------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                              [1m[94m|[0m
+     [1m[94m|[0m                              [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1425:65
+     [1m[94m|[0m
+[1m[94m1425[0m [1m[94m|[0m             .set_setting("lists", &serde_json::to_string(&lists)?)?;
+     [1m[94m|[0m                                    [1m[94m-----------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                                    [1m[94m|[0m
+     [1m[94m|[0m                                    [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[92m   Compiling[0m darling v0.24.1
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1433:65
+     [1m[94m|[0m
+[1m[94m1433[0m [1m[94m|[0m             .set_setting("lists", &serde_json::to_string(&lists)?)?;
+     [1m[94m|[0m                                    [1m[94m-----------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                                    [1m[94m|[0m
+     [1m[94m|[0m                                    [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1560:66
+     [1m[94m|[0m
+[1m[94m1559[0m [1m[94m|[0m fn signed_from_row(row: &EventRow) -> Result<SignedEvent, EngineError> {
+     [1m[94m|[0m                                       [1m[94m--------------------------------[0m [1m[94mexpected `EngineError` because of this[0m
+[1m[94m1560[0m [1m[94m|[0m     let envelope: Envelope = serde_json::from_str(&row.canonical)?;
+     [1m[94m|[0m                              [1m[94m------------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                              [1m[94m|[0m
+     [1m[94m|[0m                              [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1585:51
+     [1m[94m|[0m
+[1m[94m1576[0m [1m[94m|[0m fn write_identity(dir: &Path, identity: &Identity) -> Result<(), EngineError> {
+     [1m[94m|[0m                                                       [1m[94m-----------------------[0m [1m[94mexpected `EngineError` because of this[0m
+[1m[94m...[0m
+[1m[94m1585[0m [1m[94m|[0m     let text = serde_json::to_string_pretty(&file)?;
+     [1m[94m|[0m                [1m[94m-----------------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                [1m[94m|[0m
+     [1m[94m|[0m                [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1591:57
+     [1m[94m|[0m
+[1m[94m1589[0m [1m[94m|[0m fn read_identity(dir: &Path) -> Result<Identity, EngineError> {
+     [1m[94m|[0m                                 [1m[94m-----------------------------[0m [1m[94mexpected `EngineError` because of this[0m
+[1m[94m1590[0m [1m[94m|[0m     let text = fs::read_to_string(dir.join(IDENTITY_FILE))?;
+[1m[94m1591[0m [1m[94m|[0m     let file: IdentityFile = serde_json::from_str(&text)?;
+     [1m[94m|[0m                              [1m[94m---------------------------[0m[1m[91m^[0m [1m[91mthe trait `From<serde_json::Error>` is not implemented for `EngineError`[0m
+     [1m[94m|[0m                              [1m[94m|[0m
+     [1m[94m|[0m                              [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `EngineError` implements trait `From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`From<CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[92m   Compiling[0m itertools v0.13.0
+[1mFor more information about this error, try `rustc --explain E0277`.[0m
+[1m[91merror[0m: could not compile `social-mail-engine` (lib) due to 15 previous errors
 [1m[33mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[0m: could not compile `social-mail-protocol` (lib test) due to 2 previous errors
 test_exit=101
 
 ## clippy
-[1m[92m    Checking[0m social-mail-crypto v0.1.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m    Checking[0m libsqlite3-sys v0.30.1
+[1m[92m    Checking[0m social-mail-crypto v0.1.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m    Checking[0m rusqlite v0.32.1
 [1m[92m    Checking[0m social-mail-storage v0.1.0 (/home/runner/work/social/social/crates/storage)
+[1m[92m    Checking[0m social-mail-protocol v0.1.0 (/home/runner/work/social/social/crates/protocol)
 [1m[33mwarning[0m[1m: replacing text with itself[0m
-   [1m[94m--> [0mcrates/storage/src/lib.rs:645:13
+   [1m[94m--> [0mcrates/storage/src/lib.rs:661:13
     [1m[94m|[0m
-[1m[94m645[0m [1m[94m|[0m             Self::tab_clause(tab).replace("t.", "t.")
+[1m[94m661[0m [1m[94m|[0m             Self::tab_clause(tab).replace("t.", "t.")
     [1m[94m|[0m             [1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
     [1m[94m|[0m
     [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#no_effect_replace
@@ -280,29 +788,420 @@ test_exit=101
 
 [1m[33mwarning[0m: `social-mail-storage` (lib) generated 1 warning
 [1m[33mwarning[0m: `social-mail-storage` (lib test) generated 1 warning (1 duplicate)
-[1m[92m    Checking[0m social-mail-protocol v0.1.0 (/home/runner/work/social/social/crates/protocol)
-[1m[91merror[E0308][0m[1m: mismatched types[0m
-   [1m[94m--> [0mcrates/protocol/src/event.rs:390:20
+[1m[92m    Checking[0m social-mail-engine v0.1.0 (/home/runner/work/social/social/crates/engine)
+[1m[91merror[E0609][0m[1m: no field `author` on type `std::option::Option<social_mail_protocol::Envelope>`[0m
+   [1m[94m--> [0mcrates/protocol/tests/fixtures.rs:251:22
     [1m[94m|[0m
-[1m[94m390[0m [1m[94m|[0m             event: self.event,
-    [1m[94m|[0m                    [1m[91m^^^^^^^^^^[0m [1m[91mexpected `Option<Envelope>`, found `Envelope`[0m
+[1m[94m251[0m [1m[94m|[0m     mismatched.event.author = "0".repeat(40);
+    [1m[94m|[0m                      [1m[91m^^^^^^[0m [1m[91munknown field[0m
     [1m[94m|[0m
-    [1m[94m= [0m[1mnote[0m: expected enum `[1m[35mstd::option::Option[0m[1m[35m<[0mEnvelope[1m[35m>[0m`
-             found struct `Envelope`
-[1m[96mhelp[0m: try wrapping the expression in `Some`
+[1m[96mhelp[0m: one of the expressions' fields has a field of the same name
     [1m[94m|[0m
-[1m[94m390[0m [1m[94m| [0m            event: [92mSome([0mself.event[92m)[0m,
-    [1m[94m|[0m                    [92m+++++[0m          [92m+[0m
+[1m[94m251[0m [1m[94m| [0m    mismatched.event.[92munwrap().[0mauthor = "0".repeat(40);
+    [1m[94m|[0m                      [92m+++++++++[0m
 
-[1m[91merror[E0063][0m[1m: missing fields `author` and `encrypted` in initializer of `event::Carrier`[0m
-   [1m[94m--> [0mcrates/protocol/src/event.rs:385:9
+[1mFor more information about this error, try `rustc --explain E0609`.[0m
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:491:43
     [1m[94m|[0m
-[1m[94m385[0m [1m[94m|[0m         Carrier {
-    [1m[94m|[0m         [1m[91m^^^^^^^[0m [1m[91mmissing `author` and `encrypted`[0m
+[1m[94m491[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-[1mSome errors have detailed explanations: E0063, E0308.[0m
-[1mFor more information about an error, try `rustc --explain E0063`.[0m
-[1m[91merror[0m: could not compile `social-mail-protocol` (lib) due to 2 previous errors
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:522:43
+    [1m[94m|[0m
+[1m[94m522[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:561:69
+    [1m[94m|[0m
+[1m[94m561[0m [1m[94m|[0m                 serde_json::to_value(FollowRemovePayload::default())?,
+    [1m[94m|[0m                 [1m[94m----------------------------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+    [1m[94m|[0m                 [1m[94m|[0m
+    [1m[94m|[0m                 [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:583:69
+    [1m[94m|[0m
+[1m[94m583[0m [1m[94m|[0m                 serde_json::to_value(FollowRemovePayload::default())?,
+    [1m[94m|[0m                 [1m[94m----------------------------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+    [1m[94m|[0m                 [1m[94m|[0m
+    [1m[94m|[0m                 [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:610:43
+    [1m[94m|[0m
+[1m[94m610[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+   [1m[94m--> [0mcrates/engine/src/engine.rs:830:43
+    [1m[94m|[0m
+[1m[94m830[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+    [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+    [1m[94m|[0m             [1m[94m|[0m
+    [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+    [1m[94m|[0m
+[1m[94m  4[0m [1m[94m|[0m pub enum EngineError {
+    [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+   [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+    [1m[94m|[0m
+[1m[94m  3[0m [1m[94m|[0m #[derive(Debug, Error)]
+    [1m[94m|[0m                 [1m[96m^^^^^[0m
+    [1m[94m|[0m                 [1m[96m|[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+    [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+    [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1163:43
+     [1m[94m|[0m
+[1m[94m1163[0m [1m[94m|[0m             serde_json::to_value(&payload)?,
+     [1m[94m|[0m             [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m             [1m[94m|[0m
+     [1m[94m|[0m             [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1390:67
+     [1m[94m|[0m
+[1m[94m1390[0m [1m[94m|[0m         let value: serde_json::Value = serde_json::from_str(&text)?;
+     [1m[94m|[0m                                        [1m[94m---------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                                        [1m[94m|[0m
+     [1m[94m|[0m                                        [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1397:54
+     [1m[94m|[0m
+[1m[94m1397[0m [1m[94m|[0m             let body = serde_json::to_string(carrier)?;
+     [1m[94m|[0m                        [1m[94m------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                        [1m[94m|[0m
+     [1m[94m|[0m                        [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1409:57
+     [1m[94m|[0m
+[1m[94m1409[0m [1m[94m|[0m             Some(text) => Ok(serde_json::from_str(&text)?),
+     [1m[94m|[0m                              [1m[94m---------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                              [1m[94m|[0m
+     [1m[94m|[0m                              [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1425:65
+     [1m[94m|[0m
+[1m[94m1425[0m [1m[94m|[0m             .set_setting("lists", &serde_json::to_string(&lists)?)?;
+     [1m[94m|[0m                                    [1m[94m-----------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                                    [1m[94m|[0m
+     [1m[94m|[0m                                    [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1433:65
+     [1m[94m|[0m
+[1m[94m1433[0m [1m[94m|[0m             .set_setting("lists", &serde_json::to_string(&lists)?)?;
+     [1m[94m|[0m                                    [1m[94m-----------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                                    [1m[94m|[0m
+     [1m[94m|[0m                                    [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1560:66
+     [1m[94m|[0m
+[1m[94m1559[0m [1m[94m|[0m fn signed_from_row(row: &EventRow) -> Result<SignedEvent, EngineError> {
+     [1m[94m|[0m                                       [1m[94m--------------------------------[0m [1m[94mexpected `error::EngineError` because of this[0m
+[1m[94m1560[0m [1m[94m|[0m     let envelope: Envelope = serde_json::from_str(&row.canonical)?;
+     [1m[94m|[0m                              [1m[94m------------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                              [1m[94m|[0m
+     [1m[94m|[0m                              [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1585:51
+     [1m[94m|[0m
+[1m[94m1576[0m [1m[94m|[0m fn write_identity(dir: &Path, identity: &Identity) -> Result<(), EngineError> {
+     [1m[94m|[0m                                                       [1m[94m-----------------------[0m [1m[94mexpected `error::EngineError` because of this[0m
+[1m[94m...[0m
+[1m[94m1585[0m [1m[94m|[0m     let text = serde_json::to_string_pretty(&file)?;
+     [1m[94m|[0m                [1m[94m-----------------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                [1m[94m|[0m
+     [1m[94m|[0m                [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[E0277][0m[1m: `?` couldn't convert the error to `error::EngineError`[0m
+    [1m[94m--> [0mcrates/engine/src/engine.rs:1591:57
+     [1m[94m|[0m
+[1m[94m1589[0m [1m[94m|[0m fn read_identity(dir: &Path) -> Result<Identity, EngineError> {
+     [1m[94m|[0m                                 [1m[94m-----------------------------[0m [1m[94mexpected `error::EngineError` because of this[0m
+[1m[94m1590[0m [1m[94m|[0m     let text = fs::read_to_string(dir.join(IDENTITY_FILE))?;
+[1m[94m1591[0m [1m[94m|[0m     let file: IdentityFile = serde_json::from_str(&text)?;
+     [1m[94m|[0m                              [1m[94m---------------------------[0m[1m[91m^[0m [1m[91mthe trait `std::convert::From<serde_json::Error>` is not implemented for `error::EngineError`[0m
+     [1m[94m|[0m                              [1m[94m|[0m
+     [1m[94m|[0m                              [1m[94mthis can't be annotated with `?` because it has type `Result<_, serde_json::Error>`[0m
+     [1m[94m|[0m
+[1m[92mnote[0m: `error::EngineError` needs to implement `From<serde_json::Error>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:4:1
+     [1m[94m|[0m
+[1m[94m   4[0m [1m[94m|[0m pub enum EngineError {
+     [1m[94m|[0m [1m[92m^^^^^^^^^^^^^^^^^^^^[0m
+     [1m[94m= [0m[1mnote[0m: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
+[1m[96mhelp[0m: `error::EngineError` implements trait `std::convert::From<T>`
+    [1m[94m--> [0mcrates/engine/src/error.rs:3:17
+     [1m[94m|[0m
+[1m[94m   3[0m [1m[94m|[0m #[derive(Debug, Error)]
+     [1m[94m|[0m                 [1m[96m^^^^^[0m
+     [1m[94m|[0m                 [1m[96m|[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_crypto::CryptoError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_protocol::ProtocolError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<social_mail_storage::StorageError>`[0m
+     [1m[94m|[0m                 [1m[96m`std::convert::From<std::io::Error>`[0m
+     [1m[94m= [0m[1mnote[0m: this error originates in the derive macro `Error` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+[1m[91merror[0m: could not compile `social-mail-protocol` (test "fixtures") due to 1 previous error
 [1m[33mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[0m: could not compile `social-mail-protocol` (lib test) due to 2 previous errors
+[1mFor more information about this error, try `rustc --explain E0277`.[0m
+[1m[91merror[0m: could not compile `social-mail-engine` (lib) due to 15 previous errors
+[1m[91merror[0m: could not compile `social-mail-engine` (lib test) due to 15 previous errors
 clippy_exit=101

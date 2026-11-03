@@ -1146,6 +1146,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "social-mail-reflector"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "serde_json",
+ "social-mail-engine",
+]
+
+[[package]]
 name = "social-mail-storage"
 version = "0.1.0"
 dependencies = [
