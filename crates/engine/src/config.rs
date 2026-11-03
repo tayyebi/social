@@ -105,8 +105,12 @@ impl Config {
             EngineError::Config(format!("line {line}: `{key}` expects {expected}"))
         };
         match key {
-            "profile.name" => self.profile_name = parse_string(value).ok_or_else(|| bad("a string"))?,
-            "profile.address" => self.address = parse_string(value).ok_or_else(|| bad("a string"))?,
+            "profile.name" => {
+                self.profile_name = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "profile.address" => {
+                self.address = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
             "profile.locale" => self.locale = parse_string(value).ok_or_else(|| bad("a string"))?,
             "ui.color" => self.color = parse_string(value).ok_or_else(|| bad("a string"))?,
             "ui.density_following" => {
@@ -115,11 +119,18 @@ impl Config {
             "ui.density_lists" => {
                 self.density_lists = parse_string(value).ok_or_else(|| bad("a string"))?
             }
-            "ui.density_you" => self.density_you = parse_string(value).ok_or_else(|| bad("a string"))?,
-            "ui.density_all" => self.density_all = parse_string(value).ok_or_else(|| bad("a string"))?,
-            "ui.body_lines" => self.body_lines = parse_int(value).ok_or_else(|| bad("an integer"))?,
+            "ui.density_you" => {
+                self.density_you = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "ui.density_all" => {
+                self.density_all = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "ui.body_lines" => {
+                self.body_lines = parse_int(value).ok_or_else(|| bad("an integer"))?
+            }
             "mail.move_protocol_messages" => {
-                self.move_protocol_messages = parse_bool(value).ok_or_else(|| bad("true or false"))?
+                self.move_protocol_messages =
+                    parse_bool(value).ok_or_else(|| bad("true or false"))?
             }
             "mail.protocol_folder" => {
                 self.protocol_folder = parse_string(value).ok_or_else(|| bad("a string"))?
@@ -130,7 +141,9 @@ impl Config {
             "storage.data_dir" => {
                 self.data_dir = PathBuf::from(parse_string(value).ok_or_else(|| bad("a string"))?)
             }
-            "transport.kind" => self.transport = parse_string(value).ok_or_else(|| bad("a string"))?,
+            "transport.kind" => {
+                self.transport = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
             "transport.spool_dir" => {
                 self.spool_dir = PathBuf::from(parse_string(value).ok_or_else(|| bad("a string"))?)
             }
@@ -155,7 +168,10 @@ impl Config {
         out.push_str(&format!("protocol_folder = {:?}\n\n", self.protocol_folder));
         out.push_str("[ui]\n");
         out.push_str(&format!("color = {:?}\n", self.color));
-        out.push_str(&format!("density_following = {:?}\n", self.density_following));
+        out.push_str(&format!(
+            "density_following = {:?}\n",
+            self.density_following
+        ));
         out.push_str(&format!("density_lists = {:?}\n", self.density_lists));
         out.push_str(&format!("density_you = {:?}\n", self.density_you));
         out.push_str(&format!("density_all = {:?}\n", self.density_all));
@@ -166,10 +182,16 @@ impl Config {
             self.auto_sync_minutes
         ));
         out.push_str("[storage]\n");
-        out.push_str(&format!("data_dir = {:?}\n\n", self.data_dir.display().to_string()));
+        out.push_str(&format!(
+            "data_dir = {:?}\n\n",
+            self.data_dir.display().to_string()
+        ));
         out.push_str("[transport]\n");
         out.push_str(&format!("kind = {:?}\n", self.transport));
-        out.push_str(&format!("spool_dir = {:?}\n", self.spool_dir.display().to_string()));
+        out.push_str(&format!(
+            "spool_dir = {:?}\n",
+            self.spool_dir.display().to_string()
+        ));
         out
     }
 

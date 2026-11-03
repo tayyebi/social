@@ -45,9 +45,7 @@ impl SpoolTransport {
         }
         let dir = self.root.join(recipient);
         fs::create_dir_all(&dir)?;
-        let stamp = chrono::Utc::now()
-            .timestamp_nanos_opt()
-            .unwrap_or_default();
+        let stamp = chrono::Utc::now().timestamp_nanos_opt().unwrap_or_default();
         let name = format!("{stamp:020}-{}.json", std::process::id());
         let temp = dir.join(format!(".{name}.tmp"));
         fs::write(&temp, body)?;
@@ -63,11 +61,7 @@ impl SpoolTransport {
         let mut paths: Vec<PathBuf> = fs::read_dir(&dir)?
             .filter_map(|entry| entry.ok())
             .map(|entry| entry.path())
-            .filter(|path| {
-                path.extension()
-                    .map(|ext| ext == "json")
-                    .unwrap_or(false)
-            })
+            .filter(|path| path.extension().map(|ext| ext == "json").unwrap_or(false))
             .collect();
         paths.sort();
         let mut out = Vec::new();

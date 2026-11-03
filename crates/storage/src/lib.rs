@@ -880,7 +880,11 @@ impl Database {
     }
 
     /// Resolve replies whose parent just arrived.
-    pub fn resolve_orphans(&self, parent: &str, parent_author: &str) -> Result<usize, StorageError> {
+    pub fn resolve_orphans(
+        &self,
+        parent: &str,
+        parent_author: &str,
+    ) -> Result<usize, StorageError> {
         let changed = self.conn.execute(
             "UPDATE events SET parent_author = ?2 WHERE parent = ?1",
             params![parent, parent_author],

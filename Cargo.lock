@@ -662,6 +662,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "social-mail-engine"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "serde",
+ "serde_json",
+ "social-mail-crypto",
+ "social-mail-protocol",
+ "social-mail-storage",
+ "thiserror",
+]
+
+[[package]]
 name = "social-mail-protocol"
 version = "0.1.0"
 dependencies = [

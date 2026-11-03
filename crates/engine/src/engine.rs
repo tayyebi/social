@@ -39,7 +39,9 @@ pub enum ImportOutcome {
     Updated,
     Unchanged,
     /// A different key claims an address we already know: never merged silently.
-    Mismatch { stored: String },
+    Mismatch {
+        stored: String,
+    },
     OwnCard,
 }
 
@@ -306,8 +308,8 @@ impl Engine {
                         stored: existing.fingerprint,
                     });
                 }
-                let changed = existing.display_name != card.display_name
-                    || existing.address != card.address;
+                let changed =
+                    existing.display_name != card.display_name || existing.address != card.address;
                 let mut updated = existing;
                 updated.display_name = card.display_name.clone();
                 updated.address = card.address.clone();
@@ -363,8 +365,7 @@ impl Engine {
         }
         if upper.len() < 4 {
             return Err(EngineError::Invalid(
-                "fingerprints are 40 hex characters, or use at least 4 to match a suffix"
-                    .into(),
+                "fingerprints are 40 hex characters, or use at least 4 to match a suffix".into(),
             ));
         }
         let matches: Vec<Contact> = self
@@ -464,7 +465,11 @@ impl Engine {
         Ok(signed.event_id)
     }
 
-    pub fn approve_follower(&mut self, fingerprint: &str, verify: bool) -> Result<String, EngineError> {
+    pub fn approve_follower(
+        &mut self,
+        fingerprint: &str,
+        verify: bool,
+    ) -> Result<String, EngineError> {
         let fingerprint = self.resolve_fingerprint(fingerprint)?;
         let contact = self
             .db
@@ -531,8 +536,12 @@ impl Engine {
 
     pub fn unfollow(&mut self, fingerprint: &str) -> Result<(), EngineError> {
         let fingerprint = self.resolve_fingerprint(fingerprint)?;
-        self.db
-            .upsert_follow(&self.fingerprint(), &fingerprint, FollowState::Removed, false)?;
+        self.db.upsert_follow(
+            &self.fingerprint(),
+            &fingerprint,
+            FollowState::Removed,
+            false,
+        )?;
         if let Some(contact) = self.db.contact(&fingerprint)? {
             let envelope = Envelope::new(
                 EventKind::FollowRemove,
@@ -602,12 +611,7 @@ impl Engine {
             serde_json::to_value(&payload)?,
         );
         let signed = SignedEvent::sign(envelope, &self.identity)?;
-        self.insert_signed(
-            &signed,
-            "accepted",
-            None,
-            Some(parent_event_id),
-        )?;
+        self.insert_signed(&signed, "accepted", None, Some(parent_event_id))?;
         self.db
             .set_parent_author(&signed.event_id, &parent.author)?;
         if parent.author != self.fingerprint() {
@@ -637,7 +641,11 @@ impl Engine {
         Ok(())
     }
 
-    fn queue_delivery(&mut self, signed: &SignedEvent, contact: &Contact) -> Result<(), EngineError> {
+    fn queue_delivery(
+        &mut self,
+        signed: &SignedEvent,
+        contact: &Contact,
+    ) -> Result<(), EngineError> {
         let verified = contact.trust.is_verified();
         let state = if verified {
             DeliveryState::Queued
@@ -735,14 +743,8 @@ impl Engine {
     }
 
     pub fn retry_delivery(&mut self, post: &str, recipient: &str) -> Result<(), EngineError> {
-        self.db.set_delivery_state(
-            post,
-            recipient,
-            DeliveryState::Queued,
-            None,
-            None,
-            false,
-        )?;
+        self.db
+            .set_delivery_state(post, recipient, DeliveryState::Queued, None, None, false)?;
         self.flush_deliveries()?;
         Ok(())
     }
@@ -899,12 +901,7 @@ impl Engine {
             EventKind::Reply => {
                 let payload: ReplyPayload = signed.event.payload_as()?;
                 let parent_author = self.db.event(&payload.parent)?.map(|row| row.author);
-                self.insert_signed(
-                    &signed,
-                    "accepted",
-                    None,
-                    Some(&payload.parent),
-                )?;
+                self.insert_signed(&signed, "accepted", None, Some(&payload.parent))?;
                 if let Some(parent_author) = parent_author {
                     self.db
                         .set_parent_author(&signed.event_id, &parent_author)?;
