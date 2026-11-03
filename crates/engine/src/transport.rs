@@ -88,12 +88,17 @@ impl SpoolTransport {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::sync::atomic::{AtomicU64, Ordering};
+
+    static SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
     fn temp_root() -> PathBuf {
+        let unique = SEQUENCE.fetch_add(1, Ordering::Relaxed);
         let dir = std::env::temp_dir().join(format!(
-            "sm-spool-{}-{}",
+            "sm-spool-{}-{}-{}",
             std::process::id(),
-            chrono::Utc::now().timestamp_nanos_opt().unwrap_or_default()
+            chrono::Utc::now().timestamp_nanos_opt().unwrap_or_default(),
+            unique
         ));
         fs::create_dir_all(&dir).unwrap();
         dir
