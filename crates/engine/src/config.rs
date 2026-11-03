@@ -365,7 +365,9 @@ spool_dir = "/tmp/social-spool"
         assert_eq!(config.body_lines, 4);
         assert_eq!(config.auto_sync_minutes, 5);
         assert!(config.data_dir.ends_with("db"));
-        assert_eq!(config.spool_dir, PathBuf::from("/tmp/social-spool"));
+        // `/tmp/...` is not absolute on Windows, so the parser resolves it
+        // against the config directory; the last component must survive.
+        assert!(config.spool_dir.ends_with("social-spool"));
         assert_eq!(config.density_lists, "compact");
     }
 

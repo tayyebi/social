@@ -467,7 +467,10 @@ impl Database {
 
     /// Walk a thread: the root plus every descendant, in author-time order.
     pub fn conversation(&self, root: &str) -> Result<Vec<EventRow>, StorageError> {
-        let mut statement = self.conn.prepare(&format!(
+        // Ordered by depth first so the root always leads its thread, then by
+        // author time. Without the depth key, equal timestamps would put a reply
+        // before its parent.
+        let mut statement = self.conn.prepare(
             "WITH RECURSIVE thread(event_id, depth) AS (
                  SELECT event_id, 0 FROM events WHERE event_id = ?1
                  UNION ALL
@@ -475,11 +478,11 @@ impl Database {
                  FROM events e JOIN thread ON e.parent = thread.event_id
                  WHERE thread.depth < 8
              )
-             SELECT {} FROM events
-             WHERE event_id IN (SELECT event_id FROM thread)
-             ORDER BY created_at ASC, event_id ASC",
-            Self::EVENT_COLUMNS
-        ))?;
+             SELECT e.event_id, e.author, e.kind, e.created_at, e.received_at,
+                    e.payload, e.signature, e.canonical, e.status, e.reason, e.parent
+             FROM events e JOIN thread t ON e.event_id = t.event_id
+             ORDER BY t.depth ASC, e.created_at ASC, e.event_id ASC",
+        )?;
         let rows = statement.query_map(params![root], Self::event_from_row)?;
         let mut out = Vec::new();
         for row in rows {
