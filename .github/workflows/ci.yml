@@ -12,14 +12,14 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: ci-${{ github.ref }}-${{ matrix.os }}
-  cancel-in-progress: false
-
 jobs:
   gate:
     name: gate (${{ matrix.os }})
-    if: "!contains(github.event.head_commit.message, '[ci-report]')"
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[ci-report]')
+    concurrency:
+      group: ci-${{ github.ref }}-${{ matrix.os }}
+      cancel-in-progress: false
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
