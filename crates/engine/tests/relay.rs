@@ -30,11 +30,13 @@ impl Sandbox {
         let dir = self.root.join(name);
         fs::create_dir_all(&dir).unwrap();
         let config_path = dir.join("social-mail.toml");
-        let mut config = Config::default();
-        config.data_dir = dir.join("data");
-        config.spool_dir = self.root.join("spool");
-        config.profile_name = name.to_string();
-        config.address = address.to_string();
+        let config = Config {
+            data_dir: dir.join("data"),
+            spool_dir: self.root.join("spool"),
+            profile_name: name.to_string(),
+            address: address.to_string(),
+            ..Config::default()
+        };
         config.save(&config_path).unwrap();
         Engine::create(
             &config_path,

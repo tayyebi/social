@@ -658,7 +658,7 @@ impl Database {
                    WHERE c.fingerprint = t.author AND (c.muted = 1 OR c.trust = 'blocked')
                )
                {}",
-            Self::tab_clause(tab).replace("t.", "t.")
+            Self::tab_clause(tab)
         );
         tx.execute(&sql, params![me, position])?;
         tx.execute(

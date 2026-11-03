@@ -5,7 +5,7 @@
 //! terminals that lack Arabic/Persian shaping will show disconnected letters.
 //! That limitation is documented rather than hidden.
 
-use unicode_bidi::{BidiInfo, Direction};
+use unicode_bidi::{BidiInfo, Direction, Level};
 use unicode_width::{UnicodeWidthChar, UnicodeWidthStr};
 
 /// Wrap logical text to `width` display columns, preserving explicit newlines.
@@ -74,7 +74,11 @@ fn is_rtl_char(ch: char) -> bool {
 
 /// Reorder one logical line into terminal visual order.
 pub fn visual_line(line: &str) -> String {
-    let bidi = BidiInfo::new(line, Some(base_direction(line)));
+    let level = match base_direction(line) {
+        Direction::Rtl => Some(Level::rtl()),
+        Direction::Ltr => None,
+    };
+    let bidi = BidiInfo::new(line, level);
     if bidi.paragraphs.is_empty() {
         return line.to_string();
     }

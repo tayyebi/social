@@ -8,7 +8,7 @@
 //! The operator can read list traffic in transit. That is stated in `init`,
 //! in `list-members`, and in `docs/security.md` — never hidden.
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::thread::sleep;
 use std::time::Duration;
 
@@ -131,12 +131,12 @@ fn run(cli: Cli) -> Result<()> {
     }
 }
 
-fn open(config_path: &PathBuf) -> Result<Engine> {
+fn open(config_path: &Path) -> Result<Engine> {
     Engine::open(config_path).map_err(|error| anyhow::anyhow!("{error}"))
 }
 
 fn init(
-    config_path: &PathBuf,
+    config_path: &Path,
     list: Option<String>,
     name: Option<String>,
     spool: Option<PathBuf>,
@@ -177,7 +177,7 @@ fn init(
 }
 
 fn run_worker(
-    config_path: &PathBuf,
+    config_path: &Path,
     once: bool,
     interval: u64,
     batch: usize,

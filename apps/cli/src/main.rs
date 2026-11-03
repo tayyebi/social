@@ -11,7 +11,7 @@ use std::path::PathBuf;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use social_mail_engine::{Config, Engine};
+use social_mail_engine::{Config, Engine, InitOptions};
 
 #[derive(Parser, Debug)]
 #[command(
