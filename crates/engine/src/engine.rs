@@ -933,7 +933,10 @@ impl Engine {
             };
             let signed = signed_from_row(&event_row)?;
             let public = PublicIdentity::from_b64(&contact.ed25519, &contact.x25519)?;
-            let carrier = Carrier::for_recipient(&signed, &public)?;
+            // Our own card travels with every message so a recipient who has
+            // never seen us can still verify the signature — and still has to
+            // make a deliberate verification decision.
+            let carrier = Carrier::for_recipient(&signed, &public)?.with_card(self.contact_card()?);
             let body = carrier.to_json()?;
             match transport.send(&contact.fingerprint, &body) {
                 Ok(_) => {
