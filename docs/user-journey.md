@@ -1,6 +1,7 @@
 # User Journey Baseline: `social-mail` v0.1
 
-Status: **decided** (v0.1 baseline). Companion to [`../PLAN.md`](../PLAN.md).
+Status: **decided** (v0.1 baseline, revised 2026-11-03 after product-owner choices).
+Companion to [`../PLAN.md`](../PLAN.md).
 
 PLAN.md specifies the machine: crypto, protocol, transport, storage, CLI surface,
 TUI screens. This document specifies the **human** side of the same binary: who
@@ -14,6 +15,21 @@ order the user is asked for things**, this document wins.
 
 ---
 
+## 0. Confirmed product choices
+
+These five were chosen explicitly by the maintainer (2026-11-03) and override any
+earlier framing in this file. They are the assumptions behind every journey below.
+
+| Choice | Selected | Consequence |
+|---|---|---|
+| Surface balance | **TUI and CLI as equals** | Every action is designed twice, with a parity test (§19, J14). No feature may be reachable from only one surface. |
+| Onboarding | **Guided wizard** | `social-mail init` asks the questions in a fixed order; local (file) mode is an advanced `--offline` path, not an onboarding option. |
+| Trust model | **Two-tier** | Unverified contacts can be read and followed; private posts go only to verified followers; withheld recipients are shown as `Not sent — unverified`. |
+| Timeline | **Feed of cards** | Header (time · author · fingerprint · trust · audience), body, footer; grouped by day; no split pane. |
+| Visual style | **Color-coded status** | Trust and delivery states get color and always keep their word; `NO_COLOR` loses nothing. |
+
+---
+
 ## 1. Product promise, in user language
 
 > Your identity is a key you hold. Your posts travel as ordinary email. Nobody
@@ -21,8 +37,9 @@ order the user is asked for things**, this document wins.
 
 What the user is promised:
 
-1. **You are reachable by anyone you have verified** — no account approval by a
-   platform, no invite code, no signup form.
+1. **You are reachable by anyone whose key you have verified, and you can read
+   anyone you choose to follow** — no account approval by a platform, no invite
+   code, no signup form.
 2. **Nobody can post as you.** Every item in the timeline verifies against the
    author's key, and the app tells you when it does not.
 3. **Private means encrypted before it leaves your machine**, one copy per
@@ -46,9 +63,9 @@ onboarding:
 
 | Persona | Description | Primary interface | Success in v0.1 |
 |---|---|---|---|
-| **Alice / Bob** (primary) | Technically comfortable, one laptop, one existing mailbox. Wants a small trusted circle, not an audience. | TUI | Two people exchange a verified, encrypted post in under 10 minutes, and can repeat it a week later without re-reading docs. |
+| **Alice / Bob** (primary) | Technically comfortable, one laptop, one existing mailbox. Wants a small trusted circle, not an audience. | TUI, or CLI at equal fidelity | Two people exchange a verified, encrypted post in under 10 minutes, and can repeat it a week later without re-reading docs. |
 | **Carol** (list operator) | Runs a private list for 5–50 people on her own mailbox. Comfortable with a terminal and a config file. | `social-mail-reflector` CLI | Approves a member from a queue, redistributes a post, and can explain a failed delivery. |
-| **Dave** (public-list reader) | Reads a public list that already exists (Mailman/mlmmj). Does not want to run anything. | TUI (read-only-ish) | Sees verified authors and forged messages visibly rejected. |
+| **Dave** (public-list reader) | Reads a public list that already exists (Mailman/mlmmj). Does not want to run anything. | TUI or `timeline --json` | Sees verified authors and forged messages visibly rejected. |
 | **Evaluator** (contributor/security reviewer) | Wants to reproduce the acceptance demo from a clean checkout without real mail accounts. | CLI | Runs the offline two-profile demo end to end with no credentials. |
 
 **Degrees of sophistication we assume:** the primary user can copy a path,
@@ -94,7 +111,7 @@ know what a subkey is, what `UID VALIDITY` means, or why a signature failed.
 ```
 
 Every journey below lists: **trigger → steps → what the user sees → what must
-never happen → acceptance check**. Journey IDs (`J0`–`J13`) are the vocabulary
+never happen → acceptance check**. Journey IDs (`J0`–`J13`, plus the cross-cutting checks J14–J15) are the vocabulary
 for UI tests, release notes, and issue titles.
 
 ---
@@ -106,22 +123,22 @@ from an accident. Reversal requires editing this table.
 
 | # | Decision | Rationale |
 |---|---|---|
-| **D1** | **The TUI is the product. The CLI is the automation surface.** `social-mail --tui` is the advertised way to *use* the app; CLI commands exist for scripting, the reflector, the acceptance demo, and headless servers. | A social app is a reading-and-writing loop. Forcing shell incantations for daily use would make v0.1 a protocol demo, not an app. CLI stays complete so no feature is TUI-only. |
+| **D1** | **Two equal surfaces: interactive and scriptable.** Every user action exists both in the TUI and as a CLI command; neither is ever the only way to do something. Parity is enforced by a test (see §19, *Parity: CLI ↔ TUI*), not by intention. The TUI is what a person opens; the CLI is what a script, the demo, and a headless host uses — both are first-class. | Nothing may be reachable only by memorising a flag, and nothing may be reachable only by pressing keys (CI, the reflector, and the acceptance demo must never need a TTY). This costs a documented parity matrix and doubles some journey tests; it is worth it because it makes the engine boundary honest. |
 | **D2** | **One command gets you to a usable app: `social-mail init`.** It is an interactive wizard with flag equivalents for every question (`--email`, `--name`, `--locale`, `--offline`, `--no-auto-sync`). Re-running is safe and resumes a partial setup. | Setup is the highest-risk funnel step. One command with resumable state beats five ordered commands the user can get wrong. |
 | **D3** | **First launch is always the wizard.** No implicit config creation from defaults, no "empty timeline with a cryptic status bar". If `--config` points at nothing, the wizard offers to create it there. | An empty app that cannot explain itself is the most common failure mode of terminal software. |
 | **D4** | **Identity creation comes before mailbox configuration.** | The key is the identity; the mailbox is a delivery route. Doing keys first means the app is already meaningful (and exportable) if SMTP/IMAP fails. |
-| **D5** | **Local (file-based) mode is a first-class onboarding path**, reachable from the wizard (*"Try without a mail account"*) and via `social-mail init --offline`. It uses signed bundle files exchanged by hand. The TUI labels the profile with a persistent `LOCAL MODE` marker. | Lets a user (and CI, and reviewers) complete J0–J7 with zero credentials, and matches the Milestone 2 gate. It is also the honest answer to "let me just look at it". |
+| **D5** | **Local (file-based) mode exists but is not offered in the wizard.** The wizard is a mail wizard. Local mode is reachable only via `social-mail init --offline`, used for credential-free demos and CI, and marked in the TUI with a persistent `LOCAL MODE` label. | It is needed for the Milestone 2 gate and for tests without credentials, but presenting "try it without email" as an equal first-run choice splits the onboarding story and buries the product's actual value. Advanced path, loud label, no prominent invitation. |
 | **D6** | **Terminology in the UI: Follow / Followers / Requests / Contacts / Lists.** "Subscription" and "subscriber" never appear in user-facing strings, even though the protocol and storage use those words. | Email-era "subscribe" reads as newsletters and mailing lists, which are a *different* feature we also have. One word per concept. |
 | **D7** | **Verification is a deliberate two-step ceremony, never a checkbox.** Step 1: compare the grouped fingerprint out of band. Step 2: confirm in-app with the full grouped fingerprint visible and the consequence spelled out ("You will trust posts signed by this key"). | A signature proves key control, not personhood. The ceremony is the only defense against a swapped contact card, so it must be visible and slightly inconvenient. |
 | **D8** | **Short fingerprints and safety phrases are display conveniences only.** The UI shows the last 8 hex characters next to names, and the full grouped fingerprint in every verification dialog. No word-list "safety phrase" in v0.1. | Word lists add translation surface and invite people to compare 32 bits instead of 160. Convenience for scanning, full string for deciding. |
-| **D9** | **A follow request can only be approved from a `verified` contact.** The approve dialog offers "Verify and approve" inline; approving an unverified key is not offered in v0.1. | PLAN.md §10 already implies this. Making it explicit removes a dialog branch and prevents the classic "approved a stranger's key" outcome. |
+| **D9** | **Two-tier trust: reading is permissive, private publishing is not.** Unverified contacts can be imported, followed, and read (their items are permanently tagged `unverified`). **Private posts are delivered only to verified followers.** Approving an unverified follower is allowed, with the consequence on the button: *"Approve — Alice won't receive private posts until you verify her."* | Verify-before-anything made the first ten minutes a fingerprint exercise; fully soft trust quietly leaks encrypted posts to a key nobody checked. The split puts friction exactly where the harm is: outbound confidential content, not inbound reading. |
 | **D10** | **Following is never automatic and never mutual by default.** No follow-back, no suggestions, no auto-accept even when a request comes from a verified contact. | Never manufacture consent on the user's behalf. |
 | **D11** | **Private is the default audience.** The composer opens with `Audience: Followers (encrypted)` and requires an explicit move to public. | Opt-in disclosure only. |
 | **D12** | **Public posting is a two-gate action:** the composer shows a bordered warning block (*"Anyone on this list and its operators can read this in plain text"*), and the send action requires a typed confirmation only on the first public post per list, then a single explicit keypress (`Ctrl+S` on the warning panel) thereafter. | One-time friction teaches; permanent friction gets bypassed by muscle memory. |
 | **D13** | **The home screen is the Timeline, and requests/queue are persistent badges, not screens you must remember.** Status bar always shows: identity, sync freshness, pending requests, queued deliveries. | A social app whose social surface is hidden is a mail client. |
 | **D14** | **Sync runs automatically every 5 minutes while the TUI is idle**, plus on launch, plus on `r`. It is disableable in settings and via `--no-auto-sync`. Delivery of outgoing mail is attempted immediately on send and retried by the queue. | A timeline frozen until you press a key feels broken. 5 minutes is slow enough not to burn provider quota, fast enough to feel alive. |
 | **D15** | **Never block the interface on the network.** Sync and sends run in the engine's worker; the TUI shows state transitions (`Syncing…`, `Retrying in 2m`) and stays navigable. Modals only appear for actions the user just took. | Terminal apps that freeze look crashed. |
-| **D16** | **Delivery language is literal and never exceeds SMTP truth**: `Queued` → `Sending` → `Accepted by your mail server` → `Retrying in 2m (attempt 3)` → `Failed — needs action`. The word "Delivered" is banned; "Read" is banned. | PLAN.md §13. Also the most common trust-destroying lie in messaging apps. |
+| **D16** | **Delivery language is literal and never exceeds SMTP truth**: `Queued` → `Sending` → `Accepted by your mail server` → `Retrying in 2m (attempt 3)` → `Failed — needs action`. "Delivered" is banned; "Read" is banned. A private copy withheld by policy reads **`Not sent — unverified`** — never queued, never failed. | PLAN.md §13. The withheld state is a policy outcome decided before the queue, so presenting it as a queue state would mislead twice: it is not coming, and nothing is broken. |
 | **D17** | **Public/private/list audience is visible on every timeline item and every queue row**, as a compact tag (`private`, `public`, `list:name`). | The user must never wonder whether something went out encrypted. |
 | **D18** | **Threads open on demand.** Timeline is flat and chronological (local receipt order); `Enter` opens a thread view with replies, capped at 3 indentation levels. Orphaned replies appear under a `Pending (parent not received)` heading in both the timeline and the thread. | PLAN.md §8's ordering rules and orphan handling need a concrete presentation. |
 | **D19** | **Read/unread is local and never synced.** A `New` divider marks items received since the timeline was last opened in this session; `u` toggles unread. No read receipts exist anywhere in the protocol. | Prevents an implied receipt channel and matches the "no server" model. |
@@ -134,6 +151,9 @@ from an accident. Reversal requires editing this table.
 | **D26** | **Reflector administration is CLI-only in v0.1.** No reflector TUI. | PLAN.md §11 lists CLI commands; a second TUI doubles the RTL/snapshot test surface for a small-operator audience already using a terminal. |
 | **D27** | **No OS notifications, no sounds, no badges outside the app.** The status bar and the `Requests` badge are the notification system. | Cross-platform terminal notification support is unreliable; false promises are worse than quiet. |
 | **D28** | **The first public post is the only place we interrupt the user uninvited**, and that interruption is educational, not blocking. | One earned interruption; everything else stays out of the way. |
+| **D29** | **The timeline is a feed of cards, not an inbox of rows.** Each item is a bordered block: a header line (local time · author · short fingerprint · trust · audience), the body (up to a configurable line budget, with `…` + `Enter` for the rest), and a footer line (`2 replies`, delivery summary for own posts). Cards are grouped by day with a thin `Today` / `Yesterday` / date divider. | Chosen over an inbox list: posts are multi-paragraph and often mixed-direction, and a header/body/footer block is the only layout that keeps author, trust, and audience attached to the text they describe without a second column. Chosen over a split pane: split panes waste horizontal space at 80 columns, which is the size we must look good at. |
+| **D30** | **Color carries status, words carry meaning.** Trust and delivery states get color (verified green, unverified/retrying amber, mismatch/failed red, private blue-cyan, public yellow, list magenta), and every one of them also renders as a word. `NO_COLOR`, `TERM=dumb`, and a `settings.color = never` option remove color entirely with no loss of information; `settings.color = always` is available for high-contrast terminals. | Chosen over monochrome: scanning a feed for "is this verified / did it send" is the app's most repeated task, and color makes it a glance instead of a read. The word must stay, because ssh sessions, screenshots, and color-blind users all exist. |
+| **D31** | **One trust vocabulary, two renderings.** The engine returns trust (`verified`, `unverified`, `mismatch`, `invalid`) and delivery (`queued`, `sending`, `accepted`, `retrying`, `failed`, `cancelled`, `withheld`); the TUI maps these to color + word, the CLI maps them to words and `--json` enums. Neither surface invents a state, and a test asserts the mapping is total. | Two surfaces means two chances to describe the same fact differently — the fastest way to lose a user's trust is for the TUI to say "Sending" while the CLI says "queued". |
 
 ---
 
@@ -166,14 +186,17 @@ from an accident. Reversal requires editing this table.
    length enforced, and a one-line refusal to continue if empty:
    *"You can leave this blank, but then anyone with this laptop can post as
    you."* Blank requires an extra confirmation keystroke.
-4. **Mail account** — host/port/user/password (hidden), or **"Skip — try it
-   without email"** which enters local mode (D5).
+4. **Mail account** — address, then IMAP/SMTP host/port/user/password
+   (hidden), with `[ t ] Test`. No "skip and try it without email" invitation:
+   local mode is an advanced path (`init --offline`, D5), documented in the
+   README's evaluator demo.
 5. **Protocol folder** — `[x] Move SocialMail messages out of INBOX` (default
    checked) with a two-line explanation and the preview from D22 once a first
    scan exists (the wizard accepts "decide after first sync").
 6. **Backup** — see J2.
 7. **Done screen** — shows the full grouped fingerprint, the config path, and
-   exactly two next actions: *"Copy my contact card"* and *"Open the app"*.
+   exactly three next actions: *"Copy my contact card"*, *"Add someone"*, and
+   *"Open the app"*.
 
 **Rules**
 
@@ -337,8 +360,12 @@ verification is for.
 - The verification dialog always shows the **complete** fingerprint and the
   source of the key (imported file, follow request, or `profile` event).
 - `Mark verified` requires a confirmation keypress after the full string has
-  been on screen; the success state is explicit: *"Alice verified. Posts signed
-  by this key will now be trusted."*
+  been on screen; the success state is explicit and states the tier change:
+  *"Alice verified. Her posts are now trusted, and she can receive your private
+  posts."*
+- The dialog states what is *already* possible without verifying, so the user
+  knows the stakes: *"Unverified, Alice can still be read, replied to, and
+  followed — she just won't receive private posts."* (D9)
 - Importing a card for a fingerprint we already know is a no-op (idempotent).
   Importing a **different** key claiming the same address triggers D21: it is
   quarantined, not merged, and the UI asks the user to resolve the mismatch.
@@ -359,13 +386,17 @@ the contact appears.
 social-mail follow request alice@…    # Bob's address
 ```
 
-TUI: Contacts → `f` on a verified contact, or the done-screen action after J3.
+TUI: Contacts → `f` on a contact, or the done-screen action after J3.
 
-Rules:
+Rules (two-tier trust, D9):
 
-- The request requires a **verified** contact (D9) and a known delivery route;
-  otherwise the action is disabled with the reason inline: *"Verify Bob's
-  fingerprint before following."*
+- Following works for **verified and unverified** contacts, because reading their
+  posts is safe either way. If the contact is unverified, the confirmation line
+  says: *"Bob isn't verified. You'll see his posts marked unverified until you
+  check his fingerprint."*
+- A known delivery route is still required; without one the action is disabled
+  with the reason inline (*"Bob's card has no delivery route. Ask for a newer
+  card."*).
 - The request is signed and encrypted to Bob's key; it carries Alice's
   certificate and route so Bob can approve without another exchange.
 - After sending, Alice sees a **Pending** row in Contacts (`waiting for Bob to
@@ -381,26 +412,41 @@ Requests screen, badge in the status bar (`1 request`):
 │  Alice · alice@example.org                                   │
 │  3F2A 91C4 … D8E4   unverified · received 2m ago             │
 │                                                              │
-│  Alice wants to follow you. Approving lets her receive your  │
-│  private posts from now on.                                  │
+│  Alice wants to follow you. Approving lets her reach you.    │
+│  She won't receive your private posts until you verify her   │
+│  fingerprint.                                                │
 │                                                              │
-│  [ v ] Verify and approve   [ d ] Decline   [ b ] Block      │
+│  [ v ] Verify and approve   [ a ] Approve unverified         │
+│  [ d ] Decline              [ b ] Block                      │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-- `Verify and approve` shows the J4 fingerprint screen, then approves in one
-  flow. This is the only approval path (D9).
+- `v` runs the J4 fingerprint screen, then approves in one flow and sends
+  `follow-accept`. Alice lands in the **verified tier**.
+- `a` approves without verification. Alice lands in the **unverified tier**: she
+  receives `follow-accept`, she can be replied to publicly, she can be followed,
+  and **she is silently-excluded from every private post** — not queued, not
+  failed, just absent from that post's delivery list.
+- The consequence is stated at the moment of the decision, in the dialog, not
+  afterwards: the dialog shows a persistent `unverified — no private posts` line
+  for the contact, and the composer's audience line counts only verified
+  followers (*"Followers (3 verified, 1 unverified — unverified followers won't
+  receive this)"*).
 - `Decline` removes the request and remembers the fingerprint so a duplicate
   request is not shown again (no notification is sent).
-- Approval changes Bob's follower list locally; the next private post includes
-  Alice (one encrypted copy, PLAN.md §10).
+- Promoting a follower from unverified to verified later is a single action in
+  Contacts and takes effect on the *next* post; `TODO`-style backlog delivery is
+  not attempted (no backfill).
 - Bob can later `follow remove` from Contacts; delivery stops immediately for
   future posts. **The UI says so**: *"Bob will stop receiving new posts. What he
   already has, he keeps."*
 
-**Acceptance:** approve-before-verify is unreachable via keyboard; a declined
-request does not reappear; removing a follower produces no new deliveries for the
-next post and no error surfaced to the removed party.
+**Acceptance:** an unverified follower's delivery list for a private post is
+empty and the post's delivery summary says so in words; a verified follower
+receives exactly one encrypted copy; promoting a follower changes the next
+post's recipients and nothing else; a declined request does not reappear;
+removing a follower produces no new deliveries and no error surfaced to the
+removed party.
 
 ---
 
@@ -408,7 +454,8 @@ next post and no error surfaced to the removed party.
 
 ```text
 ┌ New post ────────────────────────────────────────────────────┐
-│  To:  Followers (encrypted) · 4 people            [ a ] change│
+│  To:  Followers · encrypted · 3 will receive      [ a ] change│
+│       ⚠ 1 unverified follower won't receive this             │
 │                                                              │
 │  سلام، این یک آزمایش است.                                    │
 │  Hello world                                                  │
@@ -421,19 +468,21 @@ next post and no error surfaced to the removed party.
 **Audience chooser (`a`)** — exactly three options, each one line:
 
 ```text
-  Followers (4)      encrypted separately for each person
-  Public list…       signed, unencrypted, readable by anyone on the list
-  Save as draft      keep it local for now
+  Followers (3 verified, 1 unverified)   encrypted per verified person
+  Public list…                           signed, unencrypted, readable by all
+  Save as draft                          keep it local for now
 ```
 
 **After send:** the composer closes, the item appears in the timeline pinned into
-the local chronology, and the status bar shows `1 queued`. `Queue` shows one row
-per recipient for a private post (D16 vocabulary), e.g.:
+the local chronology, and the status bar shows `1 queued`. The post's card footer
+carries a one-line delivery summary (`sent 2 of 3 · 1 retrying · 1 withheld`),
+and `Queue` expands it to one row per recipient (D16 vocabulary):
 
 ```text
   Bob        Accepted by your mail server   12:04
   Carol      Retrying in 2m (attempt 2)     12:04   [ R ] retry now
   Dave       Failed — needs action          12:04   [ i ] details
+  Erin       Not sent — unverified          12:04   [ v ] verify her
 ```
 
 **Rules**
@@ -441,14 +490,19 @@ per recipient for a private post (D16 vocabulary), e.g.:
 - Sending an empty or whitespace-only post is refused inline, not with a modal.
 - Length is capped (documented limit, enforced with a counter that appears near
   the limit); over-limit blocks send with the exact overflow.
-- A private post with **zero followers** is allowed but warned: *"You have no
-  approved followers. This will be saved but not sent to anyone."*
-- The composer shows no recipient addresses in the clear when the audience is
-  private? — It may show them locally (this screen is local-only), but they are
-  never placed in outbound headers (PLAN.md §9).
+- A private post with **zero verified followers** is allowed but warned before
+  sending: *"None of your verified followers can receive this. It will be saved
+  and sent to no one."* If there are unverified followers, the warning names the
+  fix: *"3 followers won't receive this until you verify them."*
+- Unverified followers are **withheld, not queued** (D9, D16). Withheld rows never
+  enter the outgoing queue, never retry, and never fail; they resolve the moment
+  the contact is verified — for future posts only, with no backfill.
+- Recipient addresses may be shown on this local-only screen but are never
+  placed in outbound headers (PLAN.md §9).
 
 **Acceptance:** an accepted private post produces exactly one delivery record per
-approved follower; none for blocked or removed followers; blocked followers
+verified follower and zero for unverified, blocked, or removed followers;
+promoting a follower to verified changes the next post only; blocked followers
 cannot be re-added to a delivery by re-queuing; the outgoing item survives an
 immediate kill -9 and resumes on restart.
 
@@ -456,22 +510,48 @@ immediate kill -9 and resumes on restart.
 
 ## 12. J7 — Reading, threading, replying
 
-**Timeline item anatomy** (must fit 80×24):
+**Timeline cards** (feed layout, D29; must fit 80×24 — roughly three cards):
 
 ```text
- 12:04  Bob · b7c3 · verified · private
-        سلام، این یک آزمایش است.
-        Hello world
-        2 replies
+─────────────────── Today ────────────────────
+┌ 12:04 · Bob · b7c3 · verified · private ─────────────────────┐
+│ سلام، این یک آزمایش است.                                    │
+│ Hello world                                                  │
+│                                                              │
+│ 2 replies                                                    │
+└──────────────────────────────────────────────────────────────┘
+┌ 11:47 · Carol · 4a19 · verified · list:rust-users ───────────┐
+│ Does anybody still have that mail-sync bug from last week?   │
+│ I couldn't reproduce it on 0.1.0.                            │
+│                                                              │
+│ 5 replies · unread                                           │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-- Author display name (fallback: address, then short fingerprint).
-- Short fingerprint as a *scan* aid; `Enter` → contact card shows the full one.
-- Trust state as a word, not an icon: `verified` / `unverified` / `blocked` /
-  `key mismatch` / `signature invalid`.
-- Local receipt time first; author time shown in the thread view (PLAN.md §8).
-- Audience tag on every item (D17).
-- Reply count when there are children.
+Color (D30) applies to the header's status words, never to the body text:
+`verified` green, `unverified` amber, `mismatch`/`invalid` red, `private`
+blue-cyan, `public` yellow, `list:…` magenta. Without color the words, the
+`private`/`public` tag, and the position of the tag are unchanged, so the card is
+identically informative.
+
+Card rules:
+
+- **Header line:** local receipt time · author · short fingerprint · trust word ·
+  audience tag. Header is the only thing that is ever truncated (and it
+  truncates from the right, keeping author and trust).
+- **Body:** authored text, up to `settings.feed.body_lines` (default `6`) with a
+  `… +4 lines` marker; `Enter` opens the full item. Persian and mixed-direction
+  bodies render through the same text pipeline as everywhere else.
+- **Footer:** reply count, `unread` marker, and for your own posts the delivery
+  summary from §11. No footer if there is nothing to say.
+- Day dividers (`Today`, `Yesterday`, `2026-11-01`) keep local chronology legible
+  without timestamps competing with the body.
+- Author display name falls back to address, then short fingerprint. The short
+  fingerprint is a *scan* aid only; `Enter` → contact card shows the full one.
+- Trust and delivery never render as bare icons; the word is always present
+  (D30, PLAN.md §16).
+- Own posts are visually distinguishable (a dim left rule) but not differently
+  colored, so "mine" never competes with "trusted".
 
 **Invalid events never look like normal events.** A quarantined item renders in a
 separate `Problems` section with one sentence of cause and an action:
@@ -567,9 +647,10 @@ social-mail-reflector retry-failed
 - `run` prints a live one-line status per cycle (`cycle 42: 3 in, 12 out, 0
   failed`) and never prompts.
 - Pending memberships are a queue that `list-members --pending` shows; approving
-  prints the fingerprint and requires `--force` to approve an unverified key
-  (the operator is the trust authority here, unlike D9 which covers personal
-  contacts).
+  prints the fingerprint and requires `--force` to approve an unverified key.
+  The reflector is deliberately *stricter* than personal two-tier trust (D9):
+  a list has one operator, no in-app fingerprint ceremony, and a fan-out blast
+  radius, so unverified members stay out of redistribution entirely.
 - A member's post that fails verification is **not** redistributed and is
   reported with the reason and the sender.
 - The reflector never holds member keys; the admin UI/CLI states that the
@@ -597,6 +678,7 @@ the TUI without leaving the current screen.
 | Server refused sender | `Failed — the server rejected this sender` | Edit config, retry, cancel |
 | Queue retrying | `Retrying in 2m (attempt 3 of 6)` | `R` retry now, `c` cancel |
 | Permanent failure | `Failed — needs action` + reason in plain words | `i` details, retry, cancel |
+| Private post withheld | `Not sent — unverified` on the recipient row and in the post footer | `v` verify now (applies to future posts) |
 | Folder move failed | Persistent banner: `Could not move 3 messages to SocialMail. They were still read from INBOX.` | Retry, change folder, disable moving (explicitly, not silently) |
 | Clock skew | Warning on items whose author time is >10 min in the future: *"Bob's clock may be wrong."* | None needed; never reorders storage |
 
@@ -697,8 +779,38 @@ the date it was written.
 - Banners occupy one line above the status bar; they never steal focus.
 - Modals are only for actions the user initiated; the queue/sync run in the
   background (D15).
-- Layout survives 80×24 and grows gracefully; below 60 columns, list items lose
-  the short fingerprint first, then the audience tag moves to the detail view.
+- Layout survives 80×24 and grows gracefully; below 60 columns, cards lose the
+  short fingerprint first, then the audience tag becomes a one-letter tag, then
+  the border collapses into a dim indent (still readable, still grouped by day).
+- Scrolling is card-granular above 100 columns and row-granular below, so a tall
+  Persian post never strands its header off-screen.
+
+### Feed layout
+
+The Timeline is a vertical list of cards (D29), each `header / body / footer`,
+separated by day dividers, never by per-card blank lines (borders do that job).
+Card width equals the frame width minus one column of breathing room; text is
+wrapped by the terminal-text pipeline, not by character count. Long bodies are
+clipped at `settings.feed.body_lines` (default `6`) with an explicit `… +N lines`
+marker, never silently.
+
+### Color palette (D30)
+
+| Token | Meaning | Color | Fallback |
+|---|---|---|---|
+| `verified` | signature valid, fingerprint confirmed | green | word `verified` |
+| `unverified` | signature valid, fingerprint not confirmed | amber | word `unverified` |
+| `mismatch` | known address, unknown key | red, bold | word `key mismatch` |
+| `invalid` | signature does not verify | red, reverse | word `signature invalid` |
+| `private` | encrypted audience | blue-cyan | word `private` |
+| `public` | unencrypted list | yellow | word `public` |
+| `list:<name>` | mailing list | magenta | word `list:<name>` |
+| `accepted` / `failed` / `retrying` | delivery states | green / red / amber | words |
+| `withheld` | policy-excluded recipient | dim amber | `Not sent — unverified` |
+
+Rules: status color never applies to body text; `NO_COLOR=1`, `TERM=dumb`,
+`--no-color`, and `settings.color = never` disable the palette completely; a
+monochrome snapshot test runs the full matrix to prove no information is lost.
 
 ### Keymap (global, then contextual)
 
@@ -711,10 +823,10 @@ the date it was written.
 | `g` then `t/c/f/l/q/s` | jump to screen | · | · | · | · | · | · |
 | `r` | sync now | · | · | · | · | · | · |
 | `n` | new post | new post | · | · | · | · | · |
-| `a` | · | · | · | verify & approve | follow | · | audience |
+| `a` | · | · | · | approve unverified | follow | · | audience |
 | `d` | · | · | · | decline | · | · | · |
 | `b` | · | · | · | block | block | · | · |
-| `v` | · | · | · | verify | verify | · | · |
+| `v` | · | · | · | verify & approve | verify | · | · |
 | `f` | · | · | · | · | follow | · | · |
 | `F` | · | · | · | · | remove follower | · | · |
 | `m` | · | mute | · | · | mute | · | · |
@@ -727,6 +839,39 @@ the date it was written.
 | `y` | copy focused identifier (OSC 52 where available, otherwise show a selectable line) | · | · | · | · | · | · |
 
 `q` never destroys state. `Esc` in a dialog always returns without side effects.
+
+### Parity: CLI ↔ TUI (D1)
+
+Every journey step below is reachable from both surfaces, and the CLI form is the
+scripted equivalent of the keypress — not a reduced version.
+
+| Action | TUI | CLI |
+|---|---|---|
+| Create profile | wizard | `init` (+ flags, `--offline`) |
+| Show/export identity | Contacts → own card, `y` | `identity show`, `identity export-public` |
+| Export/import backup | Settings → Backup | `identity export-backup`, `identity import-backup` |
+| Import contact card | `i` in Contacts | `contacts import <FILE>` |
+| Verify contact | `v` | `contacts verify <FP>` |
+| Block / unblock | `b` | `contacts block <FP>`, `contacts unblock <FP>` |
+| Follow / unfollow | `f` / `F` (own follows) | `follow request <ADDR>`, `follow remove <FP>` |
+| Approve follower | Requests `v` / `a` | `follow approve <FP>` (+ `--force` for unverified) |
+| Decline request | Requests `d` | `follow decline <FP>` |
+| Post (private/list) | `n`, `a`, `Ctrl+S` | `post --text … --private` / `--public-list <ID>` |
+| Reply | `R` | `reply <EVENT_ID> --text …` |
+| Read timeline | scroll / `Enter` | `timeline [--limit N] [--json] [--thread <ID>]` |
+| Sync | `r`, auto | `sync`, `sync --status` |
+| Delivery state / retry / cancel | Queue `R` / `c` | `queue status`, `queue retry <ID>`, `queue cancel <ID>` |
+| Verify-a-recipient prompt | `v` on a withheld row | `queue show <POST_ID>` lists withheld recipients |
+| Lists add/remove/post | Lists `a` / `d` | `lists add`, `lists remove`, `post --public-list` |
+| Mute / block from an item | `m` / `b` | `contacts mute <FP>` |
+| Folder setting | Settings | `settings show`, `settings set-mail-folder` |
+| Locale / color / auto-sync | Settings | `settings set-locale`, `set-color`, `set-auto-sync` |
+| Diagnostics | Problems `i` | `diagnostics [--json]`, `problems list` |
+
+**Parity rule:** a UI action without a command is a bug in the CLI; a command
+without a UI affordance is a bug in the TUI. The parity test walks this table,
+fails if a row is missing from either `--help` or the keymap registry, and asserts
+both surfaces print the same state words for the same row (D31).
 
 ### Empty states (each with the one action that fixes it)
 
@@ -781,8 +926,10 @@ password", not "You entered a wrong password"); no jargon in primary text
 
 ## 21. Accessibility and terminal reality
 
-- **No color-only meaning.** Trust and delivery states are words; color is
-  decoration. Works over `ssh`, in `screen`, with a monochrome theme.
+- **No color-only meaning.** Color is a fast path to status (D30); the word is
+  always present, and `NO_COLOR` / `--no-color` / `settings.color = never` must
+  leave the screen identically informative. Works over `ssh`, in `screen`, on a
+  monochrome theme, and in a screenshot.
 - **No mouse requirement.** Every action has a key; mouse support, if added, is
   additive.
 - **Resize is a first-class event**: every screen re-renders safely at any size,
@@ -808,19 +955,21 @@ Every journey has an owner, a test, and a demonstrable artifact. Journeys marked
 | J2 | Backup | integration: export → restore rehearsal → wrong passphrase | test output |
 | J3 | Mailbox | integration vs fake IMAP/SMTP: 6 failure rows | matrix table |
 | J4 | Verify | integration: double import, mismatch quarantine | snapshot |
-| J5 | Follow/approve | integration: 3-profile flow; decline does not reappear | test output |
-| J6 | Post | integration: per-follower deliveries, zero-follower warning, kill -9 resume | test output |
+| J5 | Follow/approve | integration: 3-profile flow, unverified tier receives no private post, promotion applies to next post only, decline does not reappear | test output |
+| J6 | Post | integration: one delivery per verified follower, withheld rows for unverified, zero-verified warning, kill -9 resume | test output |
 | J7 | Read/reply | integration: duplicates, orphan-then-parent, tampered payload | snapshot + test |
 | J8 | Public list | integration: forged rejection, warning gate, List-ID mismatch | snapshot |
 | J9 | Reflector | integration: signature preserved, removal effective, retry | CLI transcript |
-| J10 | Degraded | integration: 10 rows of §15 table | matrix table |
+| J10 | Degraded | integration: every row of §15's failure table | matrix table |
 | J11 | Block/mute | integration: drop before insert, unblock no replay | test output |
 | J12 | Restart | integration: 5 recovery cases | test output |
 | J13 | Key loss | manual checklist + doc assertion | docs link |
+| J14 | Surface parity | `tests/parity.rs`: every row of the §19 parity table exists in `--help` and in the keymap registry, and both surfaces return the same state words (D31) | parity report |
+| J15 | Color independence | snapshot matrix with and without color at 40/80/120 columns, both locales | diffed snapshots |
 
-The v0.1 acceptance demonstration in PLAN.md §19 must be runnable **through the
-TUI alone** (Milestone 5 gate), with the CLI commands available as the scripted
-equivalent.
+The v0.1 acceptance demonstration in PLAN.md §19 must pass **twice: once through
+the TUI and once as a single scripted CLI transcript** (Milestone 5 gate). Either
+one alone is an incomplete gate under D1.
 
 ---
 
@@ -831,16 +980,22 @@ equivalent.
    `lists request-membership`, and `init` with a full flag set
    (`--email --name --locale --offline --no-auto-sync --config`).
 2. **New TUI screens/details** implied by §19: `Problems`/quarantine list,
-   `Pending replies`, delivery detail view, `LOCAL MODE` marker, key-mismatch
-   resolution.
-3. **New settings**: `ui.locale`, `sync.auto_interval_minutes` (default `5`,
-   `0` = manual), `compose.max_bytes`, and the existing
+   `Pending replies`, delivery detail view, withheld-recipient row, `LOCAL MODE`
+   marker, key-mismatch resolution.
+3. **New settings**: `ui.locale`, `ui.color` (`auto|always|never`),
+   `sync.auto_interval_minutes` (default `5`, `0` = manual),
+   `feed.body_lines` (default `6`), `compose.max_bytes`, and the existing
    `mail.move_protocol_messages`.
-4. **New tests**: journey integration tests (J0–J12), string-table coverage test
-   (every UI key has both locales), TUI snapshot matrix at 40/80/120 columns.
-5. **New docs**: this file; `docs/protocol.md` gains nothing (no protocol
+4. **New engine outputs**: per-recipient delivery summary for a post (including
+   `withheld` reason), so both surfaces render from one struct (D31) — this is a
+   small addition to PLAN.md §14's `outgoing_deliveries` semantics: a withheld
+   recipient gets a row with reason `unverified` and never an SMTP attempt.
+5. **New tests**: journey integration tests (J0–J13), parity test (J14), color
+   independence snapshots (J15), string-table coverage (every UI key has both
+   locales), TUI snapshot matrix at 40/80/120 columns.
+6. **New docs**: this file; `docs/protocol.md` gains nothing (no protocol
    change); README gains a "Five-minute two-person demo" section that follows
-   J0→J7 verbatim.
+   J0→J7 verbatim, in both its interactive and scripted forms.
 
 ---
 

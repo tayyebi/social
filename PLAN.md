@@ -405,8 +405,8 @@ Requirements:
 
 - Bob’s approved-follower list is local and authoritative for his client.
 - A follow approval is not inferred merely because a request arrived.
-- Approval requires an available, verified recipient certificate.
-- Reject requests with unknown or untrusted keys unless the user explicitly imports and approves the contact.
+- Two-tier trust (`docs/user-journey.md` D9): a follower who is approved without fingerprint verification is accepted into an **unverified tier** — readable and followable, but excluded from every private post. Private posts may only be delivered to followers whose key the user has verified. Seed deliveries are never backfilled after later verification.
+- Requests from keys with no available certificate must be resolved by explicitly importing the contact first; approval never creates trust from an unverified claim.
 - Support follow removal and blocking.
 - Prevent delivery to blocked or removed followers.
 - Previously delivered content cannot be recalled.
@@ -1165,30 +1165,41 @@ Everything else should build on that working foundation.
 The full plan lives in `docs/user-journey.md`. The non-negotiable parts that
 constrain every implementation task:
 
-1. **The TUI is the product**; the CLI is the automation surface. `social-mail init`
-   is the single entry point and is resumable and fully flag-drivable.
-2. **First launch is always the wizard.** No implicit profile creation.
-3. **Identity before mailbox.** A local (file-based) mode must let a user complete
-   onboarding, pairing, posting, and replying with no mail credentials.
-4. **Verification is a two-step ceremony** with the full grouped fingerprint on
-   screen; short fingerprints are scan aids only; a follow request can only be
-   approved from a verified contact.
-5. **Private is the default audience**, and every timeline item and queue row
-   states its audience and trust status as words, not icons or colors.
-6. **Delivery language never exceeds SMTP truth**: queued, sending, accepted by
-   your mail server, retrying, failed, cancelled. Never "delivered", never
-   "read".
-7. **Key changes are never silent.** Mismatched or invalid signatures are
+1. **Two equal surfaces.** Every user action exists both in the TUI and as a CLI
+   command; parity is a test (`docs/user-journey.md` §19), and neither surface may
+   be the only way to do something. `social-mail init` is the single entry point
+   and is resumable and fully flag-drivable.
+2. **First launch is always the guided wizard.** No implicit profile creation.
+   Local (file-based) mode exists as an advanced `init --offline` path for
+   credential-free demos and CI, not as an onboarding choice.
+3. **Identity before mailbox**, and a failed SMTP/IMAP test never discards the
+   identity or restarts setup.
+4. **Two-tier trust.** Verification is still a two-step ceremony with the full
+   grouped fingerprint on screen, but reading is permissive: unverified contacts
+   can be imported, followed, and read (permanently tagged `unverified`), while
+   **private posts are delivered only to verified followers**. Withheld
+   recipients are shown as `Not sent — unverified`, never as queued or failed.
+5. **The timeline is a feed of cards** (header: time · author · short fingerprint
+   · trust · audience; body; footer), grouped by day.
+6. **Color carries status, words carry meaning.** Trust and delivery states are
+   color-coded and always also rendered as words; `NO_COLOR` and
+   `settings.color = never` lose no information.
+7. **Private is the default audience**, and every card and queue row states its
+   audience and trust status.
+8. **Delivery language never exceeds SMTP truth**: queued, sending, accepted by
+   your mail server, retrying, failed, cancelled, withheld. Never "delivered",
+   never "read".
+9. **Key changes are never silent.** Mismatched or invalid signatures are
    quarantined into a visible `Problems` list and never enter the timeline.
-8. **Every error names an action.** No dead-end screens and no unusable app when
-   the network or mailbox is broken.
-9. **Block and mute are local and silent**; no block or mute action sends mail.
-10. **Nothing is lost to a crash**: drafts survive `Esc`, outgoing state survives
+10. **Every error names an action.** No dead-end screens and no unusable app when
+    the network or mailbox is broken.
+11. **Block and mute are local and silent**; no block or mute action sends mail.
+12. **Nothing is lost to a crash**: drafts survive `Esc`, outgoing state survives
     kill, and restarting never duplicates a timeline entry.
-11. **Persian is a first-class locale**: UI language is chosen at first run with a
-    live preview, identifiers stay Latin and LTR inside RTL text, and RTL
+13. **Persian is a first-class locale**: UI language is chosen at first run with
+    a live preview, identifiers stay Latin and LTR inside RTL text, and RTL
     correctness is proven by snapshot tests, not asserted.
-12. **Journeys J0–J12 in section 22 of `docs/user-journey.md` are acceptance
+14. **Journeys J0–J15 in section 22 of `docs/user-journey.md` are acceptance
     tests**, not documentation. A journey without a test is unfinished work, and
-    the release report must show which journeys pass.
-
+    the release report must show which journeys pass. The acceptance demo must
+    pass both interactively and as a scripted CLI transcript.
