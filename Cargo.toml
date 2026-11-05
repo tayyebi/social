@@ -1,6 +1,8 @@
 [workspace]
 resolver = "2"
 members = ["crates/*", "apps/*"]
+# The Android app is a Gradle project that links the Rust core; it is not a crate.
+exclude = ["apps/android"]
 
 [workspace.package]
 version = "0.2.0"
