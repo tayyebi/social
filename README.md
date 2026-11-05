@@ -37,16 +37,16 @@ offline demos. See [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.
 Download the archive for your platform from the releases page:
 
 ```text
-social-mail-v0.1.0-x86_64-unknown-linux-gnu.tar.gz
-social-mail-v0.1.0-x86_64-pc-windows-msvc.zip
+social-mail-v0.2.0-x86_64-unknown-linux-gnu.tar.gz
+social-mail-v0.2.0-x86_64-pc-windows-msvc.zip
 ```
 
 Each archive contains `social-mail` (`social-mail.exe` on Windows),
 `social-mail-reflector`, this README and `PLAN.md`. Verify the download against
 `SHA256SUMS.txt` before running it.
 
-v0.2 artefacts are named `social-mail-v0.2.0-...`; the older `v0.1.0` artefacts use
-the spool transport only.
+The `v0.1.0` artefacts are still downloadable but predate the mail transport: they
+only move messages through a spool directory.
 
 From source (Rust 1.75 or newer):
 
@@ -216,7 +216,7 @@ and Linux only.
 
 ## Documents
 
-- [`PLAN.md`](PLAN.md) — v0.1 requirements baseline
+- [`PLAN.md`](PLAN.md) — requirements baseline (v0.2 status in §25)
 - [`docs/user-journey.md`](docs/user-journey.md) — product decisions D1–D36, journeys, copy
 - [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md) — what is done, what is left
 - [`docs/protocol.md`](docs/protocol.md) — event envelope, canonicalisation, carriers
