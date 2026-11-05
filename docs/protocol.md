@@ -98,6 +98,21 @@ Rationale and the OpenPGP trade-off: `docs/decisions/0002-crypto-backend.md`.
 - "Accepted for delivery" means the transport took the message. It never means the
   recipient read it.
 
+## Transport
+
+Carriers are transport-independent. Two transports implement the same boundary:
+
+| Transport | Reference | Send | Receive |
+|---|---|---|---|
+| `spool` | path relative to the spool directory | write `<ref>.json` | scan the directory |
+| `mail` | `<folder>#<uid>` | SMTP submission | IMAP search for the carrier marker |
+
+The mail transport wraps one carrier per message in
+`Content-Type: text/plain; charset=utf-8`, base64, subject `SocialMail/v1 carrier`
+and header `X-SocialMail: v1`. Mail without the marker is left untouched. Processed
+mail moves to `SocialMail/`; quarantined mail stays where it is and is only flagged
+read, because a message we could not parse may still matter to its owner.
+
 ## Invalid input
 
 An event is quarantined, with a machine-readable reason, when:
@@ -106,7 +121,8 @@ An event is quarantined, with a machine-readable reason, when:
 - the author is unknown and no valid card travels with the message;
 - a `follow-accept` names someone else;
 - the payload does not parse or violates `deny_unknown_fields`;
-- the message exceeds the size ceiling (once mail transport lands).
+- the message exceeds the 2 MB size ceiling (mail transport quarantines it before
+  parsing, so the reason is `too-large`).
 
 Blocked authors are dropped silently. Quarantined content is stored for
 diagnostics, never displayed in the feed.
