@@ -174,9 +174,7 @@ impl Config {
             "transport.spool_dir" => {
                 self.spool_dir = PathBuf::from(parse_string(value).ok_or_else(|| bad("a string"))?)
             }
-            "mail.account" => {
-                self.account = parse_string(value).ok_or_else(|| bad("a string"))?
-            }
+            "mail.account" => self.account = parse_string(value).ok_or_else(|| bad("a string"))?,
             "mail.imap_host" => {
                 self.imap_host = parse_string(value).ok_or_else(|| bad("a string"))?
             }
@@ -317,8 +315,14 @@ impl Config {
         );
         map.insert("transport.kind".into(), self.transport.clone());
         map.insert("mail.account".into(), self.account.clone());
-        map.insert("mail.imap".into(), format!("{}:{} ({})", self.imap_host, self.imap_port, self.imap_tls));
-        map.insert("mail.smtp".into(), format!("{}:{} ({})", self.smtp_host, self.smtp_port, self.smtp_tls));
+        map.insert(
+            "mail.imap".into(),
+            format!("{}:{} ({})", self.imap_host, self.imap_port, self.imap_tls),
+        );
+        map.insert(
+            "mail.smtp".into(),
+            format!("{}:{} ({})", self.smtp_host, self.smtp_port, self.smtp_tls),
+        );
         map.insert("mail.username".into(), self.username.clone());
         map.insert("mail.password_env".into(), self.password_env.clone());
         map.insert("mail.folder".into(), self.mail_folder.clone());

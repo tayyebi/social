@@ -1061,8 +1061,10 @@ fn diagnostics(engine: &mut Engine, json_output: bool) -> Result<()> {
             match engine.config.transport.as_str() {
                 "mail" => format!(
                     "imap {}:{} · smtp {}:{}",
-                    engine.config.imap_host, engine.config.imap_port,
-                    engine.config.smtp_host, engine.config.smtp_port
+                    engine.config.imap_host,
+                    engine.config.imap_port,
+                    engine.config.smtp_host,
+                    engine.config.smtp_port
                 ),
                 other => format!("{other} ({})", engine.config.spool_dir.display()),
             }

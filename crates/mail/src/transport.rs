@@ -54,13 +54,19 @@ impl MailConfig {
             ));
         }
         if self.imap_host.trim().is_empty() {
-            return Err(MailError::config("set `mail.imap_host` (for example imap.example.org)"));
+            return Err(MailError::config(
+                "set `mail.imap_host` (for example imap.example.org)",
+            ));
         }
         if self.smtp_host.trim().is_empty() {
-            return Err(MailError::config("set `mail.smtp_host` (for example smtp.example.org)"));
+            return Err(MailError::config(
+                "set `mail.smtp_host` (for example smtp.example.org)",
+            ));
         }
         if self.password_env.trim().is_empty() {
-            return Err(MailError::config("set `mail.password_env` to a variable name"));
+            return Err(MailError::config(
+                "set `mail.password_env` to a variable name",
+            ));
         }
         Ok(())
     }
@@ -137,9 +143,7 @@ impl MailTransport {
     /// Send one carrier to one address.
     pub fn send(&self, to: &str, carrier: &str) -> MailResult<String> {
         if to.trim().is_empty() {
-            return Err(MailError::permanent(
-                "this contact has no delivery address",
-            ));
+            return Err(MailError::permanent("this contact has no delivery address"));
         }
         if !to.contains('@') {
             return Err(MailError::permanent(format!(

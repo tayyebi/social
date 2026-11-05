@@ -42,7 +42,11 @@ fn fake_smtp(user: &'static str, password: &'static str) -> (u16, JoinHandle<Vec
             }
             let command = line.trim_end().to_string();
             if command.starts_with("EHLO") {
-                write!(stream, "250-fake\r\n250-AUTH PLAIN LOGIN\r\n250 8BITMIME\r\n").unwrap();
+                write!(
+                    stream,
+                    "250-fake\r\n250-AUTH PLAIN LOGIN\r\n250 8BITMIME\r\n"
+                )
+                .unwrap();
             } else if let Some(token) = command.strip_prefix("AUTH PLAIN ") {
                 let decoded = social_mail_crypto::base64::decode(token).unwrap();
                 let parts: Vec<&[u8]> = decoded.split(|byte| *byte == 0).collect();
@@ -104,7 +108,12 @@ fn fake_imap(messages: Vec<(u32, Vec<u8>)>) -> (u16, JoinHandle<Vec<String>>) {
                 .unwrap();
             } else if upper.starts_with("UID SEARCH") {
                 let list: Vec<String> = messages.iter().map(|(uid, _)| uid.to_string()).collect();
-                write!(stream, "* SEARCH {}\r\n{tag} OK search done\r\n", list.join(" ")).unwrap();
+                write!(
+                    stream,
+                    "* SEARCH {}\r\n{tag} OK search done\r\n",
+                    list.join(" ")
+                )
+                .unwrap();
             } else if upper.starts_with("UID FETCH") {
                 let uid: u32 = rest
                     .split_whitespace()
@@ -113,12 +122,8 @@ fn fake_imap(messages: Vec<(u32, Vec<u8>)>) -> (u16, JoinHandle<Vec<String>>) {
                     .unwrap_or(0);
                 match messages.iter().find(|(value, _)| *value == uid) {
                     Some((_, body)) => {
-                        write!(
-                            stream,
-                            "* 1 FETCH (UID {uid} BODY[] {{{}}}\r\n",
-                            body.len()
-                        )
-                        .unwrap();
+                        write!(stream, "* 1 FETCH (UID {uid} BODY[] {{{}}}\r\n", body.len())
+                            .unwrap();
                         stream.write_all(body).unwrap();
                         write!(stream, ")\r\n{tag} OK fetch done\r\n").unwrap();
                     }

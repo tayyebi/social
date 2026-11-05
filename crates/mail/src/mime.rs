@@ -47,7 +47,10 @@ pub fn build_message(from: &str, to: &str, subject: &str, body: &[u8]) -> Vec<u8
     out.push_str(&format!("From: {from}\r\n"));
     out.push_str(&format!("To: {to}\r\n"));
     out.push_str(&format!("Subject: {subject}\r\n"));
-    out.push_str(&format!("Date: {}\r\n", now.format("%a, %d %b %Y %H:%M:%S +0000")));
+    out.push_str(&format!(
+        "Date: {}\r\n",
+        now.format("%a, %d %b %Y %H:%M:%S +0000")
+    ));
     out.push_str(&format!("Message-ID: {message_id}\r\n"));
     out.push_str("X-SocialMail: v1\r\n");
     out.push_str("MIME-Version: 1.0\r\n");
@@ -249,7 +252,8 @@ mod tests {
 
     #[test]
     fn rejects_multipart_for_now() {
-        let message = b"Subject: SocialMail/x\r\nContent-Type: multipart/mixed; boundary=x\r\n\r\n--x--\r\n";
+        let message =
+            b"Subject: SocialMail/x\r\nContent-Type: multipart/mixed; boundary=x\r\n\r\n--x--\r\n";
         assert!(parse_message(message).is_err());
     }
 }

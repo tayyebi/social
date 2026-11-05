@@ -333,9 +333,7 @@ mod tests {
         let alice = SpoolTransport::new(&root, "AA".repeat(20)).unwrap();
         let bob = SpoolTransport::new(&root, "BB".repeat(20)).unwrap();
         let bob_fingerprint = "BB".repeat(20);
-        alice
-            .send(&recipient(&bob_fingerprint), "garbage")
-            .unwrap();
+        alice.send(&recipient(&bob_fingerprint), "garbage").unwrap();
         let incoming = bob.receive().unwrap();
         bob.quarantine(&incoming[0]).unwrap();
         assert!(bob.receive().unwrap().is_empty());

@@ -281,7 +281,11 @@ fn literal_length(line: &str) -> Option<usize> {
         return None;
     }
     let open = trimmed.rfind('{')?;
-    trimmed.get(open + 1..trimmed.len() - 1)?.trim().parse().ok()
+    trimmed
+        .get(open + 1..trimmed.len() - 1)?
+        .trim()
+        .parse()
+        .ok()
 }
 
 fn quote(value: &str) -> String {
@@ -337,6 +341,9 @@ mod tests {
             untagged: vec!["NO [AUTHENTICATIONFAILED] Invalid credentials".to_string()],
             literals: Vec::new(),
         };
-        assert_eq!(classify(&response, "sign-in").kind, crate::FailureKind::Auth);
+        assert_eq!(
+            classify(&response, "sign-in").kind,
+            crate::FailureKind::Auth
+        );
     }
 }

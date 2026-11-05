@@ -20,12 +20,7 @@ pub struct SmtpClient {
 
 impl SmtpClient {
     /// Connect, greet, EHLO, and upgrade with STARTTLS when the mode asks for it.
-    pub fn connect(
-        host: &str,
-        port: u16,
-        mode: TlsMode,
-        client_name: &str,
-    ) -> MailResult<Self> {
+    pub fn connect(host: &str, port: u16, mode: TlsMode, client_name: &str) -> MailResult<Self> {
         let conn = Conn::connect(host, port, mode)?;
         let mut client = SmtpClient {
             stream: BufReader::new(conn),
