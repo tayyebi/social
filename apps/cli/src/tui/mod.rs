@@ -117,6 +117,11 @@ impl App {
             last_sync: None,
         };
         app.refresh();
+        if let Ok(Some(error)) = app.engine.transport_error() {
+            if !error.trim().is_empty() {
+                app.status = error;
+            }
+        }
         let _ = app.sync();
         app
     }

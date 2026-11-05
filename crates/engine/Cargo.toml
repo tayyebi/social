@@ -12,6 +12,7 @@ chrono.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 social-mail-crypto = { path = "../crypto" }
+social-mail-mail = { path = "../mail" }
 social-mail-protocol = { path = "../protocol" }
 social-mail-storage = { path = "../storage" }
 thiserror.workspace = true

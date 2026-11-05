@@ -27,7 +27,24 @@ pub struct Config {
     pub move_protocol_messages: bool,
     pub protocol_folder: String,
     pub auto_sync_minutes: i64,
+    /// `spool` (a shared directory) or `mail` (IMAP receive, SMTP send).
     pub transport: String,
+    /// Mailbox address used as the envelope sender.
+    pub account: String,
+    pub imap_host: String,
+    pub imap_port: i64,
+    /// `implicit`, `starttls` or `none`.
+    pub imap_tls: String,
+    pub smtp_host: String,
+    pub smtp_port: i64,
+    pub smtp_tls: String,
+    /// Login name when it differs from the address.
+    pub username: String,
+    /// Environment variable holding the app password. The password itself is
+    /// never written to the config file or the database.
+    pub password_env: String,
+    /// Folder to read protocol mail from.
+    pub mail_folder: String,
 }
 
 impl Default for Config {
@@ -48,6 +65,16 @@ impl Default for Config {
             protocol_folder: "SocialMail".to_string(),
             auto_sync_minutes: 0,
             transport: "spool".to_string(),
+            account: String::new(),
+            imap_host: String::new(),
+            imap_port: 993,
+            imap_tls: "implicit".to_string(),
+            smtp_host: String::new(),
+            smtp_port: 587,
+            smtp_tls: "starttls".to_string(),
+            username: String::new(),
+            password_env: "SOCIAL_MAIL_PASSWORD".to_string(),
+            mail_folder: "INBOX".to_string(),
         }
     }
 }
@@ -147,6 +174,36 @@ impl Config {
             "transport.spool_dir" => {
                 self.spool_dir = PathBuf::from(parse_string(value).ok_or_else(|| bad("a string"))?)
             }
+            "mail.account" => {
+                self.account = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.imap_host" => {
+                self.imap_host = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.imap_port" => {
+                self.imap_port = parse_int(value).ok_or_else(|| bad("an integer"))?
+            }
+            "mail.imap_tls" => {
+                self.imap_tls = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.smtp_host" => {
+                self.smtp_host = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.smtp_port" => {
+                self.smtp_port = parse_int(value).ok_or_else(|| bad("an integer"))?
+            }
+            "mail.smtp_tls" => {
+                self.smtp_tls = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.username" => {
+                self.username = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.password_env" => {
+                self.password_env = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
+            "mail.folder" => {
+                self.mail_folder = parse_string(value).ok_or_else(|| bad("a string"))?
+            }
             // Unknown keys are ignored so older builds can read newer files.
             _ => {}
         }
@@ -165,7 +222,17 @@ impl Config {
             "move_protocol_messages = {}\n",
             self.move_protocol_messages
         ));
-        out.push_str(&format!("protocol_folder = {:?}\n\n", self.protocol_folder));
+        out.push_str(&format!("protocol_folder = {:?}\n", self.protocol_folder));
+        out.push_str(&format!("account = {:?}\n", self.account));
+        out.push_str(&format!("imap_host = {:?}\n", self.imap_host));
+        out.push_str(&format!("imap_port = {}\n", self.imap_port));
+        out.push_str(&format!("imap_tls = {:?}\n", self.imap_tls));
+        out.push_str(&format!("smtp_host = {:?}\n", self.smtp_host));
+        out.push_str(&format!("smtp_port = {}\n", self.smtp_port));
+        out.push_str(&format!("smtp_tls = {:?}\n", self.smtp_tls));
+        out.push_str(&format!("username = {:?}\n", self.username));
+        out.push_str(&format!("password_env = {:?}\n", self.password_env));
+        out.push_str(&format!("folder = {:?}\n\n", self.mail_folder));
         out.push_str("[ui]\n");
         out.push_str(&format!("color = {:?}\n", self.color));
         out.push_str(&format!(
@@ -205,6 +272,15 @@ impl Config {
         Ok(())
     }
 
+    /// Login name for the mailbox: the explicit username, or the address.
+    pub fn login_name(&self) -> String {
+        if self.username.trim().is_empty() {
+            self.account.trim().to_string()
+        } else {
+            self.username.trim().to_string()
+        }
+    }
+
     pub fn density_for(&self, tab: &str) -> String {
         match tab {
             "following" => self.density_following.clone(),
@@ -240,6 +316,12 @@ impl Config {
             self.auto_sync_minutes.to_string(),
         );
         map.insert("transport.kind".into(), self.transport.clone());
+        map.insert("mail.account".into(), self.account.clone());
+        map.insert("mail.imap".into(), format!("{}:{} ({})", self.imap_host, self.imap_port, self.imap_tls));
+        map.insert("mail.smtp".into(), format!("{}:{} ({})", self.smtp_host, self.smtp_port, self.smtp_tls));
+        map.insert("mail.username".into(), self.username.clone());
+        map.insert("mail.password_env".into(), self.password_env.clone());
+        map.insert("mail.folder".into(), self.mail_folder.clone());
         map
     }
 }

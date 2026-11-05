@@ -1,0 +1,15 @@
+[package]
+name = "social-mail-mail"
+description = "IMAP receive and SMTP send for social-mail, with app-password sign-in"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+chrono.workspace = true
+rustls.workspace = true
+thiserror.workspace = true
+webpki-roots.workspace = true
+social-mail-crypto = { path = "../crypto" }

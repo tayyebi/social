@@ -1,0 +1,98 @@
+name: ci
+
+# Temporary development gate for the mail transport milestone. It formats the
+# tree, runs check/test/clippy on Linux and Windows, and commits a readable
+# report to the branch (Actions logs are not reachable from the build sandbox).
+# It is removed again once the milestone is green, leaving release.yml only.
+
+on:
+  push:
+    branches: [arena/beca6cfd-social]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  gate:
+    name: gate (${{ matrix.os }})
+    if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[ci-report]')
+    concurrency:
+      group: ci-${{ github.ref }}-${{ matrix.os }}
+      cancel-in-progress: false
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Check, test and report
+        shell: bash
+        run: |
+          set +e
+          mkdir -p ci
+          report="ci/last-run-${{ matrix.os }}.txt"
+          {
+            echo "# ci report (${{ matrix.os }})"
+            echo "sha: ${GITHUB_SHA}"
+            echo
+            echo "## toolchain"
+            rustc --version
+            cargo --version
+            echo
+            echo "## fmt (applied, not gated)"
+            cargo fmt --all 2>&1
+            echo "fmt_exit=$?"
+            echo
+            echo "## check"
+            cargo check --workspace --all-targets 2>&1
+            echo "check_exit=$?"
+            echo
+            echo "## test"
+            cargo test --workspace 2>&1
+            echo "test_exit=$?"
+            echo
+            echo "## clippy"
+            cargo clippy --workspace --all-targets 2>&1
+            echo "clippy_exit=$?"
+          } > "$report"
+          grep -E '^(fmt|check|test|clippy)_exit=' "$report" || true
+
+      - name: Publish report and formatting
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@users.noreply.github.com"
+          for attempt in 1 2 3 4; do
+            git add -A
+            git commit -m "ci: report for ${GITHUB_SHA:0:7} [ci-report]" || true
+            git pull --rebase --autostash origin arena/beca6cfd-social || true
+            if git push origin HEAD:arena/beca6cfd-social; then
+              echo "report pushed"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "could not push report"
+          exit 0
+
+      - name: Gate
+        shell: bash
+        run: |
+          set +e
+          f="ci/last-run-${{ matrix.os }}.txt"
+          if grep -qE '^(check|test|clippy)_exit=[1-9]' "$f"; then
+            echo "::error::ci gate failed"
+            grep -E '^(check|test|clippy)_exit=' "$f"
+            exit 1
+          fi
+          echo "ci gate passed"

@@ -117,6 +117,11 @@ pub enum Command {
     },
     /// Exchange pending messages with the transport
     Sync,
+    /// Check the mail account without sending anything
+    Mail {
+        #[command(subcommand)]
+        cmd: MailCmd,
+    },
     /// Inspect and repair deliveries
     Queue {
         #[command(subcommand)]
@@ -234,8 +239,46 @@ pub enum ListsCmd {
 }
 
 #[derive(Subcommand, Debug)]
+pub enum MailCmd {
+    /// Sign in to IMAP and SMTP and report what was found
+    Test {
+        /// Also send one test message to your own address
+        #[arg(long)]
+        send: bool,
+    },
+    /// Show the effective mail settings; the password is never printed
+    Status,
+}
+
+#[derive(Subcommand, Debug)]
 pub enum SettingsCmd {
     Show,
+    /// Configure the mailbox, TLS modes and the app-password variable
+    Mail {
+        #[arg(long)]
+        account: Option<String>,
+        #[arg(long)]
+        imap_host: Option<String>,
+        #[arg(long)]
+        imap_port: Option<i64>,
+        #[arg(long)]
+        imap_tls: Option<String>,
+        #[arg(long)]
+        smtp_host: Option<String>,
+        #[arg(long)]
+        smtp_port: Option<i64>,
+        #[arg(long)]
+        smtp_tls: Option<String>,
+        #[arg(long)]
+        username: Option<String>,
+        #[arg(long)]
+        password_env: Option<String>,
+        #[arg(long)]
+        folder: Option<String>,
+        /// `spool` (local directory) or `mail` (IMAP + SMTP)
+        #[arg(long)]
+        transport: Option<String>,
+    },
     SetMailFolder {
         /// true or false
         value: String,

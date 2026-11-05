@@ -12,8 +12,8 @@ use social_mail_engine::{
 
 use crate::text;
 use crate::{
-    BundleCmd, Command, ContactsCmd, FollowCmd, IdentityCmd, ListsCmd, ProblemsCmd, QueueCmd,
-    SettingsCmd,
+    BundleCmd, Command, ContactsCmd, FollowCmd, IdentityCmd, ListsCmd, MailCmd, ProblemsCmd,
+    QueueCmd, SettingsCmd,
 };
 
 const PLACEHOLDER_ADDRESS: &str = "local@social-mail.invalid";
@@ -159,6 +159,7 @@ pub fn run(engine: &mut Engine, command: Command, json_output: bool) -> Result<(
             replies,
         } => timeline(engine, limit, tab, thread, replies, json_output),
         Command::Sync => sync(engine, json_output),
+        Command::Mail { cmd } => mail(engine, cmd, json_output),
         Command::Queue { cmd } => queue(engine, cmd, json_output),
         Command::Lists { cmd } => lists(engine, cmd, json_output),
         Command::Settings { cmd } => settings(engine, cmd, json_output),
@@ -759,6 +760,59 @@ fn settings(engine: &mut Engine, cmd: SettingsCmd, json_output: bool) -> Result<
             );
             Ok(())
         }
+        SettingsCmd::Mail {
+            account,
+            imap_host,
+            imap_port,
+            imap_tls,
+            smtp_host,
+            smtp_port,
+            smtp_tls,
+            username,
+            password_env,
+            folder,
+            transport,
+        } => {
+            if let Some(value) = transport {
+                if value != "spool" && value != "mail" {
+                    bail!("transport must be spool or mail");
+                }
+                engine.config.transport = value;
+            }
+            if let Some(value) = account {
+                engine.config.account = value;
+            }
+            if let Some(value) = imap_host {
+                engine.config.imap_host = value;
+            }
+            if let Some(value) = imap_port {
+                engine.config.imap_port = value;
+            }
+            if let Some(value) = imap_tls {
+                engine.config.imap_tls = value;
+            }
+            if let Some(value) = smtp_host {
+                engine.config.smtp_host = value;
+            }
+            if let Some(value) = smtp_port {
+                engine.config.smtp_port = value;
+            }
+            if let Some(value) = smtp_tls {
+                engine.config.smtp_tls = value;
+            }
+            if let Some(value) = username {
+                engine.config.username = value;
+            }
+            if let Some(value) = password_env {
+                engine.config.password_env = value;
+            }
+            if let Some(value) = folder {
+                engine.config.mail_folder = value;
+            }
+            engine.save_config()?;
+            print_mail_settings(engine, json_output)?;
+            Ok(())
+        }
         SettingsCmd::SetLocale { value } => {
             engine.set_locale(&value)?;
             println!("UI language set to {value}.");
@@ -775,6 +829,118 @@ fn settings(engine: &mut Engine, cmd: SettingsCmd, json_output: bool) -> Result<
             println!("Density for {} set to {value}.", tab.as_str());
             Ok(())
         }
+    }
+}
+
+fn mail(engine: &mut Engine, cmd: MailCmd, json_output: bool) -> Result<()> {
+    match cmd {
+        MailCmd::Status => print_mail_settings(engine, json_output),
+        MailCmd::Test { send } => {
+            let summary = engine
+                .mail_probe()
+                .map_err(|error| anyhow::anyhow!("{error}"))?;
+            let mut sent = None;
+            if send {
+                let transport = engine
+                    .mail_send_test()
+                    .map_err(|error| anyhow::anyhow!("{error}"))?;
+                sent = Some(transport);
+            }
+            if json_output {
+                print_json(json!({
+                    "ok": true,
+                    "summary": summary,
+                    "sent_test": sent,
+                    "transport": engine.config.transport,
+                }));
+            } else {
+                println!("{summary}");
+                match sent {
+                    Some(_) => println!("Test message accepted for delivery to your own address."),
+                    None => println!("No test message was sent (pass --send to send one)."),
+                }
+            }
+            Ok(())
+        }
+    }
+}
+
+fn print_mail_settings(engine: &Engine, json_output: bool) -> Result<()> {
+    let config = &engine.config;
+    let password_present = std::env::var(&config.password_env)
+        .map(|value| !value.is_empty())
+        .unwrap_or(false)
+        || std::env::var("SOCIAL_MAIL_PASSWORD")
+            .map(|value| !value.is_empty())
+            .unwrap_or(false);
+    if json_output {
+        print_json(json!({
+            "transport": config.transport,
+            "account": config.account,
+            "username": config.login_name(),
+            "imap": {
+                "host": config.imap_host,
+                "port": config.imap_port,
+                "tls": config.imap_tls,
+            },
+            "smtp": {
+                "host": config.smtp_host,
+                "port": config.smtp_port,
+                "tls": config.smtp_tls,
+            },
+            "folder": config.mail_folder,
+            "protocol_folder": config.protocol_folder,
+            "move_protocol_messages": config.move_protocol_messages,
+            "password_env": config.password_env,
+            "password_available": password_present,
+        }));
+        return Ok(());
+    }
+    println!("transport         {}", config.transport);
+    println!("account           {}", blank(&config.account));
+    println!("login             {}", blank(&config.login_name()));
+    println!(
+        "imap              {}:{} ({})",
+        blank(&config.imap_host),
+        config.imap_port,
+        config.imap_tls
+    );
+    println!(
+        "smtp              {}:{} ({})",
+        blank(&config.smtp_host),
+        config.smtp_port,
+        config.smtp_tls
+    );
+    println!("read folder       {}", config.mail_folder);
+    println!(
+        "protocol folder   {} (moves: {})",
+        config.protocol_folder, config.move_protocol_messages
+    );
+    println!(
+        "app password      {} ({})",
+        if password_present {
+            "available"
+        } else {
+            "MISSING"
+        },
+        config.password_env
+    );
+    if !password_present {
+        println!();
+        println!(
+            "Set it with: export {}=your-app-password",
+            config.password_env
+        );
+        println!("Passwords are never written to the config file or the database.");
+    }
+    Ok(())
+}
+
+fn blank(value: &str) -> &str {
+    if value.trim().is_empty() {
+        "(not set)"
+    } else {
+        value
     }
 }
 
@@ -890,7 +1056,22 @@ fn diagnostics(engine: &mut Engine, json_output: bool) -> Result<()> {
         println!("Config      {}", engine.config_path().display());
         println!("Data        {}", engine.data_dir().display());
         println!("Spool       {}", engine.config.spool_dir.display());
-        println!("Transport   {}", engine.config.transport);
+        println!(
+            "Transport   {}",
+            match engine.config.transport.as_str() {
+                "mail" => format!(
+                    "imap {}:{} · smtp {}:{}",
+                    engine.config.imap_host, engine.config.imap_port,
+                    engine.config.smtp_host, engine.config.smtp_port
+                ),
+                other => format!("{other} ({})", engine.config.spool_dir.display()),
+            }
+        );
+        if let Some(error) = engine.transport_error()? {
+            if !error.trim().is_empty() {
+                println!("Last error  {error}");
+            }
+        }
         println!();
         println!(
             "Events      {} ({} roots, {} replies)",

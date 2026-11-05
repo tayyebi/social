@@ -18,7 +18,7 @@ use social_mail_storage::{
 };
 
 use crate::config::Config;
-use crate::transport::SpoolTransport;
+use crate::transport::{self, Recipient, Transport, TransportFailure};
 use crate::EngineError;
 
 pub const IDENTITY_FILE: &str = "identity.json";
@@ -654,7 +654,11 @@ impl Engine {
         let body = carrier.to_json()?;
         let transport = self.transport()?;
         let now = now_rfc3339();
-        match transport.send(&contact.fingerprint, &body) {
+        let to = Recipient {
+            fingerprint: &contact.fingerprint,
+            address: &contact.address,
+        };
+        match transport.send(&to, &body) {
             Ok(_) => self.db.upsert_delivery(&DeliveryRow {
                 post_event_id: signed.event_id.clone(),
                 recipient: contact.fingerprint.clone(),
@@ -783,7 +787,11 @@ impl Engine {
             }
             let body = carrier.to_json()?;
             let now = now_rfc3339();
-            match transport.send(&contact.fingerprint, &body) {
+            let to = Recipient {
+                fingerprint: &contact.fingerprint,
+                address: &contact.address,
+            };
+            match transport.send(&to, &body) {
                 Ok(_) => {
                     self.db.upsert_delivery(&DeliveryRow {
                         post_event_id: event_id.to_string(),
@@ -938,7 +946,11 @@ impl Engine {
             // make a deliberate verification decision.
             let carrier = Carrier::for_recipient(&signed, &public)?.with_card(self.contact_card()?);
             let body = carrier.to_json()?;
-            match transport.send(&contact.fingerprint, &body) {
+            let to = Recipient {
+                fingerprint: &contact.fingerprint,
+                address: &contact.address,
+            };
+            match transport.send(&to, &body) {
                 Ok(_) => {
                     self.db.set_delivery_state(
                         &row.post_event_id,
@@ -948,19 +960,75 @@ impl Engine {
                         None,
                         true,
                     )?;
+                    self.db.set_sync_state("transport_error", "")?;
                     sent += 1;
                 }
                 Err(error) => {
-                    let next = chrono::Utc::now() + chrono::Duration::minutes(2);
-                    self.db.set_delivery_state(
-                        &row.post_event_id,
-                        &row.recipient,
-                        DeliveryState::Retrying,
-                        Some(&error.to_string()),
-                        Some(&next.to_rfc3339()),
-                        true,
-                    )?;
                     failed += 1;
+                    match error.failure {
+                        TransportFailure::Auth => {
+                            // Every other message would fail the same way, so
+                            // stop here and say what has to change.
+                            self.db.set_delivery_state(
+                                &row.post_event_id,
+                                &row.recipient,
+                                DeliveryState::Failed,
+                                Some("sign-in failed"),
+                                None,
+                                true,
+                            )?;
+                            self.db.set_sync_state("transport_error", &error.message)?;
+                            self.record_problem(
+                                &row.post_event_id,
+                                None,
+                                None,
+                                "mailbox sign-in failed",
+                                &error.message,
+                            )?;
+                            break;
+                        }
+                        TransportFailure::TooLarge => {
+                            self.db.set_delivery_state(
+                                &row.post_event_id,
+                                &row.recipient,
+                                DeliveryState::Failed,
+                                Some("message too large"),
+                                None,
+                                true,
+                            )?;
+                            self.db.set_sync_state("transport_error", &error.message)?;
+                            self.record_problem(
+                                &row.post_event_id,
+                                None,
+                                None,
+                                "message too large",
+                                &error.message,
+                            )?;
+                        }
+                        TransportFailure::Permanent | TransportFailure::Unavailable => {
+                            self.db.set_delivery_state(
+                                &row.post_event_id,
+                                &row.recipient,
+                                DeliveryState::Failed,
+                                Some(&error.message),
+                                None,
+                                true,
+                            )?;
+                            self.db.set_sync_state("transport_error", &error.message)?;
+                        }
+                        TransportFailure::Transient => {
+                            let next = chrono::Utc::now() + chrono::Duration::minutes(2);
+                            self.db.set_delivery_state(
+                                &row.post_event_id,
+                                &row.recipient,
+                                DeliveryState::Retrying,
+                                Some(&error.message),
+                                Some(&next.to_rfc3339()),
+                                true,
+                            )?;
+                            self.db.set_sync_state("transport_error", &error.message)?;
+                        }
+                    }
                 }
             }
         }
@@ -996,19 +1064,19 @@ impl Engine {
             match self.ingest(&incoming.body) {
                 Ok(IngestOutcome::Accepted) => {
                     report.accepted += 1;
-                    transport.acknowledge(&incoming.path)?;
+                    transport.acknowledge(&incoming)?;
                 }
                 Ok(IngestOutcome::Duplicate) => {
                     report.duplicates += 1;
-                    transport.acknowledge(&incoming.path)?;
+                    transport.acknowledge(&incoming)?;
                 }
                 Ok(IngestOutcome::Dropped) => {
                     report.dropped += 1;
-                    transport.acknowledge(&incoming.path)?;
+                    transport.acknowledge(&incoming)?;
                 }
                 Ok(IngestOutcome::Quarantined(_)) => {
                     report.quarantined += 1;
-                    transport.quarantine(&incoming.path)?;
+                    transport.quarantine(&incoming)?;
                 }
                 Err(error) => {
                     report.quarantined += 1;
@@ -1019,7 +1087,7 @@ impl Engine {
                         "could not process message",
                         &error.to_string(),
                     )?;
-                    transport.quarantine(&incoming.path)?;
+                    transport.quarantine(&incoming)?;
                 }
             }
         }
@@ -1494,8 +1562,31 @@ impl Engine {
 
     // -------------------------------------------------------------- internals
 
-    fn transport(&self) -> Result<SpoolTransport, EngineError> {
-        SpoolTransport::new(self.config.spool_dir.clone(), self.fingerprint())
+    fn transport(&self) -> Result<Box<dyn Transport>, EngineError> {
+        transport::for_config(&self.config, &self.fingerprint())
+    }
+
+    /// Sign in to the configured mailbox and report what we found. Sends nothing.
+    pub fn mail_probe(&self) -> Result<String, EngineError> {
+        let mailbox = transport::MailboxTransport::new(&self.config)?;
+        Ok(mailbox.probe()?)
+    }
+
+    /// Send one carrier-shaped test message to ourselves.
+    pub fn mail_send_test(&self) -> Result<String, EngineError> {
+        let mailbox = transport::MailboxTransport::new(&self.config)?;
+        let body = serde_json::json!({
+            "kind": "social-mail/carrier",
+            "version": 1,
+            "probe": true,
+        })
+        .to_string();
+        Ok(mailbox.send_test(&body)?)
+    }
+
+    /// The last delivery problem worth showing in a banner, if any.
+    pub fn transport_error(&self) -> Result<Option<String>, EngineError> {
+        Ok(self.db.sync_state("transport_error")?)
     }
 
     fn insert_signed(
