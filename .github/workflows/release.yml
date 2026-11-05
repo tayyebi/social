@@ -1,12 +1,15 @@
 name: release
 
-# Windows and Linux binaries for every tag. Nothing else runs here.
-# Tag `v0.2.0` produces:
-#   social-mail-v0.2.0-x86_64-unknown-linux-gnu.tar.gz  (+ .sha256)
-#   social-mail-v0.2.0-x86_64-pc-windows-msvc.zip       (+ .sha256)
+# Every tag produces desktop binaries and an Android APK. Nothing else runs here.
+# Tag `v0.3.0` produces:
+#   social-mail-v0.3.0-x86_64-unknown-linux-gnu.tar.gz  (+ .sha256)
+#   social-mail-v0.3.0-x86_64-pc-windows-msvc.zip       (+ .sha256)
+#   social-mail-v0.3.0-android.apk                      (+ .sha256)
 #   SHA256SUMS.txt
-# This is the only workflow in the repository: branch CI was a temporary gate for
-# this phase and was removed once it was green on Linux and Windows.
+# The APK is release-signed only when the ANDROID_KEYSTORE_BASE64,
+# ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS and ANDROID_KEY_PASSWORD secrets
+# are set; otherwise it is named "-unsigned" and never pretends otherwise.
+# This is the only workflow in the repository.
 
 on:
   push:
@@ -97,9 +100,152 @@ jobs:
             dist/*.sha256
           if-no-files-found: error
 
+
+  android:
+    name: android apk
+    # Builds the APK on every tag. Signed when the four ANDROID_* secrets exist;
+    # otherwise the artefact is named "-unsigned" and the release says so.
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    env:
+      KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect the app
+        id: detect
+        shell: bash
+        run: |
+          if [ -f apps/android/settings.gradle.kts ]; then
+            echo "has_app=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_app=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-java@v4
+        if: steps.detect.outputs.has_app == 'true'
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.detect.outputs.has_app == 'true'
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,x86_64-linux-android
+
+      - uses: gradle/actions/setup-gradle@v4
+        if: steps.detect.outputs.has_app == 'true'
+        with:
+          gradle-version: '8.9'
+
+      - name: Install cargo-ndk
+        if: steps.detect.outputs.has_app == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ndk="${ANDROID_NDK_HOME:-}"
+          if [ -z "$ndk" ] || [ ! -d "$ndk" ]; then
+            ndk="$(ls -d "${ANDROID_HOME:-/usr/local/lib/android/sdk}"/ndk/* 2>/dev/null | sort -V | tail -1)"
+          fi
+          echo "using NDK: $ndk"
+          echo "ANDROID_NDK_HOME=$ndk" >> "$GITHUB_ENV"
+          cargo install cargo-ndk --locked
+
+      - name: Build the native core for Android
+        if: steps.detect.outputs.has_app == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo ndk --platform 26 \
+            -t arm64-v8a -t armeabi-v7a -t x86_64 \
+            -o apps/android/app/src/main/jniLibs \
+            build --release -p social-mail-android-jni
+          find apps/android/app/src/main/jniLibs -name '*.so' -exec ls -l {} +
+
+      - name: Version from the tag
+        if: steps.detect.outputs.has_app == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME:-v0.3.0}"
+          version="${tag#v}"
+          IFS='.' read -r major minor patch <<< "$version" || true
+          major="${major:-0}"; minor="${minor:-0}"; patch="${patch:-0}"
+          patch="$(printf '%s' "$patch" | tr -cd '0-9')"
+          patch="${patch:-0}"
+          code=$(( major * 10000 + minor * 100 + patch ))
+          {
+            echo "APP_VERSION_NAME=$version"
+            echo "APP_VERSION_CODE=$code"
+          } >> "$GITHUB_ENV"
+          echo "version=$version code=$code"
+
+      - name: Decode the signing key
+        id: signing
+        if: steps.detect.outputs.has_app == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "${KEYSTORE_B64:-}" ]; then
+            printf '%s' "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            chmod 600 "$RUNNER_TEMP/release.jks"
+            {
+              echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/release.jks"
+              echo "ANDROID_KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD"
+              echo "ANDROID_KEY_ALIAS=$KEY_ALIAS"
+              echo "ANDROID_KEY_PASSWORD=$KEY_PASSWORD"
+            } >> "$GITHUB_ENV"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+            echo "Signing key decoded; this APK will be release-signed."
+          else
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::No ANDROID_KEYSTORE_BASE64 secret; building an unsigned APK."
+          fi
+
+      - name: Build the APK
+        if: steps.detect.outputs.has_app == 'true'
+        working-directory: apps/android
+        shell: bash
+        run: gradle --no-daemon :app:assembleRelease
+
+      - name: Verify the signature and package the APK
+        if: steps.detect.outputs.has_app == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk="$(ls apps/android/app/build/outputs/apk/release/*.apk | head -1)"
+          echo "built: $apk"
+          apksigner="$(ls "${ANDROID_HOME:-/usr/local/lib/android/sdk}"/build-tools/*/apksigner 2>/dev/null | sort -V | tail -1)"
+          signed=false
+          if [ -n "$apksigner" ] && "$apksigner" verify --print-certs "$apk"; then
+            signed=true
+          fi
+          version="${APP_VERSION_NAME:-0.3.0}"
+          mkdir -p dist-android
+          if [ "$signed" = true ]; then
+            name="social-mail-v${version}-android.apk"
+          else
+            name="social-mail-v${version}-android-unsigned.apk"
+          fi
+          cp "$apk" "dist-android/$name"
+          (cd dist-android && sha256sum "$name" > "$name.sha256")
+          ls -l dist-android
+          echo "SIGNED=$signed" >> "$GITHUB_ENV"
+
+      - name: Upload the APK
+        if: steps.detect.outputs.has_app == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: dist-android/*
+          if-no-files-found: error
+
   publish:
     name: publish release
-    needs: build
+    needs: [build, android]
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
@@ -125,6 +271,13 @@ jobs:
           set -euo pipefail
           tag="${GITHUB_REF_NAME}"
           repo="${GITHUB_REPOSITORY}"
+          if ls artifacts/*-android-unsigned.apk >/dev/null 2>&1; then
+            android_note="The Android APK in this release is UNSIGNED: no signing secrets were configured."
+          elif ls artifacts/*-android.apk >/dev/null 2>&1; then
+            android_note="The Android APK is release-signed."
+          else
+            android_note="This release contains no Android APK."
+          fi
           if gh release view "$tag" --repo "$repo" >/dev/null 2>&1; then
             gh release upload "$tag" artifacts/* --repo "$repo" --clobber
           else
@@ -132,5 +285,5 @@ jobs:
               --repo "$repo" \
               --title "$tag" \
               --generate-notes \
-              --notes "Windows and Linux binaries. Verify with SHA256SUMS.txt before running."
+              --notes "Windows and Linux binaries, plus the Android app. ${android_note} Verify every download with SHA256SUMS.txt before running it."
           fi

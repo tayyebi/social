@@ -4,3 +4,16 @@
 .DS_Store
 /social-mail.toml
 /.social-mail
+
+# Android app build output and native libraries (built by CI, never committed)
+/apps/android/.gradle/
+/apps/android/build/
+/apps/android/app/build/
+/apps/android/local.properties
+/apps/android/app/src/main/jniLibs/
+/apps/android/.kotlin/
+
+# Signing material must never be committed
+*.jks
+*.keystore
+*.b64

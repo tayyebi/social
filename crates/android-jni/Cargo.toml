@@ -1,0 +1,18 @@
+[package]
+name = "social-mail-android-jni"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "JNI bridge between the Android app and the social-mail engine"
+
+[lib]
+name = "social_mail_android"
+crate-type = ["cdylib"]
+
+[dependencies]
+jni = "0.21"
+serde_json = { workspace = true }
+social-mail-engine = { path = "../engine" }
+social-mail-storage = { path = "../storage" }
