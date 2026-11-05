@@ -5,7 +5,7 @@
 //! assertions are about bytes on the wire.
 
 use std::io::{BufRead, BufReader, Write};
-use std::net::{TcpListener, TcpStream};
+use std::net::TcpListener;
 use std::thread::{self, JoinHandle};
 
 use social_mail_mail::{build_message, FailureKind, MailConfig, MailTransport, TlsMode};

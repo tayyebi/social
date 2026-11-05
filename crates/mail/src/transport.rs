@@ -86,6 +86,17 @@ pub struct MailTransport {
     password: String,
 }
 
+/// Debug output never contains the password.
+impl std::fmt::Debug for MailTransport {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("MailTransport")
+            .field("config", &self.config)
+            .field("password", &"<redacted>")
+            .finish()
+    }
+}
+
 impl MailTransport {
     /// Read the app password from the environment. It is never stored.
     pub fn from_env(config: MailConfig) -> MailResult<Self> {

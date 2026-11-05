@@ -204,6 +204,15 @@ pub struct MailboxTransport {
     mail: MailTransport,
 }
 
+impl fmt::Debug for MailboxTransport {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter
+            .debug_struct("MailboxTransport")
+            .field("mail", &self.mail)
+            .finish()
+    }
+}
+
 impl MailboxTransport {
     pub fn new(config: &Config) -> Result<Self, TransportError> {
         let mail = MailTransport::from_env(mail_config(config)?)?;
