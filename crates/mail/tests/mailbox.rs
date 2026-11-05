@@ -8,7 +8,7 @@ use std::io::{BufRead, BufReader, Write};
 use std::net::TcpListener;
 use std::thread::{self, JoinHandle};
 
-use social_mail_mail::{build_message, FailureKind, MailConfig, MailTransport, TlsMode};
+use social_mail_transport::{build_message, FailureKind, MailConfig, MailTransport, TlsMode};
 
 fn listener() -> (TcpListener, u16) {
     let listener = TcpListener::bind("127.0.0.1:0").unwrap();

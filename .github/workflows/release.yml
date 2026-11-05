@@ -1,9 +1,9 @@
 name: release
 
 # Windows and Linux binaries for every tag. Nothing else runs here.
-# Tag `v0.1.0` produces:
-#   social-mail-v0.1.0-x86_64-unknown-linux-gnu.tar.gz  (+ .sha256)
-#   social-mail-v0.1.0-x86_64-pc-windows-msvc.zip       (+ .sha256)
+# Tag `v0.2.0` produces:
+#   social-mail-v0.2.0-x86_64-unknown-linux-gnu.tar.gz  (+ .sha256)
+#   social-mail-v0.2.0-x86_64-pc-windows-msvc.zip       (+ .sha256)
 #   SHA256SUMS.txt
 # This is the only workflow in the repository: branch CI was a temporary gate for
 # this phase and was removed once it was green on Linux and Windows.

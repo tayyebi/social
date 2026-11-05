@@ -1176,14 +1176,14 @@ dependencies = [
  "serde",
  "serde_json",
  "social-mail-crypto",
- "social-mail-mail",
+ "social-mail-transport",
  "social-mail-protocol",
  "social-mail-storage",
  "thiserror",
 ]
 
 [[package]]
-name = "social-mail-mail"
+name = "social-mail-transport"
 version = "0.2.0"
 dependencies = [
  "chrono",

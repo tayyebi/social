@@ -12,7 +12,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use social_mail_mail::{FailureKind, MailConfig, MailTransport, TlsMode};
+use social_mail_transport::{FailureKind, MailConfig, MailTransport, TlsMode};
 
 use crate::config::Config;
 use crate::EngineError;
@@ -75,8 +75,8 @@ impl From<TransportError> for EngineError {
     }
 }
 
-impl From<social_mail_mail::MailError> for TransportError {
-    fn from(error: social_mail_mail::MailError) -> Self {
+impl From<social_mail_transport::MailError> for TransportError {
+    fn from(error: social_mail_transport::MailError) -> Self {
         let failure = match error.kind {
             FailureKind::Auth => TransportFailure::Auth,
             FailureKind::Transient => TransportFailure::Transient,
