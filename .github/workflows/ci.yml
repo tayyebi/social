@@ -17,8 +17,10 @@ jobs:
   gate:
     name: gate (${{ matrix.os }})
     if: github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, '[ci-report]')
+    # Both matrix jobs publish a report to the same branch. Serialise them so the
+    # push cannot race; the per-OS report files stay independent.
     concurrency:
-      group: ci-${{ github.ref }}-${{ matrix.os }}
+      group: ci-report-${{ github.ref }}
       cancel-in-progress: false
     timeout-minutes: 40
     strategy:
@@ -72,7 +74,7 @@ jobs:
           set +e
           git config user.name "ci-bot"
           git config user.email "ci-bot@users.noreply.github.com"
-          for attempt in 1 2 3 4; do
+          for attempt in 1 2 3 4 5 6; do
             git add -A
             git commit -m "ci: report for ${GITHUB_SHA:0:7} [ci-report]" || true
             git pull --rebase --autostash origin arena/beca6cfd-social || true
