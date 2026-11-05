@@ -1,5 +1,5 @@
 # ci report (ubuntu-latest)
-sha: ad5f8ece6e65bd05cf91baacdc5eef33b9a542f9
+sha: 7d9f08b94dc5b9fca713fbaf461264eb1884e28c
 
 ## toolchain
 rustc 1.99.1 (58cf8f9c3 2026-10-13)
@@ -11,200 +11,200 @@ fmt_exit=0
 ## check
 [1m[92m    Updating[0m crates.io index
 [1m[92m Downloading[0m crates ...
-[1m[92m  Downloaded[0m aead v0.5.2
-[1m[92m  Downloaded[0m base64ct v1.8.3
-[1m[92m  Downloaded[0m cfg-if v1.0.5
-[1m[92m  Downloaded[0m lru v0.12.5
-[1m[92m  Downloaded[0m poly1305 v0.8.0
-[1m[92m  Downloaded[0m cassowary v0.3.0
-[1m[92m  Downloaded[0m clap v4.6.7
-[1m[92m  Downloaded[0m rustls-pki-types v1.15.1
-[1m[92m  Downloaded[0m chrono v0.4.45
-[1m[92m  Downloaded[0m const-oid v0.9.6
-[1m[92m  Downloaded[0m hmac v0.12.1
-[1m[92m  Downloaded[0m equivalent v1.0.3
-[1m[92m  Downloaded[0m itoa v1.0.18
-[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
-[1m[92m  Downloaded[0m der v0.7.10
-[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
-[1m[92m  Downloaded[0m generic-array v0.14.7
-[1m[92m  Downloaded[0m darling v0.24.1
-[1m[92m  Downloaded[0m indoc v2.0.8
-[1m[92m  Downloaded[0m rustc_version v0.4.1
-[1m[92m  Downloaded[0m parking_lot v0.12.5
-[1m[92m  Downloaded[0m pbkdf2 v0.12.2
-[1m[92m  Downloaded[0m anstyle-parse v1.0.0
-[1m[92m  Downloaded[0m is_terminal_polyfill v1.70.2
-[1m[92m  Downloaded[0m rand v0.8.8
-[1m[92m  Downloaded[0m anstyle-query v1.1.5
-[1m[92m  Downloaded[0m clap_lex v1.1.1
-[1m[92m  Downloaded[0m anstream v1.0.0
-[1m[92m  Downloaded[0m colorchoice v1.0.5
-[1m[92m  Downloaded[0m serde_derive v1.0.229
-[1m[92m  Downloaded[0m block-buffer v0.10.4
+[1m[92m  Downloaded[0m zeroize_derive v1.5.0
+[1m[92m  Downloaded[0m signature v2.2.0
+[1m[92m  Downloaded[0m strum v0.26.3
+[1m[92m  Downloaded[0m version_check v0.9.5
+[1m[92m  Downloaded[0m spki v0.7.3
+[1m[92m  Downloaded[0m shlex v2.0.1
+[1m[92m  Downloaded[0m signal-hook-mio v0.2.5
 [1m[92m  Downloaded[0m signal-hook-registry v1.4.8
-[1m[92m  Downloaded[0m anstyle v1.0.14
-[1m[92m  Downloaded[0m crypto-common v0.1.7
-[1m[92m  Downloaded[0m ryu v1.0.23
-[1m[92m  Downloaded[0m allocator-api2 v0.2.21
-[1m[92m  Downloaded[0m num-traits v0.2.19
-[1m[92m  Downloaded[0m thiserror-impl v1.0.69
-[1m[92m  Downloaded[0m cipher v0.4.4
+[1m[92m  Downloaded[0m x25519-dalek v2.0.1
 [1m[92m  Downloaded[0m signal-hook v0.3.18
-[1m[92m  Downloaded[0m ahash v0.8.12
-[1m[92m  Downloaded[0m castaway v0.2.4
+[1m[92m  Downloaded[0m universal-hash v0.5.1
+[1m[92m  Downloaded[0m webpki-roots v0.26.11
+[1m[92m  Downloaded[0m strsim v0.11.1
+[1m[92m  Downloaded[0m subtle v2.6.1
+[1m[92m  Downloaded[0m serde_json v1.0.154
+[1m[92m  Downloaded[0m sha2 v0.10.9
+[1m[92m  Downloaded[0m syn v2.0.119
+[1m[92m  Downloaded[0m unicode-ident v1.0.27
+[1m[92m  Downloaded[0m unicode-truncate v1.1.0
+[1m[92m  Downloaded[0m zeroize v1.9.1
 [1m[92m  Downloaded[0m smallvec v1.16.4
-[1m[92m  Downloaded[0m hashbrown v0.15.5
-[1m[92m  Downloaded[0m serde v1.0.229
-[1m[92m  Downloaded[0m cc v1.11.0
-[1m[92m  Downloaded[0m compact_str v0.8.2
-[1m[92m  Downloaded[0m unicode-width v0.1.14
-[1m[92m  Downloaded[0m unicode-width v0.2.0
+[1m[92m  Downloaded[0m static_assertions v1.1.0
 [1m[92m  Downloaded[0m webpki-roots v1.0.11
-[1m[92m  Downloaded[0m cpufeatures v0.2.17
-[1m[92m  Downloaded[0m inout v0.1.4
 [1m[92m  Downloaded[0m typenum v1.20.1
-[1m[92m  Downloaded[0m ratatui v0.29.0
-[1m[92m  Downloaded[0m rustversion v1.0.23
-[1m[92m  Downloaded[0m autocfg v1.5.1
+[1m[92m  Downloaded[0m thiserror v1.0.69
+[1m[92m  Downloaded[0m thiserror-impl v1.0.69
+[1m[92m  Downloaded[0m unicode-width v0.2.0
+[1m[92m  Downloaded[0m syn v3.0.9
+[1m[92m  Downloaded[0m unicode-segmentation v1.13.3
+[1m[92m  Downloaded[0m untrusted v0.9.0
+[1m[92m  Downloaded[0m utf8parse v0.2.2
 [1m[92m  Downloaded[0m zmij v1.0.23
-[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
-[1m[92m  Downloaded[0m memchr v2.8.3
+[1m[92m  Downloaded[0m strum_macros v0.26.4
 [1m[92m  Downloaded[0m unicode-bidi v0.3.18
 [1m[92m  Downloaded[0m vcpkg v0.2.15
-[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
-[1m[92m  Downloaded[0m clap_builder v4.6.7
-[1m[92m  Downloaded[0m quote v1.0.47
-[1m[92m  Downloaded[0m parking_lot_core v0.9.12
-[1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
-[1m[92m  Downloaded[0m rustix v0.38.44
-[1m[92m  Downloaded[0m bitflags v2.13.2
-[1m[92m  Downloaded[0m clap_derive v4.6.7
-[1m[92m  Downloaded[0m lock_api v0.4.14
-[1m[92m  Downloaded[0m signature v2.2.0
-[1m[92m  Downloaded[0m hashlink v0.9.1
-[1m[92m  Downloaded[0m paste v1.0.15
-[1m[92m  Downloaded[0m chacha20 v0.9.1
-[1m[92m  Downloaded[0m digest v0.10.7
-[1m[92m  Downloaded[0m ed25519 v2.2.3
-[1m[92m  Downloaded[0m sha2 v0.10.9
-[1m[92m  Downloaded[0m subtle v2.6.1
-[1m[92m  Downloaded[0m fallible-iterator v0.3.0
-[1m[92m  Downloaded[0m darling_macro v0.24.1
-[1m[92m  Downloaded[0m iana-time-zone v0.1.65
-[1m[92m  Downloaded[0m rand_core v0.6.4
-[1m[92m  Downloaded[0m semver v1.0.28
-[1m[92m  Downloaded[0m getrandom v0.2.17
-[1m[92m  Downloaded[0m once_cell v1.21.4
-[1m[92m  Downloaded[0m serde_core v1.0.229
-[1m[92m  Downloaded[0m spki v0.7.3
-[1m[92m  Downloaded[0m darling_core v0.24.1
-[1m[92m  Downloaded[0m unicode-truncate v1.1.0
-[1m[92m  Downloaded[0m ident_case v1.0.1
-[1m[92m  Downloaded[0m version_check v0.9.5
-[1m[92m  Downloaded[0m pkcs8 v0.10.2
-[1m[92m  Downloaded[0m pkg-config v0.3.34
-[1m[92m  Downloaded[0m signal-hook-mio v0.2.5
-[1m[92m  Downloaded[0m strum_macros v0.26.4
-[1m[92m  Downloaded[0m rand_chacha v0.3.1
-[1m[92m  Downloaded[0m either v1.19.0
-[1m[92m  Downloaded[0m heck v0.5.0
-[1m[92m  Downloaded[0m instability v0.3.14
-[1m[92m  Downloaded[0m itertools v0.13.0
-[1m[92m  Downloaded[0m mio v1.2.4
-[1m[92m  Downloaded[0m opaque-debug v0.3.1
-[1m[92m  Downloaded[0m strum v0.26.3
-[1m[92m  Downloaded[0m x25519-dalek v2.0.1
-[1m[92m  Downloaded[0m anyhow v1.0.104
-[1m[92m  Downloaded[0m foldhash v0.1.5
-[1m[92m  Downloaded[0m hashbrown v0.14.5
-[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
-[1m[92m  Downloaded[0m proc-macro2 v1.0.107
-[1m[92m  Downloaded[0m scopeguard v1.2.0
-[1m[92m  Downloaded[0m unicode-ident v1.0.27
-[1m[92m  Downloaded[0m crossterm v0.28.1
-[1m[92m  Downloaded[0m log v0.4.35
-[1m[92m  Downloaded[0m rusqlite v0.32.1
-[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
-[1m[92m  Downloaded[0m linux-raw-sys v0.4.15
-[1m[92m  Downloaded[0m strsim v0.11.1
-[1m[92m  Downloaded[0m syn v2.0.119
-[1m[92m  Downloaded[0m unicode-segmentation v1.13.3
-[1m[92m  Downloaded[0m utf8parse v0.2.2
-[1m[92m  Downloaded[0m errno v0.3.14
-[1m[92m  Downloaded[0m syn v3.0.9
-[1m[92m  Downloaded[0m zeroize v1.9.1
-[1m[92m  Downloaded[0m shlex v2.0.1
-[1m[92m  Downloaded[0m rustls v0.23.46
-[1m[92m  Downloaded[0m libc v0.2.191
-[1m[92m  Downloaded[0m thiserror v1.0.69
-[1m[92m  Downloaded[0m zeroize_derive v1.5.0
-[1m[92m  Downloaded[0m rustls-webpki v0.103.16
-[1m[92m  Downloaded[0m untrusted v0.9.0
-[1m[92m  Downloaded[0m static_assertions v1.1.0
+[1m[92m  Downloaded[0m unicode-width v0.1.14
 [1m[92m  Downloaded[0m zerocopy v0.8.63
-[1m[92m  Downloaded[0m universal-hash v0.5.1
+[1m[92m  Downloaded[0m anyhow v1.0.104
+[1m[92m  Downloaded[0m block-buffer v0.10.4
+[1m[92m  Downloaded[0m anstyle-query v1.1.5
+[1m[92m  Downloaded[0m castaway v0.2.4
+[1m[92m  Downloaded[0m aead v0.5.2
+[1m[92m  Downloaded[0m anstyle v1.0.14
+[1m[92m  Downloaded[0m anstyle-parse v1.0.0
+[1m[92m  Downloaded[0m cassowary v0.3.0
+[1m[92m  Downloaded[0m rustc_version v0.4.1
+[1m[92m  Downloaded[0m colorchoice v1.0.5
+[1m[92m  Downloaded[0m ident_case v1.0.1
+[1m[92m  Downloaded[0m clap_lex v1.1.1
+[1m[92m  Downloaded[0m itoa v1.0.18
+[1m[92m  Downloaded[0m cfg-if v1.0.5
+[1m[92m  Downloaded[0m autocfg v1.5.1
+[1m[92m  Downloaded[0m base64ct v1.8.3
+[1m[92m  Downloaded[0m scopeguard v1.2.0
+[1m[92m  Downloaded[0m rand_chacha v0.3.1
+[1m[92m  Downloaded[0m errno v0.3.14
+[1m[92m  Downloaded[0m equivalent v1.0.3
+[1m[92m  Downloaded[0m inout v0.1.4
+[1m[92m  Downloaded[0m lru v0.12.5
+[1m[92m  Downloaded[0m opaque-debug v0.3.1
+[1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
+[1m[92m  Downloaded[0m instability v0.3.14
+[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
+[1m[92m  Downloaded[0m crypto-common v0.1.7
+[1m[92m  Downloaded[0m pbkdf2 v0.12.2
+[1m[92m  Downloaded[0m cpufeatures v0.2.17
+[1m[92m  Downloaded[0m anstream v1.0.0
+[1m[92m  Downloaded[0m ed25519 v2.2.3
+[1m[92m  Downloaded[0m heck v0.5.0
+[1m[92m  Downloaded[0m cipher v0.4.4
+[1m[92m  Downloaded[0m either v1.19.0
+[1m[92m  Downloaded[0m foldhash v0.1.5
+[1m[92m  Downloaded[0m ahash v0.8.12
+[1m[92m  Downloaded[0m darling_macro v0.24.1
+[1m[92m  Downloaded[0m chacha20 v0.9.1
+[1m[92m  Downloaded[0m is_terminal_polyfill v1.70.2
+[1m[92m  Downloaded[0m poly1305 v0.8.0
+[1m[92m  Downloaded[0m generic-array v0.14.7
+[1m[92m  Downloaded[0m paste v1.0.15
+[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
+[1m[92m  Downloaded[0m pkcs8 v0.10.2
+[1m[92m  Downloaded[0m digest v0.10.7
+[1m[92m  Downloaded[0m fallible-iterator v0.3.0
+[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
+[1m[92m  Downloaded[0m indoc v2.0.8
+[1m[92m  Downloaded[0m rustversion v1.0.23
+[1m[92m  Downloaded[0m pkg-config v0.3.34
+[1m[92m  Downloaded[0m rand_core v0.6.4
+[1m[92m  Downloaded[0m clap_derive v4.6.7
+[1m[92m  Downloaded[0m hmac v0.12.1
+[1m[92m  Downloaded[0m const-oid v0.9.6
+[1m[92m  Downloaded[0m hashlink v0.9.1
+[1m[92m  Downloaded[0m once_cell v1.21.4
+[1m[92m  Downloaded[0m semver v1.0.28
+[1m[92m  Downloaded[0m quote v1.0.47
+[1m[92m  Downloaded[0m iana-time-zone v0.1.65
+[1m[92m  Downloaded[0m getrandom v0.2.17
+[1m[92m  Downloaded[0m lock_api v0.4.14
+[1m[92m  Downloaded[0m allocator-api2 v0.2.21
+[1m[92m  Downloaded[0m bitflags v2.13.2
+[1m[92m  Downloaded[0m darling v0.24.1
+[1m[92m  Downloaded[0m log v0.4.35
+[1m[92m  Downloaded[0m num-traits v0.2.19
+[1m[92m  Downloaded[0m parking_lot v0.12.5
+[1m[92m  Downloaded[0m rustls-pki-types v1.15.1
+[1m[92m  Downloaded[0m parking_lot_core v0.9.12
+[1m[92m  Downloaded[0m proc-macro2 v1.0.107
+[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
+[1m[92m  Downloaded[0m ryu v1.0.23
+[1m[92m  Downloaded[0m serde_core v1.0.229
+[1m[92m  Downloaded[0m clap v4.6.7
+[1m[92m  Downloaded[0m darling_core v0.24.1
+[1m[92m  Downloaded[0m der v0.7.10
+[1m[92m  Downloaded[0m serde v1.0.229
+[1m[92m  Downloaded[0m serde_derive v1.0.229
+[1m[92m  Downloaded[0m compact_str v0.8.2
+[1m[92m  Downloaded[0m rand v0.8.8
+[1m[92m  Downloaded[0m memchr v2.8.3
+[1m[92m  Downloaded[0m rustls-webpki v0.103.16
+[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
+[1m[92m  Downloaded[0m mio v1.2.4
+[1m[92m  Downloaded[0m crossterm v0.28.1
+[1m[92m  Downloaded[0m hashbrown v0.15.5
+[1m[92m  Downloaded[0m itertools v0.13.0
+[1m[92m  Downloaded[0m cc v1.11.0
+[1m[92m  Downloaded[0m rusqlite v0.32.1
+[1m[92m  Downloaded[0m hashbrown v0.14.5
+[1m[92m  Downloaded[0m clap_builder v4.6.7
+[1m[92m  Downloaded[0m chrono v0.4.45
+[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
+[1m[92m  Downloaded[0m rustls v0.23.46
+[1m[92m  Downloaded[0m rustix v0.38.44
+[1m[92m  Downloaded[0m ratatui v0.29.0
+[1m[92m  Downloaded[0m libc v0.2.191
 [1m[92m  Downloaded[0m ring v0.17.14
+[1m[92m  Downloaded[0m linux-raw-sys v0.4.15
 [1m[92m  Downloaded[0m libsqlite3-sys v0.30.1
-[1m[92m  Downloaded[0m webpki-roots v0.26.11
-[1m[92m  Downloaded[0m serde_json v1.0.154
 [1m[92m   Compiling[0m proc-macro2 v1.0.107
-[1m[92m   Compiling[0m unicode-ident v1.0.27
 [1m[92m   Compiling[0m quote v1.0.47
+[1m[92m   Compiling[0m unicode-ident v1.0.27
 [1m[92m   Compiling[0m libc v0.2.191
 [1m[92m    Checking[0m cfg-if v1.0.5
 [1m[92m   Compiling[0m version_check v0.9.5
-[1m[92m   Compiling[0m generic-array v0.14.7
 [1m[92m    Checking[0m typenum v1.20.1
-[1m[92m    Checking[0m subtle v2.6.1
+[1m[92m   Compiling[0m generic-array v0.14.7
 [1m[92m   Compiling[0m zerocopy v0.8.63
-[1m[92m   Compiling[0m shlex v2.0.1
+[1m[92m    Checking[0m subtle v2.6.1
 [1m[92m   Compiling[0m syn v2.0.119
-[1m[92m   Compiling[0m syn v3.0.9
 [1m[92m    Checking[0m getrandom v0.2.17
 [1m[92m    Checking[0m rand_core v0.6.4
+[1m[92m   Compiling[0m syn v3.0.9
 [1m[92m    Checking[0m crypto-common v0.1.7
 [1m[92m   Compiling[0m find-msvc-tools v0.1.15
+[1m[92m   Compiling[0m shlex v2.0.1
 [1m[92m   Compiling[0m cc v1.11.0
 [1m[92m    Checking[0m block-buffer v0.10.4
 [1m[92m    Checking[0m cpufeatures v0.2.17
 [1m[92m    Checking[0m digest v0.10.7
-[1m[92m   Compiling[0m serde_core v1.0.229
 [1m[92m   Compiling[0m autocfg v1.5.1
+[1m[92m   Compiling[0m serde_core v1.0.229
 [1m[92m   Compiling[0m semver v1.0.28
-[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m rustc_version v0.4.1
+[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m curve25519-dalek v4.1.3
 [1m[92m   Compiling[0m thiserror v1.0.69
 [1m[92m   Compiling[0m serde v1.0.229
+[1m[92m    Checking[0m inout v0.1.4
+[1m[92m    Checking[0m iana-time-zone v0.1.65
+[1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m   Compiling[0m serde_derive v1.0.229
 [1m[92m   Compiling[0m zeroize_derive v1.5.0
 [1m[92m   Compiling[0m curve25519-dalek-derive v0.1.1
 [1m[92m    Checking[0m zeroize v1.9.1
 [1m[92m   Compiling[0m thiserror-impl v1.0.69
-[1m[92m    Checking[0m inout v0.1.4
-[1m[92m    Checking[0m iana-time-zone v0.1.65
 [1m[92m    Checking[0m itoa v1.0.18
-[1m[92m   Compiling[0m zmij v1.0.23
-[1m[92m    Checking[0m chrono v0.4.45
 [1m[92m    Checking[0m cipher v0.4.4
+[1m[92m    Checking[0m chrono v0.4.45
 [1m[92m    Checking[0m ppv-lite86 v0.2.21
 [1m[92m    Checking[0m universal-hash v0.5.1
-[1m[92m   Compiling[0m serde_json v1.0.154
-[1m[92m    Checking[0m opaque-debug v0.3.1
 [1m[92m    Checking[0m signature v2.2.0
+[1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m    Checking[0m once_cell v1.21.4
-[1m[92m    Checking[0m ed25519 v2.2.3
-[1m[92m    Checking[0m poly1305 v0.8.0
-[1m[92m    Checking[0m chacha20 v0.9.1
+[1m[92m    Checking[0m opaque-debug v0.3.1
 [1m[92m    Checking[0m rand_chacha v0.3.1
+[1m[92m    Checking[0m poly1305 v0.8.0
+[1m[92m    Checking[0m ed25519 v2.2.3
+[1m[92m    Checking[0m chacha20 v0.9.1
 [1m[92m    Checking[0m sha2 v0.10.9
 [1m[92m    Checking[0m hmac v0.12.1
 [1m[92m    Checking[0m aead v0.5.2
 [1m[92m    Checking[0m memchr v2.8.3
+[1m[92m    Checking[0m pbkdf2 v0.12.2
 [1m[92m    Checking[0m chacha20poly1305 v0.10.1
 [1m[92m    Checking[0m ed25519-dalek v2.2.0
-[1m[92m    Checking[0m pbkdf2 v0.12.2
 [1m[92m    Checking[0m rand v0.8.8
 [1m[92m    Checking[0m x25519-dalek v2.0.1
 [1m[92m   Compiling[0m ring v0.17.14
@@ -212,59 +212,56 @@ fmt_exit=0
 [1m[92m    Checking[0m rustls-pki-types v1.15.1
 [1m[92m   Compiling[0m ahash v0.8.12
 [1m[92m    Checking[0m smallvec v1.16.4
-[1m[92m    Checking[0m bitflags v2.13.2
-[1m[92m    Checking[0m untrusted v0.9.0
-[1m[92m    Checking[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m pkg-config v0.3.34
+[1m[92m    Checking[0m bitflags v2.13.2
+[1m[92m    Checking[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m vcpkg v0.2.15
+[1m[92m    Checking[0m untrusted v0.9.0
 [1m[92m   Compiling[0m rustls v0.23.46
 [1m[92m    Checking[0m hashbrown v0.14.5
 [1m[92m    Checking[0m webpki-roots v1.0.11
 [1m[92m    Checking[0m webpki-roots v0.26.11
 [1m[92m    Checking[0m fallible-streaming-iterator v0.1.9
-[1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m    Checking[0m fallible-iterator v0.3.0
+[1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m    Checking[0m hashlink v0.9.1
-[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m   Compiling[0m rustversion v1.0.23
+[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m    Checking[0m social-mail-protocol v0.2.0 (/home/runner/work/social/social/crates/protocol)
 [1m[92m    Checking[0m utf8parse v0.2.2
 [1m[92m    Checking[0m anstyle-parse v1.0.0
 [1m[92m    Checking[0m errno v0.3.14
-[1m[92m   Compiling[0m signal-hook v0.3.18
-[1m[92m    Checking[0m is_terminal_polyfill v1.70.2
-[1m[92m    Checking[0m anstyle-query v1.1.5
 [1m[92m   Compiling[0m parking_lot_core v0.9.12
+[1m[92m    Checking[0m is_terminal_polyfill v1.70.2
+[1m[92m   Compiling[0m signal-hook v0.3.18
+[1m[92m    Checking[0m anstyle-query v1.1.5
+[1m[92m    Checking[0m anstyle v1.0.14
 [1m[92m    Checking[0m colorchoice v1.0.5
 [1m[92m   Compiling[0m strsim v0.11.1
 [1m[92m   Compiling[0m ident_case v1.0.1
-[1m[92m    Checking[0m anstyle v1.0.14
 [1m[92m    Checking[0m anstream v1.0.0
 [1m[92m   Compiling[0m darling_core v0.24.1
 [1m[92m    Checking[0m signal-hook-registry v1.4.8
-[1m[92m   Compiling[0m rustix v0.38.44
-[1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m    Checking[0m scopeguard v1.2.0
+[1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m    Checking[0m clap_lex v1.1.1
+[1m[92m   Compiling[0m rustix v0.38.44
 [1m[92m    Checking[0m clap_builder v4.6.7
 [1m[92m    Checking[0m rustls-webpki v0.103.16
 [1m[92m    Checking[0m lock_api v0.4.14
 [1m[92m   Compiling[0m clap_derive v4.6.7
 [1m[92m   Compiling[0m darling_macro v0.24.1
 [1m[92m    Checking[0m mio v1.2.4
+[1m[92m   Compiling[0m paste v1.0.15
 [1m[92m    Checking[0m allocator-api2 v0.2.21
+[1m[92m    Checking[0m linux-raw-sys v0.4.15
 [1m[92m    Checking[0m foldhash v0.1.5
 [1m[92m    Checking[0m equivalent v1.0.3
 [1m[92m    Checking[0m either v1.19.0
-[1m[92m    Checking[0m linux-raw-sys v0.4.15
-[1m[92m   Compiling[0m paste v1.0.15
-[1m[92m    Checking[0m clap v4.6.7
-[1m[92m    Checking[0m itertools v0.13.0
 [1m[92m    Checking[0m hashbrown v0.15.5
+[1m[92m    Checking[0m itertools v0.13.0
+[1m[92m    Checking[0m clap v4.6.7
 [1m[92m    Checking[0m social-mail-mail v0.2.0 (/home/runner/work/social/social/crates/mail)
-[1m[92m    Checking[0m signal-hook-mio v0.2.5
-[1m[92m   Compiling[0m darling v0.24.1
-[1m[92m    Checking[0m parking_lot v0.12.5
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -288,29 +285,32 @@ fmt_exit=0
     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
 [1m[33mwarning[0m: `social-mail-mail` (lib) generated 2 warnings
+[1m[92m    Checking[0m signal-hook-mio v0.2.5
+[1m[92m   Compiling[0m darling v0.24.1
+[1m[92m    Checking[0m parking_lot v0.12.5
 [1m[92m    Checking[0m castaway v0.2.4
 [1m[92m   Compiling[0m strum_macros v0.26.4
 [1m[92m   Compiling[0m indoc v2.0.8
-[1m[92m    Checking[0m unicode-width v0.1.14
 [1m[92m    Checking[0m ryu v1.0.23
+[1m[92m    Checking[0m unicode-width v0.1.14
 [1m[92m    Checking[0m static_assertions v1.1.0
 [1m[92m    Checking[0m unicode-segmentation v1.13.3
 [1m[92m    Checking[0m compact_str v0.8.2
-[1m[92m   Compiling[0m instability v0.3.14
 [1m[92m    Checking[0m unicode-truncate v1.1.0
+[1m[92m   Compiling[0m instability v0.3.14
 [1m[92m    Checking[0m crossterm v0.28.1
 [1m[92m    Checking[0m lru v0.12.5
 [1m[92m    Checking[0m cassowary v0.3.0
-[1m[92m    Checking[0m strum v0.26.3
 [1m[92m    Checking[0m unicode-width v0.2.0
 [1m[92m    Checking[0m unicode-bidi v0.3.18
+[1m[92m    Checking[0m strum v0.26.3
 [1m[92m    Checking[0m ratatui v0.29.0
 [1m[33mwarning[0m: `social-mail-mail` (lib test) generated 2 warnings (2 duplicates)
 [1m[92m    Checking[0m rusqlite v0.32.1
 [1m[92m    Checking[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
 [1m[92m    Checking[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
-[1m[92m    Checking[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
 [1m[92m    Checking[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
+[1m[92m    Checking[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
 [1m[33mwarning[0m[1m: function `delivery_label` is never used[0m
     [1m[94m--> [0mapps/cli/src/commands.rs:1275:8
      [1m[94m|[0m
@@ -325,9 +325,9 @@ fmt_exit=0
 [1m[94m100[0m [1m[94m|[0m pub fn width(text: &str) -> usize {
     [1m[94m|[0m        [1m[33m^^^^^[0m
 
-[1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 2 warnings
-[1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning (1 duplicate)
-[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 27.21s
+[1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning
+[1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 2 warnings (1 duplicate)
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 23.84s
 check_exit=0
 
 ## test
@@ -343,9 +343,9 @@ check_exit=0
 [1m[92m   Compiling[0m getrandom v0.2.17
 [1m[92m   Compiling[0m rand_core v0.6.4
 [1m[92m   Compiling[0m block-buffer v0.10.4
+[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m crypto-common v0.1.7
 [1m[92m   Compiling[0m digest v0.10.7
-[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m iana-time-zone v0.1.65
 [1m[92m   Compiling[0m thiserror v1.0.69
 [1m[92m   Compiling[0m inout v0.1.4
@@ -355,25 +355,25 @@ check_exit=0
 [1m[92m   Compiling[0m serde v1.0.229
 [1m[92m   Compiling[0m cipher v0.4.4
 [1m[92m   Compiling[0m universal-hash v0.5.1
-[1m[92m   Compiling[0m signature v2.2.0
 [1m[92m   Compiling[0m opaque-debug v0.3.1
-[1m[92m   Compiling[0m poly1305 v0.8.0
+[1m[92m   Compiling[0m signature v2.2.0
 [1m[92m   Compiling[0m ed25519 v2.2.3
+[1m[92m   Compiling[0m poly1305 v0.8.0
 [1m[92m   Compiling[0m chacha20 v0.9.1
 [1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m   Compiling[0m sha2 v0.10.9
 [1m[92m   Compiling[0m hmac v0.12.1
 [1m[92m   Compiling[0m aead v0.5.2
+[1m[92m   Compiling[0m once_cell v1.21.4
 [1m[92m   Compiling[0m memchr v2.8.3
 [1m[92m   Compiling[0m ppv-lite86 v0.2.21
-[1m[92m   Compiling[0m once_cell v1.21.4
-[1m[92m   Compiling[0m chacha20poly1305 v0.10.1
 [1m[92m   Compiling[0m ed25519-dalek v2.2.0
+[1m[92m   Compiling[0m chacha20poly1305 v0.10.1
 [1m[92m   Compiling[0m pbkdf2 v0.12.2
 [1m[92m   Compiling[0m x25519-dalek v2.0.1
 [1m[92m   Compiling[0m log v0.4.35
-[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m rustls-pki-types v1.15.1
+[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m   Compiling[0m rand v0.8.8
 [1m[92m   Compiling[0m smallvec v1.16.4
@@ -384,22 +384,22 @@ check_exit=0
 [1m[92m   Compiling[0m hashbrown v0.14.5
 [1m[92m   Compiling[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m webpki-roots v1.0.11
+[1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m   Compiling[0m webpki-roots v0.26.11
 [1m[92m   Compiling[0m hashlink v0.9.1
-[1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m   Compiling[0m fallible-streaming-iterator v0.1.9
 [1m[92m   Compiling[0m fallible-iterator v0.3.0
 [1m[92m   Compiling[0m strsim v0.11.1
 [1m[92m   Compiling[0m social-mail-protocol v0.2.0 (/home/runner/work/social/social/crates/protocol)
-[1m[92m   Compiling[0m rustls-webpki v0.103.16
 [1m[92m   Compiling[0m rusqlite v0.32.1
+[1m[92m   Compiling[0m rustls-webpki v0.103.16
 [1m[92m   Compiling[0m rustls v0.23.46
 [1m[92m   Compiling[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
 [1m[92m   Compiling[0m errno v0.3.14
 [1m[92m   Compiling[0m utf8parse v0.2.2
 [1m[92m   Compiling[0m darling_core v0.24.1
-[1m[92m   Compiling[0m anstyle-parse v1.0.0
 [1m[92m   Compiling[0m signal-hook-registry v1.4.8
+[1m[92m   Compiling[0m anstyle-parse v1.0.0
 [1m[92m   Compiling[0m is_terminal_polyfill v1.70.2
 [1m[92m   Compiling[0m anstyle-query v1.1.5
 [1m[92m   Compiling[0m scopeguard v1.2.0
@@ -407,24 +407,21 @@ check_exit=0
 [1m[92m   Compiling[0m anstyle v1.0.14
 [1m[92m   Compiling[0m lock_api v0.4.14
 [1m[92m   Compiling[0m anstream v1.0.0
-[1m[92m   Compiling[0m signal-hook v0.3.18
 [1m[92m   Compiling[0m parking_lot_core v0.9.12
+[1m[92m   Compiling[0m signal-hook v0.3.18
 [1m[92m   Compiling[0m mio v1.2.4
-[1m[92m   Compiling[0m allocator-api2 v0.2.21
-[1m[92m   Compiling[0m clap_lex v1.1.1
-[1m[92m   Compiling[0m linux-raw-sys v0.4.15
 [1m[92m   Compiling[0m foldhash v0.1.5
 [1m[92m   Compiling[0m equivalent v1.0.3
 [1m[92m   Compiling[0m either v1.19.0
-[1m[92m   Compiling[0m rustix v0.38.44
-[1m[92m   Compiling[0m itertools v0.13.0
+[1m[92m   Compiling[0m clap_lex v1.1.1
+[1m[92m   Compiling[0m allocator-api2 v0.2.21
+[1m[92m   Compiling[0m linux-raw-sys v0.4.15
 [1m[92m   Compiling[0m hashbrown v0.15.5
-[1m[92m   Compiling[0m darling_macro v0.24.1
+[1m[92m   Compiling[0m rustix v0.38.44
 [1m[92m   Compiling[0m clap_builder v4.6.7
+[1m[92m   Compiling[0m itertools v0.13.0
+[1m[92m   Compiling[0m darling_macro v0.24.1
 [1m[92m   Compiling[0m social-mail-mail v0.2.0 (/home/runner/work/social/social/crates/mail)
-[1m[92m   Compiling[0m darling v0.24.1
-[1m[92m   Compiling[0m signal-hook-mio v0.2.5
-[1m[92m   Compiling[0m parking_lot v0.12.5
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -447,27 +444,30 @@ check_exit=0
     [1m[94m|[0m
     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1m[92m   Compiling[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
 [1m[33mwarning[0m: `social-mail-mail` (lib) generated 2 warnings
+[1m[92m   Compiling[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
+[1m[92m   Compiling[0m darling v0.24.1
+[1m[92m   Compiling[0m signal-hook-mio v0.2.5
+[1m[92m   Compiling[0m parking_lot v0.12.5
 [1m[92m   Compiling[0m castaway v0.2.4
-[1m[92m   Compiling[0m unicode-width v0.1.14
 [1m[92m   Compiling[0m ryu v1.0.23
 [1m[92m   Compiling[0m static_assertions v1.1.0
 [1m[92m   Compiling[0m unicode-segmentation v1.13.3
+[1m[92m   Compiling[0m unicode-width v0.1.14
 [1m[92m   Compiling[0m unicode-truncate v1.1.0
+[1m[92m   Compiling[0m instability v0.3.14
 [1m[92m   Compiling[0m compact_str v0.8.2
 [1m[92m   Compiling[0m clap v4.6.7
-[1m[92m   Compiling[0m instability v0.3.14
 [1m[92m   Compiling[0m strum v0.26.3
 [1m[92m   Compiling[0m crossterm v0.28.1
-[1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m   Compiling[0m lru v0.12.5
+[1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m   Compiling[0m unicode-width v0.2.0
 [1m[92m   Compiling[0m cassowary v0.3.0
-[1m[92m   Compiling[0m ratatui v0.29.0
 [1m[92m   Compiling[0m unicode-bidi v0.3.18
-[1m[92m   Compiling[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
+[1m[92m   Compiling[0m ratatui v0.29.0
 [1m[33mwarning[0m: `social-mail-mail` (lib test) generated 2 warnings (2 duplicates)
+[1m[92m   Compiling[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
 [1m[92m   Compiling[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
 [1m[33mwarning[0m[1m: function `delivery_label` is never used[0m
     [1m[94m--> [0mapps/cli/src/commands.rs:1275:8
@@ -478,15 +478,15 @@ check_exit=0
      [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
 [1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning
-[1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 18.59s
+[1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 19.39s
 [1m[92m     Running[0m unittests src/main.rs (target/debug/deps/social_mail-0022026449aa3300)
 
 running 6 tests
 test text::tests::identifiers_stay_latin_and_readable ... ok
 test text::tests::empty_and_control_input_is_safe ... ok
+test text::tests::persian_fixtures_survive_layout ... ok
 test text::tests::truncation_respects_width_and_utf8 ... ok
 test text::tests::very_long_unbroken_text_is_broken ... ok
-test text::tests::persian_fixtures_survive_layout ... ok
 test text::tests::mixed_direction_lines_stay_within_width ... ok
 
 test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
@@ -503,13 +503,13 @@ test identity::tests::backup_requires_passphrase ... ok
 test identity::tests::debug_output_hides_secrets ... ok
 test identity::tests::encryption_is_randomised ... ok
 test identity::tests::fingerprint_shape_is_stable ... ok
-test identity::tests::public_identity_base64_round_trip ... ok
 test identity::tests::encryption_round_trip_and_wrong_recipient ... ok
+test identity::tests::public_identity_base64_round_trip ... ok
 test identity::tests::signature_hex_round_trip ... ok
 test tests::grouping_is_stable ... ok
 test tests::short_fingerprint_handles_short_input ... ok
-test identity::tests::backup_rejects_tampered_ciphertext ... ok
 test identity::tests::sign_and_verify_round_trip ... ok
+test identity::tests::backup_rejects_tampered_ciphertext ... ok
 test identity::tests::backup_round_trip_and_wrong_passphrase ... ok
 
 test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
@@ -520,15 +520,15 @@ running 12 tests
 test config::tests::missing_file_yields_defaults ... ok
 test config::tests::comments_inside_strings_are_preserved ... ok
 test config::tests::parses_the_documented_shape ... ok
+test config::tests::unknown_keys_are_ignored ... ok
 test config::tests::reports_malformed_lines_with_context ... ok
 test config::tests::round_trips_through_save_and_load ... ok
 test transport::tests::mail_config_maps_settings_and_defaults ... ok
-test transport::tests::missing_mail_settings_point_at_the_config_key ... ok
 test transport::tests::mail_config_rejects_unknown_tls_modes ... ok
-test config::tests::unknown_keys_are_ignored ... ok
-test transport::tests::rejects_non_hex_recipients ... ok
+test transport::tests::missing_mail_settings_point_at_the_config_key ... ok
 test transport::tests::quarantine_moves_the_file_aside ... ok
 test transport::tests::spools_and_receives_a_message ... ok
+test transport::tests::rejects_non_hex_recipients ... ok
 
 test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
@@ -538,7 +538,7 @@ running 2 tests
 test unverified_members_are_never_relayed_to ... ok
 test relay_preserves_the_author_and_skips_unverified_members ... ok
 
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.64s
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
 
 [1m[92m     Running[0m unittests src/lib.rs (target/debug/deps/social_mail_mail-7a9807de380b0c9a)
 
@@ -547,19 +547,19 @@ test error::tests::display_never_repeats_secrets ... ok
 test error::tests::io_errors_are_transient ... ok
 test imap::tests::classifies_rejections ... ok
 test imap::tests::quotes_login_arguments ... ok
+test imap::tests::finds_literal_lengths ... ok
 test mime::tests::dot_stuffing_preserves_leading_dots ... ok
 test mime::tests::folded_headers_are_unfolded ... ok
 test mime::tests::ordinary_mail_is_not_ours ... ok
 test mime::tests::rejects_multipart_for_now ... ok
 test net::tests::parses_tls_modes ... ok
-test imap::tests::finds_literal_lengths ... ok
 test net::tests::refuses_an_empty_host ... ok
 test mime::tests::round_trips_a_carrier ... ok
 test transport::tests::login_falls_back_to_the_account ... ok
 test transport::tests::missing_password_is_an_auth_error ... ok
 test transport::tests::references_round_trip ... ok
-test transport::tests::refuses_a_recipient_without_an_address ... ok
 test transport::tests::validates_settings_before_connecting ... ok
+test transport::tests::refuses_a_recipient_without_an_address ... ok
 test transport::tests::refuses_an_oversized_carrier ... ok
 
 test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
@@ -569,8 +569,8 @@ test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fin
 running 6 tests
 test bad_credentials_are_an_auth_failure ... ok
 test probe_reports_both_protocols ... ok
-test sends_a_carrier_over_smtp ... ok
 test quarantine_marks_read_and_leaves_the_message ... ok
+test sends_a_carrier_over_smtp ... ok
 test fetches_only_social_mail ... ok
 test acknowledging_moves_mail_to_the_protocol_folder ... ok
 
@@ -596,12 +596,12 @@ test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fin
 [1m[92m     Running[0m tests/fixtures.rs (target/debug/deps/fixtures-30aff69818d87e3b)
 
 running 14 tests
-test carrier_rejects_unknown_kinds_and_broken_json ... ok
 test canonical_bytes_match_the_reference_implementation ... ok
+test carrier_rejects_unknown_kinds_and_broken_json ... ok
 test event_kind_round_trips ... ok
 test event_ids_are_stable ... ok
-test fixtures_are_structurally_valid ... ok
 test payloads_parse_into_typed_shapes ... ok
+test fixtures_are_structurally_valid ... ok
 test rejects_invalid_envelopes ... ok
 test rejects_bad_payloads ... ok
 test signing_requires_matching_author ... ok
@@ -622,16 +622,16 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 [1m[92m     Running[0m unittests src/lib.rs (target/debug/deps/social_mail_storage-f3a1e2eb4ee0dacd)
 
 running 12 tests
-test tests::contacts_round_trip_and_update_local_state ... ok
 test tests::deliveries_track_withheld_and_pending ... ok
+test tests::contacts_round_trip_and_update_local_state ... ok
 test tests::counts_summarise_state ... ok
 test tests::conversations_include_nested_replies_only_when_stored ... ok
-test tests::migration_is_idempotent ... ok
 test tests::events_are_idempotent ... ok
+test tests::migration_is_idempotent ... ok
 test tests::problems_are_upserted_and_clearable ... ok
 test tests::positions_are_monotonic_and_never_reused ... ok
-test tests::replies_to_me_use_the_resolved_parent_author ... ok
 test tests::settings_and_sync_state_round_trip ... ok
+test tests::replies_to_me_use_the_resolved_parent_author ... ok
 test tests::seen_state_and_cursors ... ok
 test tests::tabs_filter_by_follow_and_trust ... ok
 
@@ -728,8 +728,8 @@ test_exit=0
     [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#field_reassign_with_default
     [1m[94m= [0m[1mnote[0m: `#[warn(clippy::field_reassign_with_default)]` on by default
 
-[1m[92m    Checking[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
 [1m[92m    Checking[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
+[1m[92m    Checking[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
 [1m[33mwarning[0m[1m: field assignment outside of initializer for an instance created with Default::default()[0m
    [1m[94m--> [0mcrates/engine/src/transport.rs:375:9
     [1m[94m|[0m
@@ -751,6 +751,12 @@ test_exit=0
      [1m[94m|[0m        [1m[33m^^^^^^^^^^^^^^[0m
      [1m[94m|[0m
      [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+[1m[33mwarning[0m[1m: function `width` is never used[0m
+   [1m[94m--> [0mapps/cli/src/text.rs:100:8
+    [1m[94m|[0m
+[1m[94m100[0m [1m[94m|[0m pub fn width(text: &str) -> usize {
+    [1m[94m|[0m        [1m[33m^^^^^[0m
 
 [1m[33mwarning[0m[1m: enclosing `Ok` and `?` operator are unneeded[0m
    [1m[94m--> [0mapps/cli/src/commands.rs:125:16
@@ -804,13 +810,7 @@ test_exit=0
 [1m[94m386[0m [92m~ [0m                    }
     [1m[94m|[0m
 
-[1m[33mwarning[0m[1m: function `width` is never used[0m
-   [1m[94m--> [0mapps/cli/src/text.rs:100:8
-    [1m[94m|[0m
-[1m[94m100[0m [1m[94m|[0m pub fn width(text: &str) -> usize {
-    [1m[94m|[0m        [1m[33m^^^^^[0m
-
-[1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 4 warnings (run `cargo clippy --fix --bin "social-mail" -p social-mail --tests -- ` to apply 2 suggestions)
-[1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 5 warnings (4 duplicates)
-[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 2.91s
+[1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 4 warnings (4 duplicates)
+[1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 5 warnings (run `cargo clippy --fix --bin "social-mail" -p social-mail -- ` to apply 2 suggestions)
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 2.01s
 clippy_exit=0
