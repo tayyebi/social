@@ -1270,3 +1270,35 @@ crates/engine    application logic, transport boundary, relay
 apps/cli         social-mail (CLI + TUI)
 apps/social-mail-reflector
 ```
+
+## 26. Android app (v0.3)
+
+The phone is a companion client, not a second protocol implementation: the same
+`social-mail-engine` runs as a native library behind a single JNI entry point.
+
+### Requirements
+
+| # | Requirement | Status |
+|---|---|---|
+| A1 | Build from the same engine (crypto, protocol, storage, transport) | done |
+| A2 | Create an identity on the device; keys never leave app-private storage | done |
+| A3 | Feed with Following / Lists / You / All, threads and replies | done |
+| A4 | Compose to followers (encrypted) or to a public list (signed) | done |
+| A5 | Contacts: import a card, follow, verify, mute, block; approve or decline requests | done |
+| A6 | Problems list survives on the phone: nothing quarantined is hidden | done |
+| A7 | Mailbox settings incl. TLS mode, ports, folder, session-only app password | done |
+| A8 | Sync on demand; delivery states labelled exactly as on the desktop | done |
+| A9 | Release artefact is an APK, signed when signing secrets exist | done |
+| A10 | Cloud backup and device transfer excluded (identity cannot leak via backup) | done |
+| A11 | Restore a desktop identity from a backup file | not done (`TODO.md`) |
+| A12 | Background sync / notifications | not done (explicitly deferred) |
+| A13 | Play Store listing and AAB | not done (APK only, deliberately) |
+
+### Boundaries
+
+- The bridge is one function: `call(request_json) -> response_json`. Typed helpers
+  live on the Kotlin side; the contract is documented in `crates/android-jni`.
+- The password is session-only. Anything stronger needs the Android Keystore and its
+  own decision record.
+- No silent behaviour on the phone that the desktop would not do: same engine, same
+  states, same refusals.

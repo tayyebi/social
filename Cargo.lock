@@ -1212,7 +1212,7 @@ checksum = "d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8"
 
 [[package]]
 name = "social-mail"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "chrono",
@@ -1229,7 +1229,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-android-jni"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "jni",
  "serde_json",
@@ -1239,7 +1239,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-crypto"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "chacha20poly1305",
  "chrono",
@@ -1255,7 +1255,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-engine"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "serde",
@@ -1269,7 +1269,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-protocol"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "rand",
@@ -1282,7 +1282,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-reflector"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -1292,7 +1292,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-storage"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "rusqlite",
@@ -1302,7 +1302,7 @@ dependencies = [
 
 [[package]]
 name = "social-mail-transport"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "chrono",
  "rustls",

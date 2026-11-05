@@ -6,11 +6,12 @@ interactive terminal UI, plus a headless list reflector.
 Your identity is a key. Your posts travel as email. Nobody runs a server that
 decides who you can follow.
 
-Status: **v0.2, working reference implementation.** Signed events, encrypted
+Status: **v0.3, working reference implementation.** Signed events, encrypted
 private posts, two-tier trust, the reflector and the terminal UI work end to end,
-and messages now travel through a real mailbox: IMAP for receiving, SMTP for
-sending, app passwords for both. A local spool directory is still available for
-offline demos. See [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md).
+messages travel through a real mailbox (IMAP in, SMTP out, app passwords), and the
+same Rust engine now runs inside an Android app. A local spool directory is still
+available for offline demos. See
+[`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md).
 
 ## What works now
 
@@ -29,7 +30,10 @@ offline demos. See [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.
 | RTL text pipeline with Persian fixtures | done |
 | IMAP receive + SMTP send with app passwords (TLS via rustls) | done |
 | MIME envelope, protocol-folder moves, 2 MB ceiling | done |
+| Android app (Jetpack Compose) over the same engine, via JNI | done |
+| Signed APK release artefact when signing secrets are configured | done |
 | OAuth2 / XOAUTH2 sign-in | not yet (app passwords only) |
+| Identity restore on Android from a desktop backup | not yet (see `TODO.md`) |
 | Attachments, reactions, edits, search, multi-device | out of scope (see `TODO.md`) |
 
 ## Install
@@ -37,16 +41,18 @@ offline demos. See [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.
 Download the archive for your platform from the releases page:
 
 ```text
-social-mail-v0.2.0-x86_64-unknown-linux-gnu.tar.gz
-social-mail-v0.2.0-x86_64-pc-windows-msvc.zip
+social-mail-v0.3.0-x86_64-unknown-linux-gnu.tar.gz
+social-mail-v0.3.0-x86_64-pc-windows-msvc.zip
+social-mail-v0.3.0-android.apk
 ```
 
 Each archive contains `social-mail` (`social-mail.exe` on Windows),
 `social-mail-reflector`, this README and `PLAN.md`. Verify the download against
 `SHA256SUMS.txt` before running it.
 
-The `v0.1.0` artefacts are still downloadable but predate the mail transport: they
-only move messages through a spool directory.
+The APK is release-signed when the four `ANDROID_*` signing secrets are configured
+in CI; otherwise it is published as `…-android-unsigned.apk` and labelled as such.
+The `v0.1.0` and `v0.2.0` artefacts are still downloadable but predate the app.
 
 From source (Rust 1.75 or newer):
 
@@ -133,6 +139,40 @@ What you get, and what you do not:
 Staying offline is still one flag: `social-mail init --offline` uses the spool
 transport, and `social-mail settings mail --transport spool` switches back.
 
+## Android app
+
+`apps/android` is a Jetpack Compose app (minSdk 26, `tld.android.social`) that links
+the same Rust engine through a single JSON-over-JNI entry point. It covers the
+companion workflow: create an identity, read the feed (Following / Lists / You /
+All), open threads and reply, post to followers or to a public list, manage
+contacts and follow requests, review Problems, sync, and configure the mailbox.
+
+```text
+apps/android          Gradle project (Kotlin + Compose)
+crates/android-jni    the bridge: one exported function, JSON in, JSON out
+```
+
+What to expect on the phone:
+
+- The identity is generated on the device and stored in app-private storage; cloud
+  backup and device transfer are explicitly disabled so the keys cannot leave it.
+- The app password is kept **in memory for the session only** — nothing is written
+  to preferences or disk. Restarting the app means entering it again.
+- No background sync: pull to refresh by pressing the sync button.
+- Restoring an existing desktop identity is not implemented yet; first in
+  `TODO.md`.
+
+Building it locally needs the Android SDK, NDK 26+, `cargo-ndk` and Gradle 8.9:
+
+```bash
+cargo ndk --platform 26 -t arm64-v8a -t x86_64 \
+  -o apps/android/app/src/main/jniLibs build --release -p social-mail-android-jni
+cd apps/android && gradle :app:assembleRelease
+```
+
+Signing is described in [`docs/decisions/0004-android-app.md`](docs/decisions/0004-android-app.md);
+the release workflow signs the APK only when the keystore secrets exist.
+
 ## Terminal UI
 
 ```bash
@@ -203,8 +243,10 @@ crates/crypto    keys, signatures, encryption, backups
 crates/protocol  envelopes, canonical JSON, carriers, contact cards
 crates/storage   SQLite: events, timeline, contacts, deliveries, problems
 crates/mail      IMAP/SMTP clients, MIME envelope, failure classification
+crates/android-jni  JSON-over-JNI bridge used by the Android app
 crates/engine    application logic shared by CLI and TUI, transport abstraction
 apps/cli         `social-mail` (CLI + TUI)
+apps/android     Jetpack Compose app (Kotlin, Gradle)
 apps/social-mail-reflector
 ```
 
@@ -220,6 +262,7 @@ and Linux only.
 - [`docs/user-journey.md`](docs/user-journey.md) — product decisions D1–D36, journeys, copy
 - [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md) — what is done, what is left
 - [`docs/protocol.md`](docs/protocol.md) — event envelope, canonicalisation, carriers
+- [`docs/decisions/0004-android-app.md`](docs/decisions/0004-android-app.md) — the Android app, the JNI bridge and APK signing
 - [`docs/decisions/0003-mail-transport.md`](docs/decisions/0003-mail-transport.md) — IMAP/SMTP, TLS, credentials
 - [`docs/security.md`](docs/security.md) — threat model and non-goals
 - [`TODO.md`](TODO.md) — deferred work

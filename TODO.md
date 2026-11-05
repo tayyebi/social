@@ -4,6 +4,24 @@ This file records work intentionally excluded from the Rust CLI/TUI v0.1.
 The current implementation must not add native GUI, browser, or alternative
 transport clients before the core email workflows are stable.
 
+## Android app (v0.3 shipped the companion)
+
+- [x] Compose app over the shared engine through one JSON-over-JNI entry point.
+- [x] Feed, threads, replies, compose, contacts, requests, problems, settings, sync.
+- [x] Session-only app password; no backup, no device transfer of the identity.
+- [x] `release.yml` builds the APK for arm64-v8a, armeabi-v7a and x86_64, signed when
+      the `ANDROID_*` secrets exist and named `-unsigned` otherwise.
+- [ ] Restore a desktop identity from a backup file (most important gap: today the
+      phone can only create a new identity).
+- [ ] Export a backup from the phone so an identity can move to the desktop.
+- [ ] Store the app password in the Android Keystore instead of memory.
+- [ ] WorkManager-driven background sync with a notification, respecting the
+      provider's rate limits.
+- [ ] Share targets: post from another app, "add contact" from a shared card.
+- [ ] Persian UI strings and RTL layout review on device.
+- [ ] Play Store listing (AAB, store assets, privacy policy) if it is ever wanted.
+- [ ] Instrumented tests on an emulator in CI (the JNI bridge is unit-tested today).
+
 ## Mail transport (v0.2 shipped the basics)
 
 - [x] IMAP receive (UID SEARCH/FETCH), SMTP send with STARTTLS and implicit TLS.

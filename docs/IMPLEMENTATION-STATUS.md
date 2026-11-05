@@ -63,6 +63,26 @@ right now.
 - Fake in-process SMTP/IMAP servers cover send, fetch, acknowledge, quarantine and
   auth failure; no test touches the network.
 
+### Android app (v0.3)
+
+- `crates/android-jni` exports one function, `Core.call(request_json)`, and answers
+  with `{"ok": true, "data": …}` or `{"ok": false, "error": …}`. All commands —
+  status, create, feed, conversation, post, reply, follow, contacts, requests,
+  problems, sync, queue, lists, settings, mail probe — go through it. Unit tests
+  cover request parsing, the tab/audience mapping and TLS/port validation.
+- `apps/android` is a Kotlin + Jetpack Compose app (minSdk 26, target 34,
+  `tld.android.social`) with onboarding, feed, thread, compose, contacts, follow
+  requests, problems and settings screens. It compiled and packaged
+  (`assembleRelease`) in CI.
+- The identity lives in app-private storage; `allowBackup=false` plus explicit
+  data-extraction rules keep it out of cloud backup and device transfer.
+- The mail app password is session-only: never in preferences, files, the database
+  or logs.
+- `release.yml` builds the Rust core with `cargo-ndk` for arm64-v8a, armeabi-v7a and
+  x86_64, signs the APK when the `ANDROID_*` secrets exist, verifies the signature
+  with `apksigner`, and publishes `social-mail-vX.Y.Z-android.apk` with a checksum.
+  Without the secrets the artefact is named `…-unsigned.apk`.
+
 ### Surfaces
 
 - `social-mail` CLI: `init`, `identity` (show/export-public/contact-card/
@@ -97,6 +117,8 @@ right now.
 | Item | Why it is not here yet |
 |---|---|
 | OAuth2 / XOAUTH2 | App passwords only in v0.2; provider client registration belongs in its own decision record. |
+| Android identity restore/export | The phone creates a new identity only; backup import/export is the next piece of work. |
+| Android background sync, share targets, Play Store listing | Deferred; the app syncs on demand and ships as an APK. |
 | IDLE / connection pooling | One connection per operation is simpler to reason about; queues are small. |
 | OS keyring storage | Environment variable is documented; keyring is deferred. |
 | Attachments and large media | Out of scope; the 2 MB ceiling quarantines oversized messages. |
@@ -131,7 +153,8 @@ social-mail --config b.toml init --name Bob   --email bob@example.org
 
 ## Next milestone (in order)
 
-1. OAuth2 (XOAUTH2) sign-in for Gmail and Outlook, as its own decision record.
+1. Android identity restore and export, so one identity works on desktop and phone.
+2. OAuth2 (XOAUTH2) sign-in for Gmail and Outlook, as its own decision record.
 2. Session reuse and IDLE so a long-running client does not reopen per operation.
 3. Public-list reading from a mailbox and reflector parity for public lists.
 4. Scripted J0–J18 acceptance transcripts against a fake mailbox.
