@@ -21,6 +21,8 @@ Email providers still provide transport and storage. “Decentralized” means t
 
 This phase is a working reference implementation, not a production-ready anonymity system.
 
+This document specifies the machine. `docs/user-journey.md` specifies the human side of the same binary — personas, first-run setup, trust ceremonies, screen flows, copy, failure states, and closed product decisions (D1–D28). It is part of the v0.1 baseline: where it disagrees about *what the software must do*, this document wins; where it disagrees about *how the product feels and in what order the user is asked for things*, it wins. See section 24.
+
 ---
 
 ## 2. Deliverables
@@ -124,6 +126,7 @@ Use this structure unless a concrete implementation constraint requires a small 
     ├── architecture.md
     ├── protocol.md
     ├── security.md
+    ├── user-journey.md
     └── decisions/
 ```
 
@@ -336,7 +339,7 @@ If a reply arrives before its parent:
 - Display it as an orphaned reply or pending item.
 - Resolve it automatically when the parent arrives.
 
-`created_at` is an author claim. Sort primarily by local receipt/index information with author time displayed separately; do not let an arbitrary timestamp reorder local storage destructively.
+`created_at` is an author claim. Give every stored event an **immutable, monotonically increasing local feed position**, assigned at commit time inside the same transaction as the sync checkpoint. Within one commit batch, order by the claimed time clamped to `[commit_time - 30 days, commit_time]`; after commit, never re-sort and never move an event. Display author time separately and label arrivals that are far older than the newest committed item. Read state never changes position. Do not let an arbitrary timestamp reorder local storage destructively, and do not let a background sync rearrange the screen a user is reading (see `docs/user-journey.md` D32).
 
 ### Invalid events
 
@@ -402,8 +405,8 @@ Requirements:
 
 - Bob’s approved-follower list is local and authoritative for his client.
 - A follow approval is not inferred merely because a request arrived.
-- Approval requires an available, verified recipient certificate.
-- Reject requests with unknown or untrusted keys unless the user explicitly imports and approves the contact.
+- Two-tier trust (`docs/user-journey.md` D9): a follower who is approved without fingerprint verification is accepted into an **unverified tier** — readable and followable, but excluded from every private post. Private posts may only be delivered to followers whose key the user has verified. Seed deliveries are never backfilled after later verification.
+- Requests from keys with no available certificate must be resolved by explicitly importing the contact first; approval never creates trust from an unverified claim.
 - Support follow removal and blocking.
 - Prevent delivery to blocked or removed followers.
 - Previously delivered content cannot be recalled.
@@ -623,6 +626,7 @@ received
 Requirements:
 
 - Event IDs have uniqueness constraints.
+- Every timeline entry stores an immutable feed position (monotonic per profile), and per-filter seen cursors are stored separately from entries.
 - Transport messages and application events are separate concepts.
 - Duplicate deliveries do not duplicate timeline entries.
 - Raw payloads and verification status remain available for diagnostics.
@@ -667,6 +671,14 @@ social-mail lists add <ADDRESS> --list-id <LIST_ID>
 social-mail lists list
 social-mail settings show
 social-mail settings set-mail-folder <true|false>
+```
+
+Additional commands required by the user-journey baseline (`docs/user-journey.md`):
+
+```text
+social-mail init [--email <ADDR>] [--name <NAME>] [--locale <en|fa>] [--offline] [--no-auto-sync]
+social-mail identity contact-card [--out <FILE>]
+social-mail lists request-membership <LIST_ADDRESS>
 ```
 
 `--tui` and `tui` may both launch the same interface, but only one needs to be the documented primary form.
@@ -1131,7 +1143,7 @@ The implementing agent must:
 5. Never generate or commit real credentials, private keys, or personal email fixtures.
 6. Keep all protocol state transitions deterministic and covered by fixtures.
 7. Run formatting, linting, and tests before reporting completion.
-8. Update `README.md`, `docs/protocol.md`, and `TODO.md` whenever behavior changes.
+8. Update `README.md`, `docs/protocol.md`, `docs/user-journey.md`, and `TODO.md` whenever behavior changes.
 9. Mark unfinished functionality explicitly rather than leaving silently broken commands.
 10. Finish with a report containing:
     - Implemented features.
@@ -1146,3 +1158,115 @@ The first implementation target remains:
 > Two Rust profiles exchanging a verified, encrypted signed post through real or locally emulated email, with a persistent local timeline.
 
 Everything else should build on that working foundation.
+
+---
+
+## 24. User Experience Baseline
+
+The full plan lives in `docs/user-journey.md`. The non-negotiable parts that
+constrain every implementation task:
+
+1. **Two equal surfaces.** Every user action exists both in the TUI and as a CLI
+   command; parity is a test (`docs/user-journey.md` §19), and neither surface may
+   be the only way to do something. `social-mail init` is the single entry point
+   and is resumable and fully flag-drivable.
+2. **First launch is always the guided wizard.** No implicit profile creation.
+   Local (file-based) mode exists as an advanced `init --offline` path for
+   credential-free demos and CI, not as an onboarding choice.
+3. **Identity before mailbox**, and a failed SMTP/IMAP test never discards the
+   identity or restarts setup.
+4. **Two-tier trust.** Verification is still a two-step ceremony with the full
+   grouped fingerprint on screen, but reading is permissive: unverified contacts
+   can be imported, followed, and read (permanently tagged `unverified`), while
+   **private posts are delivered only to verified followers**. Withheld
+   recipients are shown as `Not sent — unverified`, never as queued or failed.
+5. **The timeline is a feed of cards** (header: time · author · short fingerprint
+   · trust · audience; body; footer), grouped by day.
+6. **Color carries status, words carry meaning.** Trust and delivery states are
+   color-coded and always also rendered as words; `NO_COLOR` and
+   `settings.color = never` lose no information.
+7. **Private is the default audience**, and every card and queue row states its
+   audience and trust status.
+8. **Delivery language never exceeds SMTP truth**: queued, sending, accepted by
+   your mail server, retrying, failed, cancelled, withheld. Never "delivered",
+   never "read".
+9. **Key changes are never silent.** Mismatched or invalid signatures are
+   quarantined into a visible `Problems` list and never enter the timeline.
+10. **Every error names an action.** No dead-end screens and no unusable app when
+    the network or mailbox is broken.
+11. **Block and mute are local and silent**; no block or mute action sends mail.
+12. **Nothing is lost to a crash**: drafts survive `Esc`, outgoing state survives
+    kill, and restarting never duplicates a timeline entry.
+13. **The feed is sticky and append-only.** Items get their position once, at
+    commit; nothing is re-sorted, and syncing never rearranges what is on screen.
+    Late arrivals are labelled `late`, not relocated.
+14. **The feed is roots-only**, with replies in conversations and a visible
+    `N new replies` counter plus a Replies screen so "someone answered you" is
+    never invisible. List traffic is never merged into the Following tab.
+15. **Density is per source and chrome is hybrid**: compact rows for lists, cards
+    for people, borders only when the terminal has room (≥60 columns, not
+    compact), and focus is never rendered as a status color.
+16. **Persian is a first-class locale**: UI language is chosen at first run with
+    a live preview, identifiers stay Latin and LTR inside RTL text, and RTL
+    correctness is proven by snapshot tests, not asserted.
+17. **Journeys J0–J18 in section 22 of `docs/user-journey.md` are acceptance
+    tests**, not documentation. A journey without a test is unfinished work, and
+    the release report must show which journeys pass. The acceptance demo must
+    pass both interactively and as a scripted CLI transcript.
+
+---
+
+## 25. Implementation status (2026-11-05)
+
+This section records where the code stands against the requirements above. It is
+not a requirement; `docs/IMPLEMENTATION-STATUS.md` is the maintained version of
+this table. Requirements above stay unchanged until a decision record says
+otherwise.
+
+### Shipped in v0.2 (Windows + Linux release)
+
+- §9 MIME: one carrier per message, base64 body, `SocialMail/v1 carrier` subject.
+- §12 folder behaviour: processed mail moves to `SocialMail/` (copy, delete, expunge);
+  quarantined mail stays put, flagged read.
+- §13 IMAP receive and SMTP send with app passwords, TLS via `rustls`, and failure
+  classification that drives the existing delivery state machine.
+
+### Shipped in v0.1 (release `v0.1.0`, Windows + Linux)
+
+| Requirement | Where |
+|---|---|
+| §2 deliverables 1–4, 7, 9, 10, 11, 13 | workspace, CLI/TUI binary, engine, SQLite, RTL tests, README, `docs/`, `release.yml` |
+| §7 identity and contact model | `crates/crypto`, `crates/protocol/src/card.rs`, `crates/engine` |
+| §8 protocol envelope, canonical ids, invalid events | `crates/protocol`, golden vectors in `crates/protocol/tests/fixtures.rs` |
+| §9 signing and encryption | Ed25519 + X25519 + ChaCha20-Poly1305; see `docs/decisions/0002-crypto-backend.md` |
+| §10 direct subscription workflow | follow request → approval → encrypted posts, with `withheld` for unverified followers |
+| §11 mailing lists (both modes) | public-list delivery to the operator; `social-mail-reflector` for private relay, strict verification, per-member states |
+| §14 local storage | schema v1, sticky positions, dedupe, orphan re-link, problems, deliveries, settings |
+| §15 CLI | full command surface with `--json`, nonzero exits, actionable errors |
+| §16–17 TUI and RTL | four tabs, three densities, conversation view, composer, bidi pipeline with Persian fixtures |
+| §18 security requirements | quarantine, block, mismatch rejection, encrypted backups, `docs/security.md` |
+| §19 tests | unit + integration + relay end-to-end + bidi; `cargo test --workspace` green on ubuntu-latest and windows-latest |
+| §21 Actions | `release.yml` on `v*` tags → two archives + SHA-256 + SHA256SUMS.txt; branch CI was temporary and is now removed |
+| §22 `TODO.md` | present, covering deferred work |
+| §24 non-negotiables 1–17 | implemented except those that depend on mail transport (see below) |
+
+### Still open
+
+| Requirement | Blocker |
+|---|---|
+| OAuth2 / XOAUTH2 sign-in | app passwords only in v0.2; see `TODO.md` |
+| IDLE, session reuse, UIDVALIDITY cursors | one connection per operation re-scans the mailbox each pass |
+| Attachments and large media | 2 MB ceiling quarantines oversized messages; attachments are out of scope |
+| §19 acceptance demonstration J0–J18 as transcripts | journeys exist as engine tests and CLI commands; scripted transcripts against a fake mailbox are next |
+| OpenPGP interoperability (§1) | replaced by decision 0002 |
+
+### Crate layout that shipped
+
+```text
+crates/crypto    keys, signatures, encryption, backups
+crates/protocol  envelopes, canonical JSON, carriers, contact cards
+crates/storage   SQLite schema and queries
+crates/engine    application logic, transport boundary, relay
+apps/cli         social-mail (CLI + TUI)
+apps/social-mail-reflector
+```
