@@ -15,10 +15,29 @@ secrecy.
 | Replay protection | Duplicate event ids are ignored; encrypted carriers re-derive author, id and signature from the decrypted event. |
 | Secret hygiene | The identity file is 0600 on Unix; backups are encrypted; diagnostics never print key material. |
 
+## Credentials
+
+v0.2 signs in with an app password read from `SOCIAL_MAIL_PASSWORD` (or the variable
+named in `mail.password_env`). The password is kept in memory for one operation and
+is never written to `social-mail.toml`, never stored in SQLite, never printed by
+`diagnostics`, and never included in error text or `Debug` output.
+
+Use an app password, not your account password: it can be revoked on its own, and
+it usually bypasses second-factor prompts. If a provider only offers OAuth2, this
+build cannot talk to it yet (`TODO.md`).
+
+TLS is mandatory in practice: `implicit` and `starttls` are verified against
+bundled Mozilla roots, and a refused STARTTLS upgrade aborts the connection instead
+of continuing in the clear. `none` exists for a local relay and is labelled as such.
+
 ## What it does not protect
 
 - **Metadata.** Your mail provider sees who you write to, when, and how often.
-  Subject lines and timestamps leak the same things email always leaks.
+  Subject lines and timestamps leak the same things email always leaks. Our subject
+  is always `SocialMail/v1 carrier`, so the envelope still shows the two addresses
+  and the time.
+- **Server-side copies.** Processed mail is moved to `SocialMail/` and quarantined
+  mail is left in place: both remain readable by whoever runs the mailbox.
 - **Traffic analysis and anonymity.** There is no onion routing, no padding, and
   no cover traffic.
 - **A compromised endpoint.** Malware, a shared account, or a keylogger defeats

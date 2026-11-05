@@ -4,16 +4,20 @@ This file records work intentionally excluded from the Rust CLI/TUI v0.1.
 The current implementation must not add native GUI, browser, or alternative
 transport clients before the core email workflows are stable.
 
-## Mail transport (next milestone)
+## Mail transport (v0.2 shipped the basics)
 
-- [ ] IMAP receive with UIDVALIDITY handling, resumable sync and `IDLE`-free polling.
-- [ ] SMTP send with STARTTLS/SSL, per-account submission credentials.
-- [ ] Provider-specific failure classification (auth, quota, refused sender, transient).
-- [ ] MIME mapping: one carrier per message, UTF-8 body, no HTML alternative.
-- [ ] Protocol folder moves (`SocialMail/`), including copy-then-delete safety.
-- [ ] 2 MB message ceiling with quarantine above it.
+- [x] IMAP receive (UID SEARCH/FETCH), SMTP send with STARTTLS and implicit TLS.
+- [x] Provider-independent failure classification: auth, transient, permanent, too large.
+- [x] MIME mapping: one carrier per message, UTF-8 base64 body.
+- [x] Protocol folder moves (`SocialMail/`) with copy-then-delete.
+- [x] 2 MB message ceiling with quarantine above it.
+- [x] App-password credentials from the environment, redacted in Debug output.
+- [ ] OAuth2 / XOAUTH2 sign-in (Gmail, Outlook) with per-provider client registration.
+- [ ] OS keyring credential storage (Windows Credential Manager, Secret Service).
+- [ ] `IDLE` and a reused session for long-running clients.
+- [ ] UIDVALIDITY-aware resumable sync (v0.2 re-scans the mailbox each pass).
 - [ ] Public-list reading from the mailbox; reflector parity for public lists.
-- [ ] Credential storage that never prints secrets and never lands in the database.
+- [ ] HTML-only senders: currently only `text/plain` and base64/quoted-printable parts.
 
 ## Shared-core preparation
 

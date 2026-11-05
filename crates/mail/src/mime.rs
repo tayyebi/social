@@ -244,7 +244,7 @@ mod tests {
 
     #[test]
     fn folded_headers_are_unfolded() {
-        let message = b"X-SocialMail: v1\r\nSubject: SocialMail/v1\r\n  carrier\r\n\r\naGk=\r\n";
+        let message = b"X-SocialMail: v1\r\nSubject: SocialMail/v1\r\n  carrier\r\nContent-Transfer-Encoding: base64\r\n\r\naGk=\r\n";
         let parsed = parse_message(message).unwrap();
         assert_eq!(parsed.subject, "SocialMail/v1 carrier");
         assert_eq!(parsed.body, b"hi");

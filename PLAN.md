@@ -1216,14 +1216,22 @@ constrain every implementation task:
 
 ---
 
-## 25. Implementation status (2026-11-04)
+## 25. Implementation status (2026-11-05)
 
 This section records where the code stands against the requirements above. It is
 not a requirement; `docs/IMPLEMENTATION-STATUS.md` is the maintained version of
 this table. Requirements above stay unchanged until a decision record says
 otherwise.
 
-### Shipped in this phase (release `v0.1.0`, Windows + Linux)
+### Shipped in v0.2 (Windows + Linux release)
+
+- §9 MIME: one carrier per message, base64 body, `SocialMail/v1 carrier` subject.
+- §12 folder behaviour: processed mail moves to `SocialMail/` (copy, delete, expunge);
+  quarantined mail stays put, flagged read.
+- §13 IMAP receive and SMTP send with app passwords, TLS via `rustls`, and failure
+  classification that drives the existing delivery state machine.
+
+### Shipped in v0.1 (release `v0.1.0`, Windows + Linux)
 
 | Requirement | Where |
 |---|---|
@@ -1246,12 +1254,11 @@ otherwise.
 
 | Requirement | Blocker |
 |---|---|
-| §12 IMAP folder behaviour | needs IMAP |
-| §13 synchronization and sending | spool transport ships instead; IMAP/SMTP is the next milestone |
-| MIME encoding (§9) | carriers are JSON on disk; MIME lands with the mail transport |
-| §16 "Syncing… n of m" and offline banners | depend on a real sync loop |
-| §19 acceptance demonstration J0–J18 as transcripts | journeys that require a mailbox cannot be scripted yet; the spool equivalents pass |
-| OpenPGP interoperability (§1) | replaced for v0.1 by decision 0002 |
+| OAuth2 / XOAUTH2 sign-in | app passwords only in v0.2; see `TODO.md` |
+| IDLE, session reuse, UIDVALIDITY cursors | one connection per operation re-scans the mailbox each pass |
+| Attachments and large media | 2 MB ceiling quarantines oversized messages; attachments are out of scope |
+| §19 acceptance demonstration J0–J18 as transcripts | journeys exist as engine tests and CLI commands; scripted transcripts against a fake mailbox are next |
+| OpenPGP interoperability (§1) | replaced by decision 0002 |
 
 ### Crate layout that shipped
 

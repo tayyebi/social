@@ -1,7 +1,7 @@
 # Implementation status
 
-Last updated: 2026-11-04, branch `arena/beca6cfd-social`, phase "Windows and Linux
-releases for v0.1".
+Last updated: 2026-11-05, branch `arena/beca6cfd-social`, phase "v0.2 mail
+transport: generic IMAP/SMTP with app passwords".
 
 This file is the honest scoreboard. `PLAN.md` says what v0.1 must do;
 `docs/user-journey.md` says how it must feel; this page says what the code does
@@ -41,6 +41,28 @@ right now.
   duplicate suppression by event id, quarantine with readable reasons, mute and
   block applied to every tab.
 
+### Mail transport (v0.2)
+
+- `crates/mail` implements SMTP submission (EHLO, STARTTLS, AUTH PLAIN/LOGIN,
+  MAIL/RCPT/DATA, dot-stuffing) and IMAP (LOGIN, SELECT, UID SEARCH, UID FETCH with
+  literals, COPY, STORE, EXPUNGE, CREATE) as small blocking clients.
+- TLS through `rustls` with bundled Mozilla roots: identical on Windows and Linux,
+  no OpenSSL, no way to disable verification, no silent STARTTLS downgrade.
+- Carriers travel as `text/plain; charset=utf-8`, base64, subject
+  `SocialMail/v1 carrier`, header `X-SocialMail: v1`.
+- Processed mail is marked read, copied into `SocialMail/`, marked deleted and
+  expunged; quarantined mail is left in place, flagged read, with the reason in
+  Problems.
+- Failures are classified — `auth`, `transient`, `permanent`, `too large` — and map
+  onto the delivery states: auth pauses the queue and records a banner error,
+  transient retries with backoff, permanent and oversized fail with a reason.
+- The app password comes from `SOCIAL_MAIL_PASSWORD` (or `mail.password_env`). It is
+  never written to the config file, the database, diagnostics or `Debug` output.
+- `social-mail mail test [--send]`, `social-mail mail status`,
+  `social-mail settings mail ...`, and `Diagnostics` report the effective settings.
+- Fake in-process SMTP/IMAP servers cover send, fetch, acknowledge, quarantine and
+  auth failure; no test touches the network.
+
 ### Surfaces
 
 - `social-mail` CLI: `init`, `identity` (show/export-public/contact-card/
@@ -74,9 +96,10 @@ right now.
 
 | Item | Why it is not here yet |
 |---|---|
-| IMAP receive, SMTP send | The transport boundary is in place (`SpoolTransport`); mail needs credential handling, folder moves and failure classification that deserve their own milestone. |
-| Protocol folder movement (`SocialMail/`) | Depends on IMAP. The setting and the copy exist; nothing moves yet. |
-| MIME mapping | Carriers are JSON today; MIME wrapping comes with the mail transport. |
+| OAuth2 / XOAUTH2 | App passwords only in v0.2; provider client registration belongs in its own decision record. |
+| IDLE / connection pooling | One connection per operation is simpler to reason about; queues are small. |
+| OS keyring storage | Environment variable is documented; keyring is deferred. |
+| Attachments and large media | Out of scope; the 2 MB ceiling quarantines oversized messages. |
 | OpenPGP wire compatibility | Deliberately replaced by Ed25519+X25519 for v0.1 with PGP-shaped fingerprints. See `docs/decisions/0002-crypto-backend.md`. |
 | Public-list ingestion at scale | Reading list mail from a mailbox needs IMAP. |
 | Persian glyph shaping | Terminals that do not shape Arabic script still show disconnected letters; documented in `TODO.md`. |
@@ -108,9 +131,8 @@ social-mail --config b.toml init --name Bob   --email bob@example.org
 
 ## Next milestone (in order)
 
-1. IMAP/SMTP transport with the same delivery state machine and honest labels.
-2. MIME encoding of carriers, plus protocol folder moves.
-3. Public-list reading from the mailbox; reflector parity for public lists.
-4. Attachment and message-size policy (quarantine above 2 MB, as specified).
-5. Release artifacts for additional targets if the phase widens beyond
-   Windows + Linux.
+1. OAuth2 (XOAUTH2) sign-in for Gmail and Outlook, as its own decision record.
+2. Session reuse and IDLE so a long-running client does not reopen per operation.
+3. Public-list reading from a mailbox and reflector parity for public lists.
+4. Scripted J0–J18 acceptance transcripts against a fake mailbox.
+5. Attachments with the documented size policy.

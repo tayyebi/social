@@ -6,11 +6,11 @@ interactive terminal UI, plus a headless list reflector.
 Your identity is a key. Your posts travel as email. Nobody runs a server that
 decides who you can follow.
 
-Status: **v0.1, working reference implementation.** Signed events, encrypted
-private posts, two-tier trust, the reflector and the terminal UI work end to end
-today. Mail transport is the next milestone: this build moves messages through a
-shared spool directory instead of IMAP/SMTP. See
-[`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md).
+Status: **v0.2, working reference implementation.** Signed events, encrypted
+private posts, two-tier trust, the reflector and the terminal UI work end to end,
+and messages now travel through a real mailbox: IMAP for receiving, SMTP for
+sending, app passwords for both. A local spool directory is still available for
+offline demos. See [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md).
 
 ## What works now
 
@@ -27,7 +27,9 @@ shared spool directory instead of IMAP/SMTP. See
 | SQLite storage, sticky timeline positions, dedupe, orphan replies | done |
 | TUI: four source tabs, three densities, conversation view, queue, problems | done |
 | RTL text pipeline with Persian fixtures | done |
-| IMAP/SMTP transport, mail folder moving | **not in this build** |
+| IMAP receive + SMTP send with app passwords (TLS via rustls) | done |
+| MIME envelope, protocol-folder moves, 2 MB ceiling | done |
+| OAuth2 / XOAUTH2 sign-in | not yet (app passwords only) |
 | Attachments, reactions, edits, search, multi-device | out of scope (see `TODO.md`) |
 
 ## Install
@@ -42,6 +44,9 @@ social-mail-v0.1.0-x86_64-pc-windows-msvc.zip
 Each archive contains `social-mail` (`social-mail.exe` on Windows),
 `social-mail-reflector`, this README and `PLAN.md`. Verify the download against
 `SHA256SUMS.txt` before running it.
+
+v0.2 artefacts are named `social-mail-v0.2.0-...`; the older `v0.1.0` artefacts use
+the spool transport only.
 
 From source (Rust 1.75 or newer):
 
@@ -91,6 +96,43 @@ social-mail timeline --json
 social-mail diagnostics --json
 ```
 
+## Connect a mailbox
+
+v0.2 talks to any IMAP/SMTP provider that accepts app passwords — Fastmail, Proton
+Bridge, self-hosted Dovecot, most VPS mail servers, and plenty more.
+
+```bash
+social-mail settings mail \
+  --transport mail \
+  --account alice@example.org \
+  --imap-host imap.example.org --imap-port 993 --imap-tls implicit \
+  --smtp-host smtp.example.org --smtp-port 587 --smtp-tls starttls
+
+export SOCIAL_MAIL_PASSWORD='app-password-from-your-provider'
+social-mail mail test          # signs in to IMAP and SMTP, sends nothing
+social-mail mail test --send   # additionally posts a test message to yourself
+social-mail sync
+```
+
+What you get, and what you do not:
+
+- TLS is always verified (bundled Mozilla roots). There is no switch to turn it off.
+- The password lives in an environment variable. It is never written to
+  `social-mail.toml`, never stored in the database, never printed — and `Debug`
+  output is redacted on purpose.
+- `--imap-tls starttls` aborts if the server refuses the upgrade; there is no
+  silent downgrade to plaintext.
+- Processed protocol mail is moved to `SocialMail/` (set `mail.move_protocol_messages
+  = false` to keep it in place). Quarantined mail stays put, flagged read, with the
+  reason in `social-mail problems list`.
+- Delivery language stays honest: "Accepted for delivery" means your mail server
+  took it, nothing more. Sign-in failures pause sending and say so.
+- OAuth2 (Gmail/Outlook) is not implemented; use an app password or a provider that
+  offers one. See `TODO.md`.
+
+Staying offline is still one flag: `social-mail init --offline` uses the spool
+transport, and `social-mail settings mail --transport spool` switches back.
+
 ## Terminal UI
 
 ```bash
@@ -104,7 +146,7 @@ social-mail --tui      # or: social-mail tui
 | `j` `k` | move |
 | `Enter` | open conversation |
 | `n` / `R` | new post / reply |
-| `r` | sync now |
+| `r` | sync now (IMAP + SMTP when a mailbox is configured) |
 | `g c` | contacts (then `v` verify, `b` block, `m` mute, `f` follow) |
 | `g f` | follow requests (`v` verify & approve, `a` approve, `d` decline) |
 | `g q` | queue (retry, cancel) |
@@ -143,6 +185,8 @@ The operator can read list traffic while relaying it; say so to your members.
   feed.
 - Key loss is documented, not solved: see `docs/security.md` and
   `docs/decisions/0002-crypto-backend.md` (OpenPGP was deferred for v0.1).
+- Mail transport choices (rustls, hand-written clients, app passwords, folder
+  moves) are recorded in `docs/decisions/0003-mail-transport.md`.
 
 ## Development
 
@@ -158,7 +202,8 @@ Layered by design:
 crates/crypto    keys, signatures, encryption, backups
 crates/protocol  envelopes, canonical JSON, carriers, contact cards
 crates/storage   SQLite: events, timeline, contacts, deliveries, problems
-crates/engine    application logic shared by CLI and TUI
+crates/mail      IMAP/SMTP clients, MIME envelope, failure classification
+crates/engine    application logic shared by CLI and TUI, transport abstraction
 apps/cli         `social-mail` (CLI + TUI)
 apps/social-mail-reflector
 ```
@@ -175,6 +220,7 @@ and Linux only.
 - [`docs/user-journey.md`](docs/user-journey.md) — product decisions D1–D36, journeys, copy
 - [`docs/IMPLEMENTATION-STATUS.md`](docs/IMPLEMENTATION-STATUS.md) — what is done, what is left
 - [`docs/protocol.md`](docs/protocol.md) — event envelope, canonicalisation, carriers
+- [`docs/decisions/0003-mail-transport.md`](docs/decisions/0003-mail-transport.md) — IMAP/SMTP, TLS, credentials
 - [`docs/security.md`](docs/security.md) — threat model and non-goals
 - [`TODO.md`](TODO.md) — deferred work
 
