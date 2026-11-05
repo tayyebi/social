@@ -1,5 +1,5 @@
 # ci report (ubuntu-latest)
-sha: 24b92fce3ecafb19ff8721787a47d5c1f454155a
+sha: d3ae17ee8c5ec0094c9c2d0c72a394d3b812b0ad
 
 ## toolchain
 rustc 1.99.1 (58cf8f9c3 2026-10-13)
@@ -10,148 +10,139 @@ fmt_exit=0
 
 ## check
 [1m[92m    Updating[0m crates.io index
-[1m[92m     Locking[0m 8 packages to highest compatible versions
-[1m[92m      Adding[0m ring v0.17.14
-[1m[92m      Adding[0m rustls v0.23.46
-[1m[92m      Adding[0m rustls-pki-types v1.15.1
-[1m[92m      Adding[0m rustls-webpki v0.103.16
-[1m[92m      Adding[0m untrusted v0.9.0
-[1m[92m      Adding[0m webpki-roots v0.26.11 [1m[33m(available: v1.0.11)[0m
-[1m[92m      Adding[0m webpki-roots v1.0.11
-[1m[92m      Adding[0m windows-sys v0.52.0
 [1m[92m Downloading[0m crates ...
-[1m[92m  Downloaded[0m anstyle-query v1.1.5
-[1m[92m  Downloaded[0m aead v0.5.2
-[1m[92m  Downloaded[0m shlex v2.0.1
-[1m[92m  Downloaded[0m smallvec v1.16.4
-[1m[92m  Downloaded[0m strum v0.26.3
-[1m[92m  Downloaded[0m strum_macros v0.26.4
-[1m[92m  Downloaded[0m anstyle v1.0.14
-[1m[92m  Downloaded[0m anstyle-parse v1.0.0
-[1m[92m  Downloaded[0m autocfg v1.5.1
-[1m[92m  Downloaded[0m crypto-common v0.1.7
-[1m[92m  Downloaded[0m signal-hook-registry v1.4.8
-[1m[92m  Downloaded[0m signature v2.2.0
-[1m[92m  Downloaded[0m static_assertions v1.1.0
-[1m[92m  Downloaded[0m base64ct v1.8.3
-[1m[92m  Downloaded[0m signal-hook-mio v0.2.5
-[1m[92m  Downloaded[0m spki v0.7.3
-[1m[92m  Downloaded[0m strsim v0.11.1
-[1m[92m  Downloaded[0m ahash v0.8.12
-[1m[92m  Downloaded[0m anyhow v1.0.104
-[1m[92m  Downloaded[0m sha2 v0.10.9
-[1m[92m  Downloaded[0m zeroize_derive v1.5.0
-[1m[92m  Downloaded[0m anstream v1.0.0
 [1m[92m  Downloaded[0m allocator-api2 v0.2.21
-[1m[92m  Downloaded[0m bitflags v2.13.2
-[1m[92m  Downloaded[0m universal-hash v0.5.1
-[1m[92m  Downloaded[0m signal-hook v0.3.18
-[1m[92m  Downloaded[0m cc v1.11.0
-[1m[92m  Downloaded[0m equivalent v1.0.3
-[1m[92m  Downloaded[0m version_check v0.9.5
-[1m[92m  Downloaded[0m block-buffer v0.10.4
-[1m[92m  Downloaded[0m darling_macro v0.24.1
-[1m[92m  Downloaded[0m clap_lex v1.1.1
-[1m[92m  Downloaded[0m untrusted v0.9.0
-[1m[92m  Downloaded[0m webpki-roots v0.26.11
-[1m[92m  Downloaded[0m utf8parse v0.2.2
-[1m[92m  Downloaded[0m generic-array v0.14.7
-[1m[92m  Downloaded[0m heck v0.5.0
-[1m[92m  Downloaded[0m instability v0.3.14
-[1m[92m  Downloaded[0m ed25519 v2.2.3
-[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
-[1m[92m  Downloaded[0m foldhash v0.1.5
-[1m[92m  Downloaded[0m subtle v2.6.1
-[1m[92m  Downloaded[0m unicode-truncate v1.1.0
-[1m[92m  Downloaded[0m zeroize v1.9.1
-[1m[92m  Downloaded[0m clap_derive v4.6.7
-[1m[92m  Downloaded[0m serde_json v1.0.154
-[1m[92m  Downloaded[0m zmij v1.0.23
-[1m[92m  Downloaded[0m cassowary v0.3.0
-[1m[92m  Downloaded[0m castaway v0.2.4
+[1m[92m  Downloaded[0m signal-hook-mio v0.2.5
+[1m[92m  Downloaded[0m shlex v2.0.1
+[1m[92m  Downloaded[0m aead v0.5.2
+[1m[92m  Downloaded[0m anstyle v1.0.14
+[1m[92m  Downloaded[0m sha2 v0.10.9
+[1m[92m  Downloaded[0m ahash v0.8.12
+[1m[92m  Downloaded[0m rustc_version v0.4.1
+[1m[92m  Downloaded[0m autocfg v1.5.1
 [1m[92m  Downloaded[0m cfg-if v1.0.5
-[1m[92m  Downloaded[0m hashlink v0.9.1
-[1m[92m  Downloaded[0m itoa v1.0.18
-[1m[92m  Downloaded[0m thiserror v1.0.69
-[1m[92m  Downloaded[0m thiserror-impl v1.0.69
-[1m[92m  Downloaded[0m digest v0.10.7
-[1m[92m  Downloaded[0m either v1.19.0
-[1m[92m  Downloaded[0m errno v0.3.14
-[1m[92m  Downloaded[0m ident_case v1.0.1
-[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
-[1m[92m  Downloaded[0m unicode-ident v1.0.27
 [1m[92m  Downloaded[0m fallible-iterator v0.3.0
-[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
-[1m[92m  Downloaded[0m hmac v0.12.1
-[1m[92m  Downloaded[0m unicode-bidi v0.3.18
-[1m[92m  Downloaded[0m x25519-dalek v2.0.1
-[1m[92m  Downloaded[0m der v0.7.10
-[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
-[1m[92m  Downloaded[0m getrandom v0.2.17
-[1m[92m  Downloaded[0m iana-time-zone v0.1.65
-[1m[92m  Downloaded[0m scopeguard v1.2.0
-[1m[92m  Downloaded[0m cipher v0.4.4
-[1m[92m  Downloaded[0m clap v4.6.7
-[1m[92m  Downloaded[0m compact_str v0.8.2
-[1m[92m  Downloaded[0m crossterm v0.28.1
+[1m[92m  Downloaded[0m anstream v1.0.0
+[1m[92m  Downloaded[0m colorchoice v1.0.5
+[1m[92m  Downloaded[0m serde_json v1.0.154
+[1m[92m  Downloaded[0m signature v2.2.0
+[1m[92m  Downloaded[0m universal-hash v0.5.1
+[1m[92m  Downloaded[0m webpki-roots v0.26.11
+[1m[92m  Downloaded[0m crypto-common v0.1.7
+[1m[92m  Downloaded[0m utf8parse v0.2.2
+[1m[92m  Downloaded[0m strum v0.26.3
+[1m[92m  Downloaded[0m subtle v2.6.1
+[1m[92m  Downloaded[0m untrusted v0.9.0
+[1m[92m  Downloaded[0m version_check v0.9.5
+[1m[92m  Downloaded[0m zeroize_derive v1.5.0
+[1m[92m  Downloaded[0m anstyle-query v1.1.5
+[1m[92m  Downloaded[0m darling_macro v0.24.1
+[1m[92m  Downloaded[0m castaway v0.2.4
+[1m[92m  Downloaded[0m cpufeatures v0.2.17
+[1m[92m  Downloaded[0m strsim v0.11.1
+[1m[92m  Downloaded[0m strum_macros v0.26.4
+[1m[92m  Downloaded[0m thiserror-impl v1.0.69
+[1m[92m  Downloaded[0m unicode-truncate v1.1.0
+[1m[92m  Downloaded[0m signal-hook-registry v1.4.8
+[1m[92m  Downloaded[0m zmij v1.0.23
+[1m[92m  Downloaded[0m static_assertions v1.1.0
+[1m[92m  Downloaded[0m spki v0.7.3
+[1m[92m  Downloaded[0m thiserror v1.0.69
+[1m[92m  Downloaded[0m zeroize v1.9.1
+[1m[92m  Downloaded[0m signal-hook v0.3.18
+[1m[92m  Downloaded[0m smallvec v1.16.4
+[1m[92m  Downloaded[0m unicode-ident v1.0.27
+[1m[92m  Downloaded[0m heck v0.5.0
 [1m[92m  Downloaded[0m curve25519-dalek-derive v0.1.1
-[1m[92m  Downloaded[0m darling_core v0.24.1
-[1m[92m  Downloaded[0m hashbrown v0.14.5
-[1m[92m  Downloaded[0m inout v0.1.4
+[1m[92m  Downloaded[0m equivalent v1.0.3
+[1m[92m  Downloaded[0m fallible-streaming-iterator v0.1.9
 [1m[92m  Downloaded[0m is_terminal_polyfill v1.70.2
-[1m[92m  Downloaded[0m pkcs8 v0.10.2
+[1m[92m  Downloaded[0m scopeguard v1.2.0
+[1m[92m  Downloaded[0m errno v0.3.14
+[1m[92m  Downloaded[0m opaque-debug v0.3.1
+[1m[92m  Downloaded[0m pbkdf2 v0.12.2
+[1m[92m  Downloaded[0m ident_case v1.0.1
+[1m[92m  Downloaded[0m unicode-bidi v0.3.18
+[1m[92m  Downloaded[0m itoa v1.0.18
+[1m[92m  Downloaded[0m inout v0.1.4
+[1m[92m  Downloaded[0m x25519-dalek v2.0.1
+[1m[92m  Downloaded[0m instability v0.3.14
+[1m[92m  Downloaded[0m lru v0.12.5
+[1m[92m  Downloaded[0m rand_chacha v0.3.1
 [1m[92m  Downloaded[0m typenum v1.20.1
 [1m[92m  Downloaded[0m unicode-segmentation v1.13.3
-[1m[92m  Downloaded[0m const-oid v0.9.6
-[1m[92m  Downloaded[0m indoc v2.0.8
-[1m[92m  Downloaded[0m lru v0.12.5
+[1m[92m  Downloaded[0m generic-array v0.14.7
+[1m[92m  Downloaded[0m cipher v0.4.4
+[1m[92m  Downloaded[0m either v1.19.0
+[1m[92m  Downloaded[0m parking_lot_core v0.9.12
 [1m[92m  Downloaded[0m chacha20 v0.9.1
-[1m[92m  Downloaded[0m cpufeatures v0.2.17
-[1m[92m  Downloaded[0m vcpkg v0.2.15
 [1m[92m  Downloaded[0m webpki-roots v1.0.11
-[1m[92m  Downloaded[0m unicode-width v0.2.0
+[1m[92m  Downloaded[0m vcpkg v0.2.15
 [1m[92m  Downloaded[0m unicode-width v0.1.14
-[1m[92m  Downloaded[0m rustversion v1.0.23
-[1m[92m  Downloaded[0m rand_chacha v0.3.1
-[1m[92m  Downloaded[0m zerocopy v0.8.63
+[1m[92m  Downloaded[0m unicode-width v0.2.0
 [1m[92m  Downloaded[0m syn v2.0.119
 [1m[92m  Downloaded[0m syn v3.0.9
-[1m[92m  Downloaded[0m darling v0.24.1
-[1m[92m  Downloaded[0m pbkdf2 v0.12.2
-[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
-[1m[92m  Downloaded[0m ryu v1.0.23
-[1m[92m  Downloaded[0m colorchoice v1.0.5
-[1m[92m  Downloaded[0m opaque-debug v0.3.1
-[1m[92m  Downloaded[0m proc-macro2 v1.0.107
-[1m[92m  Downloaded[0m rustc_version v0.4.1
-[1m[92m  Downloaded[0m parking_lot_core v0.9.12
+[1m[92m  Downloaded[0m zerocopy v0.8.63
+[1m[92m  Downloaded[0m clap_lex v1.1.1
+[1m[92m  Downloaded[0m base64ct v1.8.3
+[1m[92m  Downloaded[0m anstyle-parse v1.0.0
+[1m[92m  Downloaded[0m block-buffer v0.10.4
+[1m[92m  Downloaded[0m digest v0.10.7
+[1m[92m  Downloaded[0m ed25519 v2.2.3
+[1m[92m  Downloaded[0m foldhash v0.1.5
 [1m[92m  Downloaded[0m poly1305 v0.8.0
-[1m[92m  Downloaded[0m rand_core v0.6.4
+[1m[92m  Downloaded[0m find-msvc-tools v0.1.15
 [1m[92m  Downloaded[0m lock_api v0.4.14
-[1m[92m  Downloaded[0m num-traits v0.2.19
-[1m[92m  Downloaded[0m paste v1.0.15
+[1m[92m  Downloaded[0m ppv-lite86 v0.2.21
+[1m[92m  Downloaded[0m cassowary v0.3.0
+[1m[92m  Downloaded[0m rustversion v1.0.23
 [1m[92m  Downloaded[0m quote v1.0.47
-[1m[92m  Downloaded[0m clap_builder v4.6.7
-[1m[92m  Downloaded[0m pkg-config v0.3.34
-[1m[92m  Downloaded[0m serde_core v1.0.229
+[1m[92m  Downloaded[0m clap_derive v4.6.7
+[1m[92m  Downloaded[0m hashlink v0.9.1
+[1m[92m  Downloaded[0m anyhow v1.0.104
+[1m[92m  Downloaded[0m iana-time-zone v0.1.65
 [1m[92m  Downloaded[0m once_cell v1.21.4
 [1m[92m  Downloaded[0m rustls-pki-types v1.15.1
+[1m[92m  Downloaded[0m pkg-config v0.3.34
+[1m[92m  Downloaded[0m indoc v2.0.8
+[1m[92m  Downloaded[0m paste v1.0.15
 [1m[92m  Downloaded[0m serde_derive v1.0.229
-[1m[92m  Downloaded[0m memchr v2.8.3
-[1m[92m  Downloaded[0m semver v1.0.28
-[1m[92m  Downloaded[0m itertools v0.13.0
-[1m[92m  Downloaded[0m log v0.4.35
+[1m[92m  Downloaded[0m getrandom v0.2.17
 [1m[92m  Downloaded[0m parking_lot v0.12.5
-[1m[92m  Downloaded[0m rand v0.8.8
-[1m[92m  Downloaded[0m hashbrown v0.15.5
+[1m[92m  Downloaded[0m const-oid v0.9.6
+[1m[92m  Downloaded[0m darling v0.24.1
+[1m[92m  Downloaded[0m rand_core v0.6.4
+[1m[92m  Downloaded[0m num-traits v0.2.19
+[1m[92m  Downloaded[0m pkcs8 v0.10.2
+[1m[92m  Downloaded[0m ryu v1.0.23
+[1m[92m  Downloaded[0m semver v1.0.28
+[1m[92m  Downloaded[0m serde_core v1.0.229
+[1m[92m  Downloaded[0m proc-macro2 v1.0.107
+[1m[92m  Downloaded[0m log v0.4.35
+[1m[92m  Downloaded[0m bitflags v2.13.2
+[1m[92m  Downloaded[0m chacha20poly1305 v0.10.1
+[1m[92m  Downloaded[0m clap v4.6.7
+[1m[92m  Downloaded[0m hmac v0.12.1
+[1m[92m  Downloaded[0m ed25519-dalek v2.2.0
+[1m[92m  Downloaded[0m darling_core v0.24.1
+[1m[92m  Downloaded[0m der v0.7.10
 [1m[92m  Downloaded[0m rustls-webpki v0.103.16
+[1m[92m  Downloaded[0m rand v0.8.8
+[1m[92m  Downloaded[0m compact_str v0.8.2
+[1m[92m  Downloaded[0m memchr v2.8.3
 [1m[92m  Downloaded[0m serde v1.0.229
-[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
 [1m[92m  Downloaded[0m mio v1.2.4
-[1m[92m  Downloaded[0m chrono v0.4.45
+[1m[92m  Downloaded[0m cc v1.11.0
+[1m[92m  Downloaded[0m crossterm v0.28.1
+[1m[92m  Downloaded[0m hashbrown v0.14.5
+[1m[92m  Downloaded[0m hashbrown v0.15.5
 [1m[92m  Downloaded[0m rusqlite v0.32.1
-[1m[92m  Downloaded[0m rustix v0.38.44
+[1m[92m  Downloaded[0m itertools v0.13.0
+[1m[92m  Downloaded[0m clap_builder v4.6.7
+[1m[92m  Downloaded[0m chrono v0.4.45
+[1m[92m  Downloaded[0m curve25519-dalek v4.1.3
 [1m[92m  Downloaded[0m rustls v0.23.46
+[1m[92m  Downloaded[0m rustix v0.38.44
 [1m[92m  Downloaded[0m ratatui v0.29.0
 [1m[92m  Downloaded[0m libc v0.2.191
 [1m[92m  Downloaded[0m ring v0.17.14
@@ -160,8 +151,8 @@ fmt_exit=0
 [1m[92m   Compiling[0m proc-macro2 v1.0.107
 [1m[92m   Compiling[0m quote v1.0.47
 [1m[92m   Compiling[0m unicode-ident v1.0.27
-[1m[92m    Checking[0m cfg-if v1.0.5
 [1m[92m   Compiling[0m libc v0.2.191
+[1m[92m    Checking[0m cfg-if v1.0.5
 [1m[92m   Compiling[0m version_check v0.9.5
 [1m[92m   Compiling[0m generic-array v0.14.7
 [1m[92m    Checking[0m typenum v1.20.1
@@ -178,41 +169,41 @@ fmt_exit=0
 [1m[92m    Checking[0m block-buffer v0.10.4
 [1m[92m    Checking[0m cpufeatures v0.2.17
 [1m[92m    Checking[0m digest v0.10.7
-[1m[92m   Compiling[0m autocfg v1.5.1
 [1m[92m   Compiling[0m semver v1.0.28
 [1m[92m   Compiling[0m serde_core v1.0.229
-[1m[92m   Compiling[0m num-traits v0.2.19
+[1m[92m   Compiling[0m autocfg v1.5.1
 [1m[92m   Compiling[0m rustc_version v0.4.1
 [1m[92m   Compiling[0m curve25519-dalek v4.1.3
-[1m[92m   Compiling[0m serde v1.0.229
+[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m thiserror v1.0.69
+[1m[92m   Compiling[0m serde v1.0.229
 [1m[92m   Compiling[0m serde_derive v1.0.229
 [1m[92m   Compiling[0m zeroize_derive v1.5.0
-[1m[92m   Compiling[0m thiserror-impl v1.0.69
-[1m[92m    Checking[0m zeroize v1.9.1
 [1m[92m   Compiling[0m curve25519-dalek-derive v0.1.1
+[1m[92m    Checking[0m zeroize v1.9.1
+[1m[92m   Compiling[0m thiserror-impl v1.0.69
 [1m[92m    Checking[0m inout v0.1.4
-[1m[92m    Checking[0m iana-time-zone v0.1.65
-[1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m    Checking[0m itoa v1.0.18
+[1m[92m   Compiling[0m zmij v1.0.23
+[1m[92m    Checking[0m iana-time-zone v0.1.65
 [1m[92m    Checking[0m chrono v0.4.45
 [1m[92m    Checking[0m cipher v0.4.4
 [1m[92m    Checking[0m ppv-lite86 v0.2.21
 [1m[92m    Checking[0m universal-hash v0.5.1
-[1m[92m    Checking[0m once_cell v1.21.4
-[1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m    Checking[0m opaque-debug v0.3.1
 [1m[92m    Checking[0m signature v2.2.0
-[1m[92m    Checking[0m poly1305 v0.8.0
+[1m[92m    Checking[0m once_cell v1.21.4
+[1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m    Checking[0m ed25519 v2.2.3
 [1m[92m    Checking[0m rand_chacha v0.3.1
+[1m[92m    Checking[0m poly1305 v0.8.0
 [1m[92m    Checking[0m chacha20 v0.9.1
 [1m[92m    Checking[0m sha2 v0.10.9
 [1m[92m    Checking[0m hmac v0.12.1
 [1m[92m    Checking[0m aead v0.5.2
 [1m[92m    Checking[0m memchr v2.8.3
-[1m[92m    Checking[0m ed25519-dalek v2.2.0
 [1m[92m    Checking[0m chacha20poly1305 v0.10.1
+[1m[92m    Checking[0m ed25519-dalek v2.2.0
 [1m[92m    Checking[0m pbkdf2 v0.12.2
 [1m[92m    Checking[0m rand v0.8.8
 [1m[92m    Checking[0m x25519-dalek v2.0.1
@@ -221,78 +212,65 @@ fmt_exit=0
 [1m[92m    Checking[0m rustls-pki-types v1.15.1
 [1m[92m   Compiling[0m ahash v0.8.12
 [1m[92m    Checking[0m smallvec v1.16.4
+[1m[92m    Checking[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
+[1m[92m   Compiling[0m pkg-config v0.3.34
 [1m[92m   Compiling[0m vcpkg v0.2.15
 [1m[92m    Checking[0m untrusted v0.9.0
 [1m[92m    Checking[0m bitflags v2.13.2
-[1m[92m   Compiling[0m pkg-config v0.3.34
-[1m[92m    Checking[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m rustls v0.23.46
 [1m[92m    Checking[0m hashbrown v0.14.5
-[1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m    Checking[0m webpki-roots v1.0.11
+[1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m    Checking[0m webpki-roots v0.26.11
-[1m[92m    Checking[0m fallible-streaming-iterator v0.1.9
 [1m[92m    Checking[0m fallible-iterator v0.3.0
+[1m[92m    Checking[0m fallible-streaming-iterator v0.1.9
 [1m[92m    Checking[0m hashlink v0.9.1
-[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m   Compiling[0m rustversion v1.0.23
+[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m    Checking[0m social-mail-protocol v0.2.0 (/home/runner/work/social/social/crates/protocol)
 [1m[92m    Checking[0m utf8parse v0.2.2
 [1m[92m    Checking[0m anstyle-parse v1.0.0
 [1m[92m    Checking[0m errno v0.3.14
-[1m[92m   Compiling[0m signal-hook v0.3.18
-[1m[92m    Checking[0m anstyle v1.0.14
 [1m[92m    Checking[0m is_terminal_polyfill v1.70.2
-[1m[92m    Checking[0m colorchoice v1.0.5
 [1m[92m    Checking[0m anstyle-query v1.1.5
+[1m[92m   Compiling[0m strsim v0.11.1
 [1m[92m   Compiling[0m ident_case v1.0.1
 [1m[92m   Compiling[0m parking_lot_core v0.9.12
-[1m[92m   Compiling[0m strsim v0.11.1
+[1m[92m    Checking[0m anstyle v1.0.14
+[1m[92m    Checking[0m colorchoice v1.0.5
+[1m[92m   Compiling[0m signal-hook v0.3.18
 [1m[92m    Checking[0m anstream v1.0.0
 [1m[92m   Compiling[0m darling_core v0.24.1
 [1m[92m    Checking[0m signal-hook-registry v1.4.8
-[1m[92m    Checking[0m scopeguard v1.2.0
 [1m[92m   Compiling[0m rustix v0.38.44
-[1m[92m   Compiling[0m anyhow v1.0.104
+[1m[92m    Checking[0m scopeguard v1.2.0
 [1m[92m    Checking[0m clap_lex v1.1.1
+[1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m    Checking[0m clap_builder v4.6.7
 [1m[92m    Checking[0m lock_api v0.4.14
 [1m[92m   Compiling[0m darling_macro v0.24.1
 [1m[92m   Compiling[0m clap_derive v4.6.7
+[1m[92m    Checking[0m rustls-webpki v0.103.16
 [1m[92m    Checking[0m mio v1.2.4
-[1m[92m   Compiling[0m paste v1.0.15
-[1m[92m    Checking[0m linux-raw-sys v0.4.15
-[1m[92m    Checking[0m allocator-api2 v0.2.21
-[1m[92m    Checking[0m foldhash v0.1.5
 [1m[92m    Checking[0m equivalent v1.0.3
 [1m[92m    Checking[0m either v1.19.0
-[1m[92m    Checking[0m itertools v0.13.0
-[1m[92m    Checking[0m clap v4.6.7
+[1m[92m   Compiling[0m paste v1.0.15
+[1m[92m    Checking[0m allocator-api2 v0.2.21
+[1m[92m    Checking[0m linux-raw-sys v0.4.15
+[1m[92m    Checking[0m foldhash v0.1.5
 [1m[92m    Checking[0m hashbrown v0.15.5
+[1m[92m    Checking[0m clap v4.6.7
+[1m[92m    Checking[0m itertools v0.13.0
 [1m[92m    Checking[0m signal-hook-mio v0.2.5
 [1m[92m   Compiling[0m darling v0.24.1
 [1m[92m    Checking[0m parking_lot v0.12.5
-[1m[92m   Compiling[0m strum_macros v0.26.4
 [1m[92m    Checking[0m castaway v0.2.4
-[1m[92m    Checking[0m ryu v1.0.23
-[1m[92m   Compiling[0m indoc v2.0.8
-[1m[92m    Checking[0m unicode-width v0.1.14
+[1m[92m   Compiling[0m strum_macros v0.26.4
 [1m[92m    Checking[0m static_assertions v1.1.0
 [1m[92m    Checking[0m unicode-segmentation v1.13.3
-[1m[92m    Checking[0m unicode-truncate v1.1.0
-[1m[92m    Checking[0m compact_str v0.8.2
-[1m[92m    Checking[0m strum v0.26.3
-[1m[92m   Compiling[0m instability v0.3.14
-[1m[92m    Checking[0m crossterm v0.28.1
-[1m[92m    Checking[0m lru v0.12.5
-[1m[92m    Checking[0m unicode-width v0.2.0
-[1m[92m    Checking[0m cassowary v0.3.0
-[1m[92m    Checking[0m unicode-bidi v0.3.18
-[1m[92m    Checking[0m ratatui v0.29.0
-[1m[92m    Checking[0m rusqlite v0.32.1
-[1m[92m    Checking[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
-[1m[92m    Checking[0m rustls-webpki v0.103.16
 [1m[92m    Checking[0m social-mail-mail v0.2.0 (/home/runner/work/social/social/crates/mail)
+[1m[92m    Checking[0m ryu v1.0.23
+[1m[92m   Compiling[0m indoc v2.0.8
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -316,17 +294,22 @@ fmt_exit=0
     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
 [1m[33mwarning[0m: `social-mail-mail` (lib) generated 2 warnings
+[1m[92m    Checking[0m unicode-width v0.1.14
+[1m[92m    Checking[0m unicode-truncate v1.1.0
+[1m[92m   Compiling[0m instability v0.3.14
+[1m[92m    Checking[0m compact_str v0.8.2
+[1m[92m    Checking[0m crossterm v0.28.1
+[1m[92m    Checking[0m strum v0.26.3
+[1m[92m    Checking[0m lru v0.12.5
+[1m[92m    Checking[0m unicode-width v0.2.0
+[1m[92m    Checking[0m cassowary v0.3.0
+[1m[92m    Checking[0m unicode-bidi v0.3.18
+[1m[92m    Checking[0m rusqlite v0.32.1
+[1m[92m    Checking[0m ratatui v0.29.0
+[1m[33mwarning[0m: `social-mail-mail` (lib test) generated 2 warnings (2 duplicates)
+[1m[92m    Checking[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
 [1m[92m    Checking[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
-[1m[33mwarning[0m[1m: unused import: `TcpStream`[0m
- [1m[94m--> [0mcrates/mail/tests/mailbox.rs:8:29
-  [1m[94m|[0m
-[1m[94m8[0m [1m[94m|[0m use std::net::{TcpListener, TcpStream};
-  [1m[94m|[0m                             [1m[33m^^^^^^^^^[0m
-  [1m[94m|[0m
-  [1m[94m= [0m[1mnote[0m: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
-
 [1m[92m    Checking[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
-[1m[33mwarning[0m: `social-mail-mail` (test "mailbox") generated 1 warning (run `cargo fix --test "mailbox" -p social-mail-mail` to apply 1 suggestion)
 [1m[92m    Checking[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
 [1m[33mwarning[0m[1m: function `delivery_label` is never used[0m
     [1m[94m--> [0mapps/cli/src/commands.rs:1275:8
@@ -344,41 +327,8 @@ fmt_exit=0
 
 [1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 2 warnings
 [1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning (1 duplicate)
-[1m[91merror[E0277][0m[1m: `transport::MailTransport` doesn't implement `Debug`[0m
-   [1m[94m--> [0mcrates/mail/src/transport.rs:342:53
-    [1m[94m|[0m
-[1m[94m342[0m [1m[94m|[0m         let error = MailTransport::from_env(config).unwrap_err();
-    [1m[94m|[0m                                                     [1m[91m^^^^^^^^^^[0m [1m[91mthe trait `Debug` is not implemented for `transport::MailTransport`[0m
-    [1m[94m|[0m
-[1m[92mnote[0m: required by a bound in `Result::<T, E>::unwrap_err`
-   [1m[94m--> [0m/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/result.rs:1323:4
-[1m[96mhelp[0m: consider annotating `transport::MailTransport` with `#[derive(Debug)]`
-    [1m[94m|[0m
-[1m[94m 84[0m [92m+ #[derive(Debug)][0m
-[1m[94m 85[0m [1m[94m|[0m pub struct MailTransport {
-    [1m[94m|[0m
-
-[1m[91merror[E0277][0m[1m: `transport::MailboxTransport` doesn't implement `Debug`[0m
-   [1m[94m--> [0mcrates/engine/src/transport.rs:373:52
-    [1m[94m|[0m
-[1m[94m373[0m [1m[94m|[0m         let error = MailboxTransport::new(&config).unwrap_err();
-    [1m[94m|[0m                                                    [1m[91m^^^^^^^^^^[0m [1m[91munsatisfied trait bound[0m
-    [1m[94m|[0m
-[1m[96mhelp[0m: the trait `Debug` is not implemented for `transport::MailboxTransport`
-   [1m[94m--> [0mcrates/engine/src/transport.rs:203:1
-    [1m[94m|[0m
-[1m[94m203[0m [1m[94m|[0m pub struct MailboxTransport {
-    [1m[94m|[0m [1m[96m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-    [1m[94m= [0m[1mnote[0m: add `#[derive(Debug)]` to `transport::MailboxTransport` or manually `impl Debug for transport::MailboxTransport`
-[1m[92mnote[0m: required by a bound in `Result::<T, E>::unwrap_err`
-   [1m[94m--> [0m/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/result.rs:1323:4
-
-[1mFor more information about this error, try `rustc --explain E0277`.[0m
-[1m[33mwarning[0m: `social-mail-mail` (lib test) generated 1 warning (1 duplicate)
-[1m[91merror[0m: could not compile `social-mail-mail` (lib test) due to 1 previous error; 1 warning emitted
-[1m[33mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[0m: could not compile `social-mail-engine` (lib test) due to 1 previous error
-check_exit=101
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 19.79s
+check_exit=0
 
 ## test
 [1m[92m   Compiling[0m cfg-if v1.0.5
@@ -393,47 +343,47 @@ check_exit=101
 [1m[92m   Compiling[0m getrandom v0.2.17
 [1m[92m   Compiling[0m rand_core v0.6.4
 [1m[92m   Compiling[0m block-buffer v0.10.4
+[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m crypto-common v0.1.7
 [1m[92m   Compiling[0m digest v0.10.7
-[1m[92m   Compiling[0m num-traits v0.2.19
 [1m[92m   Compiling[0m iana-time-zone v0.1.65
 [1m[92m   Compiling[0m thiserror v1.0.69
+[1m[92m   Compiling[0m chrono v0.4.45
 [1m[92m   Compiling[0m inout v0.1.4
 [1m[92m   Compiling[0m itoa v1.0.18
-[1m[92m   Compiling[0m chrono v0.4.45
 [1m[92m   Compiling[0m curve25519-dalek v4.1.3
 [1m[92m   Compiling[0m serde v1.0.229
 [1m[92m   Compiling[0m cipher v0.4.4
 [1m[92m   Compiling[0m universal-hash v0.5.1
-[1m[92m   Compiling[0m opaque-debug v0.3.1
 [1m[92m   Compiling[0m signature v2.2.0
-[1m[92m   Compiling[0m ed25519 v2.2.3
+[1m[92m   Compiling[0m opaque-debug v0.3.1
 [1m[92m   Compiling[0m poly1305 v0.8.0
+[1m[92m   Compiling[0m ed25519 v2.2.3
 [1m[92m   Compiling[0m chacha20 v0.9.1
-[1m[92m   Compiling[0m ppv-lite86 v0.2.21
 [1m[92m   Compiling[0m zmij v1.0.23
-[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m sha2 v0.10.9
+[1m[92m   Compiling[0m ppv-lite86 v0.2.21
 [1m[92m   Compiling[0m hmac v0.12.1
 [1m[92m   Compiling[0m aead v0.5.2
 [1m[92m   Compiling[0m once_cell v1.21.4
 [1m[92m   Compiling[0m memchr v2.8.3
-[1m[92m   Compiling[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m chacha20poly1305 v0.10.1
-[1m[92m   Compiling[0m rand v0.8.8
+[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m pbkdf2 v0.12.2
+[1m[92m   Compiling[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m x25519-dalek v2.0.1
+[1m[92m   Compiling[0m rand v0.8.8
 [1m[92m   Compiling[0m log v0.4.35
-[1m[92m   Compiling[0m rustls-pki-types v1.15.1
 [1m[92m   Compiling[0m serde_json v1.0.154
+[1m[92m   Compiling[0m rustls-pki-types v1.15.1
 [1m[92m   Compiling[0m smallvec v1.16.4
-[1m[92m   Compiling[0m untrusted v0.9.0
 [1m[92m   Compiling[0m bitflags v2.13.2
-[1m[92m   Compiling[0m ring v0.17.14
+[1m[92m   Compiling[0m untrusted v0.9.0
 [1m[92m   Compiling[0m ahash v0.8.12
-[1m[92m   Compiling[0m hashbrown v0.14.5
 [1m[92m   Compiling[0m webpki-roots v1.0.11
+[1m[92m   Compiling[0m ring v0.17.14
 [1m[92m   Compiling[0m webpki-roots v0.26.11
+[1m[92m   Compiling[0m hashbrown v0.14.5
 [1m[92m   Compiling[0m libsqlite3-sys v0.30.1
 [1m[92m   Compiling[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m hashlink v0.9.1
@@ -444,19 +394,19 @@ check_exit=101
 [1m[92m   Compiling[0m rusqlite v0.32.1
 [1m[92m   Compiling[0m errno v0.3.14
 [1m[92m   Compiling[0m utf8parse v0.2.2
+[1m[92m   Compiling[0m rustls-webpki v0.103.16
+[1m[92m   Compiling[0m rustls v0.23.46
+[1m[92m   Compiling[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
 [1m[92m   Compiling[0m anstyle-parse v1.0.0
 [1m[92m   Compiling[0m darling_core v0.24.1
-[1m[92m   Compiling[0m rustls-webpki v0.103.16
-[1m[92m   Compiling[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
-[1m[92m   Compiling[0m rustls v0.23.46
 [1m[92m   Compiling[0m signal-hook-registry v1.4.8
 [1m[92m   Compiling[0m scopeguard v1.2.0
-[1m[92m   Compiling[0m colorchoice v1.0.5
-[1m[92m   Compiling[0m anstyle v1.0.14
 [1m[92m   Compiling[0m is_terminal_polyfill v1.70.2
 [1m[92m   Compiling[0m anstyle-query v1.1.5
-[1m[92m   Compiling[0m anstream v1.0.0
+[1m[92m   Compiling[0m colorchoice v1.0.5
+[1m[92m   Compiling[0m anstyle v1.0.14
 [1m[92m   Compiling[0m lock_api v0.4.14
+[1m[92m   Compiling[0m anstream v1.0.0
 [1m[92m   Compiling[0m signal-hook v0.3.18
 [1m[92m   Compiling[0m parking_lot_core v0.9.12
 [1m[92m   Compiling[0m mio v1.2.4
@@ -464,22 +414,14 @@ check_exit=101
 [1m[92m   Compiling[0m equivalent v1.0.3
 [1m[92m   Compiling[0m either v1.19.0
 [1m[92m   Compiling[0m allocator-api2 v0.2.21
-[1m[92m   Compiling[0m clap_lex v1.1.1
-[1m[92m   Compiling[0m darling_macro v0.24.1
 [1m[92m   Compiling[0m linux-raw-sys v0.4.15
-[1m[92m   Compiling[0m hashbrown v0.15.5
-[1m[92m   Compiling[0m darling v0.24.1
-[1m[92m   Compiling[0m clap_builder v4.6.7
+[1m[92m   Compiling[0m clap_lex v1.1.1
 [1m[92m   Compiling[0m rustix v0.38.44
+[1m[92m   Compiling[0m clap_builder v4.6.7
+[1m[92m   Compiling[0m hashbrown v0.15.5
+[1m[92m   Compiling[0m darling_macro v0.24.1
 [1m[92m   Compiling[0m itertools v0.13.0
-[1m[92m   Compiling[0m signal-hook-mio v0.2.5
-[1m[92m   Compiling[0m parking_lot v0.12.5
-[1m[92m   Compiling[0m castaway v0.2.4
-[1m[92m   Compiling[0m ryu v1.0.23
-[1m[92m   Compiling[0m static_assertions v1.1.0
-[1m[92m   Compiling[0m unicode-segmentation v1.13.3
 [1m[92m   Compiling[0m social-mail-mail v0.2.0 (/home/runner/work/social/social/crates/mail)
-[1m[92m   Compiling[0m unicode-width v0.1.14
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -502,12 +444,20 @@ check_exit=101
     [1m[94m|[0m
     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1m[92m   Compiling[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
 [1m[33mwarning[0m: `social-mail-mail` (lib) generated 2 warnings
-[1m[92m   Compiling[0m unicode-truncate v1.1.0
-[1m[92m   Compiling[0m clap v4.6.7
+[1m[92m   Compiling[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
+[1m[92m   Compiling[0m darling v0.24.1
+[1m[92m   Compiling[0m signal-hook-mio v0.2.5
+[1m[92m   Compiling[0m parking_lot v0.12.5
+[1m[92m   Compiling[0m castaway v0.2.4
+[1m[92m   Compiling[0m ryu v1.0.23
+[1m[92m   Compiling[0m static_assertions v1.1.0
+[1m[92m   Compiling[0m unicode-segmentation v1.13.3
+[1m[92m   Compiling[0m unicode-width v0.1.14
 [1m[92m   Compiling[0m instability v0.3.14
+[1m[92m   Compiling[0m unicode-truncate v1.1.0
 [1m[92m   Compiling[0m compact_str v0.8.2
+[1m[92m   Compiling[0m clap v4.6.7
 [1m[92m   Compiling[0m strum v0.26.3
 [1m[92m   Compiling[0m crossterm v0.28.1
 [1m[92m   Compiling[0m anyhow v1.0.104
@@ -516,24 +466,119 @@ check_exit=101
 [1m[92m   Compiling[0m cassowary v0.3.0
 [1m[92m   Compiling[0m unicode-bidi v0.3.18
 [1m[92m   Compiling[0m ratatui v0.29.0
-[1m[91merror[E0277][0m[1m: `transport::MailTransport` doesn't implement `Debug`[0m
-   [1m[94m--> [0mcrates/mail/src/transport.rs:342:53
-    [1m[94m|[0m
-[1m[94m342[0m [1m[94m|[0m         let error = MailTransport::from_env(config).unwrap_err();
-    [1m[94m|[0m                                                     [1m[91m^^^^^^^^^^[0m [1m[91mthe trait `Debug` is not implemented for `transport::MailTransport`[0m
-    [1m[94m|[0m
-[1m[92mnote[0m: required by a bound in `Result::<T, E>::unwrap_err`
-   [1m[94m--> [0m/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/result.rs:1323:4
-[1m[96mhelp[0m: consider annotating `transport::MailTransport` with `#[derive(Debug)]`
-    [1m[94m|[0m
-[1m[94m 84[0m [92m+ #[derive(Debug)][0m
-[1m[94m 85[0m [1m[94m|[0m pub struct MailTransport {
-    [1m[94m|[0m
+[1m[33mwarning[0m: `social-mail-mail` (lib test) generated 2 warnings (2 duplicates)
+[1m[92m   Compiling[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
+[1m[92m   Compiling[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
+[1m[33mwarning[0m[1m: function `delivery_label` is never used[0m
+    [1m[94m--> [0mapps/cli/src/commands.rs:1275:8
+     [1m[94m|[0m
+[1m[94m1275[0m [1m[94m|[0m pub fn delivery_label(state: DeliveryState) -> &'static str {
+     [1m[94m|[0m        [1m[33m^^^^^^^^^^^^^^[0m
+     [1m[94m|[0m
+     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1mFor more information about this error, try `rustc --explain E0277`.[0m
-[1m[33mwarning[0m: `social-mail-mail` (lib test) generated 1 warning (1 duplicate)
-[1m[91merror[0m: could not compile `social-mail-mail` (lib test) due to 1 previous error; 1 warning emitted
-[1m[33mwarning[0m: build failed, waiting for other jobs to finish...
+[1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning
+[1m[92m    Finished[0m `test` profile [unoptimized + debuginfo] target(s) in 12.76s
+[1m[92m     Running[0m unittests src/main.rs (target/debug/deps/social_mail-0022026449aa3300)
+
+running 6 tests
+test text::tests::identifiers_stay_latin_and_readable ... ok
+test text::tests::empty_and_control_input_is_safe ... ok
+test text::tests::persian_fixtures_survive_layout ... ok
+test text::tests::truncation_respects_width_and_utf8 ... ok
+test text::tests::very_long_unbroken_text_is_broken ... ok
+test text::tests::mixed_direction_lines_stay_within_width ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[1m[92m     Running[0m unittests src/lib.rs (target/debug/deps/social_mail_crypto-9479965eaf85b2b7)
+
+running 17 tests
+test base64::tests::rejects_bad_input ... ok
+test base64::tests::round_trips_rfc4648_vectors ... ok
+test hex::tests::rejects_malformed ... ok
+test base64::tests::handles_binary_and_whitespace ... ok
+test hex::tests::round_trip ... ok
+test identity::tests::backup_requires_passphrase ... ok
+test identity::tests::debug_output_hides_secrets ... ok
+test identity::tests::encryption_is_randomised ... ok
+test identity::tests::fingerprint_shape_is_stable ... ok
+test identity::tests::public_identity_base64_round_trip ... ok
+test identity::tests::encryption_round_trip_and_wrong_recipient ... ok
+test identity::tests::signature_hex_round_trip ... ok
+test tests::grouping_is_stable ... ok
+test tests::short_fingerprint_handles_short_input ... ok
+test identity::tests::backup_rejects_tampered_ciphertext ... ok
+test identity::tests::sign_and_verify_round_trip ... ok
+test identity::tests::backup_round_trip_and_wrong_passphrase ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+[1m[92m     Running[0m unittests src/lib.rs (target/debug/deps/social_mail_engine-0024a803669b836d)
+
+running 12 tests
+test config::tests::missing_file_yields_defaults ... ok
+test config::tests::comments_inside_strings_are_preserved ... ok
+test config::tests::parses_the_documented_shape ... ok
+test config::tests::reports_malformed_lines_with_context ... ok
+test transport::tests::mail_config_maps_settings_and_defaults ... ok
+test transport::tests::mail_config_rejects_unknown_tls_modes ... ok
+test config::tests::unknown_keys_are_ignored ... ok
+test transport::tests::missing_mail_settings_point_at_the_config_key ... ok
+test config::tests::round_trips_through_save_and_load ... ok
+test transport::tests::rejects_non_hex_recipients ... ok
+test transport::tests::spools_and_receives_a_message ... ok
+test transport::tests::quarantine_moves_the_file_aside ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[1m[92m     Running[0m tests/relay.rs (target/debug/deps/relay-bca28e7bea3cabe2)
+
+running 2 tests
+test unverified_members_are_never_relayed_to ... ok
+test relay_preserves_the_author_and_skips_unverified_members ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.42s
+
+[1m[92m     Running[0m unittests src/lib.rs (target/debug/deps/social_mail_mail-7a9807de380b0c9a)
+
+running 18 tests
+test error::tests::io_errors_are_transient ... ok
+test error::tests::display_never_repeats_secrets ... ok
+test imap::tests::finds_literal_lengths ... ok
+test imap::tests::classifies_rejections ... ok
+test imap::tests::quotes_login_arguments ... ok
+test mime::tests::dot_stuffing_preserves_leading_dots ... ok
+test mime::tests::ordinary_mail_is_not_ours ... ok
+test mime::tests::rejects_multipart_for_now ... ok
+test mime::tests::folded_headers_are_unfolded ... FAILED
+test net::tests::parses_tls_modes ... ok
+test net::tests::refuses_an_empty_host ... ok
+test mime::tests::round_trips_a_carrier ... ok
+test transport::tests::login_falls_back_to_the_account ... ok
+test transport::tests::missing_password_is_an_auth_error ... ok
+test transport::tests::references_round_trip ... ok
+test transport::tests::refuses_a_recipient_without_an_address ... ok
+test transport::tests::validates_settings_before_connecting ... ok
+test transport::tests::refuses_an_oversized_carrier ... ok
+
+failures:
+
+---- mime::tests::folded_headers_are_unfolded stdout ----
+
+thread 'mime::tests::folded_headers_are_unfolded' (4892) panicked at crates/mail/src/mime.rs:250:9:
+assertion `left == right` failed
+  left: [97, 71, 107, 61]
+ right: [104, 105]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    mime::tests::folded_headers_are_unfolded
+
+test result: FAILED. 17 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[1m[91merror[0m: test failed, to rerun pass `-p social-mail-mail --lib`
 test_exit=101
 
 ## clippy
@@ -541,20 +586,6 @@ test_exit=101
 [1m[92m    Checking[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
 [1m[92m    Checking[0m social-mail-protocol v0.2.0 (/home/runner/work/social/social/crates/protocol)
 [1m[92m    Checking[0m social-mail-mail v0.2.0 (/home/runner/work/social/social/crates/mail)
-[1m[91merror[E0277][0m[1m: `transport::MailTransport` doesn't implement `std::fmt::Debug`[0m
-   [1m[94m--> [0mcrates/mail/src/transport.rs:342:53
-    [1m[94m|[0m
-[1m[94m342[0m [1m[94m|[0m         let error = MailTransport::from_env(config).unwrap_err();
-    [1m[94m|[0m                                                     [1m[91m^^^^^^^^^^[0m [1m[91mthe trait `std::fmt::Debug` is not implemented for `transport::MailTransport`[0m
-    [1m[94m|[0m
-[1m[92mnote[0m: required by a bound in `std::result::Result::<T, E>::unwrap_err`
-   [1m[94m--> [0m/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/result.rs:1323:4
-[1m[96mhelp[0m: consider annotating `transport::MailTransport` with `#[derive(Debug)]`
-    [1m[94m|[0m
-[1m[94m 84[0m [92m+ #[derive(Debug)][0m
-[1m[94m 85[0m [1m[94m|[0m pub struct MailTransport {
-    [1m[94m|[0m
-
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -577,7 +608,6 @@ test_exit=101
     [1m[94m|[0m
     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1mFor more information about this error, try `rustc --explain E0277`.[0m
 [1m[33mwarning[0m[1m: this loop could be written as a `while let` loop[0m
    [1m[94m--> [0mcrates/mail/src/imap.rs:240:13
     [1m[94m|[0m
@@ -594,33 +624,105 @@ test_exit=101
     [1m[94m= [0m[1mnote[0m: `#[warn(clippy::while_let_loop)]` on by default
 
 [1m[33mwarning[0m: `social-mail-mail` (lib) generated 3 warnings
-[1m[33mwarning[0m[1m: unused import: `TcpStream`[0m
- [1m[94m--> [0mcrates/mail/tests/mailbox.rs:8:29
-  [1m[94m|[0m
-[1m[94m8[0m [1m[94m|[0m use std::net::{TcpListener, TcpStream};
-  [1m[94m|[0m                             [1m[33m^^^^^^^^^[0m
-  [1m[94m|[0m
-  [1m[94m= [0m[1mnote[0m: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
-
+[1m[33mwarning[0m: `social-mail-mail` (lib test) generated 3 warnings (3 duplicates)
 [1m[92m    Checking[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
-[1m[33mwarning[0m: `social-mail-mail` (test "mailbox") generated 1 warning (run `cargo clippy --fix --test "mailbox" -p social-mail-mail -- ` to apply 1 suggestion)
-[1m[33mwarning[0m: `social-mail-mail` (lib test) generated 1 warning (1 duplicate)
-[1m[91merror[0m: could not compile `social-mail-mail` (lib test) due to 1 previous error; 1 warning emitted
-[1m[33mwarning[0m: build failed, waiting for other jobs to finish...
-[1m[91merror[E0277][0m[1m: `transport::MailboxTransport` doesn't implement `std::fmt::Debug`[0m
-   [1m[94m--> [0mcrates/engine/src/transport.rs:373:52
+[1m[92m    Checking[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
+[1m[92m    Checking[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
+[1m[33mwarning[0m[1m: field assignment outside of initializer for an instance created with Default::default()[0m
+   [1m[94m--> [0mcrates/engine/src/transport.rs:357:9
     [1m[94m|[0m
-[1m[94m373[0m [1m[94m|[0m         let error = MailboxTransport::new(&config).unwrap_err();
-    [1m[94m|[0m                                                    [1m[91m^^^^^^^^^^[0m [1m[91munsatisfied trait bound[0m
+[1m[94m357[0m [1m[94m|[0m         config.account = "alice@example.org".to_string();
+    [1m[94m|[0m         [1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
     [1m[94m|[0m
-[1m[96mhelp[0m: the trait `std::fmt::Debug` is not implemented for `transport::MailboxTransport`
-   [1m[94m--> [0mcrates/engine/src/transport.rs:203:1
+[1m[92mnote[0m: consider initializing the variable with `config::Config { account: "alice@example.org".to_string(), imap_host: "imap.example.org".to_string(), smtp_host: "smtp.example.org".to_string(), imap_port: 993, smtp_port: 587, imap_tls: "implicit".to_string(), smtp_tls: "starttls".to_string(), ..Default::default() }` and removing relevant reassignments
+   [1m[94m--> [0mcrates/engine/src/transport.rs:356:9
     [1m[94m|[0m
-[1m[94m203[0m [1m[94m|[0m pub struct MailboxTransport {
-    [1m[94m|[0m [1m[96m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
-    [1m[94m= [0m[1mnote[0m: add `#[derive(Debug)]` to `transport::MailboxTransport` or manually `impl std::fmt::Debug for transport::MailboxTransport`
-[1m[92mnote[0m: required by a bound in `std::result::Result::<T, E>::unwrap_err`
-   [1m[94m--> [0m/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/result.rs:1323:4
+[1m[94m356[0m [1m[94m|[0m         let mut config = Config::default();
+    [1m[94m|[0m         [1m[92m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#field_reassign_with_default
+    [1m[94m= [0m[1mnote[0m: `#[warn(clippy::field_reassign_with_default)]` on by default
 
-[1m[91merror[0m: could not compile `social-mail-engine` (lib test) due to 1 previous error
-clippy_exit=101
+[1m[33mwarning[0m[1m: field assignment outside of initializer for an instance created with Default::default()[0m
+   [1m[94m--> [0mcrates/engine/src/transport.rs:375:9
+    [1m[94m|[0m
+[1m[94m375[0m [1m[94m|[0m         config.imap_tls = "kinda".to_string();
+    [1m[94m|[0m         [1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: consider initializing the variable with `config::Config { imap_tls: "kinda".to_string(), ..Default::default() }` and removing relevant reassignments
+   [1m[94m--> [0mcrates/engine/src/transport.rs:374:9
+    [1m[94m|[0m
+[1m[94m374[0m [1m[94m|[0m         let mut config = Config::default();
+    [1m[94m|[0m         [1m[92m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#field_reassign_with_default
+
+[1m[33mwarning[0m: `social-mail-engine` (lib test) generated 2 warnings
+[1m[33mwarning[0m[1m: function `delivery_label` is never used[0m
+    [1m[94m--> [0mapps/cli/src/commands.rs:1275:8
+     [1m[94m|[0m
+[1m[94m1275[0m [1m[94m|[0m pub fn delivery_label(state: DeliveryState) -> &'static str {
+     [1m[94m|[0m        [1m[33m^^^^^^^^^^^^^^[0m
+     [1m[94m|[0m
+     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+[1m[33mwarning[0m[1m: function `width` is never used[0m
+   [1m[94m--> [0mapps/cli/src/text.rs:100:8
+    [1m[94m|[0m
+[1m[94m100[0m [1m[94m|[0m pub fn width(text: &str) -> usize {
+    [1m[94m|[0m        [1m[33m^^^^^[0m
+
+[1m[33mwarning[0m[1m: enclosing `Ok` and `?` operator are unneeded[0m
+   [1m[94m--> [0mapps/cli/src/commands.rs:125:16
+    [1m[94m|[0m
+[1m[94m125[0m [1m[94m|[0m         return Ok(std::fs::read_to_string(file).context("reading the text file")?);
+    [1m[94m|[0m                [1m[33m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1m[94m|[0m
+    [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#needless_question_mark
+    [1m[94m= [0m[1mnote[0m: `#[warn(clippy::needless_question_mark)]` on by default
+[1m[96mhelp[0m: remove the enclosing `Ok` and `?` operator
+    [1m[94m|[0m
+[1m[94m125[0m [91m- [0m        return [91mOk([0mstd::fs::read_to_string(file).context("reading the text file")[91m?)[0m;
+[1m[94m125[0m [92m+ [0m        return std::fs::read_to_string(file).context("reading the text file");
+    [1m[94m|[0m
+
+[1m[33mwarning[0m[1m: this `if` has identical blocks[0m
+   [1m[94m--> [0mapps/cli/src/commands.rs:175:28
+    [1m[94m|[0m
+[1m[94m175[0m [1m[94m|[0m               if json_output {
+    [1m[94m|[0m [1m[33m ____________________________^[0m
+[1m[94m176[0m [1m[94m|[0m [1m[33m|[0m                 print_identity(engine)?;
+[1m[94m177[0m [1m[94m|[0m [1m[33m|[0m             } else {
+    [1m[94m|[0m [1m[33m|_____________^[0m
+    [1m[94m|[0m
+[1m[92mnote[0m: same as this
+   [1m[94m--> [0mapps/cli/src/commands.rs:177:20
+    [1m[94m|[0m
+[1m[94m177[0m [1m[94m|[0m               } else {
+    [1m[94m|[0m [1m[92m ____________________^[0m
+[1m[94m178[0m [1m[94m|[0m [1m[92m|[0m                 print_identity(engine)?;
+[1m[94m179[0m [1m[94m|[0m [1m[92m|[0m             }
+    [1m[94m|[0m [1m[92m|_____________^[0m
+    [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#if_same_then_else
+    [1m[94m= [0m[1mnote[0m: `#[warn(clippy::if_same_then_else)]` on by default
+
+[1m[33mwarning[0m[1m: this `if` can be collapsed into the outer `match`[0m
+   [1m[94m--> [0mapps/cli/src/commands.rs:384:21
+    [1m[94m|[0m
+[1m[94m384[0m [1m[94m|[0m [1m[33m/[0m [1m[94m...[0m   if !json_output {
+[1m[94m385[0m [1m[94m|[0m [1m[33m|[0m [1m[94m...[0m       println!("{} isn't verified. Their posts will be marked unverified until you check their fingerprint.", contact.display[1m[94m...[0m
+[1m[94m386[0m [1m[94m|[0m [1m[33m|[0m [1m[94m...[0m   }
+    [1m[94m|[0m [1m[33m|_______^[0m
+    [1m[94m|[0m
+    [1m[94m= [0m[1mhelp[0m: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#collapsible_match
+    [1m[94m= [0m[1mnote[0m: `#[warn(clippy::collapsible_match)]` on by default
+[1m[96mhelp[0m: collapse nested if block
+    [1m[94m|[0m
+[1m[94m383[0m [92m~ [0m                Some(contact) if contact.trust == Trust::Unverified
+[1m[94m384[0m [92m~ [0m                    [92m&&[0m !json_output [92m=> [0m{
+[1m[94m385[0m [1m[94m|[0m                         println!("{} isn't verified. Their posts will be marked unverified until you check their fingerprint.", contact.display_name);
+[1m[94m386[0m [92m~ [0m                    }
+    [1m[94m|[0m
+
+[1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 5 warnings (run `cargo clippy --fix --bin "social-mail" -p social-mail -- ` to apply 2 suggestions)
+[1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 4 warnings (4 duplicates)
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 1.83s
+clippy_exit=0
