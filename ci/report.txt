@@ -1,5 +1,5 @@
 # ci report
-sha: 9cc49fcdf12038fb0237dd2681f6e180475868df
+sha: 858d0aeec6f227e6764eb8338961e780099fd447
 
 ## cargo check (workspace)
 [1m[92m   Compiling[0m pkg-config v0.3.34
@@ -11,72 +11,53 @@ sha: 9cc49fcdf12038fb0237dd2681f6e180475868df
 [1m[92m    Checking[0m fallible-streaming-iterator v0.1.9
 [1m[92m    Checking[0m fallible-iterator v0.3.0
 [1m[92m    Checking[0m hashlink v0.9.1
-[1m[92m    Checking[0m social-mail-protocol v0.2.0 (/home/runner/work/social/social/crates/protocol)
-[1m[92m   Compiling[0m heck v0.5.0
+[1m[92m    Checking[0m social-mail-protocol v0.3.0 (/home/runner/work/social/social/crates/protocol)
 [1m[92m   Compiling[0m rustversion v1.0.23
+[1m[92m   Compiling[0m heck v0.5.0
 [1m[92m    Checking[0m utf8parse v0.2.2
 [1m[92m    Checking[0m anstyle-parse v1.0.0
 [1m[92m    Checking[0m errno v0.3.14
+[1m[92m    Checking[0m is_terminal_polyfill v1.70.2
+[1m[92m    Checking[0m anstyle-query v1.1.5
 [1m[92m   Compiling[0m signal-hook v0.3.18
 [1m[92m   Compiling[0m strsim v0.11.1
-[1m[92m    Checking[0m anstyle v1.0.14
-[1m[92m    Checking[0m is_terminal_polyfill v1.70.2
-[1m[92m    Checking[0m colorchoice v1.0.5
-[1m[92m    Checking[0m anstyle-query v1.1.5
 [1m[92m   Compiling[0m ident_case v1.0.1
+[1m[92m    Checking[0m colorchoice v1.0.5
+[1m[92m    Checking[0m anstyle v1.0.14
 [1m[92m   Compiling[0m parking_lot_core v0.9.12
-[1m[92m   Compiling[0m darling_core v0.24.1
 [1m[92m    Checking[0m anstream v1.0.0
+[1m[92m   Compiling[0m darling_core v0.24.1
 [1m[92m    Checking[0m signal-hook-registry v1.4.8
-[1m[92m    Checking[0m scopeguard v1.2.0
 [1m[92m   Compiling[0m anyhow v1.0.104
 [1m[92m   Compiling[0m rustix v0.38.44
 [1m[92m    Checking[0m clap_lex v1.1.1
-[1m[92m    Checking[0m clap_builder v4.6.7
+[1m[92m    Checking[0m scopeguard v1.2.0
 [1m[92m    Checking[0m lock_api v0.4.14
-[1m[92m   Compiling[0m clap_derive v4.6.7
+[1m[92m    Checking[0m clap_builder v4.6.7
 [1m[92m   Compiling[0m darling_macro v0.24.1
+[1m[92m    Checking[0m rustls-webpki v0.103.16
+[1m[92m   Compiling[0m clap_derive v4.6.7
 [1m[92m    Checking[0m mio v1.2.4
 [1m[92m   Compiling[0m jni-sys-macros v0.4.1
-[1m[92m   Compiling[0m jni-sys v0.3.1
-[1m[92m   Compiling[0m paste v1.0.15
-[1m[92m    Checking[0m allocator-api2 v0.2.21
 [1m[92m    Checking[0m linux-raw-sys v0.4.15
 [1m[92m    Checking[0m foldhash v0.1.5
 [1m[92m    Checking[0m equivalent v1.0.3
 [1m[92m    Checking[0m either v1.19.0
+[1m[92m   Compiling[0m jni-sys v0.3.1
+[1m[92m   Compiling[0m paste v1.0.15
+[1m[92m    Checking[0m allocator-api2 v0.2.21
+[1m[92m    Checking[0m clap v4.6.7
 [1m[92m    Checking[0m itertools v0.13.0
 [1m[92m    Checking[0m hashbrown v0.15.5
-[1m[92m    Checking[0m clap v4.6.7
 [1m[92m    Checking[0m jni-sys v0.4.1
 [1m[92m    Checking[0m signal-hook-mio v0.2.5
-[1m[92m   Compiling[0m darling v0.24.1
 [1m[92m    Checking[0m parking_lot v0.12.5
+[1m[92m   Compiling[0m darling v0.24.1
 [1m[92m    Checking[0m castaway v0.2.4
 [1m[92m   Compiling[0m strum_macros v0.26.4
-[1m[92m    Checking[0m bytes v1.12.1
 [1m[92m    Checking[0m unicode-width v0.1.14
-[1m[92m    Checking[0m ryu v1.0.23
-[1m[92m    Checking[0m static_assertions v1.1.0
-[1m[92m   Compiling[0m indoc v2.0.8
-[1m[92m    Checking[0m unicode-segmentation v1.13.3
-[1m[92m    Checking[0m unicode-truncate v1.1.0
-[1m[92m   Compiling[0m instability v0.3.14
-[1m[92m    Checking[0m strum v0.26.3
-[1m[92m    Checking[0m compact_str v0.8.2
-[1m[92m    Checking[0m combine v4.6.9
-[1m[92m    Checking[0m crossterm v0.28.1
-[1m[92m    Checking[0m lru v0.12.5
-[1m[92m    Checking[0m cesu8 v1.1.0
-[1m[92m    Checking[0m unicode-width v0.2.0
-[1m[92m    Checking[0m cassowary v0.3.0
-[1m[92m    Checking[0m ratatui v0.29.0
-[1m[92m    Checking[0m unicode-bidi v0.3.18
-[1m[92m    Checking[0m jni v0.21.1
-[1m[92m    Checking[0m rusqlite v0.32.1
-[1m[92m    Checking[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
-[1m[92m    Checking[0m rustls-webpki v0.103.16
-[1m[92m    Checking[0m social-mail-transport v0.2.0 (/home/runner/work/social/social/crates/mail)
+[1m[92m    Checking[0m bytes v1.12.1
+[1m[92m    Checking[0m social-mail-transport v0.3.0 (/home/runner/work/social/social/crates/mail)
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -99,12 +80,29 @@ sha: 9cc49fcdf12038fb0237dd2681f6e180475868df
     [1m[94m|[0m
     [1m[94m= [0m[1mnote[0m: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
-[1m[33mwarning[0m: `social-mail-transport` (lib) generated 2 warnings (1 duplicate)
-[1m[92m    Checking[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
-[1m[33mwarning[0m: `social-mail-transport` (lib test) generated 2 warnings (1 duplicate)
-[1m[92m    Checking[0m social-mail-reflector v0.2.0 (/home/runner/work/social/social/apps/social-mail-reflector)
-[1m[92m    Checking[0m social-mail v0.2.0 (/home/runner/work/social/social/apps/cli)
-[1m[92m    Checking[0m social-mail-android-jni v0.2.0 (/home/runner/work/social/social/crates/android-jni)
+[1m[33mwarning[0m: `social-mail-transport` (lib) generated 2 warnings
+[1m[92m    Checking[0m static_assertions v1.1.0
+[1m[92m    Checking[0m rusqlite v0.32.1
+[1m[92m    Checking[0m ryu v1.0.23
+[1m[92m    Checking[0m unicode-segmentation v1.13.3
+[1m[92m   Compiling[0m indoc v2.0.8
+[1m[92m   Compiling[0m instability v0.3.14
+[1m[92m    Checking[0m unicode-truncate v1.1.0
+[1m[92m    Checking[0m combine v4.6.9
+[1m[92m    Checking[0m social-mail-storage v0.3.0 (/home/runner/work/social/social/crates/storage)
+[1m[92m    Checking[0m social-mail-engine v0.3.0 (/home/runner/work/social/social/crates/engine)
+[1m[92m    Checking[0m compact_str v0.8.2
+[1m[92m    Checking[0m strum v0.26.3
+[1m[92m    Checking[0m crossterm v0.28.1
+[1m[92m    Checking[0m lru v0.12.5
+[1m[92m    Checking[0m cesu8 v1.1.0
+[1m[92m    Checking[0m unicode-width v0.2.0
+[1m[92m    Checking[0m cassowary v0.3.0
+[1m[92m    Checking[0m unicode-bidi v0.3.18
+[1m[92m    Checking[0m social-mail-reflector v0.3.0 (/home/runner/work/social/social/apps/social-mail-reflector)
+[1m[92m    Checking[0m ratatui v0.29.0
+[1m[33mwarning[0m: `social-mail-transport` (lib test) generated 2 warnings (2 duplicates)
+[1m[92m    Checking[0m social-mail v0.3.0 (/home/runner/work/social/social/apps/cli)
 [1m[33mwarning[0m[1m: function `delivery_label` is never used[0m
     [1m[94m--> [0mapps/cli/src/commands.rs:1275:8
      [1m[94m|[0m
@@ -121,19 +119,21 @@ sha: 9cc49fcdf12038fb0237dd2681f6e180475868df
 
 [1m[33mwarning[0m: `social-mail` (bin "social-mail") generated 2 warnings
 [1m[33mwarning[0m: `social-mail` (bin "social-mail" test) generated 1 warning (1 duplicate)
-[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 27.41s
+[1m[92m    Checking[0m jni v0.21.1
+[1m[92m    Checking[0m social-mail-android-jni v0.3.0 (/home/runner/work/social/social/crates/android-jni)
+[1m[92m    Finished[0m `dev` profile [unoptimized + debuginfo] target(s) in 21.97s
 
 ## cargo test (workspace)
 test imap::tests::quotes_login_arguments ... ok
 test mime::tests::dot_stuffing_preserves_leading_dots ... ok
-test mime::tests::folded_headers_are_unfolded ... ok
 test imap::tests::finds_literal_lengths ... ok
-test mime::tests::ordinary_mail_is_not_ours ... ok
+test mime::tests::folded_headers_are_unfolded ... ok
 test mime::tests::rejects_multipart_for_now ... ok
+test mime::tests::ordinary_mail_is_not_ours ... ok
 test net::tests::parses_tls_modes ... ok
-test net::tests::refuses_an_empty_host ... ok
-test transport::tests::login_falls_back_to_the_account ... ok
 test mime::tests::round_trips_a_carrier ... ok
+test transport::tests::login_falls_back_to_the_account ... ok
+test net::tests::refuses_an_empty_host ... ok
 test transport::tests::missing_password_is_an_auth_error ... ok
 test transport::tests::refuses_a_recipient_without_an_address ... ok
 test transport::tests::validates_settings_before_connecting ... ok
@@ -142,7 +142,7 @@ test transport::tests::refuses_an_oversized_carrier ... ok
 
 test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
-[1m[92m     Running[0m tests/mailbox.rs (target/debug/deps/mailbox-594e818f44ab55dc)
+[1m[92m     Running[0m tests/mailbox.rs (target/debug/deps/mailbox-9dc21237628b1116)
 
 running 6 tests
 test bad_credentials_are_an_auth_failure ... ok
@@ -194,57 +194,57 @@ NDK: /usr/local/lib/android/sdk/ndk/27.3.13750724
 [1m[92m   Installed[0m package `cargo-ndk v4.1.2` (executables `cargo-ndk`, `cargo-ndk-env`, `cargo-ndk-runner`, `cargo-ndk-test`)
 
 ## native core (arm64-v8a)
-[1m[92m   Compiling[0m zmij v1.0.23
 [1m[92m   Compiling[0m serde v1.0.229
+[1m[92m   Compiling[0m memchr v2.8.3
 [1m[92m   Compiling[0m serde_derive v1.0.229
-[1m[92m   Compiling[0m rustls-pki-types v1.15.1
-[1m[92m   Compiling[0m cipher v0.4.4
-[1m[92m   Compiling[0m iana-time-zone v0.1.65
 [1m[92m   Compiling[0m ppv-lite86 v0.2.21
+[1m[92m   Compiling[0m cipher v0.4.4
+[1m[92m   Compiling[0m rustls-pki-types v1.15.1
+[1m[92m   Compiling[0m iana-time-zone v0.1.65
 [1m[92m   Compiling[0m universal-hash v0.5.1
 [1m[92m   Compiling[0m cpufeatures v0.2.17
-[1m[92m   Compiling[0m vcpkg v0.2.15
-[1m[92m   Compiling[0m signature v2.2.0
 [1m[92m   Compiling[0m serde_json v1.0.154
 [1m[92m   Compiling[0m pkg-config v0.3.34
 [1m[92m   Compiling[0m opaque-debug v0.3.1
-[1m[92m   Compiling[0m poly1305 v0.8.0
+[1m[92m   Compiling[0m vcpkg v0.2.15
+[1m[92m   Compiling[0m signature v2.2.0
 [1m[92m   Compiling[0m ed25519 v2.2.3
-[1m[92m   Compiling[0m chrono v0.4.45
+[1m[92m   Compiling[0m poly1305 v0.8.0
 [1m[92m   Compiling[0m libsqlite3-sys v0.30.1
+[1m[92m   Compiling[0m chrono v0.4.45
 [1m[92m   Compiling[0m sha2 v0.10.9
-[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m chacha20 v0.9.1
+[1m[92m   Compiling[0m rand_chacha v0.3.1
 [1m[92m   Compiling[0m hmac v0.12.1
 [1m[92m   Compiling[0m aead v0.5.2
-[1m[92m   Compiling[0m untrusted v0.9.0
 [1m[92m   Compiling[0m itoa v1.0.18
+[1m[92m   Compiling[0m untrusted v0.9.0
 [1m[92m   Compiling[0m chacha20poly1305 v0.10.1
 [1m[92m   Compiling[0m pbkdf2 v0.12.2
 [1m[92m   Compiling[0m hashbrown v0.14.5
 [1m[92m   Compiling[0m rand v0.8.8
 [1m[92m   Compiling[0m ed25519-dalek v2.2.0
 [1m[92m   Compiling[0m x25519-dalek v2.0.1
-[1m[92m   Compiling[0m log v0.4.35
 [1m[92m   Compiling[0m rustls v0.23.46
-[1m[92m   Compiling[0m social-mail-crypto v0.2.0 (/home/runner/work/social/social/crates/crypto)
+[1m[92m   Compiling[0m log v0.4.35
+[1m[92m   Compiling[0m social-mail-crypto v0.3.0 (/home/runner/work/social/social/crates/crypto)
 [1m[92m   Compiling[0m hashlink v0.9.1
 [1m[92m   Compiling[0m webpki-roots v1.0.11
 [1m[92m   Compiling[0m jni-sys-macros v0.4.1
-[1m[92m   Compiling[0m fallible-iterator v0.3.0
-[1m[92m   Compiling[0m smallvec v1.16.4
 [1m[92m   Compiling[0m jni-sys v0.3.1
 [1m[92m   Compiling[0m bitflags v2.13.2
 [1m[92m   Compiling[0m fallible-streaming-iterator v0.1.9
+[1m[92m   Compiling[0m fallible-iterator v0.3.0
+[1m[92m   Compiling[0m smallvec v1.16.4
 [1m[92m   Compiling[0m jni-sys v0.4.1
 [1m[92m   Compiling[0m webpki-roots v0.26.11
 [1m[92m   Compiling[0m bytes v1.12.1
-[1m[92m   Compiling[0m social-mail-protocol v0.2.0 (/home/runner/work/social/social/crates/protocol)
+[1m[92m   Compiling[0m social-mail-protocol v0.3.0 (/home/runner/work/social/social/crates/protocol)
 [1m[92m   Compiling[0m combine v4.6.9
 [1m[92m   Compiling[0m cesu8 v1.1.0
 [1m[92m   Compiling[0m jni v0.21.1
 [1m[92m   Compiling[0m rustls-webpki v0.103.16
-[1m[92m   Compiling[0m social-mail-transport v0.2.0 (/home/runner/work/social/social/crates/mail)
+[1m[92m   Compiling[0m social-mail-transport v0.3.0 (/home/runner/work/social/social/crates/mail)
 [1m[33mwarning[0m[1m: value assigned to `code` is never read[0m
    [1m[94m--> [0mcrates/mail/src/smtp.rs:183:24
     [1m[94m|[0m
@@ -269,212 +269,87 @@ NDK: /usr/local/lib/android/sdk/ndk/27.3.13750724
 
 [1m[33mwarning[0m: `social-mail-transport` (lib) generated 2 warnings
 [1m[92m   Compiling[0m rusqlite v0.32.1
-[1m[92m   Compiling[0m social-mail-storage v0.2.0 (/home/runner/work/social/social/crates/storage)
-[1m[92m   Compiling[0m social-mail-engine v0.2.0 (/home/runner/work/social/social/crates/engine)
-[1m[92m   Compiling[0m social-mail-android-jni v0.2.0 (/home/runner/work/social/social/crates/android-jni)
-[1m[92m    Finished[0m `release` profile [optimized] target(s) in 44.22s
+[1m[92m   Compiling[0m social-mail-storage v0.3.0 (/home/runner/work/social/social/crates/storage)
+[1m[92m   Compiling[0m social-mail-engine v0.3.0 (/home/runner/work/social/social/crates/engine)
+[1m[92m   Compiling[0m social-mail-android-jni v0.3.0 (/home/runner/work/social/social/crates/android-jni)
+[1m[92m    Finished[0m `release` profile [optimized] target(s) in 43.86s
      Copying libraries to /home/runner/work/social/social/apps/android/app/src/main/jniLibs
 ndk_exit=0
 
 ## gradle assembleRelease (unsigned, for compile feedback)
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/guava/guava/32.0.1-jre/guava-32.0.1-jre.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.google.guava:guava:32.0.1-jre.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/google/guava/guava/32.0.1-jre/guava-32.0.1-jre.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/guava/guava/32.0.1-jre/guava-32.0.1-jre.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve javax.inject:javax.inject:1.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:sdk-common:31.5.2
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:bundletool:1.16.0
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:builder:8.5.2
-      > Could not resolve javax.inject:javax.inject:1.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve javax.inject:javax.inject:1.
-         > Could not get resource 'https://plugins.gradle.org/m2/javax/inject/javax.inject/1/javax.inject-1.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/javax/inject/javax.inject/1/javax.inject-1.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.bouncycastle:bcprov-jdk18on:1.77.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:sdk-common:31.5.2
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:builder:8.5.2
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:builder:8.5.2 > com.android.tools.build:apkzlib:8.5.2
-      > Could not resolve org.bouncycastle:bcprov-jdk18on:1.77.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.77/bcprov-jdk18on-1.77.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.77/bcprov-jdk18on-1.77.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.bouncycastle:bcprov-jdk18on:1.77.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/bouncycastle/bcprov-jdk18on/1.77/bcprov-jdk18on-1.77.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.77/bcprov-jdk18on-1.77.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.jetbrains.intellij.deps:trove4j:1.0.20200330.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:sdk-common:31.5.2
-      > Could not resolve org.jetbrains.intellij.deps:trove4j:1.0.20200330.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.jetbrains.intellij.deps:trove4j:1.0.20200330.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/jetbrains/intellij/deps/trove4j/1.0.20200330/trove4j-1.0.20200330.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.apache.commons:commons-compress:1.21.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:sdklib:31.5.2
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:repository:31.5.2
-      > Could not resolve org.apache.commons:commons-compress:1.21.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.apache.commons:commons-compress:1.21.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.apache.httpcomponents:httpcore:4.4.16.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:sdklib:31.5.2
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.analytics-library:crash:31.5.2
-      > Could not resolve org.apache.httpcomponents:httpcore:4.4.16.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.apache.httpcomponents:httpcore:4.4.16.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.google.jimfs:jimfs:1.1.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:repository:31.5.2
-      > Could not resolve com.google.jimfs:jimfs:1.1.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.google.jimfs:jimfs:1.1.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/google/jimfs/jimfs/1.1/jimfs-1.1.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/jimfs/jimfs/1.1/jimfs-1.1.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.sun.activation:javax.activation:1.2.0.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:repository:31.5.2
-      > Could not resolve com.sun.activation:javax.activation:1.2.0.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.sun.activation:javax.activation:1.2.0.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.apache.httpcomponents:httpclient:4.5.14.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.analytics-library:crash:31.5.2
-      > Could not resolve org.apache.httpcomponents:httpclient:4.5.14.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.apache.httpcomponents:httpclient:4.5.14.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve net.java.dev.jna:jna-platform:5.6.0.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.analytics-library:shared:31.5.2
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools:sdk-common:31.5.2 > com.android.tools:common:31.5.2
-      > Could not resolve net.java.dev.jna:jna-platform:5.6.0.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve net.java.dev.jna:jna-platform:5.6.0.
-         > Could not get resource 'https://plugins.gradle.org/m2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.googlecode.juniversalchardet:juniversalchardet:1.0.3.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > androidx.databinding:databinding-compiler-common:8.5.2
-      > Could not resolve com.googlecode.juniversalchardet:juniversalchardet:1.0.3.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.googlecode.juniversalchardet:juniversalchardet:1.0.3.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/googlecode/juniversalchardet/juniversalchardet/1.0.3/juniversalchardet-1.0.3.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve javax.annotation:javax.annotation-api:1.3.2.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.utp:android-test-plugin-result-listener-gradle-proto:31.5.2
-      > Could not resolve javax.annotation:javax.annotation-api:1.3.2.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve javax.annotation:javax.annotation-api:1.3.2.
-         > Could not get resource 'https://plugins.gradle.org/m2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.google.auto.value:auto-value-annotations:1.6.2.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:bundletool:1.16.0
-      > Could not resolve com.google.auto.value:auto-value-annotations:1.6.2.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.google.auto.value:auto-value-annotations:1.6.2.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/auto/value/auto-value-annotations/1.6.2/auto-value-annotations-1.6.2.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.google.errorprone:error_prone_annotations:2.3.1.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:bundletool:1.16.0
-      > Could not resolve com.google.errorprone:error_prone_annotations:2.3.1.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.3.1/error_prone_annotations-2.3.1.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.3.1/error_prone_annotations-2.3.1.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.google.errorprone:error_prone_annotations:2.3.1.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/google/errorprone/error_prone_annotations/2.3.1/error_prone_annotations-2.3.1.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.3.1/error_prone_annotations-2.3.1.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.google.dagger:dagger:2.28.3.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:bundletool:1.16.0
-      > Could not resolve com.google.dagger:dagger:2.28.3.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/google/dagger/dagger/2.28.3/dagger-2.28.3.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/dagger/dagger/2.28.3/dagger-2.28.3.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.google.dagger:dagger:2.28.3.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/google/dagger/dagger/2.28.3/dagger-2.28.3.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/dagger/dagger/2.28.3/dagger-2.28.3.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.bitbucket.b_c:jose4j:0.9.5.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:bundletool:1.16.0
-      > Could not resolve org.bitbucket.b_c:jose4j:0.9.5.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.9.5/jose4j-0.9.5.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.9.5/jose4j-0.9.5.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.bitbucket.b_c:jose4j:0.9.5.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/bitbucket/b_c/jose4j/0.9.5/jose4j-0.9.5.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.9.5/jose4j-0.9.5.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.slf4j:slf4j-api:1.7.30.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:bundletool:1.16.0
-      > Could not resolve org.slf4j:slf4j-api:1.7.30.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.slf4j:slf4j-api:1.7.30.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve org.jdom:jdom2:2.0.6.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10
-      > Could not resolve org.jdom:jdom2:2.0.6.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve org.jdom:jdom2:2.0.6.
-         > Could not get resource 'https://plugins.gradle.org/m2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/org/jdom/jdom2/2.0.6/jdom2-2.0.6.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve commons-codec:commons-codec:1.10.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:builder:8.5.2
-      > Could not resolve commons-codec:commons-codec:1.10.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve commons-codec:commons-codec:1.10.
-         > Could not get resource 'https://plugins.gradle.org/m2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.squareup:javawriter:2.5.0.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:builder:8.5.2
-      > Could not resolve com.squareup:javawriter:2.5.0.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.squareup:javawriter:2.5.0.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/squareup/javawriter/2.5.0/javawriter-2.5.0.pom'. Received status code 429 from server: Too Many Requests
-   > Could not resolve com.google.code.findbugs:jsr305:3.0.2.
-     Required by:
-         project : > com.android.application:com.android.application.gradle.plugin:8.5.2 > com.android.tools.build:gradle:8.5.2 > com.android.tools.build:builder:8.5.2 > com.android.tools.build:apkzlib:8.5.2
-      > Could not resolve com.google.code.findbugs:jsr305:3.0.2.
-         > Could not get resource 'https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom'. Received status code 429 from server: Too Many Requests
-      > Could not resolve com.google.code.findbugs:jsr305:3.0.2.
-         > Could not get resource 'https://plugins.gradle.org/m2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom'.
-            > Could not GET 'https://repo.maven.apache.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.pom'. Received status code 429 from server: Too Many Requests
-> There are 18 more failures with identical causes.
 
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
+Welcome to Gradle 8.9!
 
-BUILD FAILED in 3m 10s
-gradle_exit=1
+Here are the highlights of this release:
+ - Enhanced Error and Warning Messages
+ - IDE Integration Improvements
+ - Daemon JVM Information
+
+For more details see https://docs.gradle.org/8.9/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.9/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:generateReleaseBuildConfig
+> Task :app:generateReleaseResValues
+> Task :app:checkReleaseAarMetadata
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:mergeReleaseResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:parseReleaseLocalResources
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:javaPreCompileRelease
+> Task :app:extractProguardFiles
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:processReleaseResources
+> Task :app:mergeReleaseNativeLibs
+
+> Task :app:stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsocial_mail_android.so.
+
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseStartupProfile
+> Task :app:extractReleaseNativeSymbolTables
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:mergeReleaseArtProfile
+> Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:compileReleaseKotlin
+> Task :app:mergeExtDexRelease
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:dexBuilderRelease
+> Task :app:mergeReleaseShaders
+> Task :app:mergeReleaseGlobalSynthetics
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:processReleaseJavaRes
+> Task :app:optimizeReleaseResources
+> Task :app:mergeReleaseJavaResource
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:mergeDexRelease
+> Task :app:compileReleaseArtProfile
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:lintVitalReportRelease
+> Task :app:lintVitalRelease
+> Task :app:assembleRelease
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run-1793908475383.json
+
+BUILD SUCCESSFUL in 2m 30s
+49 actionable tasks: 49 executed
+gradle_exit=0
